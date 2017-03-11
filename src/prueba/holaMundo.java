@@ -7,6 +7,6 @@ public class holaMundo {
 		System.out.println("bye world");
 		
 		System.out.println("hello world");
-		System.out.println("Prueb Masadasdasdasdasdddar");
+		System.out.println("Prueb Masadasdasdasr");
 	}
 }
