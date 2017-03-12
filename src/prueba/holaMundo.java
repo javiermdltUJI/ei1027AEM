@@ -12,5 +12,6 @@ public class holaMundo {
 		System.out.println("Prueb Masadasdasdasr");
 		
 		System.out.println("SE SUBE");
+		System.out.println("lo hago mal");
 	}
 }
