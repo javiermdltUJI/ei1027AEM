@@ -6,5 +6,9 @@ public class holaMundo {
 		System.out.println("bye world");
 		System.out.println("hellosfhsdgfhs world");
 		System.out.println("Prueb Mar");
+		System.out.println("bye world");
+		
+		System.out.println("hello world");
+		System.out.println("Prueb Masadasdasdasr");
 	}
 }
