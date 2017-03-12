@@ -13,5 +13,9 @@ public class holaMundo {
 		
 		System.out.println("SE SUBE");
 		System.out.println("lo hago mal");
+		System.out.println("bye world");
+		
+		System.out.println("hello world");
+		System.out.println("Prueb Masadasdasdasr");
 	}
 }
