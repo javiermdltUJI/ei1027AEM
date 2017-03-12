@@ -6,6 +6,7 @@
 <body>
 <ul>
 	<li><a href="prova.html">Prova 1</a></li>
+	<li><a href="estudiante/listar.html">Gestión de Estudiantes</a></li>
 </ul>
 
 </body>
