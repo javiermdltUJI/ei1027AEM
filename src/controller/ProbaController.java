@@ -9,7 +9,7 @@ public class ProbaController {
 	
 	@RequestMapping("/prova")
 	public String provaWeb(Model model){
-		String message = "Provant la configuració feta avui";
+		String message = "Provant la configuració feta avui.";
 		model.addAttribute("message", message);
 		return "prova";
 	}
