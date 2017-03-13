@@ -23,7 +23,7 @@ public class Estudiante {
 	public int getContadorBloqueo(){ return contadorBloqueo; }
 	public void setContadorBloqueo(int cont){
 		if(contadorBloqueo < 3){
-			this.contadorBloqueo ++;
+			this.contadorBloqueo = cont;
 		}else{
 			this.bloqueado = 1;
 		}
