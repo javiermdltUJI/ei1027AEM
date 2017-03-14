@@ -36,6 +36,8 @@ public class EstudianteDao {
 			estudiante.setBloqueado(rs.getInt("bloqueado"));
 			return estudiante;
 		}
+		
+		
 	}
 	
 	public List<Estudiante> getEstudiantes(){
