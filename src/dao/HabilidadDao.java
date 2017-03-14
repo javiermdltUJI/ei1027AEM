@@ -19,12 +19,12 @@ import modelo.Nivel;
 
 
 //He creado un id estatatico que se va incrementando cada vez que se hace una llamada al add
-//Ahora mismo el id es 7 porque tengo 6 componentes en la bbdd, pero hay que cambiarlo a 0 cuando la bbdd se cree nueva
+//Ahora mismo el id es 6 porque tengo 5 componentes en la bbdd, pero hay que cambiarlo a 0 cuando la bbdd se cree nueva
 
 @Repository
 public class HabilidadDao {
 	
-private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource){
@@ -52,7 +52,7 @@ private JdbcTemplate jdbcTemplate;
 		return this.jdbcTemplate.queryForObject("select * from habilidad where id_habilidad=?",  new Object[] {id_habilidad}, new HabilidadMapper());
 	}
 	
-	static int id = 7;
+	static int id = 6;
 	
 	public void addHabilidad(Habilidad habilidad){
 		this.jdbcTemplate.update("insert into Habilidad(id_habilidad, nombre, tipo, descripcion, nivel, estado) values(?, ?, ?, ?, CAST(? AS nivel), CAST(? AS estado))", 

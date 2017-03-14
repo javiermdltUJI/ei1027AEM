@@ -15,15 +15,15 @@
 			</tr>
 			<tr>
 				<td><form:label path="nombre">Nombre</form:label></td>
-				<td><form:input path="nombre"/></td>
+				<td><form:input path="nombre" id="nombre" placeholder="Nombre"/></td>
 			</tr>
 			<tr>
 				<td><form:label path="tipo">Tipo</form:label></td>
-				<td><form:input path="tipo"/></td>
+				<td><form:input path="tipo" id="tipo" placeholder="Tipo"/></td>
 			</tr>
 			<tr>
 				<td><form:label path="descripcion">Descripción</form:label></td>
-				<td><form:input path="descripcion"/></td>
+				<td><form:input path="descripcion" id="descripcion" placeholder="Descripción"/></td>
 			</tr>
 			<tr>
 				<td>
