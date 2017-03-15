@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset=UTF-8>
 <title>Crear una nueva habilidad</title>
 </head>
 <body>

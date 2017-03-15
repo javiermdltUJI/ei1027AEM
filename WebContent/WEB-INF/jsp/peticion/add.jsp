@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset=UTF-8>
 <title>Crear una nueva petición</title>
 </head>
 <body>
@@ -26,6 +26,7 @@
 				<td><form:label path="usuario">Usuario</form:label></td>
 				<td><form:input path="usuario" id="usuario" placeholder="Usuario"/></td>
 			</tr>
+			<tr>
 				<td><form:label path="idHabilidad">id_habilidad</form:label></td>
 				<td><form:input path="idHabilidad" id="idHabilidad" placeholder="1"/></td>
 			</tr>

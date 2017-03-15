@@ -2,12 +2,12 @@ package modelo;
 
 public class Habilidad {
 	
-	int id_habilidad;
-	String nombre;
-	String tipo;
-	String descripcion;
-	Nivel nivel;
-	Estado estado;
+	private int id_habilidad;
+	private String nombre;
+	private String tipo;
+	private String descripcion;
+	private Nivel nivel;
+	private Estado estado;
 	
 	public int getIdHabilidad(){ return id_habilidad; }
 	public void setIdHabilidad(int id_habilidad){ this.id_habilidad = id_habilidad; }

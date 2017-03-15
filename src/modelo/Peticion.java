@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Peticion {
 	
-	int id_peticion;
-	Date fechaIni;
-	Date fechaFin;
-	String descripcion;
-	String usuario;
-	int id_habilidad;
+	private int id_peticion;
+	private Date fechaIni;
+	private Date fechaFin;
+	private String descripcion;
+	private String usuario;
+	private int id_habilidad;
 	
 	public int getIdPeticion(){ return id_peticion; }
 	public void setIdPeticion(int idPeticion){ this.id_peticion = idPeticion;}

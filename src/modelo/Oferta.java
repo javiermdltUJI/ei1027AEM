@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Oferta {
 	
-	int id_oferta;
-	Date fechaIni;
-	Date fechaFin;
-	String descripcion;
-	String usuario;
-	int id_habilidad;
+	private int id_oferta;
+	private Date fechaIni;
+	private Date fechaFin;
+	private String descripcion;
+	private String usuario;
+	private int id_habilidad;
 	
 	public int getIdOferta(){ return id_oferta; }
 	public void setIdOferta(int idOferta){ this.id_oferta = idOferta;}

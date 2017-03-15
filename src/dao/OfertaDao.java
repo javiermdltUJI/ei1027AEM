@@ -59,7 +59,6 @@ public class OfertaDao {
 	}
 	
 	public void updateOferta(Oferta oferta){
-		System.out.println(oferta.toString());
 		this.jdbcTemplate.update("update Oferta set fecha_ini = ?, fecha_fin = ?,  descripcion = ?, usuario = ?, id_habilidad = ? where id_oferta = ?", 
 				oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad(), oferta.getIdOferta());
 	}

@@ -22,7 +22,7 @@ import modelo.Peticion;
 @Repository
 public class PeticionDao {
 	
-private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource){
@@ -59,7 +59,6 @@ private JdbcTemplate jdbcTemplate;
 	}
 	
 	public void updatePeticion(Peticion peticion){
-		System.out.println(peticion.toString());
 		this.jdbcTemplate.update("update Peticion set fecha_ini = ?, fecha_fin = ?,  descripcion = ?, usuario = ?, id_habilidad = ? where id_peticion = ?", 
 				peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad(), peticion.getIdPeticion());
 	}
@@ -72,6 +71,4 @@ private JdbcTemplate jdbcTemplate;
 	private static Date toDate(Timestamp t){
 		return new Date(t.getTime());
 	}
-
-
 }

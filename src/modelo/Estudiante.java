@@ -2,13 +2,13 @@ package modelo;
 
 public class Estudiante {
 	
-	String usuario;
-	String contrasenya;
-	String correo;
-	String nombre;
-	String dni;
-	int contadorBloqueo = 0;
-	int bloqueado = 0;
+	private String usuario;
+	private String contrasenya;
+	private String correo;
+	private String nombre;
+	private String dni;
+	private int contadorBloqueo = 0;
+	private int bloqueado = 0;
 	
 	public String getUsuario(){ return usuario; }
 	public void setUsuario(String usuario){ this.usuario = usuario; }
