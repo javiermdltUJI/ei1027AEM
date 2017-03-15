@@ -1,22 +1,20 @@
-package modelo;
+/**package modelo;
 
-import java.util.Date;
+public class ContenedorOferta {
 
-public class Oferta {
-	
 	int id_oferta;
-	Date fechaIni;
-	Date fechaFin;
+	String fecha_ini;
+	String fecha_fin;
 	String descripcion;
 	String usuario;
 	int id_habilidad;
 	
 	public int getIdOferta(){ return id_oferta; }
 	public void setIdOferta(int idOferta){ this.id_oferta = idOferta;}
-	public Date getFechaIni(){ return fechaIni; }
-	public void setFechaIni(Date fIni){ this.fechaIni = fIni;}
-	public Date getFechaFin(){ return fechaFin; }
-	public void setFechaFin(Date fFin){ this.fechaFin = fFin; }
+	public String getFechaIni(){ return fecha_ini; }
+	public void setFechaIni(String fIni){ this.fecha_ini = fIni;}
+	public String getFechaFin(){ return fecha_fin; }
+	public void setFechaFin(String fFin){ this.fecha_fin = fFin; }
 	public String getDescripcion(){ return descripcion; }
 	public void setDescripcion(String descripcion){ this.descripcion = descripcion; }
 	public String getUsuario(){ return usuario; }
@@ -25,8 +23,9 @@ public class Oferta {
 	public void setIdHabilidad(int idHab){ this.id_habilidad = idHab; }
 	
 	public String toString() {
-		return "Oferta [id_oferta=" + id_oferta + ", fechaIni=" + fechaIni + ", fechaFin="
-				+ fechaFin + ", descripcion=" + descripcion + ", usuario=" + usuario + ", id_habilidad"
+		return "Oferta [id_oferta=" + id_oferta + ", fecha_ini=" + fecha_ini + ", fecha_fin="
+				+ fecha_fin + ", descripcion=" + descripcion + ", usuario=" + usuario + ", id_habilidad"
 				+ id_habilidad + "]";
 	}
 }
+**/

@@ -1,9 +1,15 @@
 package controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import dao.OfertaDao;
 import modelo.Habilidad;
 import modelo.Oferta;
+
+
+//El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
 
 @Controller
 @RequestMapping("/oferta")
@@ -55,6 +64,7 @@ public class OfertaController {
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
+		System.out.println(oferta.toString());
 		ofertaDao.updateOferta(oferta);
 		return "redirect:../listar.html";
 	}
@@ -63,5 +73,13 @@ public class OfertaController {
 	public String processDelete(@PathVariable int id_oferta){
 		ofertaDao.deleteOferta(id_oferta);
 		return "redirect:../listar.html";
+	}
+	
+	/*formateo de fechas	 */
+	@InitBinder
+	public void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		dateFormat.setLenient(false);
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 }

@@ -1,8 +1,9 @@
 package dao;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.ResultSet;
-
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -28,8 +29,8 @@ public class OfertaDao {
 		public Oferta mapRow(ResultSet rs, int rowNum) throws SQLException{
 			Oferta oferta = new Oferta();
 			oferta.setIdOferta(rs.getInt("id_oferta"));
-			oferta.setFechaIni(rs.getTimestamp("fecha_ini"));
-			oferta.setFechaFin(rs.getTimestamp("fecha_fin"));
+			oferta.setFechaIni(toDate(rs.getTimestamp("fecha_ini")));
+			oferta.setFechaFin(toDate(rs.getTimestamp("fecha_fin")));
 			oferta.setDescripcion(rs.getString("descripcion"));
 			oferta.setUsuario(rs.getString("usuario"));
 			oferta.setIdHabilidad(rs.getInt("id_habilidad"));
@@ -49,11 +50,12 @@ public class OfertaDao {
 	
 	public void addOferta(Oferta oferta){
 		this.jdbcTemplate.update("insert into Oferta(id_oferta, fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?, ?)", 
-				id, oferta.getFechaIni(), oferta.getFechaIni(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad());
+				id, oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad());
 		id++;
 	}
 	
 	public void updateOferta(Oferta oferta){
+		System.out.println(oferta.toString());
 		this.jdbcTemplate.update("update Oferta set fecha_ini = ?, fecha_fin = ?,  descripcion = ?, usuario = ?, id_habilidad = ? where id_oferta = ?", 
 				oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad(), oferta.getIdOferta());
 	}
@@ -61,6 +63,10 @@ public class OfertaDao {
 	public void deleteOferta(int oferta){
 		this.jdbcTemplate.update("delete from oferta where id_oferta = ?", oferta);
 	}
-	
+
+	//Para extraer correctamente las fechas
+	private static Date toDate(Timestamp t){
+		return new Date(t.getTime());
+	}
 
 }

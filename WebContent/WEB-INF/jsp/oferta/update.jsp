@@ -11,7 +11,7 @@
 	<form:form method="post" modelAttribute="oferta">
 		<table>
 			<tr>
-				<td><form:input type="hidden" name="idOferta" path="idHabilidad"/></td>
+				<td><form:input type="hidden" name="idOferta" path="idOferta"/></td>
 			</tr>
 			<tr>
 				<td><form:label path="fechaIni">Fecha Inicio</form:label></td>
@@ -33,7 +33,7 @@
 				<td><form:input path="idHabilidad" id="idHabilidad" placeholder="1"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Agregar oferta" /></td>
+				<td colspan="2"><input type="submit" value="Modifica oferta" /></td>
 			</tr>				
 		</table>
 	</form:form>
