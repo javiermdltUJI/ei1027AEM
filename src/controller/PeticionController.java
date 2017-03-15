@@ -15,62 +15,60 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dao.OfertaDao;
-import modelo.Oferta;
-
+import dao.PeticionDao;
+import modelo.Peticion;
 
 //El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
 
 @Controller
-@RequestMapping("/oferta")
-public class OfertaController {
-	
-	private OfertaDao ofertaDao;
+@RequestMapping("/peticion")
+public class PeticionController {
+
+	private PeticionDao peticionDao;
 	
 	@Autowired
-	public void setHabilidadDao(OfertaDao ofertaDao){
-		this.ofertaDao = ofertaDao;
+	public void setHabilidadDao(PeticionDao peticionDao){
+		this.peticionDao = peticionDao;
 	}
 	
 	@RequestMapping("/listar")
-	public String listaOferta(Model model){
-		model.addAttribute("ofertas", ofertaDao.getOfertas());
-		return "oferta/listar";
+	public String listaPeticion(Model model){
+		model.addAttribute("peticiones", peticionDao.getPeticiones());
+		return "peticion/listar";
 	}
 
 	@RequestMapping(value="/add")
-	public String addOferta(Model model){
-		model.addAttribute("oferta", new Oferta());
-		return "oferta/add";
+	public String addPeticion(Model model){
+		model.addAttribute("peticion", new Peticion());
+		return "peticion/add";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+	public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
-		ofertaDao.addOferta(oferta);
+		peticionDao.addPeticion(peticion);
 		return "redirect:listar.html";
 	}
 	
-	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.GET)
-	public String editOferta(Model model, @PathVariable int id_oferta){
-			model.addAttribute("oferta", ofertaDao.getOferta(id_oferta));
-			return "oferta/update";	
+	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.GET)
+	public String editPeticion(Model model, @PathVariable int id_peticion){
+			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
+			return "peticion/update";	
 	}
 	
-	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int id_oferta, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.POST)
+	public String processUpdateSubmit(@PathVariable int id_peticion, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
-		System.out.println(oferta.toString());
-		ofertaDao.updateOferta(oferta);
+		peticionDao.updatePeticion(peticion);
 		return "redirect:../listar.html";
 	}
 	
-	@RequestMapping(value="/delete/{id_oferta}")
-	public String processDelete(@PathVariable int id_oferta){
-		ofertaDao.deleteOferta(id_oferta);
+	@RequestMapping(value="/delete/{id_peticion}")
+	public String processDelete(@PathVariable int id_peticion){
+		peticionDao.deletePeticion(id_peticion);
 		return "redirect:../listar.html";
 	}
 	
