@@ -28,7 +28,7 @@
 			<tr>
 				<td>
 				<form:label path="nivel">Nivel</form:label>
-				    		<form:select path="nivel" class="form-control" id="tipoPropiedad">
+				    		<form:select path="nivel" class="form-control" id="tipoNivel">
 								<form:option value="EXPERTO"> ---- </form:option>
 								<form:option value="EXPERTO"> Experto </form:option>
 								<form:option value="MEDIO">Medio</form:option>
@@ -39,7 +39,7 @@
 			<tr>
 				<td>
 				<form:label path="estado">Estado</form:label>
-				    		<form:select path="estado" class="form-control" id="tipoPropiedad">
+				    		<form:select path="estado" class="form-control" id="tipoEstado">
 								<form:option value="ACTIVO"> ---- </form:option>
 								<form:option value="ACTIVO"> Activo </form:option>
 								<form:option value="CANCELADO">Cancelado</form:option>
@@ -47,7 +47,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Agregar habilidad" /></td>
+				<td colspan="2"><input type="submit" value="Modificar habilidad" /></td>
 			</tr>				
 		</table>
 	</form:form>

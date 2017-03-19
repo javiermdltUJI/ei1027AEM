@@ -1,6 +1,6 @@
 package modelo;
 
-public class Estudiante {
+public class Usuario {
 	
 	private String usuario;
 	private String contrasenya;
@@ -9,6 +9,7 @@ public class Estudiante {
 	private String dni;
 	private int contadorBloqueo = 0;
 	private int bloqueado = 0;
+	private Rol rol;
 	
 	public String getUsuario(){ return usuario; }
 	public void setUsuario(String usuario){ this.usuario = usuario; }
@@ -34,11 +35,18 @@ public class Estudiante {
 			this.bloqueado = bloq;
 		}
 	}
+	public Rol getRol() {
+		return rol;
+	}
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 	
 	@Override
 	public String toString() {
 		return "Estudiante [usuario=" + usuario + ", contrasenya=" + contrasenya + ", correo="
 				+ correo + ", nombre=" + nombre + ", dni=" + dni + ", contadorBloqueo"
-				+ contadorBloqueo + ", bloqueado=" + bloqueado + "]";
+				+ contadorBloqueo + ", bloqueado=" + bloqueado + "rol=" + rol +"]";
 	}
+	
 }

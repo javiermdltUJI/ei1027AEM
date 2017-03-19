@@ -19,7 +19,7 @@
 			</tr>
 			<tr>
 				<td><form:label path="fechaFin">Fecha Fin</form:label></td>
-	            <td><form:input path="fechaFin" id="fechaInicio" placeholder="Fecha Fin" /></td>
+	            <td><form:input path="fechaFin" id="fechaFin" placeholder="Fecha Fin" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="descripcion">Descripción</form:label></td>

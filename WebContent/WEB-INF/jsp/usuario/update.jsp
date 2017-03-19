@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset=UTF-8>
-<title>Crear un nuevo estudiante</title>
+<title>Modificar datos de un usuarios</title>
 </head>
 <body>
-	<h2>Nuevo estudiante</h2>
-	<form:form method="post" modelAttribute="estudiante">
+	<h2>Usuario</h2>
+	<form:form method="post" modelAttribute="usuario">
 		<table>
 			<tr>
 				<td><form:label path="usuario">Usuario</form:label></td>
@@ -39,7 +39,17 @@
 				<td><form:input path="bloqueado" id="bloqueado" placeholder="0"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Agregar estudiante" /></td>
+				<td>
+				<form:label path="rol">Rol</form:label>
+				    		<form:select path="rol" class="form-control" id="tipoRol">
+								<form:option value="ESTUDIANTE"> ---- </form:option>
+								<form:option value="ESTUDIANTE"> Estudiante </form:option>
+								<form:option value="ADMIN">Admin</form:option>
+							</form:select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="Modifica usuario" /></td>
 			</tr>				
 		</table>
 	</form:form>
