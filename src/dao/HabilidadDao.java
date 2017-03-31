@@ -51,13 +51,10 @@ public class HabilidadDao {
 	public Habilidad getHabilidad(int id_habilidad) {
 		return this.jdbcTemplate.queryForObject("select * from habilidad where id_habilidad=?",  new Object[] {id_habilidad}, new HabilidadMapper());
 	}
-	
-	static int id = 6;
-	
+		
 	public void addHabilidad(Habilidad habilidad){
-		this.jdbcTemplate.update("insert into Habilidad(id_habilidad, nombre, tipo, descripcion, nivel, estado) values(?, ?, ?, ?, CAST(? AS nivel), CAST(? AS estado))", 
-				id, habilidad.getNombre(), habilidad.getTipo(), habilidad.getDescripcion(), habilidad.getNivel().name(), habilidad.getEstado().name());
-		id++;
+		this.jdbcTemplate.update("insert into Habilidad( nombre, tipo, descripcion, nivel, estado) values( ?, ?, ?, CAST(? AS nivel), CAST(? AS estado))", 
+				habilidad.getNombre(), habilidad.getTipo(), habilidad.getDescripcion(), habilidad.getNivel().name(), habilidad.getEstado().name());
 	}
 	
 	public void updateHabilidad(Habilidad habilidad){

@@ -50,13 +50,10 @@ public class ColaboracionDao {
 	public Colaboracion getColaboracion(int id_colaboracion) {
 		return this.jdbcTemplate.queryForObject("select * from colaboracion where id_colaboracion=?",  new Object[] {id_colaboracion}, new ColaboracionMapper());
 	}
-	
-	static int id = 6;
-	
+		
 	public void addColaboracion(Colaboracion colaboracion){
-		this.jdbcTemplate.update("insert into Colaboracion(id_colaboracion, fecha_ini, fecha_fin, horas_totales, valoracion, id_oferta, id_peticion) values(?, ?, ?, ?, ?, ?, ?)", 
-				id, colaboracion.getFechaIni(), colaboracion.getFechaFin(), colaboracion.getHorasTotales(), colaboracion.getValoracion(), colaboracion.getIdOferta(), colaboracion.getIdPeticion());
-		id++;
+		this.jdbcTemplate.update("insert into Colaboracion( fecha_ini, fecha_fin, horas_totales, valoracion, id_oferta, id_peticion) values(?, ?, ?, ?, ?, ?)", 
+				colaboracion.getFechaIni(), colaboracion.getFechaFin(), colaboracion.getHorasTotales(), colaboracion.getValoracion(), colaboracion.getIdOferta(), colaboracion.getIdPeticion());
 	}
 	
 	public void updateColaboracion(Colaboracion colaboracion){

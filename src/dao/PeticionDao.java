@@ -50,12 +50,10 @@ public class PeticionDao {
 		return this.jdbcTemplate.queryForObject("select * from peticion where id_peticion=?",  new Object[] {id_peticion}, new PeticionMapper());
 	}
 	
-	static int id = 6;
 	
 	public void addPeticion(Peticion peticion){
-		this.jdbcTemplate.update("insert into Peticion(id_peticion, fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?, ?)", 
-				id, peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad());
-		id++;
+		this.jdbcTemplate.update("insert into Peticion(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values( ?, ?, ?, ?, ?)", 
+				peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad());
 	}
 	
 	public void updatePeticion(Peticion peticion){

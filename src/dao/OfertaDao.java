@@ -49,13 +49,11 @@ public class OfertaDao {
 	public Oferta getOferta(int id_oferta) {
 		return this.jdbcTemplate.queryForObject("select * from oferta where id_oferta=?",  new Object[] {id_oferta}, new OfertaMapper());
 	}
-	
-	static int id = 6;
+
 	
 	public void addOferta(Oferta oferta){
-		this.jdbcTemplate.update("insert into Oferta(id_oferta, fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?, ?)", 
-				id, oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad());
-		id++;
+		this.jdbcTemplate.update("insert into Oferta(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?)", 
+				oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad());
 	}
 	
 	public void updateOferta(Oferta oferta){
