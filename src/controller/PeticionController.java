@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.HabilidadDao;
 import dao.PeticionDao;
 import modelo.Peticion;
 
@@ -26,9 +27,16 @@ public class PeticionController {
 
 	private PeticionDao peticionDao;
 	
+	private HabilidadDao habilidadDao;
+	
 	@Autowired
-	public void setHabilidadDao(PeticionDao peticionDao){
+	public void setPeticionDao(PeticionDao peticionDao){
 		this.peticionDao = peticionDao;
+	}
+	
+	@Autowired
+	public void setHabilidadDao(HabilidadDao habilidadDao){
+		this.habilidadDao=habilidadDao;
 	}
 	
 	@RequestMapping("/listar")
@@ -40,6 +48,7 @@ public class PeticionController {
 	@RequestMapping(value="/add")
 	public String addPeticion(Model model){
 		model.addAttribute("peticion", new Peticion());
+		model.addAttribute("habilidades", habilidadDao.getHabilidades());
 		return "peticion/add";
 	}
 
@@ -54,6 +63,7 @@ public class PeticionController {
 	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.GET)
 	public String editPeticion(Model model, @PathVariable int id_peticion){
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
+			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "peticion/update";	
 	}
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.HabilidadDao;
 import dao.OfertaDao;
 import modelo.Oferta;
 
@@ -27,10 +28,19 @@ public class OfertaController {
 	
 	private OfertaDao ofertaDao;
 	
+	private HabilidadDao habilidadDao;
+
+	
 	@Autowired
-	public void setHabilidadDao(OfertaDao ofertaDao){
+	public void setOfertaDao(OfertaDao ofertaDao){
 		this.ofertaDao = ofertaDao;
 	}
+	
+	@Autowired
+	public void setHabilidadDao(HabilidadDao habilidadDao){
+		this.habilidadDao=habilidadDao;
+	}
+	
 	
 	@RequestMapping("/listar")
 	public String listaOferta(Model model){
@@ -41,6 +51,7 @@ public class OfertaController {
 	@RequestMapping(value="/add")
 	public String addOferta(Model model){
 		model.addAttribute("oferta", new Oferta());
+		model.addAttribute("habilidades", habilidadDao.getHabilidades());
 		return "oferta/add";
 	}
 
@@ -63,7 +74,7 @@ public class OfertaController {
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
-		System.out.println(oferta.toString());
+		//System.out.println(oferta.toString());
 		ofertaDao.updateOferta(oferta);
 		return "redirect:../listar.html";
 	}
