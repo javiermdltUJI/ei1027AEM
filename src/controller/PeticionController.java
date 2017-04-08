@@ -56,6 +56,10 @@ public class PeticionController {
 	public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
+		// PeticionValidator peticionValidator = new PeticionValidator();
+		// peticionValidator.validate(peticion, bindingResult);
+		// if (bindingResult.hasErrors()) 
+		//		return "nadador/add";
 		peticionDao.addPeticion(peticion);
 		return "redirect:listar.html";
 	}
