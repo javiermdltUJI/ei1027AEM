@@ -1,14 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=iso-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<t:paginabasica title="EI1027">
+<jsp:body>
 <html>
 <head>
 <title>Gestionar Usuarios</title>
 </head>
 <body>
 	<h1>Lista de Usuarios</h1>
-	<table>
+	<table  class="table">
 		<tr>
 			<th>Nombre usuario</th>
 			<th>Contrasenya</th>
@@ -29,11 +31,13 @@
 				<td>${usuario.contadorBloqueo}</td>
 				<td>${usuario.bloqueado}</td>
 				<td>${usuario.rol}</td>
-				<td><a href="update/${usuario.usuario}.html">Edita</a>
-				<td><a href="delete/${usuario.usuario}.html">Elimina</a>		
+				<td><a type="button" class="btn btn-default" href="update/${usuario.usuario}.html">Edita</a>
+				<td><a type="button" class="btn btn-default" href="delete/${usuario.usuario}.html">Elimina</a>		
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="add.html">Agregar usuario</a>
+	<a type="button" class="btn btn-default" href="add.html">Agregar usuario</a>
 </body>
 </html>
+</jsp:body>
+</t:paginabasica>

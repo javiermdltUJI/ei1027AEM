@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:paginabasica title="EI1027">
+<jsp:body>
+<html> 
 <head>
 <title>Gestionar Colaboraciones</title>
 </head>
 <body>
 	<h1>Lista de Colaboraciones</h1>
-	<table>
+	<table class="table">
 		<tr>
 			<th>id_colaboracion</th>
 			<th>Fecha inicio</th>
@@ -27,11 +30,13 @@
 				<td>${colaboracion.valoracion}</td>
 				<td>${colaboracion.idOferta}</td>
 				<td>${colaboracion.idPeticion}</td>
-				<td><a href="update/${colaboracion.idColaboracion}.html">Edita</a>
-				<td><a href="delete/${colaboracion.idColaboracion}.html">Elimina</a>		
+				<td><a type="button" class="btn btn-default"  href="update/${colaboracion.idColaboracion}.html">Edita</a>
+				<td><a type="button" class="btn btn-default"  href="delete/${colaboracion.idColaboracion}.html">Elimina</a>		
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="add.html">Agregar colaboración</a>
+	<a type="button" class="btn btn-default" href="add.html">Agregar colaboración</a>
 </body>
 </html>
+</jsp:body>
+</t:paginabasica>
