@@ -9,22 +9,47 @@
 <meta charset=UTF-8>
 <title>Crear una nueva petición</title>
 <script>
+subir1 = 0;
+subir2 = 0;
+
 function validar(obj, correct, fail) {
   patron = /^\d{2}\-\d{2}\-\d{4}$/
   if(patron.test(obj.value)){
 	  document.querySelector(fail).setAttribute('style','display:none');
 	  document.querySelector(correct).setAttribute('style','display:block');
+	  if(correct=='#fechaIniCorrect'){
+		  subir1=1;
+		  
+	  }else{
+		  subir2=1;
+ 
+	  }
 
   }else{
 	  document.querySelector(fail).setAttribute('style','display:block');
 	  document.querySelector(correct).setAttribute('style','display:none');
+	  if(correct=='#fechaFinCorrect'){
+		  subir1=0;
+		  
+	  }else{
+		  subir2=0;
+ 
+	  }
   }
 }
+
+// Poner uno para cada fecha
+function validate(){
+	if(subir1==0 && subir2==0){
+		event.preventDefault();
+	}
+}
+
 </script>
 </head>
 <body>
 	<h2>Nueva petición</h2>
-	<form:form method="post" modelAttribute="peticion">
+	<form:form method="post" modelAttribute="peticion"  onsubmit="validate()">
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
 	            <form:input class="form-control" path="fechaIni" id="fechaIni" placeholder="Fecha Inicio dd-mm-yyyy" onchange="validar(this,'#fechaIniCorrect','#fechaIniError')"/>
