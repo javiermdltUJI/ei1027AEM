@@ -7,7 +7,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,7 @@ import modelo.Rol;
 import modelo.Usuario;
 
 @Repository
-public class UsuarioDao {
+public class UsuarioDao implements UserDao {
 	
 	private JdbcTemplate jdbcTemplate;
 	
@@ -37,9 +39,7 @@ public class UsuarioDao {
 			usuario.setBloqueado(rs.getInt("bloqueado"));
 			usuario.setRol(Rol.valueOf(rs.getString("rol")));
 			return usuario;
-		}
-		
-		
+		}		
 	}
 	
 	public List<Usuario> getUsuarios(){
@@ -51,8 +51,10 @@ public class UsuarioDao {
 	}
 	
 	public void addUsuario(Usuario usuario){
+		BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+		String cifrada = passwordEncryptor.encryptPassword(usuario.getContrasenya());
 		this.jdbcTemplate.update("insert into Usuario(nom_usuario, contrasenya, correo, nombre, dni, contadorBloqueo, bloqueado, rol) values(?, ?, ?, ?, ?, ?, ?, CAST(? AS rol))", 
-				usuario.getUsuario(), usuario.getContrasenya(), usuario.getCorreo(), usuario.getNombre(), usuario.getDni(), usuario.getContadorBloqueo(),
+				usuario.getUsuario(), cifrada, usuario.getCorreo(), usuario.getNombre(), usuario.getDni(), usuario.getContadorBloqueo(),
 				usuario.getBloqueado(), usuario.getRol().name());
 	}
 	
@@ -65,4 +67,34 @@ public class UsuarioDao {
 	public void deleteUsuario(String usuario){
 		this.jdbcTemplate.update("delete from usuario where nom_usuario = ?", usuario);
 	}
+	
+	public boolean existeUsuario(String nombreUsuario){
+		try{
+		Usuario u =this.jdbcTemplate.queryForObject("select * from Usuario where nom_usuario = ?",  
+				new Object[] {nombreUsuario}, 
+				new UsuarioMapper());
+		}catch(EmptyResultDataAccessException e){
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public Usuario loadUserByUsername(String nombreUsuario, String contrasenya) {
+		Usuario usuario = this.jdbcTemplate.queryForObject("select * from Usuario where nom_usuario = ?",  
+					new Object[] {nombreUsuario}, 
+					new UsuarioMapper());
+	      if (usuario == null)
+	          return null; // Usuari no trobat
+	      // Contrasenya
+	     BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor(); 
+	     if (passwordEncryptor.checkPassword(contrasenya, usuario.getContrasenya())) {
+	     // Es deuria esborrar de manera segura el camp password abans de tornar-lo
+	         return usuario; 
+	        } 
+	     else {
+	         return null; // bad login!
+	     }
+	 }
+	
 }

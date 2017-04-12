@@ -1,19 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %> 
-<t:paginabasica title="EI1027">
-<jsp:body>
-<html> 
-  <head>
-<title>Skill Sharing</title>
-  </head>
-  <ul>
-	<li><a href="usuario/listar.html">Gestión de Usuarios</a></li>
-	<li><a href="habilidad/listar.html">Gestión de Habilidades</a></li>
-	<li><a href="oferta/listar.html">Gestión de Ofertas</a></li>
-	<li><a href="peticion/listar.html">Gestión de Peticiones</a></li>
-	<li><a href="colaboracion/listar.html">Gestión de Colaboraciones</a></li>
-</ul>
-    
-  </body>
-</html>
-</jsp:body>
-</t:paginabasica>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript">
+window.location="${pageContext.request.contextPath}/login.html";
+</script>
