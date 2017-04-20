@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,19 +26,19 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/listar")
-	public String listaUsuarios(Model model){
+	public String listaUsuarios(HttpSession session, Model model){
 		model.addAttribute("usuarios", usuarioDao.getUsuarios());
 		return "usuario/listar";
 	}
 	
 	@RequestMapping(value="/add")
-	public String addUsuario(Model model){
+	public String addUsuario(HttpSession session, Model model){
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/add";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
 		if(bindingResult.hasErrors())
 			return "usuario/add";
 		usuarioDao.addUsuario(usuario);
@@ -44,13 +46,13 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
-	public String editUsuario(Model model, @PathVariable String usuario){
+	public String editUsuario(HttpSession session, Model model, @PathVariable String usuario){
 			model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
 			return "usuario/update";	
 	}
 	
 	@RequestMapping(value="/update/{nom_usuario}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String nom_usuario, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
+	public String processUpdateSubmit(HttpSession session, @PathVariable String nom_usuario, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
 		if(bindingResult.hasErrors())
 			return "usuario/update";
 		usuarioDao.updateUsuario(usuario);
@@ -58,7 +60,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/delete/{usuario}")
-	public String processDelete(@PathVariable String usuario){
+	public String processDelete(HttpSession session, @PathVariable String usuario){
 		usuarioDao.deleteUsuario(usuario);
 		return "redirect:../listar.html";
 	}

@@ -47,6 +47,12 @@ public class ColaboracionDao {
 		return this.jdbcTemplate.query("select * from colaboracion", new ColaboracionMapper());
 	}
 	
+	public List<Colaboracion> getMisColaboraciones(String usuario){
+		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, C.id_oferta, C.id_peticion"
+				+ " from colaboracion AS C JOIN oferta USING(id_oferta) JOIN peticion USING(id_peticion)"
+				+ " where peticion.usuario=? and oferta.usuario=?", new Object[] {usuario,usuario},new ColaboracionMapper());
+	}
+	
 	public Colaboracion getColaboracion(int id_colaboracion) {
 		return this.jdbcTemplate.queryForObject("select * from colaboracion where id_colaboracion=?",  new Object[] {id_colaboracion}, new ColaboracionMapper());
 	}

@@ -79,7 +79,7 @@ public class LoginController {
         usuario = userDao.loadUserByUsername(usuario.getUsuario(),usuario.getContrasenya()); 
 
         if (usuario == null) {
-            bindingResult.rejectValue("contrasenya", "badpw", "ContraseÃ±a incorrecta"); 
+            bindingResult.rejectValue("contrasenya", "badpw", "Contraseña incorrecta"); 
             return "login";
         }
         /**
@@ -92,8 +92,8 @@ public class LoginController {
                 
         // Autenticats correctament. 
         // Guardem les dades de l'usuari autenticat a la sessio
-        session.setAttribute("usuarioLogin", usuario); 
-            
+        session.setAttribute("usuario", usuario); 
+
         // Torna a la pagina principal
         String url = (String) session.getAttribute("nextUrl");
         if ( url != null){

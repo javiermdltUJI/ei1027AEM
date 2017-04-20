@@ -46,6 +46,17 @@ public class OfertaDao {
 		return this.jdbcTemplate.query("select * from oferta", new OfertaMapper());
 	}
 	
+	//Devuelve ofertas no hechas por mi
+	public Object getOfertas(String usuario) {
+		return this.jdbcTemplate.query("select * from oferta where usuario!=?",  new Object[] {usuario}, new OfertaMapper());
+	}
+	
+	//Devuelve ofertas hechas por mi
+	public Object getMisOfertas(String usuario) {
+		return this.jdbcTemplate.query("select * from oferta where usuario=?", new Object[] {usuario}, new OfertaMapper());
+	}
+		
+	
 	public Oferta getOferta(int id_oferta) {
 		return this.jdbcTemplate.queryForObject("select * from oferta where id_oferta=?",  new Object[] {id_oferta}, new OfertaMapper());
 	}
@@ -69,5 +80,6 @@ public class OfertaDao {
 	private static Date toDate(Timestamp t){
 		return new Date(t.getTime());
 	}
+
 
 }

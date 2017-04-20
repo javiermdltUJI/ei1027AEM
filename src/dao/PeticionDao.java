@@ -46,6 +46,17 @@ public class PeticionDao {
 		return this.jdbcTemplate.query("select * from peticion", new PeticionMapper());
 	}
 	
+	//Devuelve las peticiones no hechas por mi
+	public List<Peticion> getPeticiones(String usuario){
+		return this.jdbcTemplate.query("select * from peticion where usuario!=?", new Object[] {usuario}, new PeticionMapper());
+	}
+	
+	//Devuelve mis peticiones
+	public List<Peticion> getMisPeticiones(String usuario){
+		return this.jdbcTemplate.query("select * from peticion where usuario=?", new Object[] {usuario}, new PeticionMapper());
+	}
+	
+	
 	public Peticion getPeticion(int id_peticion) {
 		return this.jdbcTemplate.queryForObject("select * from peticion where id_peticion=?",  new Object[] {id_peticion}, new PeticionMapper());
 	}

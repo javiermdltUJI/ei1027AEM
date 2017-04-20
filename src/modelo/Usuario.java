@@ -46,7 +46,7 @@ public class Usuario {
 	public String toString() {
 		return "Estudiante [usuario=" + usuario + ", contrasenya=" + contrasenya + ", correo="
 				+ correo + ", nombre=" + nombre + ", dni=" + dni + ", contadorBloqueo"
-				+ contadorBloqueo + ", bloqueado=" + bloqueado + "rol=" + rol +"]";
+				+ contadorBloqueo + ", bloqueado=" + bloqueado + ", rol=" + rol +"]";
 	}
 	
 }

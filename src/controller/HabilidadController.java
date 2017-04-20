@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,20 +26,27 @@ public class HabilidadController {
 	}
 	
 	@RequestMapping("/listar")
-	public String listaHabilidad(Model model){
+	public String listaHabilidad(HttpSession session, Model model){
 		model.addAttribute("habilidades", habilidadDao.getHabilidades());
+		return "habilidad/listar";
+	}
+	
+	@RequestMapping("/listarActivas")
+	public String listaHabilidadActiva(HttpSession session, Model model){
+		model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 		return "habilidad/listar";
 	}
 
 
+
 	@RequestMapping(value="/add")
-	public String addHabilidad(Model model){
+	public String addHabilidad(HttpSession session, Model model){
 		model.addAttribute("habilidad", new Habilidad());
 		return "habilidad/add";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
 		habilidadDao.addHabilidad(habilidad);
@@ -45,13 +54,13 @@ public class HabilidadController {
 	}
 	
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.GET)
-	public String editHabilidad(Model model, @PathVariable int id_habilidad){
+	public String editHabilidad(HttpSession session, Model model, @PathVariable int id_habilidad){
 			model.addAttribute("habilidad", habilidadDao.getHabilidad(id_habilidad));
 			return "habilidad/update";	
 	}
 	
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int id_habilidad, @ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){
+	public String processUpdateSubmit(HttpSession session, @PathVariable int id_habilidad, @ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
@@ -60,7 +69,7 @@ public class HabilidadController {
 	}
 	
 	@RequestMapping(value="/delete/{id_habilidad}")
-	public String processDelete(@PathVariable int id_habilidad){
+	public String processDelete(HttpSession session, @PathVariable int id_habilidad){
 		habilidadDao.deleteHabilidad(id_habilidad);
 		return "redirect:../listar.html";
 	}

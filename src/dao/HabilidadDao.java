@@ -48,6 +48,10 @@ public class HabilidadDao {
 		return this.jdbcTemplate.query("select * from habilidad", new HabilidadMapper());
 	}
 	
+	public List<Habilidad> getHabilidadesActivas(){
+		return this.jdbcTemplate.query("select * from habilidad where estado='ACTIVO'", new HabilidadMapper());
+	}
+	
 	public Habilidad getHabilidad(int id_habilidad) {
 		return this.jdbcTemplate.queryForObject("select * from habilidad where id_habilidad=?",  new Object[] {id_habilidad}, new HabilidadMapper());
 	}

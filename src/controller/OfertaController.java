@@ -3,6 +3,8 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import dao.HabilidadDao;
 import dao.OfertaDao;
 import modelo.Oferta;
+import modelo.Usuario;
 
 
 //El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
@@ -43,20 +46,34 @@ public class OfertaController {
 	
 	
 	@RequestMapping("/listar")
-	public String listaOferta(Model model){
+	public String listaOferta(HttpSession session, Model model){
 		model.addAttribute("ofertas", ofertaDao.getOfertas());
+		return "oferta/listar";
+	}
+	
+	@RequestMapping("/listarOfertas")
+	public String listarOfertas(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("ofertas", ofertaDao.getOfertas(usuario.getUsuario()));
+		return "oferta/listar";
+	}
+	
+	@RequestMapping("/listarMisOfertas")
+	public String listarMisOfertas(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario.getUsuario()));
 		return "oferta/listar";
 	}
 
 	@RequestMapping(value="/add")
-	public String addOferta(Model model){
+	public String addOferta(HttpSession session, Model model){
 		model.addAttribute("oferta", new Oferta());
 		model.addAttribute("habilidades", habilidadDao.getHabilidades());
 		return "oferta/add";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
 		ofertaDao.addOferta(oferta);
@@ -64,14 +81,14 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.GET)
-	public String editOferta(Model model, @PathVariable int id_oferta){
+	public String editOferta(HttpSession session, Model model, @PathVariable int id_oferta){
 			model.addAttribute("oferta", ofertaDao.getOferta(id_oferta));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "oferta/update";	
 	}
 	
 	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int id_oferta, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+	public String processUpdateSubmit(HttpSession session, @PathVariable int id_oferta, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
@@ -81,7 +98,7 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/delete/{id_oferta}")
-	public String processDelete(@PathVariable int id_oferta){
+	public String processDelete(HttpSession session, @PathVariable int id_oferta){
 		ofertaDao.deleteOferta(id_oferta);
 		return "redirect:../listar.html";
 	}

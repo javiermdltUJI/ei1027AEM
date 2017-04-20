@@ -3,6 +3,8 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.ColaboracionDao;
 import modelo.Colaboracion;
+import modelo.Usuario;
 
 
 //El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
@@ -33,19 +36,26 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping("/listar")
-	public String listaColaboracion(Model model){
+	public String listaColaboracion(HttpSession session, Model model){
 		model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+		return "colaboracion/listar";
+	}
+	
+	@RequestMapping("/listarMisColaboraciones")
+	public String listaMisColaboracion(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("colaboraciones", colaboracionDao.getMisColaboraciones(usuario.getUsuario()));
 		return "colaboracion/listar";
 	}
 
 	@RequestMapping(value="/add")
-	public String addColaboracion(Model model){
+	public String addColaboracion(HttpSession session, Model model){
 		model.addAttribute("colaboracion", new Colaboracion());
 		return "colaboracion/add";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("colaboracion") Colaboracion colaboracion, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
 		colaboracionDao.addColaboracion(colaboracion);
@@ -53,13 +63,13 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.GET)
-	public String editColaboracion(Model model, @PathVariable int id_colaboracion){
+	public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion){
 			model.addAttribute("colaboracion", colaboracionDao.getColaboracion(id_colaboracion));
 			return "colaboracion/update";	
 	}
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int id_colaboracion, @ModelAttribute("colaboracion") Colaboracion colaboracion, BindingResult bindingResult){
+	public String processUpdateSubmit(HttpSession session, @PathVariable int id_colaboracion, @ModelAttribute("colaboracion") Colaboracion colaboracion, BindingResult bindingResult){
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
@@ -68,7 +78,7 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/delete/{id_colaboracion}")
-	public String processDelete(@PathVariable int id_colaboracion){
+	public String processDelete(HttpSession session, @PathVariable int id_colaboracion){
 		colaboracionDao.deleteColaboracion(id_colaboracion);
 		return "redirect:../listar.html";
 	}

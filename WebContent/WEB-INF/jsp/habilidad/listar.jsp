@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
+
 <t:paginabasica title="EI1027">
 <jsp:body>
 <html> 
@@ -18,7 +20,11 @@
 			<th>Tipo</th>
 			<th>Descripción</th>
 			<th>Nivel</th>
-			<th>Estado</th>
+			<c:choose>	
+				<c:when test='${usuario.rol=="ADMIN"}'>
+					<th>Estado</th>
+				</c:when>
+		</c:choose>
 		</tr>
 		<c:forEach items="${habilidades}" var="habilidad">
 			<tr>
@@ -27,13 +33,21 @@
 				<td>${habilidad.tipo}</td>
 				<td>${habilidad.descripcion}</td>
 				<td>${habilidad.nivel}</td>
-				<td>${habilidad.estado}</td>
-				<td><a type="button" class="btn btn-default" href="update/${habilidad.idHabilidad}.html">Edita</a>
-				<td><a type="button" class="btn btn-default" href="delete/${habilidad.idHabilidad}.html">Elimina</a>		
+				<c:choose>	
+					<c:when test='${usuario.rol=="ADMIN"}'>
+					<td>${habilidad.estado}</td>
+						<td><a type="button" class="btn btn-default" href="update/${habilidad.idHabilidad}.html">Edita</a>
+						<td><a type="button" class="btn btn-default" href="delete/${habilidad.idHabilidad}.html">Elimina</a>		
+					</c:when>
+				</c:choose>
 			</tr>
 		</c:forEach>
 	</table>
-	<a type="button" class="btn btn-default" href="add.html">Agregar habilidad</a>
+	<c:choose>	
+		<c:when test='${usuario.rol=="ADMIN"}'>
+			<a type="button" class="btn btn-default" href="add.html">Agregar habilidad</a>
+		</c:when>
+	</c:choose>
 </body>
 </html>
 </jsp:body>

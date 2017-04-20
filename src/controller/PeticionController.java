@@ -3,6 +3,8 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import dao.HabilidadDao;
 import dao.PeticionDao;
 import modelo.Peticion;
+import modelo.Usuario;
 
 //El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
 
@@ -40,20 +43,34 @@ public class PeticionController {
 	}
 	
 	@RequestMapping("/listar")
-	public String listaPeticion(Model model){
+	public String listaPeticion(HttpSession session, Model model){
 		model.addAttribute("peticiones", peticionDao.getPeticiones());
+		return "peticion/listar";
+	}
+	
+	@RequestMapping("/listarPeticiones")
+	public String listarPeticiones(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("peticiones", peticionDao.getPeticiones(usuario.getUsuario()));
+		return "peticion/listar";
+	}
+	
+	@RequestMapping("/listarMisPeticiones")
+	public String listarMisPeticiones(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario.getUsuario()));
 		return "peticion/listar";
 	}
 
 	@RequestMapping(value="/add")
-	public String addPeticion(Model model){
+	public String addPeticion(HttpSession session, Model model){
 		model.addAttribute("peticion", new Peticion());
 		model.addAttribute("habilidades", habilidadDao.getHabilidades());
 		return "peticion/add";
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
 		// PeticionValidator peticionValidator = new PeticionValidator();
@@ -65,14 +82,14 @@ public class PeticionController {
 	}
 	
 	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.GET)
-	public String editPeticion(Model model, @PathVariable int id_peticion){
+	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion){
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "peticion/update";	
 	}
 	
 	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int id_peticion, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
+	public String processUpdateSubmit(HttpSession session, @PathVariable int id_peticion, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
 	//	if(bindingResult.hasErrors())
 		//	return "habilidad/update";
 		//habilidad.setIdHabilidad(id_habilidad);
@@ -81,7 +98,7 @@ public class PeticionController {
 	}
 	
 	@RequestMapping(value="/delete/{id_peticion}")
-	public String processDelete(@PathVariable int id_peticion){
+	public String processDelete(HttpSession session, @PathVariable int id_peticion){
 		peticionDao.deletePeticion(id_peticion);
 		return "redirect:../listar.html";
 	}
