@@ -22,5 +22,12 @@ public class PrincipalController {
 		//model.addAttribute("usuarioLogin", new Usuario());
 		
 		return "principal/index";
-	}	
+	}
+	
+	@RequestMapping(value="/principal", method = RequestMethod.GET)
+	public String principal(Model model, HttpSession session) {
+		//model.addAttribute("usuarioLogin", new Usuario());
+		
+		return "principal/principal";
+	}
 }

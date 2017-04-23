@@ -1,8 +1,7 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
-
-<c:set var="usuario" scope="request" value='${session.getAttribute("usuario")}'/>
+<c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
 
 <nav class="navbar navbar-default">
 	<div class="container">
@@ -40,6 +39,19 @@
 				</c:choose>
 
 			</ul>
+			<c:if test='${usuario == null}'>
+			<ul class="nav navbar-nav" style="float:right">
+				<li><a href="${pageContext.request.contextPath}/login.html">Inicio de sesión</a></li>
+			</ul>
+			</c:if>
+			<c:if test='${usuario != null}'>
+			<ul class="nav navbar-nav" style="float:right">
+				<li>Bienvenido/a ${usuario.nombre}</li>
+				<li><a href="${pageContext.request.contextPath}/logout.html">Cerrar sesión</a></li>
+			</ul>
+			</c:if>
+			
+			
 		</div>
 	</div>
 </nav>

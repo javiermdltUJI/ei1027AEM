@@ -12,8 +12,6 @@
 	<li><a href="${pageContext.request.contextPath}/peticion/listar.html">Gestión de Peticiones</a></li>
 	<li><a href="${pageContext.request.contextPath}/colaboracion/listar.html">Gestión de Colaboraciones</a></li>
 </ul>
-    
-  </body>
 </html>
 </jsp:body>
 </t:paginabasica>

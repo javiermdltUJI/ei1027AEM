@@ -3,5 +3,5 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
-window.location="${pageContext.request.contextPath}/login.html";
+window.location="${pageContext.request.contextPath}/principal/principal.html";
 </script>
