@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
@@ -15,19 +16,23 @@
 <link
 	href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/otro.css"
+	rel="stylesheet">
 
 </head>
+
 <body>
 	<header class="container page-header">
 	<h1>Skill Sharing</h1>
 	</header>
 	<t:navegacio />
-	<div class="container">
+	<div class="container" style="left:2%">
 		<jsp:doBody />
 	</div>
-	<footer>
+	<footer style="left:2%">
 	<hr>
-	<p class="text-muted">
+	<p class="text-muted" >
 	EI1027 - Disseny i Implementació de Sistemes d'Informació
 	</p>
 	</footer>
