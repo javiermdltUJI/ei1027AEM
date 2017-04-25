@@ -33,15 +33,21 @@ $('.dropdown-toggle').dropdown();
 
 <body>
 	<header class="container page-header">
-	<h1>Skill Sharing</h1>
+		<a href="${pageContext.request.contextPath}" >
+		<img alt="Skills sharing" src="${pageContext.request.contextPath}/img/titulo.png" style="width:50%">
+		</a>
+	<t:login />
+	
 	</header>
 	<t:navegacio />
 	<div class="container" style="left:2%">
+	
 		<jsp:doBody />
 	</div>
 	<footer style="left:2%">
 	<hr>
 	<p class="text-muted" >
+	
 	EI1027 - Disseny i Implementació de Sistemes d'Informació
 	</p>
 	</footer>

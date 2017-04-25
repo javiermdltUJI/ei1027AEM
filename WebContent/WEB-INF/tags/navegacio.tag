@@ -3,6 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
 
+
 <nav class="navbar navbar-default">
 	<div class="container">
 		<div class="navbar-collapse collapse">
@@ -45,17 +46,17 @@
 				</c:choose>
 
 			</ul>
-			<c:if test='${usuario == null}'>
-			<ul class="nav navbar-nav" style="float:right">
-				<li><a href="${pageContext.request.contextPath}/login.html">Inicio de sesión</a></li>
-			</ul>
-			</c:if>
-			<c:if test='${usuario != null}'>
-			<ul class="nav navbar-nav" style="float:right">
-				<li><a style="color:blue">Bienvenido/a ${usuario.nombre}</a></li>
-				<li><a href="${pageContext.request.contextPath}/logout.html">Cerrar sesión</a></li>
-			</ul>
-			</c:if>
+<%-- 			<c:if test='${usuario == null}'> --%>
+<!-- 			<ul class="nav navbar-nav" style="float:right"> -->
+<%-- 				<li><a href="${pageContext.request.contextPath}/login.html">Inicio de sesión</a></li> --%>
+<!-- 			</ul> -->
+<%-- 			</c:if> --%>
+<%-- 			<c:if test='${usuario != null}'> --%>
+<!-- 			<ul class="nav navbar-nav" style="float:right"> -->
+<%-- 				<li><a style="color:blue">Bienvenido/a ${usuario.nombre}</a></li> --%>
+<%-- 				<li><a href="${pageContext.request.contextPath}/logout.html">Cerrar sesión</a></li> --%>
+<!-- 			</ul> -->
+<%-- 			</c:if> --%>
 			
 			
 		</div>
