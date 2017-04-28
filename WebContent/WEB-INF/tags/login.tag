@@ -11,7 +11,7 @@
 		</c:if>
 		<c:if test='${usuario != null}'>
 			<ul class="nav navbar-nav" style="float:right; top:0%">
-				<li><a style="color:blue">Bienvenido/a ${usuario.nombre}</a></li>
+				<li><a style="color:blue">Bienvenido/a ${usuario.usuario}</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout.html">Cerrar sesión</a></li>
 			</ul>
 		</c:if>
