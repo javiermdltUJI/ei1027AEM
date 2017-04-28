@@ -35,7 +35,7 @@
 							<li><a href="${pageContext.request.contextPath}/peticion/listarMisPeticiones.html">Mis Peticiones</a></li>
 							<li><a href="${pageContext.request.contextPath}/peticion/listarPeticiones.html">Ver Peticiones</a></li>
 						</ul>
-					<li><a href="${pageContext.request.contextPath}/colaboracion/listarMisColaboraciones.html">Mis Colaboraciones</a></li>
+					<li><a href="${pageContext.request.contextPath}/miColaboracion/listar.html">Mis Colaboraciones</a></li>
 				</c:when>
 					
 				<c:when test='${usuario.rol==null}'>

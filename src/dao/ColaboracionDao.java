@@ -15,8 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import modelo.Colaboracion;
 
-//He creado un id estatatico que se va incrementando cada vez que se hace una llamada al add
-//Ahora mismo el id es 6 porque tengo 5 componentes en la bbdd, pero hay que cambiarlo a 0 cuando la bbdd se cree nueva
 
 
 @Repository
@@ -47,10 +45,16 @@ public class ColaboracionDao {
 		return this.jdbcTemplate.query("select * from colaboracion", new ColaboracionMapper());
 	}
 	
-	public List<Colaboracion> getMisColaboraciones(String usuario){
-		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, C.id_oferta, C.id_peticion"
-				+ " from colaboracion AS C JOIN oferta USING(id_oferta) JOIN peticion USING(id_peticion)"
-				+ " where peticion.usuario=? and oferta.usuario=?", new Object[] {usuario,usuario},new ColaboracionMapper());
+	public List<Colaboracion> getMisColaboracionesOferta(String usuario){
+		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, P.descripcion, P.usuario"
+				+ " from colaboracion AS C JOIN peticion AS P USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
+				+ " where O.usuario=?", new Object[] {usuario},new ColaboracionMapper());
+	}
+	
+	public List<Colaboracion> getMisColaboracionesPeticion(String usuario){
+		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, O.descripcion, O.usuario"
+				+ " from colaboracion AS C JOIN oferta AS O USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
+				+ " where P.usuario=? ", new Object[] {usuario},new ColaboracionMapper());
 	}
 	
 	public Colaboracion getColaboracion(int id_colaboracion) {
@@ -75,5 +79,10 @@ public class ColaboracionDao {
 	private static Date toDate(Timestamp t){
 		return new Date(t.getTime());
 	}
+
+	public void cancelarColaboracion(int id_colaboracion) {
+		this.jdbcTemplate.update("update colaboracion set fecha_fin=null, fecha_ini=null where id_colaboracion = ?", id_colaboracion);
+	}
+		
 
 }

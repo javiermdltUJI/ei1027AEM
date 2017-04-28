@@ -67,6 +67,11 @@ public class PeticionDao {
 				peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad());
 	}
 	
+	public int addPeticionInt(Peticion peticion){
+		return this.jdbcTemplate.queryForObject("insert into Peticion(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values( ?, ?, ?, ?, ?)",
+				new Object[] {peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad()},Integer.class);
+	}
+	
 	public void updatePeticion(Peticion peticion){
 		this.jdbcTemplate.update("update Peticion set fecha_ini = ?, fecha_fin = ?,  descripcion = ?, usuario = ?, id_habilidad = ? where id_peticion = ?", 
 				peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad(), peticion.getIdPeticion());

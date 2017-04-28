@@ -41,13 +41,6 @@ public class ColaboracionController {
 		return "colaboracion/listar";
 	}
 	
-	@RequestMapping("/listarMisColaboraciones")
-	public String listaMisColaboracion(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		model.addAttribute("colaboraciones", colaboracionDao.getMisColaboraciones(usuario.getUsuario()));
-		return "colaboracion/listar";
-	}
-
 	@RequestMapping(value="/add")
 	public String addColaboracion(HttpSession session, Model model){
 		model.addAttribute("colaboracion", new Colaboracion());
@@ -80,6 +73,12 @@ public class ColaboracionController {
 	@RequestMapping(value="/delete/{id_colaboracion}")
 	public String processDelete(HttpSession session, @PathVariable int id_colaboracion){
 		colaboracionDao.deleteColaboracion(id_colaboracion);
+		return "redirect:../listar.html";
+	}
+	
+	@RequestMapping(value="/cancelar/{id_colaboracion}")
+	public String processCancelar(HttpSession session, @PathVariable int id_colaboracion){
+		colaboracionDao.cancelarColaboracion(id_colaboracion);
 		return "redirect:../listar.html";
 	}
 	

@@ -67,6 +67,11 @@ public class OfertaDao {
 				oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad());
 	}
 	
+	public int addOfertaInt(Oferta oferta){
+		return this.jdbcTemplate.queryForObject("insert into Oferta(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?)", 
+				 new Object[] {oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad()}, Integer.class);
+
+	}
 	public void updateOferta(Oferta oferta){
 		this.jdbcTemplate.update("update Oferta set fecha_ini = ?, fecha_fin = ?,  descripcion = ?, usuario = ?, id_habilidad = ? where id_oferta = ?", 
 				oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad(), oferta.getIdOferta());
