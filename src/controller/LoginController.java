@@ -101,9 +101,9 @@ public class LoginController {
         	return "redirect:" + url;
         }else{
         	if (usuario.getRol().name().equals("ESTUDIANTE"))
-        		return "redirect:principal/index.html";
+        		return "redirect:principal/principal.html";
         	else //Para administradores
-        		return "redirect:principal/index.html";
+        		return "redirect:principal/principal.html";
         }
     }
 

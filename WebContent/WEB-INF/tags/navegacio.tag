@@ -4,10 +4,10 @@
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
 
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default ">
 	<div class="container">
 		<div class="navbar-collapse collapse">
-			<ul class="nav navbar-nav">
+			<ul class="nav nav-tabs nav-justified">
 				<li><a href="${pageContext.request.contextPath}">Inicio</a></li>
 				<c:choose>
 				<c:when test='${usuario.rol=="ADMIN"}'>

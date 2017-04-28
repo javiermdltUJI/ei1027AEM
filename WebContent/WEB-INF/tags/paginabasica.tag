@@ -34,7 +34,8 @@ $('.dropdown-toggle').dropdown();
 <body>
 	<header class="container page-header">
 		<a href="${pageContext.request.contextPath}" >
-		<img alt="Skills sharing" src="${pageContext.request.contextPath}/img/titulo.png" style="width:50%">
+		<img alt="Skills sharing" src="${pageContext.request.contextPath}/img/titulo.png" style="width:60%">
+	
 		</a>
 	<t:login />
 	
@@ -48,7 +49,7 @@ $('.dropdown-toggle').dropdown();
 	<hr>
 	<p class="text-muted" >
 	
-	EI1027 - Disseny i Implementació de Sistemes d'Informació
+	EI1027 - Disseny i Implementació de Sistemes d'Informació
 	</p>
 	</footer>
 </body>
