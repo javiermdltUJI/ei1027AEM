@@ -22,7 +22,7 @@ import modelo.MiColaboracion;
 import modelo.Usuario;
 
 
-//El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
+//El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!
 
 @Controller
 @RequestMapping("/miColaboracion")
