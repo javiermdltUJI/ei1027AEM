@@ -25,8 +25,8 @@
 		<c:forEach items="${peticiones}" var="peticion">
 			<tr>
 				<td>${peticion.idPeticion}</td>
-				<td>${peticion.fechaIni}</td>
-				<td>${peticion.fechaFin}</td>
+				<td>${peticion.fechaIniString}</td>
+				<td>${peticion.fechaFinString}</td>
 				<td>${peticion.descripcion}</td>
 				<td>${peticion.usuario}</td>
 				<td>${peticion.idHabilidad}</td>

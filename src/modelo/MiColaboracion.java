@@ -1,5 +1,6 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MiColaboracion {
@@ -7,6 +8,8 @@ public class MiColaboracion {
 	private int id_colaboracion;
 	private Date fechaIni;
 	private Date fechaFin;
+	private String fechaIniString;
+	private String fechaFinString;
 	private int horasTotales;
 	private int valoracion;
 	private int id_oferta;
@@ -17,9 +20,26 @@ public class MiColaboracion {
 	public int getIdColaboracion(){ return id_colaboracion; }
 	public void setIdColaboracion(int id_colaboracion){ this.id_colaboracion = id_colaboracion;}
 	public Date getFechaIni(){ return fechaIni; }
-	public void setFechaIni(Date fIni){ this.fechaIni = fIni;}
+	public void setFechaIni(Date fIni){ 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.fechaIniString = dateFormat.format(fIni); 
+		this.fechaIni = fIni;
+	}
+	public String getFechaIniString(){ 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		return dateFormat.format(fechaIni); 
+	}
+	
 	public Date getFechaFin(){ return fechaFin; }
-	public void setFechaFin(Date fFin){ this.fechaFin = fFin; }
+	public void setFechaFin(Date fFin){ 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.fechaFinString = dateFormat.format(fFin); 
+		this.fechaFin = fFin;
+	}
+	public String getFechaFinString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		return dateFormat.format(fechaFin); 
+	}
 	public int getHorasTotales(){ return horasTotales; }
 	public void setHorasTotales(int horasTotales){ this.horasTotales = horasTotales; }
 	public int getValoracion(){ return valoracion; }

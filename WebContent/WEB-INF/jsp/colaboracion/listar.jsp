@@ -24,8 +24,8 @@
 		<c:forEach items="${colaboraciones}" var="colaboracion">
 			<tr>
 				<td>${colaboracion.idColaboracion}</td>
-				<td>${colaboracion.fechaIni}</td>
-				<td>${colaboracion.fechaFin}</td>
+				<td>${colaboracion.fechaIniString}</td>
+				<td>${colaboracion.fechaFinString}</td>
 				<td>${colaboracion.horasTotales}</td>
 				<td>${colaboracion.valoracion}</td>
 				<td>${colaboracion.idOferta}</td>

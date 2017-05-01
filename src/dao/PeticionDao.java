@@ -2,6 +2,8 @@ package dao;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
@@ -9,9 +11,12 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import modelo.Peticion;
 
@@ -84,5 +89,12 @@ public class PeticionDao {
 	//Para extraer correctamente las fechas
 	private static Date toDate(Timestamp t){
 		return new Date(t.getTime());
+	}
+	
+	@InitBinder
+	private void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		dateFormat.setLenient(false);
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 }

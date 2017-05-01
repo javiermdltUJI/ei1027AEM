@@ -22,8 +22,8 @@
 		<c:forEach items="${ofertas}" var="oferta">
 			<tr>
 				<td>${oferta.idOferta}</td>
-				<td>${oferta.fechaIni}</td>
-				<td>${oferta.fechaFin}</td>
+				<td>${oferta.fechaIniString}</td>
+				<td>${oferta.fechaFinString}</td>
 				<td>${oferta.descripcion}</td>
 				<td>${oferta.usuario}</td>
 				<td>${oferta.idHabilidad}</td>
