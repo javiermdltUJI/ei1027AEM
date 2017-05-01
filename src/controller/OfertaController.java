@@ -55,6 +55,7 @@ public class OfertaController {
 	public String listarOfertas(HttpSession session, Model model){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		if(usuario != null){
+			model.addAttribute("accesible", false);
 			model.addAttribute("ofertas", ofertaDao.getOfertas(usuario.getUsuario()));
 			return "oferta/listar";			
 		}else{
@@ -66,6 +67,7 @@ public class OfertaController {
 	public String listarMisOfertas(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			model.addAttribute("accesible", true);
 			model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario));
 			return "oferta/listar";
 		}else{

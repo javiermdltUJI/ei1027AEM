@@ -2,6 +2,9 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
+
+
 <t:paginabasica title="EI1027">
 <jsp:body>
 <html>
@@ -27,8 +30,15 @@
 				<td>${peticion.descripcion}</td>
 				<td>${peticion.usuario}</td>
 				<td>${peticion.idHabilidad}</td>
-				<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-				<td><a type="button" class="btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+				<c:if test='${accesible == true}'>
+					<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
+					<td><a type="button" class="btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+				</c:if>
+				<c:if test='${usuario.rol=="ADMIN"}'>
+					<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
+					<td><a type="button" class="btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+				</c:if>
+				
 			</tr>
 		</c:forEach>
 	</table>

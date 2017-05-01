@@ -52,6 +52,7 @@ public class PeticionController {
 	public String listarPeticiones(HttpSession session, Model model){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		if(usuario != null){
+			model.addAttribute("accesible", false);
 			model.addAttribute("peticiones", peticionDao.getPeticiones(usuario.getUsuario()));
 			return "peticion/listar";			
 		}
@@ -64,6 +65,7 @@ public class PeticionController {
 	public String listarMisPeticiones(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			model.addAttribute("accesible", true);
 			model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario));
 			return "peticion/listar";			
 		}else{

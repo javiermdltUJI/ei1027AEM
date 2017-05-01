@@ -27,8 +27,14 @@
 				<td>${oferta.descripcion}</td>
 				<td>${oferta.usuario}</td>
 				<td>${oferta.idHabilidad}</td>
-				<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
-				<td><a type="button" class="btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
+				<c:if test='${accesible == true}'>
+					<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
+					<td><a type="button" class="btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
+				</c:if>
+				<c:if test='${usuario.rol=="ADMIN"}'>
+					<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
+					<td><a type="button" class="btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>
