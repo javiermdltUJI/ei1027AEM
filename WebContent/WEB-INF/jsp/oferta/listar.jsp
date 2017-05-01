@@ -12,21 +12,29 @@
 	<h1>Lista de Ofertas</h1>
 	<table class="table">
 		<tr>
+		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_oferta</th>
+		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Descripción</th>
 			<th>Usuario</th>
+		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
+		</c:if>
 		</tr>
 		<c:forEach items="${ofertas}" var="oferta">
 			<tr>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${oferta.idOferta}</td>
+			</c:if>
 				<td>${oferta.fechaIniString}</td>
 				<td>${oferta.fechaFinString}</td>
 				<td>${oferta.descripcion}</td>
 				<td>${oferta.usuario}</td>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${oferta.idHabilidad}</td>
+			</c:if>
 				<c:if test='${accesible == true}'>
 					<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
 					<td><a type="button" class="btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		

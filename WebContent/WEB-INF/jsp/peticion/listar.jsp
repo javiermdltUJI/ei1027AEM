@@ -15,21 +15,29 @@
 	<h1>Lista de Peticiones</h1>
 	<table class="table">
 		<tr>
+		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_peticion</th>
+		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Descripción</th>
 			<th>Usuario</th>
+		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
+		</c:if>
 		</tr>
 		<c:forEach items="${peticiones}" var="peticion">
 			<tr>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${peticion.idPeticion}</td>
+			</c:if>
 				<td>${peticion.fechaIniString}</td>
 				<td>${peticion.fechaFinString}</td>
 				<td>${peticion.descripcion}</td>
 				<td>${peticion.usuario}</td>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${peticion.idHabilidad}</td>
+			</c:if>
 				<c:if test='${accesible == true}'>
 					<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
 					<td><a type="button" class="btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		

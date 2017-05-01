@@ -15,7 +15,9 @@
 	<h1>Lista de Habilidades</h1>
 	<table class="table">
 		<tr>
+		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
+		</c:if>
 			<th>Nombre</th>
 			<th>Tipo</th>
 			<th>Descripción</th>
@@ -28,7 +30,9 @@
 		</tr>
 		<c:forEach items="${habilidades}" var="habilidad">
 			<tr>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${habilidad.idHabilidad}</td>
+			</c:if>
 				<td>${habilidad.nombre}</td>
 				<td>${habilidad.tipo}</td>
 				<td>${habilidad.descripcion}</td>

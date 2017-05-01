@@ -13,7 +13,9 @@
 	<h1>Lista de Colaboraciones</h1>
 	<table class="table">
 		<tr>
+		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_colaboracion</th>
+		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
@@ -26,7 +28,9 @@
 		</tr>
 		<c:forEach items="${colaboracionesOferta}" var="colaboracionesOferta">
 			<tr>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${colaboracionesOferta.idColaboracion}</td>
+			</c:if>
 				<td>${colaboracionesOferta.fechaIniString}</td>
 				<td>${colaboracionesOferta.fechaFinString}</td>
 				<td>${colaboracionesOferta.horasTotales}</td>
