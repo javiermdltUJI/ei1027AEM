@@ -34,6 +34,10 @@
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
 					<td><a type="button" class="btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
+					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+				</c:if>
+				<c:if test='${accesible == false}'>
+					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>

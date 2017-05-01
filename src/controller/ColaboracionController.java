@@ -49,7 +49,7 @@ public class ColaboracionController {
 	@RequestMapping(value="/add")
 	public String addColaboracion(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && u.getRol().name().equals("ADMIN")){
+		if(u != null){
 			model.addAttribute("colaboracion", new Colaboracion());
 			return "colaboracion/add";
 		}else{
@@ -57,7 +57,7 @@ public class ColaboracionController {
 		}
 	}
 
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="/add/{usuario}", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
