@@ -27,14 +27,24 @@ public class UsuarioController {
 	
 	@RequestMapping("/listar")
 	public String listaUsuarios(HttpSession session, Model model){
-		model.addAttribute("usuarios", usuarioDao.getUsuarios());
-		return "usuario/listar";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			model.addAttribute("usuarios", usuarioDao.getUsuarios());
+			return "usuario/listar";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/add")
 	public String addUsuario(HttpSession session, Model model){
-		model.addAttribute("usuario", new Usuario());
-		return "usuario/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u == null || u.getRol().name().equals("ADMIN")){
+			model.addAttribute("usuario", new Usuario());
+			return "usuario/add";
+		}else{
+			return "error/error";
+		}
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -47,8 +57,13 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
 	public String editUsuario(HttpSession session, Model model, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
 			model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
-			return "usuario/update";	
+			return "usuario/update";				
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/update/{nom_usuario}", method = RequestMethod.POST)
@@ -61,8 +76,13 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/delete/{usuario}")
 	public String processDelete(HttpSession session, @PathVariable String usuario){
-		usuarioDao.deleteUsuario(usuario);
-		return "redirect:../listar.html";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			usuarioDao.deleteUsuario(usuario);
+			return "redirect:../listar.html";
+		}else{
+			return "error/error";
+		}
 	}
 
 }

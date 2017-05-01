@@ -7,6 +7,7 @@
 		<c:if test='${usuario == null}'>
 			<ul class="nav navbar-nav" style="float:right; top:0%">
 				<li><a href="${pageContext.request.contextPath}/login.html">Inicio de sesión</a></li>
+				<li><a href="${pageContext.request.contextPath}/usuario/add.html">Registrar usuario</a>
 			</ul>
 		</c:if>
 		<c:if test='${usuario != null}'>

@@ -54,22 +54,35 @@ public class OfertaController {
 	@RequestMapping("/listarOfertas")
 	public String listarOfertas(HttpSession session, Model model){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		model.addAttribute("ofertas", ofertaDao.getOfertas(usuario.getUsuario()));
-		return "oferta/listar";
+		if(usuario != null){
+			model.addAttribute("ofertas", ofertaDao.getOfertas(usuario.getUsuario()));
+			return "oferta/listar";			
+		}else{
+			return "error/error";
+		}
 	}
 	
-	@RequestMapping("/listarMisOfertas")
-	public String listarMisOfertas(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario.getUsuario()));
-		return "oferta/listar";
+	@RequestMapping("/listarMisOfertas/{usuario}")
+	public String listarMisOfertas(HttpSession session, Model model, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario));
+			return "oferta/listar";
+		}else{
+			return "error/error";
+		}
 	}
 
 	@RequestMapping(value="/add")
 	public String addOferta(HttpSession session, Model model){
-		model.addAttribute("oferta", new Oferta());
-		model.addAttribute("habilidades", habilidadDao.getHabilidades());
-		return "oferta/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			model.addAttribute("oferta", new Oferta());
+			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			return "oferta/add";			
+		}else{
+			return "error/error";
+		}
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -80,11 +93,16 @@ public class OfertaController {
 		return "redirect:listar.html";
 	}
 	
-	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.GET)
-	public String editOferta(HttpSession session, Model model, @PathVariable int id_oferta){
+	@RequestMapping(value="/update/{usuario}/{id_oferta}", method = RequestMethod.GET)
+	public String editOferta(HttpSession session, Model model, @PathVariable int id_oferta, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){	
 			model.addAttribute("oferta", ofertaDao.getOferta(id_oferta));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
-			return "oferta/update";	
+			return "oferta/update";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.POST)
@@ -97,10 +115,15 @@ public class OfertaController {
 		return "redirect:../listar.html";
 	}
 	
-	@RequestMapping(value="/delete/{id_oferta}")
-	public String processDelete(HttpSession session, @PathVariable int id_oferta){
-		ofertaDao.deleteOferta(id_oferta);
-		return "redirect:../listar.html";
+	@RequestMapping(value="/delete/{usuario}/{id_oferta}")
+	public String processDelete(HttpSession session, @PathVariable int id_oferta, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			ofertaDao.deleteOferta(id_oferta);
+			return "redirect:../listar.html";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	/*formateo de fechas	 */

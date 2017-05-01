@@ -33,7 +33,7 @@
 				<td>${colaboracionesOferta.valoracion}</td>
 				<td>${colaboracionesOferta.descripcion}</td>
 				<td>${colaboracionesOferta.usuario}</td>
-				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesOferta.idColaboracion}.html">Cancelar</a>		
+				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesOferta.usuario}/${colaboracionesOferta.idColaboracion}.html">Cancelar</a>		
 			</tr>
 		</c:forEach>
 		
@@ -49,8 +49,8 @@
 				<td>${colaboracionesPeticion.valoracion}</td>
 				<td>${colaboracionesPeticion.descripcion}</td>
 				<td>${colaboracionesPeticion.usuario}</td>
-				<td><a type="button" class="btn btn-default"  href="../colaboracion/update/${colaboracionesPeticion.idColaboracion}.html">Valorar</a>
-				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a>		
+				<td><a type="button" class="btn btn-default"  href="../colaboracion/update/${colaboracionesPeticion.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a>
+				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesPeticion.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a>		
 			</tr>
 		</c:forEach>
 		

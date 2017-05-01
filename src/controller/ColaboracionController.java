@@ -37,14 +37,24 @@ public class ColaboracionController {
 	
 	@RequestMapping("/listar")
 	public String listaColaboracion(HttpSession session, Model model){
-		model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
-		return "colaboracion/listar";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+			return "colaboracion/listar";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/add")
 	public String addColaboracion(HttpSession session, Model model){
-		model.addAttribute("colaboracion", new Colaboracion());
-		return "colaboracion/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			model.addAttribute("colaboracion", new Colaboracion());
+			return "colaboracion/add";
+		}else{
+			return "error/error";
+		}
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -57,8 +67,13 @@ public class ColaboracionController {
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.GET)
 	public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
 			model.addAttribute("colaboracion", colaboracionDao.getColaboracion(id_colaboracion));
-			return "colaboracion/update";	
+			return "colaboracion/update";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.POST)
@@ -72,14 +87,24 @@ public class ColaboracionController {
 	
 	@RequestMapping(value="/delete/{id_colaboracion}")
 	public String processDelete(HttpSession session, @PathVariable int id_colaboracion){
-		colaboracionDao.deleteColaboracion(id_colaboracion);
-		return "redirect:../listar.html";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			colaboracionDao.deleteColaboracion(id_colaboracion);
+			return "redirect:../listar.html";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/cancelar/{id_colaboracion}")
 	public String processCancelar(HttpSession session, @PathVariable int id_colaboracion){
-		colaboracionDao.cancelarColaboracion(id_colaboracion);
-		return "redirect:../listar.html";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			colaboracionDao.cancelarColaboracion(id_colaboracion);
+			return "redirect:../listar.html";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	/*formateo de fechas	 */

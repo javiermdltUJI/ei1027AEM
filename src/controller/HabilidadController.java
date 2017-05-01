@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.HabilidadDao;
 import modelo.Habilidad;
+import modelo.Usuario;
 
 @Controller
 @RequestMapping("/habilidad")
@@ -27,22 +28,37 @@ public class HabilidadController {
 	
 	@RequestMapping("/listar")
 	public String listaHabilidad(HttpSession session, Model model){
-		model.addAttribute("habilidades", habilidadDao.getHabilidades());
-		return "habilidad/listar";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			return "habilidad/listar";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping("/listarActivas")
 	public String listaHabilidadActiva(HttpSession session, Model model){
-		model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
-		return "habilidad/listar";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
+			return "habilidad/listar";
+		}else{
+			return "error/error";
+		}
 	}
 
 
 
 	@RequestMapping(value="/add")
 	public String addHabilidad(HttpSession session, Model model){
-		model.addAttribute("habilidad", new Habilidad());
-		return "habilidad/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			model.addAttribute("habilidad", new Habilidad());
+			return "habilidad/add";
+		}else{
+			return "error/error";	
+		}
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -55,8 +71,13 @@ public class HabilidadController {
 	
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.GET)
 	public String editHabilidad(HttpSession session, Model model, @PathVariable int id_habilidad){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
 			model.addAttribute("habilidad", habilidadDao.getHabilidad(id_habilidad));
 			return "habilidad/update";	
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.POST)
@@ -70,7 +91,12 @@ public class HabilidadController {
 	
 	@RequestMapping(value="/delete/{id_habilidad}")
 	public String processDelete(HttpSession session, @PathVariable int id_habilidad){
-		habilidadDao.deleteHabilidad(id_habilidad);
-		return "redirect:../listar.html";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && u.getRol().name().equals("ADMIN")){
+			habilidadDao.deleteHabilidad(id_habilidad);
+			return "redirect:../listar.html";
+		}else{
+			return "error/error";
+		}
 	}
 }

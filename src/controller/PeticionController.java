@@ -51,22 +51,36 @@ public class PeticionController {
 	@RequestMapping("/listarPeticiones")
 	public String listarPeticiones(HttpSession session, Model model){
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		model.addAttribute("peticiones", peticionDao.getPeticiones(usuario.getUsuario()));
-		return "peticion/listar";
+		if(usuario != null){
+			model.addAttribute("peticiones", peticionDao.getPeticiones(usuario.getUsuario()));
+			return "peticion/listar";			
+		}
+		else{
+			return "error/error";
+		}
 	}
 	
-	@RequestMapping("/listarMisPeticiones")
-	public String listarMisPeticiones(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario.getUsuario()));
-		return "peticion/listar";
+	@RequestMapping("/listarMisPeticiones/{usuario}")
+	public String listarMisPeticiones(HttpSession session, Model model, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario));
+			return "peticion/listar";			
+		}else{
+			return "error/error";
+		}
 	}
 
 	@RequestMapping(value="/add")
 	public String addPeticion(HttpSession session, Model model){
-		model.addAttribute("peticion", new Peticion());
-		model.addAttribute("habilidades", habilidadDao.getHabilidades());
-		return "peticion/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			model.addAttribute("peticion", new Peticion());
+			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			return "peticion/add";			
+		}else{
+			return "error/error";
+		}
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
@@ -81,11 +95,16 @@ public class PeticionController {
 		return "redirect:listar.html";
 	}
 	
-	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.GET)
-	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion){
+	@RequestMapping(value="/update/{usuario}/{id_peticion}", method = RequestMethod.GET)
+	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
-			return "peticion/update";	
+			return "peticion/update";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.POST)
@@ -97,10 +116,15 @@ public class PeticionController {
 		return "redirect:../listar.html";
 	}
 	
-	@RequestMapping(value="/delete/{id_peticion}")
-	public String processDelete(HttpSession session, @PathVariable int id_peticion){
-		peticionDao.deletePeticion(id_peticion);
-		return "redirect:../listar.html";
+	@RequestMapping(value="/delete/{usuario}/{id_peticion}")
+	public String processDelete(HttpSession session, @PathVariable int id_peticion, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			peticionDao.deletePeticion(id_peticion);
+			return "redirect:../listar.html";
+		}else{
+			return "error/error";
+		}
 	}
 	
 	/*formateo de fechas	 */

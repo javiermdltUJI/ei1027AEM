@@ -27,8 +27,8 @@
 				<td>${peticion.descripcion}</td>
 				<td>${peticion.usuario}</td>
 				<td>${peticion.idHabilidad}</td>
-				<td><a type="button" class="btn btn-default" href="update/${peticion.idPeticion}.html">Edita</a>
-				<td><a type="button" class="btn btn-default" href="delete/${peticion.idPeticion}.html">Elimina</a>		
+				<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
+				<td><a type="button" class="btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
 			</tr>
 		</c:forEach>
 	</table>
