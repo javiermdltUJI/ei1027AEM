@@ -15,9 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import modelo.Oferta;
 
-//He creado un id estatatico que se va incrementando cada vez que se hace una llamada al add
-//Ahora mismo el id es 6 porque tengo 5 componentes en la bbdd, pero hay que cambiarlo a 0 cuando la bbdd se cree nueva
-
 
 @Repository
 public class OfertaDao {

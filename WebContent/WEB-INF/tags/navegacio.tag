@@ -24,6 +24,7 @@
 					
           				<a id="DropDownOfertas" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ofertas <span class="caret"></span></a>
           				<ul class="dropdown-menu" aria-labelledby="DropDownOfertas">
+ 			            	<li><a href="${pageContext.request.contextPath}/oferta/add.html">Crear Oferta</a></li>
 			            	<li><a href="${pageContext.request.contextPath}/oferta/listarMisOfertas/${usuario.usuario}.html">Mis Ofertas</a></li>
 							<li><a href="${pageContext.request.contextPath}/oferta/listarOfertas.html">Ver Ofertas</a></li>
 							
@@ -32,6 +33,7 @@
 					<li class="dropdown">
           				<a id="DropDownPeticiones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Peticiones <span class="caret"></span></a>
           				<ul class="dropdown-menu" aria-labelledby="DropDownPeticiones">
+          					<li><a href="${pageContext.request.contextPath}/peticion/add.html">Crear Petición</a></li>
 							<li><a href="${pageContext.request.contextPath}/peticion/listarMisPeticiones/${usuario.usuario}.html">Mis Peticiones</a></li>
 							<li><a href="${pageContext.request.contextPath}/peticion/listarPeticiones.html">Ver Peticiones</a></li>
 						</ul>
