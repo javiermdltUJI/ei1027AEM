@@ -63,6 +63,7 @@ public class OfertaController {
 		}
 	}
 	
+	
 	@RequestMapping("/listarMisOfertas/{usuario}")
 	public String listarMisOfertas(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
@@ -78,6 +79,7 @@ public class OfertaController {
 	@RequestMapping(value="/add")
 	public String addOferta(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		System.out.println(u.toString());
 		if(u != null){
 			model.addAttribute("oferta", new Oferta());
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
