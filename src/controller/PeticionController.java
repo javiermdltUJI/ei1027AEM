@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.HabilidadDao;
 import dao.PeticionDao;
+import modelo.Oferta;
 import modelo.Peticion;
 import modelo.Usuario;
 
@@ -93,6 +94,10 @@ public class PeticionController {
 		// peticionValidator.validate(peticion, bindingResult);
 		// if (bindingResult.hasErrors()) 
 		//		return "nadador/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null &&  !u.getRol().name().equals("ADMIN")){
+			peticion.setUsuario(u.getUsuario());
+		}
 		peticionDao.addPeticion(peticion);
 		return "redirect:listar.html";
 	}
@@ -101,6 +106,32 @@ public class PeticionController {
 	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
+			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			return "peticion/update";
+		}else{
+			return "error/error";
+		}
+	}
+	
+	@RequestMapping(value="/update/{usuario}/{id_peticion}", method = RequestMethod.POST)
+	public String processUpdateSubmit2(HttpSession session, Model model, @PathVariable int id_peticion, @ModelAttribute("peticion") Peticion peticion){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null &&  !u.getRol().name().equals("ADMIN")){
+			peticion.setUsuario(u.getUsuario());
+		}
+		peticionDao.updatePeticion(peticion);
+		if (u.getRol().name().equals("ADMIN"))
+				return "redirect:../../listar.html";
+		else 
+			return "redirect:../../listarMisPeticiones/"+u.getUsuario()+".html";
+	}
+	
+	
+	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.GET)
+	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, BindingResult bindingResult){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null || u.getRol().name().equals("ADMIN")){
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "peticion/update";
@@ -123,7 +154,10 @@ public class PeticionController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
 			peticionDao.deletePeticion(id_peticion);
-			return "redirect:../listar.html";
+			if (u.getRol().name().equals("ADMIN"))
+				return "redirect:../../listar.html";
+			else 
+				return "redirect:../../listarMisPeticiones/"+u.getUsuario()+".html";
 		}else{
 			return "error/error";
 		}

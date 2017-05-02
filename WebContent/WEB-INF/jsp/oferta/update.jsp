@@ -41,11 +41,12 @@
 				<form:label path="descripcion">Descripción</form:label>
 				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
 			</div>
-			<div class="form-group">
-	
-				<form:label path="usuario">Usuario</form:label>
-				<form:input  class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
-			</div>
+			<c:if test='${usuario.rol=="ADMIN"}'>
+				<div class="form-group">
+					<form:label path="usuario">Usuario</form:label>
+					<form:input  class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
+				</div>
+			</c:if>
 			<div class="form-group">
 				<form:label path="idHabilidad">Habilidad</form:label>
 					<select name="idHabilidad">
