@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.ColaboracionDao;
 import dao.HabilidadDao;
+import dao.OfertaDao;
 import dao.PeticionDao;
+import modelo.Colaboracion;
 import modelo.Oferta;
 import modelo.Peticion;
 import modelo.Usuario;
@@ -33,6 +36,10 @@ public class PeticionController {
 	
 	private HabilidadDao habilidadDao;
 	
+	private ColaboracionDao colaboracionDao;
+	
+	private OfertaDao ofertaDao;
+	
 	@Autowired
 	public void setPeticionDao(PeticionDao peticionDao){
 		this.peticionDao = peticionDao;
@@ -41,6 +48,16 @@ public class PeticionController {
 	@Autowired
 	public void setHabilidadDao(HabilidadDao habilidadDao){
 		this.habilidadDao=habilidadDao;
+	}
+	
+	@Autowired
+	public void setColaboracionDao(ColaboracionDao colaboracionDao){
+		this.colaboracionDao = colaboracionDao;
+	}
+	
+	@Autowired
+	public void setOfertaDao(OfertaDao ofertaDao){
+		this.ofertaDao = ofertaDao;
 	}
 	
 	@RequestMapping("/listar")
@@ -73,6 +90,22 @@ public class PeticionController {
 			return "error/error";
 		}
 	}
+	
+	@RequestMapping("/seleccionar")
+	public String seleccionarPeticiones(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		if(usuario != null){
+			model.addAttribute("accesible", false);
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Oferta o = ofertaDao.getOferta(c.getIdOferta());
+			model.addAttribute("peticiones", peticionDao.getMisPeticionesHabilidad(usuario.getUsuario(), o.getIdHabilidad()));
+			return "peticion/seleccionar";			
+		}
+		else{
+			return "error/error";
+		}
+	}
+	
 
 	@RequestMapping(value="/add")
 	public String addPeticion(HttpSession session, Model model){

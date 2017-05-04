@@ -83,6 +83,11 @@ public class ColaboracionDao {
 	public void cancelarColaboracion(int id_colaboracion) {
 		this.jdbcTemplate.update("update colaboracion set fecha_fin=null, fecha_ini=null where id_colaboracion = ?", id_colaboracion);
 	}
-		
-
+	
+	//Para obtener las horas de las colaboraciones realizadas por un usuario (indistintamente si son peticiones u ofertas)
+	public int getHorasColaboraciones(String usuario){
+		int horasOferta = this.jdbcTemplate.queryForObject("select COALESCE(SUM(horas_totales), 0) from colaboracion join oferta using (id_oferta) where usuario = ?", new Object[] {usuario}, Integer.class);
+		int horasPeticion = this.jdbcTemplate.queryForObject("select COALESCE(SUM(horas_totales), 0) from colaboracion join peticion using (id_peticion) where usuario = ?", new Object[] {usuario}, Integer.class);
+		return horasOferta-horasPeticion;
+	}		
 }

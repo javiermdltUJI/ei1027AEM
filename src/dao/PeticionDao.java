@@ -97,4 +97,8 @@ public class PeticionDao {
 		dateFormat.setLenient(false);
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
+
+	public List<Peticion> getMisPeticionesHabilidad(String usuario, int idHabilidad) {
+		return this.jdbcTemplate.query("select * from peticion where usuario=? and id_habilidad = ?", new Object[] {usuario, idHabilidad}, new PeticionMapper());
+	}
 }

@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.ColaboracionDao;
+import dao.MiColaboracionDao;
+import dao.OfertaDao;
+import dao.PeticionDao;
 import modelo.Colaboracion;
+import modelo.Oferta;
+import modelo.Peticion;
 import modelo.Usuario;
 
 
@@ -29,10 +34,29 @@ import modelo.Usuario;
 public class ColaboracionController {
 	
 	private ColaboracionDao colaboracionDao;
+	private OfertaDao ofertaDao;
+	private PeticionDao peticionDao;
+	private MiColaboracionDao miColaboracionDao;
+
 	
 	@Autowired
-	public void setHabilidadDao(ColaboracionDao colaboracionDao){
+	public void setColaboracionDao(ColaboracionDao colaboracionDao){
 		this.colaboracionDao = colaboracionDao;
+	}
+	
+	@Autowired
+	public void setMiColaboracionDao(MiColaboracionDao miColaboracionDao){
+		this.miColaboracionDao = miColaboracionDao;
+	}
+	
+	@Autowired
+	public void setOfertaDao(OfertaDao ofertaDao){
+		this.ofertaDao = ofertaDao;
+	}
+	
+	@Autowired
+	public void setPeticionDao(PeticionDao peticionDao){
+		this.peticionDao = peticionDao;
 	}
 	
 	@RequestMapping("/listar")
@@ -57,13 +81,40 @@ public class ColaboracionController {
 		}
 	}
 
-	@RequestMapping(value="/add/{usuario}", method=RequestMethod.POST)
+	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
 		colaboracionDao.addColaboracion(colaboracion);
 		return "redirect:listar.html";
 	}
+	
+	@RequestMapping(value="/addOferta/{id_oferta}")
+	public String addColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
+				return "error/excesoHorasPeticion";
+			}else if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
+				return "error/excesoHorasOferta";
+			}else{
+				model.addAttribute("colaboracion", new Colaboracion());				
+				return "colaboracion/addOferta";
+			}
+		}else{
+			return "error/error";
+		}
+	}
+
+	@RequestMapping(value="/addOferta/{id_oferta}", method=RequestMethod.POST)
+	public String processAddOfertaSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_oferta){
+		//if(bindingResult.hasErrors())
+		//	return "habilidad/add";
+		colaboracion.setIdOferta(id_oferta);
+		session.setAttribute("colaboracion", colaboracion);
+		return "redirect:../../peticion/seleccionar.html";
+	}
+	
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.GET)
 	public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion){
@@ -106,6 +157,24 @@ public class ColaboracionController {
 			return "error/error";
 		}
 	}
+	
+	@RequestMapping("/creada/{id_peticion}")
+	public String creadaColaboracion(HttpSession session, Model model, @PathVariable int id_peticion){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			c.setIdPeticion(id_peticion);
+			colaboracionDao.addColaboracion(c);
+			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(u.getUsuario()));
+			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(u.getUsuario()));
+			return "miColaboracion/listar";
+		}else{
+			return "error/error";
+		}
+	}
+	
+	
+	
 	
 	/*formateo de fechas	 */
 	@InitBinder
