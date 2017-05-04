@@ -46,9 +46,11 @@
 		</tr>
 		<c:forEach items="${colaboracionesPeticion}" var="colaboracionesPeticion">
 			<tr>
+			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${colaboracionesPeticion.idColaboracion}</td>
-				<td>${colaboracionesPeticion.fechaIni}</td>
-				<td>${colaboracionesPeticion.fechaFin}</td>
+			</c:if>
+				<td>${colaboracionesPeticion.fechaIniString}</td>
+				<td>${colaboracionesPeticion.fechaFinString}</td>
 				<td>${colaboracionesPeticion.horasTotales}</td>
 				<td>${colaboracionesPeticion.valoracion}</td>
 				<td>${colaboracionesPeticion.descripcion}</td>
