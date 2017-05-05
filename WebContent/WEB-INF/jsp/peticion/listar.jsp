@@ -48,7 +48,7 @@
 					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>
-					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+					<td><a type="button" class="btn btn-default" href="../colaboracion/addPeticion/${peticion.idPeticion}.html">Crear colaboracion</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>

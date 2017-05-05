@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import modelo.Oferta;
+import modelo.Peticion;
 
 
 @Repository
@@ -83,5 +84,8 @@ public class OfertaDao {
 		return new Date(t.getTime());
 	}
 
+	public List<Oferta> getMisOfertasHabilidad(String usuario, int idHabilidad) {
+		return this.jdbcTemplate.query("select * from oferta where usuario=? and id_habilidad = ?", new Object[] {usuario, idHabilidad}, new OfertaMapper());
+	}
 
 }

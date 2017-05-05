@@ -115,6 +115,33 @@ public class ColaboracionController {
 		return "redirect:../../peticion/seleccionar.html";
 	}
 	
+	@RequestMapping(value="/addPeticion/{id_peticion}")
+	public String addColaboracionPeticion(HttpSession session, Model model, @PathVariable int id_peticion){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
+				return "error/excesoHorasPeticion";
+			}else if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
+				return "error/excesoHorasOferta";
+			}else{
+				model.addAttribute("colaboracion", new Colaboracion());				
+				return "colaboracion/addPeticion";
+			}
+		}else{
+			return "error/error";
+		}
+	}
+
+	@RequestMapping(value="/addPeticion/{id_peticion}", method=RequestMethod.POST)
+	public String processAddPeticionSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_peticion){
+		//if(bindingResult.hasErrors())
+		//	return "habilidad/add";
+		colaboracion.setIdPeticion(id_peticion);
+		session.setAttribute("colaboracion", colaboracion);
+		return "redirect:../../oferta/seleccionar.html";
+	}
+	
+
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.GET)
 	public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion){
@@ -173,6 +200,20 @@ public class ColaboracionController {
 		}
 	}
 	
+	@RequestMapping("/creadaOferta/{id_oferta}")
+	public String creadaColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			c.setIdOferta(id_oferta);
+			colaboracionDao.addColaboracion(c);
+			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(u.getUsuario()));
+			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(u.getUsuario()));
+			return "miColaboracion/listar";
+		}else{
+			return "error/error";
+		}
+	}
 	
 	
 	

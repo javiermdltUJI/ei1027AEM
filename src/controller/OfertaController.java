@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.ColaboracionDao;
 import dao.HabilidadDao;
 import dao.OfertaDao;
+import dao.PeticionDao;
+import modelo.Colaboracion;
 import modelo.Oferta;
+import modelo.Peticion;
 import modelo.Usuario;
 
 
@@ -30,6 +34,9 @@ import modelo.Usuario;
 public class OfertaController {
 	
 	private OfertaDao ofertaDao;
+	private PeticionDao peticionDao;
+	
+	private ColaboracionDao colaboracionDao;
 	
 	private HabilidadDao habilidadDao;
 
@@ -40,10 +47,19 @@ public class OfertaController {
 	}
 	
 	@Autowired
+	public void setPeticionDao(PeticionDao peticionDao){
+		this.peticionDao = peticionDao;
+	}
+	
+	@Autowired
 	public void setHabilidadDao(HabilidadDao habilidadDao){
 		this.habilidadDao=habilidadDao;
 	}
 	
+	@Autowired
+	public void setColaboracionDao(ColaboracionDao colaboracionDao){
+		this.colaboracionDao = colaboracionDao;
+	}
 	
 	@RequestMapping("/listar")
 	public String listaOferta(HttpSession session, Model model){
@@ -76,6 +92,57 @@ public class OfertaController {
 		}
 	}
 
+	
+	@RequestMapping("/seleccionar")
+	public String seleccionarOfertas(HttpSession session, Model model){
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		if(usuario != null){
+			model.addAttribute("accesible", false);
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
+			model.addAttribute("ofertas", ofertaDao.getMisOfertasHabilidad(usuario.getUsuario(), p.getIdHabilidad()));
+			return "oferta/seleccionar";			
+		}
+		else{
+			return "error/error";
+		}
+	}
+	
+	@RequestMapping(value="/addConHabilidad")
+	public String addOfertaConHabilidad(HttpSession session, Model model){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			model.addAttribute("oferta", new Oferta());
+			return "oferta/addConHabilidad";			
+		}else{
+			return "error/error";
+		}
+	}
+
+	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
+	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+		//if(bindingResult.hasErrors())
+		//	return "habilidad/add";
+		// PeticionValidator peticionValidator = new PeticionValidator();
+		// peticionValidator.validate(peticion, bindingResult);
+		// if (bindingResult.hasErrors()) 
+		//		return "nadador/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null &&  !u.getRol().name().equals("ADMIN")){
+			oferta.setUsuario(u.getUsuario());
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
+			oferta.setIdHabilidad(p.getIdHabilidad());
+			int id_oferta = ofertaDao.addOfertaInt(oferta);
+			c.setIdOferta(id_oferta);
+			colaboracionDao.addColaboracion(c);
+			session.removeAttribute("colaboracion");
+			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
+		}
+		return "redirect:listar.html";
+	}
+
+	
 	@RequestMapping(value="/add")
 	public String addOferta(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
