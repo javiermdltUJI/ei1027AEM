@@ -69,30 +69,33 @@
 		</c:if>
 		</tr>
 		<c:forEach items="${peticiones}" var="peticion">
-			<tr>
-			<c:if test='${usuario.rol=="ADMIN"}'>
-				<td>${peticion.idPeticion}</td>
-			</c:if>
-				<td>${peticion.fechaIniString}</td>
-				<td>${peticion.fechaFinString}</td>
-				<td>${peticion.descripcion}</td>
-				<td>${peticion.usuario}</td>
-			<c:if test='${usuario.rol=="ADMIN"}'>
-				<td>${peticion.idHabilidad}</td>
-			</c:if>
-				<c:if test='${accesible == true}'>
-					<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-					<td><a type="button" class="elimina btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
-				</c:if>
+			<jsp:useBean id="now" class="java.util.Date"/>	
+			<c:if test='${now.time < peticion.fechaFin.time}'>
+				<tr>
 				<c:if test='${usuario.rol=="ADMIN"}'>
-					<td><a type="button" class="btn btn-default" href="./update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-					<td><a type="button" class="elimina btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
-					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+					<td>${peticion.idPeticion}</td>
 				</c:if>
-				<c:if test='${accesible == false}'>
-					<td><a type="button" class="btn btn-default" href="../colaboracion/addPeticion/${peticion.idPeticion}.html">Crear colaboracion</a></td>
+					<td>${peticion.fechaIniString}</td>
+					<td>${peticion.fechaFinString}</td>
+					<td>${peticion.descripcion}</td>
+					<td>${peticion.usuario}</td>
+				<c:if test='${usuario.rol=="ADMIN"}'>
+					<td>${peticion.idHabilidad}</td>
 				</c:if>
-			</tr>
+					<c:if test='${accesible == true}'>
+						<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
+						<td><a type="button" class="elimina btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+					</c:if>
+					<c:if test='${usuario.rol=="ADMIN"}'>
+						<td><a type="button" class="btn btn-default" href="./update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
+						<td><a type="button" class="elimina btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+						<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+					</c:if>
+					<c:if test='${accesible == false}'>
+						<td><a type="button" class="btn btn-default" href="../colaboracion/addPeticion/${peticion.idPeticion}.html">Crear colaboracion</a></td>
+					</c:if>
+				</tr>
+			</c:if>
 		</c:forEach>
 	</table>
 	<c:if test='${accesible == true}'>

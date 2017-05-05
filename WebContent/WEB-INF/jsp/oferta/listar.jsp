@@ -70,30 +70,33 @@
 		</c:if>
 		</tr>
 		<c:forEach items="${ofertas}" var="oferta">
-			<tr>
-			<c:if test='${usuario.rol=="ADMIN"}'>
-				<td>${oferta.idOferta}</td>
-			</c:if>
-				<td>${oferta.fechaIniString}</td>
-				<td>${oferta.fechaFinString}</td>
-				<td>${oferta.descripcion}</td>
-				<td>${oferta.usuario}</td>
-			<c:if test='${usuario.rol=="ADMIN"}'>
-				<td>${oferta.idHabilidad}</td>
-			</c:if>
-				<c:if test='${accesible == true}'>
-					<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
-					<td><a type="button" class="elimina btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
-				</c:if>
+			<jsp:useBean id="now" class="java.util.Date"/>	
+			<c:if test='${now.time < oferta.fechaFin.time}'>
+				<tr>
 				<c:if test='${usuario.rol=="ADMIN"}'>
-					<td><a type="button" class="btn btn-default" href="./update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
-					<td><a type="button" class="elimina btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
-					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+					<td>${oferta.idOferta}</td>
 				</c:if>
-				<c:if test='${accesible == false}'>
-					<td><a type="button" class="btn btn-default" href="../colaboracion/addOferta/${oferta.idOferta}.html">Crear colaboracion</a></td>
+					<td>${oferta.fechaIniString}</td>
+					<td>${oferta.fechaFinString}</td>
+					<td>${oferta.descripcion}</td>
+					<td>${oferta.usuario}</td>
+				<c:if test='${usuario.rol=="ADMIN"}'>
+					<td>${oferta.idHabilidad}</td>
 				</c:if>
-			</tr>
+					<c:if test='${accesible == true}'>
+						<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
+						<td><a type="button" class="elimina btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
+					</c:if>
+					<c:if test='${usuario.rol=="ADMIN"}'>
+						<td><a type="button" class="btn btn-default" href="./update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
+						<td><a type="button" class="elimina btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
+						<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+					</c:if>
+					<c:if test='${accesible == false}'>
+						<td><a type="button" class="btn btn-default" href="../colaboracion/addOferta/${oferta.idOferta}.html">Crear colaboracion</a></td>
+					</c:if>
+				</tr>
+			</c:if>
 		</c:forEach>
 	</table>
 	<c:if test='${accesible == true}'>

@@ -24,7 +24,7 @@
 			<th>Usuario</th>
 		</tr>
 		<tr>
-			<td>Ofertas</td>
+			<td><h4>Ofertas</h4></td>
 		</tr>
 		<c:forEach items="${colaboracionesOferta}" var="colaboracionesOferta">
 			<tr>
@@ -37,12 +37,13 @@
 				<td>${colaboracionesOferta.valoracion}</td>
 				<td>${colaboracionesOferta.descripcion}</td>
 				<td>${colaboracionesOferta.usuario}</td>
+				<td></td>
 				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesOferta.usuario}/${colaboracionesOferta.idColaboracion}.html">Cancelar</a>		
 			</tr>
 		</c:forEach>
 		
 		<tr>
-			<td>Peticiones</td>
+			<td><h4>Peticiones</h4></td>
 		</tr>
 		<c:forEach items="${colaboracionesPeticion}" var="colaboracionesPeticion">
 			<tr>
