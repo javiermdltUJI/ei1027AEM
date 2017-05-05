@@ -60,7 +60,7 @@ public class MiColaboracionDao {
 	}
 	
 	public MiColaboracion getMiColaboracion(int id_colaboracion) {
-		return this.jdbcTemplate.queryForObject("select * from colaboracion where id_colaboracion=?",  new Object[] {id_colaboracion}, new MiColaboracionMapper());
+		return this.jdbcTemplate.queryForObject("select *, null as descripcion, null as usuario from colaboracion where id_colaboracion=?",  new Object[] {id_colaboracion}, new MiColaboracionMapper());
 	}
 		
 	public void addMiColaboracion(MiColaboracion miColaboracion){

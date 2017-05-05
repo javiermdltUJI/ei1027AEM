@@ -93,9 +93,7 @@ public class ColaboracionController {
 	public String addColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null){
-			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
-				return "error/excesoHorasPeticion";
-			}else if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
+			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
 				return "error/excesoHorasOferta";
 			}else{
 				model.addAttribute("colaboracion", new Colaboracion());				
@@ -121,8 +119,6 @@ public class ColaboracionController {
 		if(u != null){
 			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
 				return "error/excesoHorasPeticion";
-			}else if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
-				return "error/excesoHorasOferta";
 			}else{
 				model.addAttribute("colaboracion", new Colaboracion());				
 				return "colaboracion/addPeticion";

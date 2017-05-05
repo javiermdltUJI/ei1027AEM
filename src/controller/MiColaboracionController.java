@@ -68,15 +68,29 @@ public class MiColaboracionController {
 	}
 	
 	@RequestMapping(value="/update/{usuario}/{id_colaboracion}", method = RequestMethod.GET)
-	public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion, @PathVariable String usuario){
-		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){	
-			model.addAttribute("miColaboracion", miColaboracionDao.getMiColaboracion(id_colaboracion));
-			return "miColaboracion/update";
-		}else{
-			return "error/error";
-		}
-	}
+	  public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion, @PathVariable String usuario){
+	    Usuario u = (Usuario) session.getAttribute("usuario");
+	    System.out.println();
+	    if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){  
+	      model.addAttribute("miColaboracion", miColaboracionDao.getMiColaboracion(id_colaboracion));
+	      return "miColaboracion/update";
+	    }else{
+	      return "error/error";
+	    }
+	  }
+	  
+	  @RequestMapping(value="/update/{usuario}/{id_colaboracion}", method = RequestMethod.POST)
+	  public String processUpdateSubmit2(HttpSession session,@PathVariable String usuario, @PathVariable int id_colaboracion, @ModelAttribute("miColaboracion") MiColaboracion miColaboracion, BindingResult bindingResult){
+	  //  if(bindingResult.hasErrors())
+	    //  return "habilidad/update";
+	    //habilidad.setIdHabilidad(id_habilidad);
+	    MiColaboracion miColaboracion2 = miColaboracionDao.getMiColaboracion(id_colaboracion);
+	    miColaboracion2.setHorasTotales(miColaboracion.getHorasTotales());
+	    miColaboracion2.setValoracion(miColaboracion.getValoracion());
+	    
+	    miColaboracionDao.updateMiColaboracion(miColaboracion2);
+	    return "redirect:../../listar/"+usuario+".html";
+	  }
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable int id_colaboracion, @ModelAttribute("miColaboracion") MiColaboracion miColaboracion, BindingResult bindingResult){

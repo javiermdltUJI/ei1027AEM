@@ -55,7 +55,7 @@
 				<td>${colaboracionesPeticion.valoracion}</td>
 				<td>${colaboracionesPeticion.descripcion}</td>
 				<td>${colaboracionesPeticion.usuario}</td>
-				<td><a type="button" class="btn btn-default"  href="../colaboracion/update/${colaboracionesPeticion.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a>
+				<td><a type="button" class="btn btn-default"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a>
 				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesPeticion.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a>		
 			</tr>
 		</c:forEach>
