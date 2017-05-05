@@ -12,6 +12,48 @@
 <title>Gestionar Peticiones</title>
 </head>
 <body>
+
+	<script type='text/javascript' src='../../js/notifIt.js'></script>
+	<script type='text/javascript' src='../../js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='../../css/notifIt.css'>
+	
+	<script type="text/javascript">
+	
+	
+	url="";
+	$(document).ready(function(){
+
+		$('.elimina').click(function(e){
+			url = this.href;
+			e.preventDefault();
+			notif_confirm({
+			'message': '¿Borrar esta petición?',
+			'textaccept': 'Yes!',
+			'textcancel': 'No',
+			'fullscreen': true,
+			'callback': myCallback
+			})
+		});
+	});
+	
+	var myCallback = function(choice){
+		if(choice){
+			window.location.href = url;
+			notif({
+				'type': 'success',
+				'msg': 'Petición borrado!',
+				'position': 'center'
+			})
+		}else{
+			notif({
+				'type': 'error',
+				'msg': 'Petición no borrado!',
+				'position': 'center'
+			})
+		}
+	}	
+	</script>
 	<h1>Lista de Peticiones</h1>
 	<table class="table">
 		<tr>
@@ -40,11 +82,11 @@
 			</c:if>
 				<c:if test='${accesible == true}'>
 					<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-					<td><a type="button" class="btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+					<td><a type="button" class="elimina btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
 				</c:if>
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td><a type="button" class="btn btn-default" href="./update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-					<td><a type="button" class="btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
+					<td><a type="button" class="elimina btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
 					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>

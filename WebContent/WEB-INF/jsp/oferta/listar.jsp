@@ -15,11 +15,7 @@
 	<link rel='stylesheet' type='text/css' href='../../css/notifIt.css'>
 	
 	<script type="text/javascript">
-	/* notif({
-		msg: "<b>Oops!</b> A wild error appeared!",
-		type: "error",
-		position: "center"
-	}); */
+	
 	
 	url="";
 	$(document).ready(function(){
@@ -42,13 +38,13 @@
 			window.location.href = url;
 			notif({
 				'type': 'success',
-				'msg': 'Mensaje borrado!',
+				'msg': 'Oferta borrada!',
 				'position': 'center'
 			})
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Mensaje no borrado!',
+				'msg': 'Oferta no borrada!',
 				'position': 'center'
 			})
 		}
