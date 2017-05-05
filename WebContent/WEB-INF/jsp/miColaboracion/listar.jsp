@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:paginabasica title="EI1027">
 <jsp:body>
@@ -50,13 +50,23 @@
 				<td>${colaboracionesPeticion.idColaboracion}</td>
 			</c:if>
 				<td>${colaboracionesPeticion.fechaIniString}</td>
-				<td>${colaboracionesPeticion.fechaFinString}</td>
+				<td>${colaboracionesPeticion.fechaFinString}</td>	
 				<td>${colaboracionesPeticion.horasTotales}</td>
 				<td>${colaboracionesPeticion.valoracion}</td>
 				<td>${colaboracionesPeticion.descripcion}</td>
 				<td>${colaboracionesPeticion.usuario}</td>
-				<td><a type="button" class="btn btn-default"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a>
-				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesPeticion.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a>		
+				<jsp:useBean id="now" class="java.util.Date"/>
+				<c:choose>
+					<c:when test='${(colaboracionesPeticion.valoracion==0 or colaboracionesPeticion.horasTotales==0) and now.time >= colaboracionesPeticion.fechaFin.time}'>
+						<td><a type="button" class="btn btn-default"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a></td>
+					</c:when>
+					<c:otherwise>
+						<td></td>
+					</c:otherwise>
+				</c:choose>
+				<c:if test='${now.time < colaboracionesPeticion.fechaFin.time}'>
+					<td><a type="button" class="btn btn-default"  href="../cancelar/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a></td>	
+				</c:if>
 			</tr>
 		</c:forEach>
 		

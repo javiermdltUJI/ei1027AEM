@@ -181,6 +181,17 @@ public class ColaboracionController {
 		}
 	}
 	
+	@RequestMapping(value="/cancelar/{usuario}/{id_colaboracion}")
+	public String processCancelar(HttpSession session, @PathVariable int id_colaboracion, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getRol().name().equals("ADMIN") || usuario.equals(u.getUsuario())) ){
+			session.setAttribute("colaboracion", colaboracionDao.getColaboracion(id_colaboracion));
+			return "miColaboracion/update";
+		}else{
+			return "error/error";
+		}
+	}
+	
 	@RequestMapping("/creada/{id_peticion}")
 	public String creadaColaboracion(HttpSession session, Model model, @PathVariable int id_peticion){
 		Usuario u = (Usuario) session.getAttribute("usuario");

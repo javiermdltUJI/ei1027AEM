@@ -112,6 +112,35 @@ public class MiColaboracionController {
 		}
 	}
 	
+	
+	
+	@RequestMapping(value="/cancelar/{usuario}/{id_colaboracion}", method = RequestMethod.GET)
+	  public String processCancelar(HttpSession session, Model model, @PathVariable int id_colaboracion, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null && (u.getRol().name().equals("ADMIN") || usuario.equals(u.getUsuario())) ){
+			//session.setAttribute("miColaboracion", miColaboracionDao.getMiColaboracion(id_colaboracion));
+		      model.addAttribute("miColaboracion", miColaboracionDao.getMiColaboracion(id_colaboracion));
+	      return "miColaboracion/update";
+	    }else{
+	      return "error/error";
+	    }
+	  }
+	  
+	  @RequestMapping(value="/cancelar/{usuario}/{id_colaboracion}", method = RequestMethod.POST)
+	  public String processCancelarSubmit(HttpSession session,@PathVariable String usuario, @PathVariable int id_colaboracion, @ModelAttribute("miColaboracion") MiColaboracion miColaboracion, BindingResult bindingResult){
+	  //  if(bindingResult.hasErrors())
+	    //  return "habilidad/update";
+	    //habilidad.setIdHabilidad(id_habilidad);
+	    MiColaboracion miColaboracion2 = miColaboracionDao.getMiColaboracion(id_colaboracion);
+	    miColaboracion2.setHorasTotales(miColaboracion.getHorasTotales());
+	    miColaboracion2.setValoracion(miColaboracion.getValoracion());
+	    miColaboracion2.setFechaFin( new java.util.Date());
+	    miColaboracionDao.updateMiColaboracion(miColaboracion2);
+	    return "redirect:../../listar/"+usuario+".html";
+	  }
+	
+	
+	
 	/*formateo de fechas	 */
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
