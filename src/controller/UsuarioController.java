@@ -49,8 +49,16 @@ public class UsuarioController {
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
-		if(bindingResult.hasErrors())
+		UsuarioValidator usuarioValidator = new UsuarioValidator();
+		usuarioValidator.validate(usuario, bindingResult);
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "usuario/add";
+		}
+		if(usuarioDao.existeUsuario(usuario.getUsuario())){
+			bindingResult.rejectValue("usuario", "badpw", "El nombre de usuario ya existe");
+			return "usuario/add";
+		}
 		usuarioDao.addUsuario(usuario);
 		return "redirect:listar.html";
 	}
