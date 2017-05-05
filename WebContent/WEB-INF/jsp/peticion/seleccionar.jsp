@@ -54,10 +54,10 @@
 		</c:forEach>
 	</table>
 	<c:if test='${accesible == true}'>
-		<a type="button" class="btn btn-default" href="../add.html">Agregar petición</a>
+		<a type="button" class="btn btn-default" href="../addConHabilidad.html">Agregar petición</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
-		<a type="button" class="btn btn-default" href="add.html">Agregar petición</a>
+		<a type="button" class="btn btn-default" href="addConHabilidad.html">Agregar petición</a>
 	</c:if>
 </body>
 </html>

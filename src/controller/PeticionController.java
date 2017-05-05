@@ -106,6 +106,42 @@ public class PeticionController {
 		}
 	}
 	
+	@RequestMapping(value="/addConHabilidad")
+	public String addPeticionConHabilidad(HttpSession session, Model model){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null){
+			model.addAttribute("peticion", new Peticion());
+			return "peticion/addConHabilidad";			
+		}else{
+			return "error/error";
+		}
+	}
+
+	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
+	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
+		//if(bindingResult.hasErrors())
+		//	return "habilidad/add";
+		// PeticionValidator peticionValidator = new PeticionValidator();
+		// peticionValidator.validate(peticion, bindingResult);
+		// if (bindingResult.hasErrors()) 
+		//		return "nadador/add";
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if(u != null &&  !u.getRol().name().equals("ADMIN")){
+			peticion.setUsuario(u.getUsuario());
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Oferta o = ofertaDao.getOferta(c.getIdOferta());
+			peticion.setIdHabilidad(o.getIdHabilidad());
+			int id_peticion = peticionDao.addPeticionInt(peticion);
+			c.setIdPeticion(id_peticion);
+			colaboracionDao.addColaboracion(c);
+			session.removeAttribute("colaboracion");
+			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
+		}
+		return "redirect:listar.html";
+	}
+
+	
+	
 
 	@RequestMapping(value="/add")
 	public String addPeticion(HttpSession session, Model model){

@@ -65,7 +65,7 @@ public class OfertaDao {
 	}
 	
 	public int addOfertaInt(Oferta oferta){
-		return this.jdbcTemplate.queryForObject("insert into Oferta(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?)", 
+		return this.jdbcTemplate.queryForObject("insert into Oferta(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values(?, ?, ?, ?, ?) returning id_oferta", 
 				 new Object[] {oferta.getFechaIni(), oferta.getFechaFin(), oferta.getDescripcion(), oferta.getUsuario(), oferta.getIdHabilidad()}, Integer.class);
 
 	}

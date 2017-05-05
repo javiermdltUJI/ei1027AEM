@@ -73,7 +73,7 @@ public class PeticionDao {
 	}
 	
 	public int addPeticionInt(Peticion peticion){
-		return this.jdbcTemplate.queryForObject("insert into Peticion(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values( ?, ?, ?, ?, ?)",
+		return this.jdbcTemplate.queryForObject("insert into Peticion(fecha_ini, fecha_fin, descripcion, usuario, id_habilidad) values( ?, ?, ?, ?, ?) returning id_peticion",
 				new Object[] {peticion.getFechaIni(), peticion.getFechaFin(), peticion.getDescripcion(), peticion.getUsuario(), peticion.getIdHabilidad()},Integer.class);
 	}
 	
