@@ -9,6 +9,56 @@
 <title>Gestionar Ofertas</title>
 </head>
 <body>
+	<script type='text/javascript' src='../../js/notifIt.js'></script>
+	<script type='text/javascript' src='../../js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='../../css/notifIt.css'>
+	
+	<script type="text/javascript">
+	/* notif({
+		msg: "<b>Oops!</b> A wild error appeared!",
+		type: "error",
+		position: "center"
+	}); */
+	
+	url="";
+	$(document).ready(function(){
+
+		$('.elimina').click(function(e){
+			url = this.href;
+			e.preventDefault();
+			notif_confirm({
+			'message': '¿Borrar esta oferta?',
+			'textaccept': 'Yes!',
+			'textcancel': 'No',
+			'fullscreen': true,
+			'callback': myCallback
+			})
+		});
+	});
+	
+	var myCallback = function(choice){
+		if(choice){
+			window.location.href = url;
+			notif({
+				'type': 'success',
+				'msg': 'Mensaje borrado!',
+				'position': 'center'
+			})
+		}else{
+			notif({
+				'type': 'error',
+				'msg': 'Mensaje no borrado!',
+				'position': 'center'
+			})
+		}
+	}
+
+	
+	
+		
+	
+	</script>
 	<h1>Lista de Ofertas</h1>
 	<table class="table">
 		<tr>
@@ -37,11 +87,11 @@
 			</c:if>
 				<c:if test='${accesible == true}'>
 					<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
-					<td><a type="button" class="btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
+					<td><a type="button" class="elimina btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
 				</c:if>
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td><a type="button" class="btn btn-default" href="./update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
-					<td><a type="button" class="btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
+					<td><a type="button" class="elimina btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
 					<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>
