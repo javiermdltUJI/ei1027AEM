@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.ibm.icu.util.Calendar;
 
 import dao.ColaboracionDao;
 import dao.HabilidadDao;
@@ -223,7 +226,12 @@ public class OfertaController {
 	public String processDelete(HttpSession session, @PathVariable int id_oferta, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
-			ofertaDao.deleteOferta(id_oferta);
+			
+			Oferta oferta2 = ofertaDao.getOferta(id_oferta);
+			final Calendar cal = Calendar.getInstance();
+		    cal.add(Calendar.DATE, -1);
+			oferta2.setFechaFin( cal.getTime());
+			ofertaDao.updateOferta(oferta2);
 			return "redirect:../../listar.html";
 		}else{
 			return "error/error";
