@@ -48,7 +48,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(HttpSession session, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
+	public String processAddSubmit(@ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult, HttpSession session){
 		UsuarioValidator usuarioValidator = new UsuarioValidator();
 		usuarioValidator.validate(usuario, bindingResult);
 		if(bindingResult.hasErrors()){

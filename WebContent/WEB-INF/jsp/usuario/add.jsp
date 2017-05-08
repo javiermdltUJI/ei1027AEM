@@ -15,22 +15,27 @@
 			<div class="form-group">
 				<form:label path="usuario">Usuario</form:label>
 				<form:input class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
+				<form:errors path="usuario" cssClash="error"/>
 			</div>
 			<div class="form-group">
 				<form:label path="contrasenya">Contrasenya</form:label>
 				<form:input class="form-control" path="contrasenya" id="contrasenya" placeholder="Contrasenya"/>
+				<form:errors path="contrasenya" cssClash="error"/>
 			</div>
 			<div class="form-group">
 				<form:label path="correo">Correo</form:label>
 				<form:input class="form-control" path="correo" id="correo" placeholder="Correo"/>
+				<form:errors path="correo" cssClash="error"/>
 			</div>
 			<div class="form-group">
 				<form:label path="nombre">Nombre</form:label>
 				<form:input class="form-control" path="nombre" id="nombre" placeholder="Nombre"/>
+				<form:errors path="nombre" cssClash="error"/>
 			</div>
 			<div class="form-group">
 				<form:label path="dni">DNI</form:label>
 				<form:input class="form-control" path="dni" id="dni" placeholder="DNI"/>
+				<form:errors path="dni" cssClash="error"/>
 			</div>
 			<div class="form-group">
 				<form:label path="contadorBloqueo">Contador de bloqueo</form:label>

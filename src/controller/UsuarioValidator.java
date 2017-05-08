@@ -36,12 +36,12 @@ public class UsuarioValidator implements Validator{
 		
 		//Usuario
 		if(usuario.getUsuario().trim().equals(""))
-			errors.rejectValue("usuario", "obligatorio", "valor requerido");
+			errors.rejectValue("usuario", "obligatorio", "Valor requerido");
 		
 		
 		//Contraseña
 		if(usuario.getContrasenya().trim().equals(""))
-			errors.rejectValue("contrasenya", "obligatorio", "valor requerido");
+			errors.rejectValue("contrasenya", "obligatorio", "Valor requerido");
 		
 		if(usuario.getContrasenya().length()<7)
 			errors.rejectValue("contrasenya", "obligatorio", "La contraseña debe contener como mínimo 8 dígitos");
@@ -52,15 +52,15 @@ public class UsuarioValidator implements Validator{
 		
 		//Correo
 		if(usuario.getCorreo().trim().equals(""))
-			errors.rejectValue("email", "obligatorio", "valor requerido");
+			errors.rejectValue("correo", "obligatorio", "Valor requerido");
 		
 		if(!matcher.matches())
-			errors.rejectValue("email","obligatorio", "Formato incorrecto, ");
+			errors.rejectValue("correo","obligatorio", "Formato incorrecto, ej:algo@algo.algo");
 		
 		
 		//Nombre
 		if(usuario.getNombre().trim().equals(""))
-			errors.rejectValue("nombre", "obligatorio", "valor requerido");
+			errors.rejectValue("nombre", "obligatorio", "Valor requerido");
 		
 		if(usuario.getNombre().length() > 50)
 			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 caracteres");
@@ -68,7 +68,7 @@ public class UsuarioValidator implements Validator{
 		
 		//DNI
 		if(usuario.getDni().trim().equals(""))
-			errors.rejectValue("dni", "obligatorio", "valor requerido");
+			errors.rejectValue("dni", "obligatorio", "Valor requerido");
 		
 		if(usuario.getDni().length() != 9)
 			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dígitos");
