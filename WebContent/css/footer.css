@@ -1,20 +1,20 @@
-@CHARSET "ISO-8859-1";
+/* @CHARSET "ISO-8859-1";
 #footer {
   width: 100%;
-  /* Set the fixed height of the footer here */
+  Set the fixed height of the footer here
   background: 
-  /* color overlay */ 
+  color overlay 
     linear-gradient(
       rgba(240, 212, 0, 0.45), 
       rgba(0, 0, 0, 0.45)
     ),
-    /* image to overlay */
+    image to overlay
     url(http://images.cdn.fotopedia.com/_avPIZmqM3w-7z161LH_268-hd.jpg);
 }
 
 
-/* Custom footer CSS
--------------------------------------------------- */
+Custom footer CSS
+--------------------------------------------------
 
 .container {
   width: auto;
@@ -26,4 +26,313 @@
 }
 .footertext {
   color: #ffffff;
+} */
+
+
+header{
+	padding-left:4%;
+	padding-right:4%;
+	background: #fff;
+}
+
+$primary-light-blue: #8DB9ED;
+$primary-line-color: #ccc;
+* {
+  box-sizing: border-box
+}
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+nav{
+	  background: rgb(252, 132, 61);
+	
+/* 	background: #ff5800;
+ */	margin-bottom:1%;
+}
+
+
+
+body {
+/*     font: 11px "Open Sans", sans-serif;
+ */ 
+ 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: auto;
+  display: flex;
+  flex-flow: column nowrap;
+    background: #f5e6c5 !important;
+    
+  
+  //This justify-content is essentially unnecessary in Firefox and Chrome due to the flex: 1 1 auto on the main.  However, it's needed to push the footer down on IE11
+  justify-content: space-between
+}
+ul {
+  list-style: none
+}
+
+
+
+a {
+  text-decoration: none
+}
+.generic-anchor {
+    color: $primary-light-blue;
+    &:visited {
+        color: $primary-light-blue
+    }
+    &:hover {
+        color: $primary-line-color
+    }
+}
+.flex-rw {
+  display: flex;
+  flex-flow: row wrap;
+  
+}
+//This main is mostly to push the footer to the bottom and for demo purposes.
+main {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+/*   font: 10em "Oswald", sans-serif;
+ */  color: rgb(155,155,155);
+  line-height: 1
+}
+footer {
+	position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+	
+  background: rgb(252, 132, 61);
+  /* bottom:0%;
+  width: 100%; */
+  
+}
+
+#footer {
+	    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+	
+	
+	/* position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+	 */
+  background: rgb(252, 132, 61);
+  /* bottom:0%;
+  width: 100%; */
+  
+}
+
+.footer-list-top {
+  width: 25%;
+  background: rgb(252, 132, 61);
+    vertical-align: middle;
+  
+}
+.footer-list-top > li {
+  text-align: center;
+  background: rgb(252, 132, 61);
+  display: table-cell;  
+  
+}
+
+  
+}
+.footer-list-header {
+  padding: 10px 0 5px 0;
+  color: #337ab7;
+  background: rgb(252, 132, 61);
+  
+/*   font: 2.3vw "Oswald", sans-serif;
+ */ 
+  
+  
+}
+.footer-list-anchor {
+/*   font: 1.3em "Open Sans", sans-serif;*/
+
+  background: rgb(252, 132, 61);
+ 
+  
+}
+.footer-social-section {
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  margin-top: -4px;
+/*       background: rgba(255, 88, 0, 0.69);
+ */
+ }
+.footer-social-section::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 10px;
+  border-top: 1px solid $primary-line-color;
+  width: calc(100% - 20px);
+/*       background: rgba(255, 88, 0, 0.69);
+ */  
+}
+.footer-social-overlap {
+  position: relative;
+  z-index: 2;
+  padding: 0 20px;
+/*       background: rgba(255, 88, 0, 0.69);
+ */  
+}
+.footer-social-connect {
+  display: flex;
+  align-items: center;
+/*   font: 2em "Oswald", sans-serif;
+ */  color: #337ab7;
+  background: rgb(252, 132, 61);
+ 
+}
+.footer-social-small {
+  font-size: 0.9em;
+  padding: 0px 10px
+}
+.footer-social-overlap > a {
+  font-size: 2em;
+  background: rgb(252, 132, 61);
+   
+}
+.footer-social-overlap > a:not(:first-child) {
+  margin-left: 0.38em;
+  background: rgb(252, 132, 61);
+   
+}
+.footer-bottom-section {
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid $primary-line-color;
+  background: rgb(252, 132, 61);
+  
+/*   margin-top: 5px;
+ */  color: #337ab7;
+}
+.footer-bottom-section > div:first-child {
+  margin-right: auto;
+  background: rgb(252, 132, 61);
+   
+}
+
+
+.footer-bottom-wrapper {
+/*   font-size: 1.5em;
+ */  /* color: #fff; */
+  background: rgb(252, 132, 61);
+ 
+  
+}
+.footer-address {
+  display: inline;
+  font-style: normal;
+  background: rgb(252, 132, 61);
+   
+}
+@media only screen and (max-width: 768px) {
+  .footer-list-header {
+    font-size: 2em
+  }
+  .footer-list-anchor {
+    font-size: 1.1em
+  }
+  .footer-social-connect {
+    font-size: 2.5em
+  }
+  .footer-social-overlap > a {
+    font-size: 2.24em
+  }
+  .footer-bottom-wrapper {
+    font-size: 1.3em
+  }
+}
+@media only screen and (max-width: 568px) {
+  main {
+    font-size: 5em
+  }
+  .footer-list-top {
+    width: 100%
+  }
+  .footer-list-header {
+    font-size: 3em;
+  }
+  .footer-list-anchor {
+    font-size: 1.5em
+  }
+  .footer-social-section {
+    justify-content: center
+  }
+  .footer-social-section::after {
+    top: 25%
+  }
+  .footer-social-connect {
+    margin-bottom: 10px;
+    padding: 0 10px
+  }
+  .footer-social-overlap {
+    display: flex;
+    justify-content: center;
+  }
+  .footer-social-icons-wrapper {
+    width: 100%;
+    padding: 0
+  }
+  .footer-social-overlap > a:not(:first-child) {
+    margin-left: 20px;
+  }
+  .footer-bottom-section {
+    padding: 0 5px 10px 5px
+  }
+  .footer-bottom-wrapper {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px
+  }
+}
+@media only screen and (max-width: 480px) {
+  .footer-social-overlap > a {
+    margin: auto
+  }
+  .footer-social-overlap > a:not(:first-child) {
+    margin-left: 0;
+  }
+  .footer-bottom-rights {
+    display: block
+  }
+}
+@media only screen and (max-width: 320px) {
+  .footer-list-header {
+    font-size: 2.2em
+  }
+  .footer-list-anchor {
+    font-size: 1.2em
+  }
+  .footer-social-connect {
+    font-size: 2.4em
+  }
+  .footer-social-overlap > a {
+    font-size: 2.24em
+  }
+  .footer-bottom-wrapper {
+    font-size: 1.3em
+  }
 }

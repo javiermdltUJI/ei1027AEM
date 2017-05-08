@@ -9,10 +9,10 @@
 <title>Gestionar Ofertas</title>
 </head>
 <body>
-	<script type='text/javascript' src='../../js/notifIt.js'></script>
-	<script type='text/javascript' src='../../js/notifIt.min.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
 	
-	<link rel='stylesheet' type='text/css' href='../../css/notifIt.css'>
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
 	
 	<script type="text/javascript">
 	

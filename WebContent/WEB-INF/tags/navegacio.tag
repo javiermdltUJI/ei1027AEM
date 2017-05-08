@@ -4,46 +4,46 @@
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
 
 
-<nav class="navbar navbar-default ">
+<nav >
 	<div class="container">
-		<div class="navbar-collapse collapse">
+		<div class="navbar-collapse">
 			<ul class="nav nav-tabs nav-justified">
-				<li><a href="${pageContext.request.contextPath}">Inicio</a></li>
+				<li><a style="color: #fff" href="${pageContext.request.contextPath}">Inicio</a></li>
 				<c:choose>
 				<c:when test='${usuario.rol=="ADMIN"}'>
-					<li><a href="${pageContext.request.contextPath}/usuario/listar.html">Usuarios</a></li>
-					<li><a href="${pageContext.request.contextPath}/habilidad/listar.html">Habilidades</a></li>
-					<li><a href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li>
-					<li><a href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li>
-					<li><a href="${pageContext.request.contextPath}/colaboracion/listar.html">Colaboraciones</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/usuario/listar.html">Usuarios</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listar.html">Habilidades</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/colaboracion/listar.html">Colaboraciones</a></li>
 				</c:when>
 				<c:when test='${usuario.rol=="ESTUDIANTE"}'>
-					<li><a href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li>
 					
 					<li class="dropdown">
 					
-          				<a id="DropDownOfertas" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ofertas <span class="caret"></span></a>
+          				<a style="color: #fff" id="DropDownOfertas" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ofertas <span class="caret"></span></a>
           				<ul class="dropdown-menu" aria-labelledby="DropDownOfertas">
- 			            	<li><a href="${pageContext.request.contextPath}/oferta/add.html">Crear Oferta</a></li>
-			            	<li><a href="${pageContext.request.contextPath}/oferta/listarMisOfertas/${usuario.usuario}.html">Mis Ofertas</a></li>
-							<li><a href="${pageContext.request.contextPath}/oferta/listarOfertas.html">Ver Ofertas</a></li>
+ 			            	<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Oferta</a></li>
+			            	<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/listarMisOfertas/${usuario.usuario}.html">Mis Ofertas</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/listarOfertas.html">Ver Ofertas</a></li>
 							
 						</ul>
 			        </li>
 					<li class="dropdown">
-          				<a id="DropDownPeticiones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Peticiones <span class="caret"></span></a>
-          				<ul class="dropdown-menu" aria-labelledby="DropDownPeticiones">
-          					<li><a href="${pageContext.request.contextPath}/peticion/add.html">Crear Petición</a></li>
-							<li><a href="${pageContext.request.contextPath}/peticion/listarMisPeticiones/${usuario.usuario}.html">Mis Peticiones</a></li>
-							<li><a href="${pageContext.request.contextPath}/peticion/listarPeticiones.html">Ver Peticiones</a></li>
+          				<a style="color: #fff" id="DropDownPeticiones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Peticiones <span class="caret"></span></a>
+          				<ul style="color: black" class="dropdown-menu" aria-labelledby="DropDownPeticiones">
+          					<li><a style="color: black" href="${pageContext.request.contextPath}/peticion/add.html">Crear Petición</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/peticion/listarMisPeticiones/${usuario.usuario}.html">Mis Peticiones</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/peticion/listarPeticiones.html">Ver Peticiones</a></li>
 						</ul>
-					<li><a href="${pageContext.request.contextPath}/miColaboracion/listar/${usuario.usuario}.html">Mis Colaboraciones</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/miColaboracion/listar/${usuario.usuario}.html">Mis Colaboraciones</a></li>
 				</c:when>
 					
 				<c:when test='${usuario.rol==null}'>
-					<li><a href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li>
-					<li><a href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li>
-					<li><a href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li>
+					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li>
+					<li><a style="color: #fff"href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li>
+					<li><a style="color: #fff"href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li>
 				</c:when>
 				</c:choose>
 
