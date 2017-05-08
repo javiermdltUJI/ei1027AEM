@@ -83,10 +83,10 @@
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td>${oferta.idHabilidad}</td>
 				</c:if>
-					<c:if test='${accesible == true}'>
+				<!-- 	<c:if test='${accesible == true}'>
 						<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
 						<td><a type="button" class="elimina btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
-					</c:if>
+					</c:if>  -->
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-default" href="./update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
 						<td><a type="button" class="elimina btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>
@@ -101,7 +101,7 @@
 	</table>
 	<c:if test='${accesible == true}'>
 	
-		<a type="button" class="btn btn-default" href="../add.html">Agregar oferta</a>
+		<a type="button" class="btn btn-default" href="add.html">Agregar oferta</a>
 	</c:if>
 	
 	<c:if test='${accesible == false}'>

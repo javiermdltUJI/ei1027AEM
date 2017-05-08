@@ -28,20 +28,23 @@
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
 				<form:input class="form-control" path="fechaIni" id="fechaIni"/>
+				<form:errors path="fechaIni" cssClash="error"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
 				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
+				<form:errors path="fechaFin" cssClash="error"/>	
 			</div>
-			<div class="form-group">
-	
+			<div class="form-group">	
 				<form:label path="descripcion">Descripción</form:label>
 				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
+				<form:errors path="descripcion" cssClash="error"/>	
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
 					<form:label path="usuario">Usuario</form:label>
 					<form:input  class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
+					<form:errors path="usuario" cssClash="error"/>	
 				</div>
 			</c:if>
 			<div class="form-group">
@@ -49,6 +52,7 @@
 					<select name="idHabilidad">
 					<c:forEach items="${habilidades}" var="habilidad">
 						<option value="${habilidad.idHabilidad}"> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>		
+					<form:errors path="idHabilidad" cssClash="error"/>	
 					</c:forEach>
 				</select>
 				

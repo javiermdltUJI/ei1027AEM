@@ -13,7 +13,7 @@ import modelo.Peticion;
 public class PeticionValidator implements Validator{
 	
 	
-	@Override
+	  @Override
 	  public boolean supports(Class<?> cls) {
 		  return Peticion.class.equals(cls);
 	   }

@@ -66,6 +66,7 @@ public class OfertaController {
 	
 	@RequestMapping("/listar")
 	public String listaOferta(HttpSession session, Model model){
+		model.addAttribute("accesible", true);
 		model.addAttribute("ofertas", ofertaDao.getOfertas());
 		return "oferta/listar";
 	}
@@ -160,8 +161,12 @@ public class OfertaController {
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
+		OfertaValidator ofertaValidator = new OfertaValidator();
+		ofertaValidator.validate(oferta, bindingResult);
+		if (bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "oferta/add";
+		} 
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());
