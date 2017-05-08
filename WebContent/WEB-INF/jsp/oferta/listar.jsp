@@ -4,11 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:paginabasica title="EI1027">
 <jsp:body>
-<html>
-<head>
 <title>Gestionar Ofertas</title>
-</head>
-<body>
+
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
 	
@@ -108,8 +105,6 @@
 		<a type="button" class="btn btn-default" href="add.html">Agregar oferta</a>			
 	</c:if>
 					
-	
-</body>
-</html>
+
 </jsp:body>
 </t:paginabasica>

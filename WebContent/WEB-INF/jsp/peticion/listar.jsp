@@ -7,11 +7,9 @@
 
 <t:paginabasica title="EI1027">
 <jsp:body>
-<html>
-<head>
+
 <title>Gestionar Peticiones</title>
-</head>
-<body>
+
 
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
@@ -104,9 +102,6 @@
 	<c:if test='${accesible == false}'>
 		<a type="button" class="btn btn-default" href="add.html">Agregar petición</a>
 	</c:if>
-	
-	
-</body>
-</html>
+
 </jsp:body>
 </t:paginabasica>
