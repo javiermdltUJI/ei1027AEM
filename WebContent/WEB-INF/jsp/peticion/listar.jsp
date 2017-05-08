@@ -82,10 +82,10 @@
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td>${peticion.idHabilidad}</td>
 				</c:if>
-					<c:if test='${accesible == true}'>
+				<!-- 	<c:if test='${accesible == true}'>
 						<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
 						<td><a type="button" class="elimina btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
-					</c:if>
+					</c:if> -->
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-default" href="./update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
 						<td><a type="button" class="elimina btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
@@ -99,11 +99,13 @@
 		</c:forEach>
 	</table>
 	<c:if test='${accesible == true}'>
-		<a type="button" class="btn btn-default" href="../add.html">Agregar petición</a>
+		<a type="button" class="btn btn-default" href="add.html">Agregar petición</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
 		<a type="button" class="btn btn-default" href="add.html">Agregar petición</a>
 	</c:if>
+	
+	
 </body>
 </html>
 </jsp:body>

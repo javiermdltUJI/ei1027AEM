@@ -62,6 +62,7 @@ public class PeticionController {
 	
 	@RequestMapping("/listar")
 	public String listaPeticion(HttpSession session, Model model){
+		model.addAttribute("accesible", true);
 		model.addAttribute("peticiones", peticionDao.getPeticiones());
 		return "peticion/listar";
 	}
@@ -147,6 +148,7 @@ public class PeticionController {
 	public String addPeticion(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null){
+			model.addAttribute("accesible", true);
 			model.addAttribute("peticion", new Peticion());
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "peticion/add";			
@@ -157,12 +159,12 @@ public class PeticionController {
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
-		// PeticionValidator peticionValidator = new PeticionValidator();
-		// peticionValidator.validate(peticion, bindingResult);
-		// if (bindingResult.hasErrors()) 
-		//		return "nadador/add";
+		PeticionValidator peticionValidator = new PeticionValidator();
+		peticionValidator.validate(peticion, bindingResult);
+		if (bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "peticion/add";
+		} 
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			peticion.setUsuario(u.getUsuario());

@@ -18,15 +18,6 @@ public class UsuarioValidator implements Validator{
 		return Usuario.class.equals(cls);
 	}
 	
-	private static boolean isNumeric(String cadena){
-		try{
-			Integer.parseInt(cadena);
-			return true;
-		} catch (NumberFormatException nfe){
-			return false;
-		}
-	}
-	
 	@Override
 	public void validate(Object obj, Errors errors){
 		Usuario usuario = (Usuario) obj;
