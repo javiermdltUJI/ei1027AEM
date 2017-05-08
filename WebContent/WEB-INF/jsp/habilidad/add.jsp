@@ -14,16 +14,19 @@
 			<div class="form-group">
 				<form:label path="nombre">Nombre</form:label>
 				<form:input class="form-control"  path="nombre" id="nombre" placeholder="Nombre"/>
+				<form:errors path="nombre" cssClash="error"/>	
 			</div>
 			<div class="form-group">
 			
 				<form:label path="tipo">Tipo</form:label>
 				<form:input class="form-control"  path="tipo" id="tipo" placeholder="Tipo"/>
+				<form:errors path="tipo" cssClash="error"/>	
 			</div>
 			<div class="form-group">
 			
 				<form:label path="descripcion">Descripción</form:label>
 				<form:input class="form-control"  path="descripcion" id="descripcion" placeholder="Descripción"/>
+				<form:errors path="descripcion" cssClash="error"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="nivel">Nivel</form:label>

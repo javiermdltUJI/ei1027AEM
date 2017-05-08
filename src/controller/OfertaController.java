@@ -74,6 +74,7 @@ public class OfertaController {
 	@RequestMapping("/listarOfertas")
 	public String listarOfertas(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("accesible", false);
 		session.setAttribute("prevURL", "oferta/listarOfertas.html" );
 		if (u==null)
 			return "redirect:../login.html";
@@ -134,12 +135,12 @@ public class OfertaController {
 
 	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
 	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
-		// PeticionValidator peticionValidator = new PeticionValidator();
-		// peticionValidator.validate(peticion, bindingResult);
-		// if (bindingResult.hasErrors()) 
-		//		return "nadador/add";
+		OfertaValidator ofertaValidator = new OfertaValidator();
+		ofertaValidator.validate(oferta, bindingResult);
+		if (bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "oferta/addConHabilidad";
+		}
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());

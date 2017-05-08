@@ -100,10 +100,10 @@
 	
 		<a type="button" class="btn btn-default" href="add.html">Agregar oferta</a>
 	</c:if>
-	
+	<!-- 
 	<c:if test='${accesible == false}'>
 		<a type="button" class="btn btn-default" href="add.html">Agregar oferta</a>			
-	</c:if>
+	</c:if> -->
 					
 
 </jsp:body>

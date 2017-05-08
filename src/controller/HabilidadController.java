@@ -67,8 +67,12 @@ public class HabilidadController {
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
+		HabilidadValidator habilidadValidator = new HabilidadValidator();
+		habilidadValidator.validate(habilidad, bindingResult);
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "habilidad/add";
+		}
 		habilidadDao.addHabilidad(habilidad);
 		return "redirect:listar.html";
 	}

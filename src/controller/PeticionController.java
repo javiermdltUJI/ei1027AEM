@@ -73,6 +73,8 @@ public class PeticionController {
 	@RequestMapping("/listarPeticiones")
 	public String listarPeticiones(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		model.addAttribute("accesible", false);
+
 		session.setAttribute("prevURL", "peticion/listarPeticiones.html");
 		if (u==null)
 			return "redirect:../login.html";
@@ -134,10 +136,10 @@ public class PeticionController {
 	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
 		//if(bindingResult.hasErrors())
 		//	return "habilidad/add";
-		// PeticionValidator peticionValidator = new PeticionValidator();
-		// peticionValidator.validate(peticion, bindingResult);
-		// if (bindingResult.hasErrors()) 
-		//		return "nadador/add";
+		PeticionValidator peticionValidator = new PeticionValidator();
+		peticionValidator.validate(peticion, bindingResult);
+		if (bindingResult.hasErrors()) 
+			return "peticion/addConHabilidad";
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			peticion.setUsuario(u.getUsuario());

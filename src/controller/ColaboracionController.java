@@ -78,8 +78,12 @@ public class ColaboracionController {
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
+		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.validate(colaboracion, bindingResult);	
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "colaboracion/add";
+		}
 		colaboracionDao.addColaboracion(colaboracion);
 		return "redirect:listar.html";
 	}
@@ -102,8 +106,12 @@ public class ColaboracionController {
 
 	@RequestMapping(value="/addOferta/{id_oferta}", method=RequestMethod.POST)
 	public String processAddOfertaSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_oferta){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
+		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.validate(colaboracion, bindingResult);	
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "habilidad/add";
+		}
 		colaboracion.setIdOferta(id_oferta);
 		session.setAttribute("colaboracion", colaboracion);
 		return "redirect:../../peticion/seleccionar.html";
@@ -127,8 +135,12 @@ public class ColaboracionController {
 
 	@RequestMapping(value="/addPeticion/{id_peticion}", method=RequestMethod.POST)
 	public String processAddPeticionSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_peticion){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
+		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.validate(colaboracion, bindingResult);	
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");	
+			return "habilidad/add";
+		}
 		colaboracion.setIdPeticion(id_peticion);
 		session.setAttribute("colaboracion", colaboracion);
 		return "redirect:../../oferta/seleccionar.html";
