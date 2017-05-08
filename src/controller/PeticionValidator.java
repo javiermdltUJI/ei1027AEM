@@ -5,7 +5,6 @@ import java.util.Date;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.ibm.icu.text.SimpleDateFormat;
 
 import modelo.Peticion;
 

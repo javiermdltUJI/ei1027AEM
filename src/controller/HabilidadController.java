@@ -29,23 +29,23 @@ public class HabilidadController {
 	@RequestMapping("/listar")
 	public String listaHabilidad(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "habilidad/listar.html");
+		if (u==null)
+			return "redirect:../login.html";
+		if(u.getRol().name().equals("ADMIN")){
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "habilidad/listar";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
 	
 	@RequestMapping("/listarActivas")
 	public String listaHabilidadActiva(HttpSession session, Model model){
-		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
-			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
-			return "habilidad/listar";
-		}else{
-			return "error/error";
-		}
+		session.setAttribute("prevURL", "habilidad/listarActivas.html");
+		model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
+		return "habilidad/listar";
 	}
 
 
@@ -53,10 +53,14 @@ public class HabilidadController {
 	@RequestMapping(value="/add")
 	public String addHabilidad(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "habilidad/add.html");
+		if (u==null)
+			return "redirect:../login.html";
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			model.addAttribute("habilidad", new Habilidad());
 			return "habilidad/add";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";	
 		}
 	}
@@ -72,10 +76,14 @@ public class HabilidadController {
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.GET)
 	public String editHabilidad(HttpSession session, Model model, @PathVariable int id_habilidad){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "habilidad/update/"+id_habilidad+".html");
+		if (u==null)
+			return "redirect:../login.html";
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			model.addAttribute("habilidad", habilidadDao.getHabilidad(id_habilidad));
 			return "habilidad/update";	
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -92,10 +100,14 @@ public class HabilidadController {
 	@RequestMapping(value="/delete/{id_habilidad}")
 	public String processDelete(HttpSession session, @PathVariable int id_habilidad){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "habilidad/listar.html");
+		if (u==null)
+			return "redirect:../login.html";
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			habilidadDao.deleteHabilidad(id_habilidad);
 			return "redirect:../listar.html";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}

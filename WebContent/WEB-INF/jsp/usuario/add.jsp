@@ -37,22 +37,24 @@
 				<form:input class="form-control" path="dni" id="dni" placeholder="DNI"/>
 				<form:errors path="dni" cssClash="error"/>
 			</div>
-			<div class="form-group">
-				<form:label path="contadorBloqueo">Contador de bloqueo</form:label>
-				<form:input class="form-control" path="contadorBloqueo" id="contadorBloqueo" placeholder="0"/>
-			</div>
-			<div class="form-group">
-				<form:label path="bloqueado">Bloqueado</form:label>
-				<form:input class="form-control" path="bloqueado" id="bloqueado" placeholder="0"/>
-			</div>
-			<div class="form-group">
-				<form:label path="rol">Rol</form:label>
-				    	<form:select path="rol" class="form-control" id="tipoRol">
-								<form:option value="ESTUDIANTE"> ---- </form:option>
-								<form:option value="ESTUDIANTE"> Estudiante </form:option>
-								<form:option value="ADMIN">Admin</form:option>
-						</form:select>
-			</div>
+			<c:if test='${usuario.rol=="ADMIN"}'>
+				<div class="form-group">
+					<form:label path="contadorBloqueo">Contador de bloqueo</form:label>
+					<form:input class="form-control" path="contadorBloqueo" id="contadorBloqueo" placeholder="0"/>
+				</div>
+				<div class="form-group">
+					<form:label path="bloqueado">Bloqueado</form:label>
+					<form:input class="form-control" path="bloqueado" id="bloqueado" placeholder="0"/>
+				</div>
+				<div class="form-group">
+					<form:label path="rol">Rol</form:label>
+					    	<form:select path="rol" class="form-control" id="tipoRol">
+									<form:option value="ESTUDIANTE"> ---- </form:option>
+									<form:option value="ESTUDIANTE"> Estudiante </form:option>
+									<form:option value="ADMIN">Admin</form:option>
+							</form:select>
+				</div>
+			</c:if>
 			<div class="form-group">
 				<input class="btn btn-secundary" type="submit" value="Agregar usuario" />
 			</div>

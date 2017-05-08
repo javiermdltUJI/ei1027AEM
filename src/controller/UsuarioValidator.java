@@ -35,10 +35,10 @@ public class UsuarioValidator implements Validator{
 			errors.rejectValue("contrasenya", "obligatorio", "Valor requerido");
 		
 		if(usuario.getContrasenya().length()<7)
-			errors.rejectValue("contrasenya", "obligatorio", "La contraseÃ±a debe contener como mÃ­nimo 8 dÃ­gitos");
+			errors.rejectValue("contrasenya", "obligatorio", "La contraseña debe contener como mínimo 8 dígitos");
 		
 		if(usuario.getContrasenya().length()>50)
-			errors.rejectValue("contrasenya", "obligatorio", "La contraseÃ±a debe contener como mÃ¡ximo 50 dÃ­gitos");
+			errors.rejectValue("contrasenya", "obligatorio", "La contraseña±a debe contener como máximo 50 dígitos");
 		
 		
 		//Correo
@@ -54,7 +54,7 @@ public class UsuarioValidator implements Validator{
 			errors.rejectValue("nombre", "obligatorio", "Valor requerido");
 		
 		if(usuario.getNombre().length() > 50)
-			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 caracteres");
+			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 carácteres");
 		
 		
 		//DNI
@@ -62,6 +62,6 @@ public class UsuarioValidator implements Validator{
 			errors.rejectValue("dni", "obligatorio", "Valor requerido");
 		
 		if(usuario.getDni().length() != 9)
-			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dÃ­gitos");
+			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dígitos");
 	}
 }

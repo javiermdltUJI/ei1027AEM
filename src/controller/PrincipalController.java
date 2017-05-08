@@ -20,14 +20,14 @@ public class PrincipalController {
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String inicio(Model model, HttpSession session) {
 		//model.addAttribute("usuarioLogin", new Usuario());
-		
+		session.setAttribute("prevURL", "principal/index.html" );
 		return "principal/index";
 	}
 	
 	@RequestMapping(value="/principal", method = RequestMethod.GET)
 	public String principal(Model model, HttpSession session) {
 		//model.addAttribute("usuarioLogin", new Usuario());
-		
+		session.setAttribute("prevURL", "principal/principal.html" );		
 		return "principal/principal";
 	}
 }

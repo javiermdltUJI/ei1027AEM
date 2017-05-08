@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -64,56 +65,67 @@ public class PeticionController {
 	public String listaPeticion(HttpSession session, Model model){
 		model.addAttribute("accesible", true);
 		model.addAttribute("peticiones", peticionDao.getPeticiones());
+		session.setAttribute("prevURL", "peticion/listar.html");
 		return "peticion/listar";
 	}
 	
+	//Peticiones que no son mias
 	@RequestMapping("/listarPeticiones")
 	public String listarPeticiones(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null){
-			model.addAttribute("accesible", false);
-			model.addAttribute("peticiones", peticionDao.getPeticiones(usuario.getUsuario()));
-			return "peticion/listar";			
-		}
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "peticion/listarPeticiones.html");
+		if (u==null)
+			return "redirect:../login.html";
 		else{
-			return "error/error";
+			model.addAttribute("accesible", false);
+			model.addAttribute("peticiones", peticionDao.getPeticiones(u.getUsuario()));
+			return "peticion/listar";			
 		}
 	}
 	
+	//Mis peticiones
 	@RequestMapping("/listarMisPeticiones/{usuario}")
 	public String listarMisPeticiones(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+		session.setAttribute("prevURL", "peticion/listarPeticiones.html");
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			model.addAttribute("accesible", true);
 			model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario));
 			return "peticion/listar";			
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
 	
 	@RequestMapping("/seleccionar")
 	public String seleccionarPeticiones(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "peticion/seleccionar.html");
+		if (u==null)
+			return "redirect:../login.html";
+		else {
 			model.addAttribute("accesible", false);
 			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
 			Oferta o = ofertaDao.getOferta(c.getIdOferta());
-			model.addAttribute("peticiones", peticionDao.getMisPeticionesHabilidad(usuario.getUsuario(), o.getIdHabilidad()));
+			model.addAttribute("peticiones", peticionDao.getMisPeticionesHabilidad(u.getUsuario(), o.getIdHabilidad()));
 			return "peticion/seleccionar";			
-		}
-		else{
-			return "error/error";
 		}
 	}
 	
 	@RequestMapping(value="/addConHabilidad")
 	public String addPeticionConHabilidad(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "peticion/addConHabilidad.html");
+		if (u==null)
+			return "redirect:../login.html";
+		else if (session.getAttribute("colaboracion")!=null){
 			model.addAttribute("peticion", new Peticion());
 			return "peticion/addConHabilidad";			
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -147,13 +159,14 @@ public class PeticionController {
 	@RequestMapping(value="/add")
 	public String addPeticion(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "peticion/add.html");
+		if (u==null)
+			return "redirect:../login.html";
+		else{
 			model.addAttribute("accesible", true);
 			model.addAttribute("peticion", new Peticion());
-			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			return "peticion/add";			
-		}else{
-			return "error/error";
 		}
 	}
 
@@ -176,11 +189,15 @@ public class PeticionController {
 	@RequestMapping(value="/update/{usuario}/{id_peticion}", method = RequestMethod.GET)
 	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+		session.setAttribute("prevURL", "peticion/update/"+usuario+"/"+id_peticion+".html");
+		if (u==null)
+			return "redirect:../login.html";
+		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
-			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			return "peticion/update";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -202,11 +219,15 @@ public class PeticionController {
 	@RequestMapping(value="/update/{id_peticion}", method = RequestMethod.GET)
 	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, BindingResult bindingResult){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null || u.getRol().name().equals("ADMIN")){
+		session.setAttribute("prevURL", "peticion/update/"+id_peticion+".html");
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "peticion/update";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -223,13 +244,24 @@ public class PeticionController {
 	@RequestMapping(value="/delete/{usuario}/{id_peticion}")
 	public String processDelete(HttpSession session, @PathVariable int id_peticion, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
-			peticionDao.deletePeticion(id_peticion);
-			if (u.getRol().name().equals("ADMIN"))
+		session.setAttribute("prevURL", "peticion/listarMisPeticiones/"+usuario+".html");
+		if (u==null)
+			return "redirect:../login.html";
+		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
+			Peticion peticion2 = peticionDao.getPeticion(id_peticion);
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, -1);
+			peticion2.setFechaFin(cal.getTime());
+			peticionDao.updatePeticion(peticion2);
+			
+			if (u.getRol().name().equals("ADMIN")){
+				session.setAttribute("prevURL", "peticion/listar.html");
 				return "redirect:../../listar.html";
-			else 
+			}else{
 				return "redirect:../../listarMisPeticiones/"+u.getUsuario()+".html";
+			}
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}

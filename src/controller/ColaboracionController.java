@@ -22,8 +22,6 @@ import dao.MiColaboracionDao;
 import dao.OfertaDao;
 import dao.PeticionDao;
 import modelo.Colaboracion;
-import modelo.Oferta;
-import modelo.Peticion;
 import modelo.Usuario;
 
 
@@ -34,8 +32,6 @@ import modelo.Usuario;
 public class ColaboracionController {
 	
 	private ColaboracionDao colaboracionDao;
-	private OfertaDao ofertaDao;
-	private PeticionDao peticionDao;
 	private MiColaboracionDao miColaboracionDao;
 
 	
@@ -49,34 +45,33 @@ public class ColaboracionController {
 		this.miColaboracionDao = miColaboracionDao;
 	}
 	
-	@Autowired
-	public void setOfertaDao(OfertaDao ofertaDao){
-		this.ofertaDao = ofertaDao;
-	}
-	
-	@Autowired
-	public void setPeticionDao(PeticionDao peticionDao){
-		this.peticionDao = peticionDao;
-	}
 	
 	@RequestMapping("/listar")
 	public String listaColaboracion(HttpSession session, Model model){
+		session.setAttribute("prevURL", "colaboracion/listar.html" );
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && u.getRol().name().equals("ADMIN")){
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
 			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
 			return "colaboracion/listar";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
 	
 	@RequestMapping(value="/add")
 	public String addColaboracion(HttpSession session, Model model){
+		session.setAttribute("prevURL", "colaboracion/add.html" );
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
 			model.addAttribute("colaboracion", new Colaboracion());
 			return "colaboracion/add";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -92,15 +87,16 @@ public class ColaboracionController {
 	@RequestMapping(value="/addOferta/{id_oferta}")
 	public String addColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "colaboracion/addOferta/"+id_oferta+".html" );
 		if(u != null){
 			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
 				return "error/excesoHorasOferta";
 			}else{
-				model.addAttribute("colaboracion", new Colaboracion());				
+				model.addAttribute("colaboracion", new Colaboracion());
 				return "colaboracion/addOferta";
 			}
 		}else{
-			return "error/error";
+			return "redirect:../login.html";
 		}
 	}
 
@@ -115,16 +111,17 @@ public class ColaboracionController {
 	
 	@RequestMapping(value="/addPeticion/{id_peticion}")
 	public String addColaboracionPeticion(HttpSession session, Model model, @PathVariable int id_peticion){
+		session.setAttribute("prevURL", "colaboracion/addPeticion/"+id_peticion+".html" );
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null){
 			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
 				return "error/excesoHorasPeticion";
 			}else{
-				model.addAttribute("colaboracion", new Colaboracion());				
+				model.addAttribute("colaboracion", new Colaboracion());
 				return "colaboracion/addPeticion";
 			}
 		}else{
-			return "error/error";
+			return "redirect:../login.html";
 		}
 	}
 
@@ -142,10 +139,14 @@ public class ColaboracionController {
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.GET)
 	public String editColaboracion(HttpSession session, Model model, @PathVariable int id_colaboracion){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		if (u==null)
+			return "redirect:../login.html";
+		session.setAttribute("prevURL", "colaboracion/update/"+id_colaboracion+".html" );
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			model.addAttribute("colaboracion", colaboracionDao.getColaboracion(id_colaboracion));
 			return "colaboracion/update";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -162,10 +163,14 @@ public class ColaboracionController {
 	@RequestMapping(value="/delete/{id_colaboracion}")
 	public String processDelete(HttpSession session, @PathVariable int id_colaboracion){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "colaboracion/listar.html" );
+		if (u==null)
+			return "redirect:../login.html";
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			colaboracionDao.deleteColaboracion(id_colaboracion);
 			return "redirect:../listar.html";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -173,10 +178,14 @@ public class ColaboracionController {
 	@RequestMapping(value="/cancelar/{id_colaboracion}")
 	public String processCancelar(HttpSession session, @PathVariable int id_colaboracion){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "colaboracion/listar.html" );
+		if (u==null)
+			return "redirect:../login.html";
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			colaboracionDao.cancelarColaboracion(id_colaboracion);
 			return "redirect:../listar.html";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -184,10 +193,14 @@ public class ColaboracionController {
 	@RequestMapping(value="/cancelar/{usuario}/{id_colaboracion}")
 	public String processCancelar(HttpSession session, @PathVariable int id_colaboracion, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "miColaboracion/cancelar/"+usuario+"/"+id_colaboracion+".html" );
+		if (u==null)
+			return "redirect:../login.html";
 		if(u != null && (u.getRol().name().equals("ADMIN") || usuario.equals(u.getUsuario())) ){
 			session.setAttribute("colaboracion", colaboracionDao.getColaboracion(id_colaboracion));
 			return "miColaboracion/update";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -195,30 +208,32 @@ public class ColaboracionController {
 	@RequestMapping("/creada/{id_peticion}")
 	public String creadaColaboracion(HttpSession session, Model model, @PathVariable int id_peticion){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "colaboracion/creada/"+id_peticion+".html");
+		if (u==null)
+			return "redirect:../login.html";
+		else{
 			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
 			c.setIdPeticion(id_peticion);
 			colaboracionDao.addColaboracion(c);
 			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(u.getUsuario()));
 			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(u.getUsuario()));
 			return "miColaboracion/listar";
-		}else{
-			return "error/error";
 		}
 	}
 	
 	@RequestMapping("/creadaOferta/{id_oferta}")
 	public String creadaColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "colaboracion/creadaOferta/"+id_oferta+".html");
+		if (u==null)
+			return "redirect:../login.html";
+		else{
 			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
 			c.setIdOferta(id_oferta);
 			colaboracionDao.addColaboracion(c);
 			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(u.getUsuario()));
 			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(u.getUsuario()));
 			return "miColaboracion/listar";
-		}else{
-			return "error/error";
 		}
 	}
 	

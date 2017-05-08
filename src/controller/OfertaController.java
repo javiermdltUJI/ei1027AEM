@@ -1,7 +1,6 @@
 package controller;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -68,30 +67,36 @@ public class OfertaController {
 	public String listaOferta(HttpSession session, Model model){
 		model.addAttribute("accesible", true);
 		model.addAttribute("ofertas", ofertaDao.getOfertas());
+		session.setAttribute("prevURL", "oferta/listar.html" );
 		return "oferta/listar";
 	}
 	
 	@RequestMapping("/listarOfertas")
 	public String listarOfertas(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "oferta/listarOfertas.html" );
+		if (u==null)
+			return "redirect:../login.html";
+		else{
 			model.addAttribute("accesible", false);
-			model.addAttribute("ofertas", ofertaDao.getOfertas(usuario.getUsuario()));
+			model.addAttribute("ofertas", ofertaDao.getOfertas(u.getUsuario()));
 			return "oferta/listar";			
-		}else{
-			return "error/error";
 		}
 	}
 	
-	
+	//Ofertas del usuario
 	@RequestMapping("/listarMisOfertas/{usuario}")
 	public String listarMisOfertas(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
+		session.setAttribute("prevURL", "oferta/listarMisOfertas/"+usuario+".html" );
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			model.addAttribute("accesible", true);
 			model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario));
 			return "oferta/listar";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -99,26 +104,30 @@ public class OfertaController {
 	
 	@RequestMapping("/seleccionar")
 	public String seleccionarOfertas(HttpSession session, Model model){
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "oferta/seleccionar.html" );
+		if (u==null)
+			return "redirect:../login.html";
+		else{
 			model.addAttribute("accesible", false);
 			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
 			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
-			model.addAttribute("ofertas", ofertaDao.getMisOfertasHabilidad(usuario.getUsuario(), p.getIdHabilidad()));
+			model.addAttribute("ofertas", ofertaDao.getMisOfertasHabilidad(u.getUsuario(), p.getIdHabilidad()));
 			return "oferta/seleccionar";			
-		}
-		else{
-			return "error/error";
 		}
 	}
 	
 	@RequestMapping(value="/addConHabilidad")
 	public String addOfertaConHabilidad(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "oferta/addConHabilidad.html" );
+		if (u==null)
+			return "redirect:../login.html";
+		else if (session.getAttribute("colaboracion")!=null){
 			model.addAttribute("oferta", new Oferta());
 			return "oferta/addConHabilidad";			
-		}else{
+		} else {
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -150,12 +159,13 @@ public class OfertaController {
 	@RequestMapping(value="/add")
 	public String addOferta(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null){
+		session.setAttribute("prevURL", "oferta/add.html" );
+		if (u==null)
+			return "redirect:../login.html";
+		else {
 			model.addAttribute("oferta", new Oferta());
-			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			return "oferta/add";			
-		}else{
-			return "error/error";
 		}
 	}
 
@@ -178,11 +188,15 @@ public class OfertaController {
 	@RequestMapping(value="/update/{usuario}/{id_oferta}", method = RequestMethod.GET)
 	public String editOferta(HttpSession session, Model model, @PathVariable int id_oferta, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){	
+		session.setAttribute("prevURL", "oferta/update/"+usuario+"/"+id_oferta+".html" );
+		if (u==null)
+			return "redirect:../login.html";
+		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){	
 			model.addAttribute("oferta", ofertaDao.getOferta(id_oferta));
-			model.addAttribute("habilidades", habilidadDao.getHabilidades());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			return "oferta/update";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -208,11 +222,15 @@ public class OfertaController {
 	@RequestMapping(value="/update/{id_oferta}", method = RequestMethod.GET)
 	public String editOferta(HttpSession session, Model model, @PathVariable int id_oferta){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null || u.getRol().name().equals("ADMIN")){	
+		session.setAttribute("prevURL", "oferta/update/"+id_oferta+".html" );
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){	
 			model.addAttribute("oferta", ofertaDao.getOferta(id_oferta));
 			model.addAttribute("habilidades", habilidadDao.getHabilidades());
 			return "oferta/update";
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
@@ -230,15 +248,24 @@ public class OfertaController {
 	@RequestMapping(value="/delete/{usuario}/{id_oferta}")
 	public String processDelete(HttpSession session, @PathVariable int id_oferta, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
-			
+		session.setAttribute("prevURL", "oferta/listarMisOfertas/"+usuario+".html" );
+		if (u==null)
+			return "redirect:../login.html";
+		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			Oferta oferta2 = ofertaDao.getOferta(id_oferta);
 			final Calendar cal = Calendar.getInstance();
 		    cal.add(Calendar.DATE, -1);
 			oferta2.setFechaFin( cal.getTime());
 			ofertaDao.updateOferta(oferta2);
-			return "redirect:../../listar.html";
+			
+			if (u.getRol().name().equals("ADMIN")) {
+				session.setAttribute("prevURL", "oferta/listar.html" );
+				return "redirect:../../listar.html";
+			}else{
+				return "redirect:../../listarMisOfertas/"+usuario+".html";	
+			}
 		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}

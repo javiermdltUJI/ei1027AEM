@@ -94,10 +94,9 @@ public class LoginController {
         // Guardem les dades de l'usuari autenticat a la sessio
         session.setAttribute("usuario", usuario); 
 
-        // Torna a la pagina principal
-        String url = (String) session.getAttribute("nextUrl");
+     // Torna a la pagina principal
+        String url = (String) session.getAttribute("prevURL");
         if ( url != null){
-        	session.removeAttribute("nextUrl");
         	return "redirect:" + url;
         }else{
         	if (usuario.getRol().name().equals("ESTUDIANTE"))

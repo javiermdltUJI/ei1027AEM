@@ -11,6 +11,9 @@
 </head>
 <body>
 	<h1>Error. No se tiene permisos para realizar esta acción. </h1>
+	
+	<div style="text-align:center;"><a type="button" class="btn btn-default" href="${pageContext.request.contextPath}/${sessionScope.prevURL}">Volver</a></div>
+	
 </body>
 </html>
 </jsp:body>
