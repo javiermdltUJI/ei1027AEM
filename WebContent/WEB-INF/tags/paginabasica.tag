@@ -94,6 +94,23 @@
 		   
 		  </section>
 		</div>
+		
+		<script>
+	console.log($("#body").height());
+	console.log($("#footer").height());
+
+		if($("#body").height()<=500){
+			 document.getElementById("footer").style.position = "absolute";
+			 document.getElementById("footer").style.marginBottom = "0px";
+
+			 /*$('#footer').css('margin-bottom','0 em !important');
+			console.log("...."); */
+
+
+
+		}
+	
+	</script>
 </div>
 </body>
 </html>
