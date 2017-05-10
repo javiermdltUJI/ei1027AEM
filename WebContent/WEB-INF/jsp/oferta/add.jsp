@@ -24,27 +24,29 @@
 </head>
 <body>
 	<h2>Nueva oferta</h2>
+	
 	<form:form method="post" modelAttribute="oferta" onsubmit="validate()">
+	
 			<div class="form-group">
-				<form:label path="fechaIni">Fecha Inicio</form:label>
+				<form:label path="fechaIni" class="has-error">Fecha Inicio</form:label>
 				<form:input class="form-control" path="fechaIni" id="fechaIni"/>
-				<form:errors path="fechaIni" cssClash="error"/>	
+				<form:errors path="fechaIni" cssClass="error fa fa-exclamation-circle"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></form:errors>		
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
 				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
-				<form:errors path="fechaFin" cssClash="error"/>	
+				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>
 			</div>
 			<div class="form-group">	
 				<form:label path="descripcion">Descripción</form:label>
 				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
-				<form:errors path="descripcion" cssClash="error"/>	
+				<form:errors path="descripcion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
 					<form:label path="usuario">Usuario</form:label>
 					<form:input  class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
-					<form:errors path="usuario" cssClash="error"/>	
+					<form:errors path="usuario" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 			</c:if>
 			<div class="form-group">
@@ -52,7 +54,7 @@
 					<select name="idHabilidad">
 					<c:forEach items="${habilidades}" var="habilidad">
 						<option value="${habilidad.idHabilidad}"> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>		
-					<form:errors path="idHabilidad" cssClash="error"/>	
+					<form:errors path="idHabilidad" cssClass="error"/>	
 					</c:forEach>
 				</select>
 				

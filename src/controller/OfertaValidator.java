@@ -25,34 +25,30 @@ public class OfertaValidator implements Validator {
 			 errors.rejectValue("fechaFin", "obligatorio", "Valor requerido");
 		 }else{
 			 if(oferta.getFechaIni().before(new Date()))
-				 errors.rejectValue("fechaIni", "fechaInvalida", "DÃ­a inicio peticiÃ³n no vÃ¡lido");
+				 errors.rejectValue("fechaIni", "fechaInvalida", "		Día inicio Oferta no válido");
 			 
 			 if(oferta.getFechaFin().before(oferta.getFechaIni()))
-				 errors.rejectValue("fechaFin", "fechaInvalida", "Fecha fin es menor que fecha inicio");
+				 errors.rejectValue("fechaFin", "fechaInvalida", "		Fecha fin es menor que fecha inicio");
 			 
 			 if(oferta.getFechaFin().equals(oferta.getFechaIni()))
-				 errors.rejectValue("fechaIni", "fechaInvalida", "Fecha inicio igual que fecha fin");
+				 errors.rejectValue("fechaIni", "fechaInvalida", "		Fecha inicio igual que fecha fin");
 			 
 			 if(oferta.getFechaIni().equals(oferta.getFechaFin()))
-				 errors.rejectValue("fechaFin", "fechaInvalida", "Fecha fin igual que fecha inicio");
+				 errors.rejectValue("fechaFin", "fechaInvalida", "		Fecha fin igual que fecha inicio");
 		 }
 		
 		 //Descripcion
 		 if(oferta.getDescripcion().trim().equals(""))
-			 errors.rejectValue("descripcion", "obligatorio", "Valor requerido");
+			 errors.rejectValue("descripcion", "obligatorio", "		Valor requerido");
 		 
 		 if(oferta.getDescripcion().length() > 300)
-			 errors.rejectValue("descripcion",  "obligatorio", "La descripcion debe ser menor de 300 caracteres");
-		 
-		 //Usuario
-		 if(oferta.getUsuario().trim().equals(""))
-			 errors.rejectValue("usuario",  "obligatorio", "Valor requerido");
+			 errors.rejectValue("descripcion",  "obligatorio", "	La descripcion debe ser menor de 300 caracteres");
 		 
 		 //idHabilidad
 		 String p = ""+oferta.getIdHabilidad();
 
 		 if(p.trim().equals(""))
-			 errors.rejectValue("idHabilidad", "obligatorio", "Valor requerido");
+			 errors.rejectValue("idHabilidad", "obligatorio", "		Valor requerido");
 
 		
 	}
