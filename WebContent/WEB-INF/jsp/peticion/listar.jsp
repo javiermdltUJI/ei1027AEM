@@ -62,7 +62,9 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Descripción</th>
+		<c:if test='${usuario.usuario==session.getAttribute("mis")}'>
 			<th>Usuario</th>
+		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
 			<th></th>
@@ -82,7 +84,9 @@
 					<td>${peticion.fechaIniString}</td>
 					<td>${peticion.fechaFinString}</td>
 					<td>${peticion.descripcion}</td>
-					<td>${peticion.usuario}</td>
+				<c:if test='${usuario.usuario==session.getAttribute("mis")}'>
+					<td>${oferta.usuario}</td>
+				</c:if>
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td>${peticion.idHabilidad}</td>
 				</c:if>

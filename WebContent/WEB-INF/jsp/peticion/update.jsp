@@ -31,22 +31,24 @@
 			</div>
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
-				<form:input class="form-control" path="fechaIni" id="fechaInicio"/>
-							
+				<form:input class="form-control" path="fechaIni" id="fechaInicio" required="required"/>
+				<form:errors path="fechaIni" cssClass="error fa fa-exclamation-circle" />			
 			</div>
 			<div class="form-group">				
 				<form:label path="fechaFin">Fecha Fin</form:label>
-				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
-				
+				<form:input class="form-control" path="fechaFin" id="fechaFin" required="required"/>
+				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle" "/>	
 			</div>
 			<div class="form-group">
 				<form:label path="descripcion">Descripción</form:label>
-				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
+				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción" required="required"/>
+				<form:errors path="descripcion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
 					<form:label path="usuario">Usuario</form:label>
-					<form:input class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
+					<form:input class="form-control" path="usuario" id="usuario" placeholder="Usuario" required="required"/>
+					<form:errors path="usuario" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 			</c:if>
 			<div class="form-group">

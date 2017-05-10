@@ -89,6 +89,7 @@ public class PeticionController {
 	@RequestMapping("/listarMisPeticiones/{usuario}")
 	public String listarMisPeticiones(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("mis", u.getUsuario());
 		session.setAttribute("prevURL", "peticion/listarPeticiones.html");
 		if (u==null)
 			return "redirect:../login.html";
@@ -173,16 +174,20 @@ public class PeticionController {
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult,  Model model){
 		PeticionValidator peticionValidator = new PeticionValidator();
 		peticionValidator.validate(peticion, bindingResult);
 		if (bindingResult.hasErrors()){
+			model.addAttribute("elegida", peticion.getIdHabilidad());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "peticion/add";
 		} 
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			peticion.setUsuario(u.getUsuario());
+			peticionDao.addPeticion(peticion);
+			return "redirect:listarMisOfertas/"+u.getUsuario()+".html";
 		}
 		peticionDao.addPeticion(peticion);
 		return "redirect:listar.html";

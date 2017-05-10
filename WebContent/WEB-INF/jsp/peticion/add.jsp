@@ -27,34 +27,45 @@
 	<form:form method="post" modelAttribute="peticion"  onsubmit="validate()">
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
-				<form:input class="form-control" path="fechaIni" id="fechaIni"/>
-				<form:errors path="fechaIni" cssClash="error"/>	
+				<form:input class="form-control" path="fechaIni" id="fechaIni" required="required"/>
+				<form:errors path="fechaIni" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
-				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
-				<form:errors path="fechaFin" cssClash="error"/>	
+				<form:input class="form-control" path="fechaFin" id="fechaFin" required="required"/>
+				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="descripcion">Descripción</form:label>
-				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
-				<form:errors path="descripcion" cssClash="error"/>	
+				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción" required="required"/>
+				<form:errors path="descripcion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
 					<form:label path="usuario">Usuario</form:label>
-					<form:input class="form-control" path="usuario" id="usuario" placeholder="Usuario"/>
-					<form:errors path="usuario" cssClash="error"/>	
+					<form:input class="form-control" path="usuario" id="usuario" placeholder="Usuario" required="required"/>
+					<form:errors path="usuario" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 			</c:if>
 			<div class="form-group">
 				<form:label path="idHabilidad">Habilidad</form:label>
-				<select name="idHabilidad">
-					<c:forEach items="${habilidades}" var="habilidad">
-						<option value="${habilidad.idHabilidad}"> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>		
-					<form:errors path="idHabilidad" cssClash="error"/>	
-					</c:forEach>
-				</select>
+					<select name="idHabilidad">
+						<c:forEach items="${habilidades}" var="habilidad">
+							<c:choose>
+						
+							<c:when test="${elegida==habilidad.idHabilidad}">
+								<option value="${habilidad.idHabilidad}" selected> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>		
+							</c:when>
+							<c:otherwise>
+								<option value="${habilidad.idHabilidad}"> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>
+							</c:otherwise>
+							
+						</c:choose>	
+						
+						
+						<form:errors path="idHabilidad" cssClass="error fa fa-exclamation-circle"/>	
+						</c:forEach>
+					</select>
 				
 				<!-- <td><form:label path="idHabilidad">id_habilidad</form:label></td>
 				<td><form:input path="idHabilidad" id="idHabilidad" placeholder="1"/></td>

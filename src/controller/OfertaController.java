@@ -89,6 +89,7 @@ public class OfertaController {
 	@RequestMapping("/listarMisOfertas/{usuario}")
 	public String listarMisOfertas(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("mis", u.getUsuario());
 		session.setAttribute("prevURL", "oferta/listarMisOfertas/"+usuario+".html" );
 		if (u==null)
 			return "redirect:../login.html";
@@ -171,19 +172,26 @@ public class OfertaController {
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+	public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult, Model model){
 		OfertaValidator ofertaValidator = new OfertaValidator();
 		ofertaValidator.validate(oferta, bindingResult);
 		if (bindingResult.hasErrors()){
+			model.addAttribute("elegida", oferta.getIdHabilidad());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "oferta/add";
 		}
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());
+			ofertaDao.addOferta(oferta);
+			return "redirect:listarMisOfertas/"+u.getUsuario()+".html";
 		}
 		ofertaDao.addOferta(oferta);
 		return "redirect:listar.html";
+
+
+		
 	}
 	
 	@RequestMapping(value="/update/{usuario}/{id_oferta}", method = RequestMethod.GET)
