@@ -50,7 +50,7 @@
 			  <thead class="cabecera">
 		
 		<tr>
-	
+
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_colaboracion</th>
 		</c:if>

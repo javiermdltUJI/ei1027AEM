@@ -4,7 +4,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
-
 <t:paginabasica title="EI1027">
 <jsp:body>
 <html> 

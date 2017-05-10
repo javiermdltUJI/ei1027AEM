@@ -27,6 +27,7 @@
 			<th>id_peticion</th>
 			<th></th>
 			<th></th>
+			
 		</c:if>
 		</tr>
 		</thead>

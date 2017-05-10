@@ -55,7 +55,6 @@
 	<h1>Lista de Peticiones</h1>
 	<table class="table">
 		<thead class="cabecera">
-	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_peticion</th>

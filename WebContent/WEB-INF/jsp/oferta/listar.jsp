@@ -54,8 +54,8 @@
 	</script>
 	<h1>Lista de Ofertas</h1>
 	<table class="table">
-		  <thead class="cabecera">
-	
+	<thead class="cabecera">
+
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_oferta</th>
