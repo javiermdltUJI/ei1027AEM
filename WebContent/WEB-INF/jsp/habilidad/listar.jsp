@@ -14,6 +14,8 @@
 <body>
 	<h1>Lista de Habilidades</h1>
 	<table class="table">
+		  <thead class="cabecera">
+	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
@@ -26,8 +28,12 @@
 				<c:when test='${usuario.rol=="ADMIN"}'>
 					<th>Estado</th>
 				</c:when>
+				
 		</c:choose>
+		<th></th>
+			<th></th>
 		</tr>
+		</thead>
 		<c:forEach items="${habilidades}" var="habilidad">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -40,8 +46,8 @@
 				<c:choose>	
 					<c:when test='${usuario.rol=="ADMIN"}'>
 					<td>${habilidad.estado}</td>
-						<td><a type="button" class="btn btn-default" href="update/${habilidad.idHabilidad}.html">Edita</a>
-						<td><a type="button" class="btn btn-default" href="delete/${habilidad.idHabilidad}.html">Elimina</a>		
+						<td><a type="button" class="btn btn-success" href="update/${habilidad.idHabilidad}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+						<td><a type="button" class="btn btn-danger" href="delete/${habilidad.idHabilidad}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
 					</c:when>
 				</c:choose>
 			</tr>
@@ -49,7 +55,7 @@
 	</table>
 	<c:choose>	
 		<c:when test='${usuario.rol=="ADMIN"}'>
-			<a type="button" class="btn btn-default" href="add.html">Agregar habilidad</a>
+			<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar habilidad</a>
 		</c:when>
 	</c:choose>
 </body>

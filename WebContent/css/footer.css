@@ -110,11 +110,11 @@ body {
   display: flex;
   flex-flow: column nowrap;
     background: #f5e6c5 !important;
-    
+/*     margin-bottom: 2%;
+ */  
   
-  //This justify-content is essentially unnecessary in Firefox and Chrome due to the flex: 1 1 auto on the main.  However, it's needed to push the footer down on IE11
-  justify-content: space-between
 }
+
 ul {
   list-style: none
 }
@@ -164,7 +164,7 @@ footer {
 
 #footer {
 	    width: 100%;
-    height: 100px;
+    height: 30px;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -196,7 +196,15 @@ footer {
   
 }
 
-  
+
+.cabecera{
+	background: #fc843d;
+-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 6px;
+    color: #fff;
+ 
+
 }
 .footer-list-header {
   padding: 10px 0 5px 0;

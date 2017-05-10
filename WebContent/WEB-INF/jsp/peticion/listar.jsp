@@ -54,6 +54,8 @@
 	</script>
 	<h1>Lista de Peticiones</h1>
 	<table class="table">
+		<thead class="cabecera">
+	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_peticion</th>
@@ -64,8 +66,13 @@
 			<th>Usuario</th>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			
 		</c:if>
 		</tr>
+		</thead>
 		<c:forEach items="${peticiones}" var="peticion">
 			<jsp:useBean id="now" class="java.util.Date"/>	
 			<c:if test='${now.time < peticion.fechaFin.time}'>
@@ -85,19 +92,19 @@
 						<td><a type="button" class="elimina btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
 					</c:if> -->
 					<c:if test='${usuario.rol=="ADMIN"}'>
-						<td><a type="button" class="btn btn-default" href="./update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-						<td><a type="button" class="elimina btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
-						<td><a type="button" class="btn btn-default" href="../colaboracion/add.html">Crear colaboracion</a></td>
+						<td><a type="button" class="btn btn-success" href="./update/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+						<td><a type="button" class="elimina btn btn-danger" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
+						<td><a type="button" class="btn btn-primary" href="../colaboracion/add.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboracion</a></td>
 					</c:if>
 					<c:if test='${accesible == false}'>
-						<td><a type="button" class="btn btn-default" href="../colaboracion/addPeticion/${peticion.idPeticion}.html">Crear colaboracion</a></td>
+						<td><a type="button" class="btn btn-primary" href="../colaboracion/addPeticion/${peticion.idPeticion}.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboracion</a></td>
 					</c:if>
 				</tr>
 			</c:if>
 		</c:forEach>
 	</table>
 	<c:if test='${accesible == true}'>
-		<a type="button" class="btn btn-default" href="add.html">Agregar petición</a>
+		<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar petición</a>
 	</c:if>
 	<!--  
 	<c:if test='${accesible == false}'>

@@ -12,6 +12,8 @@
 <body>
 	<h1>Lista de Colaboraciones</h1>
 	<table class="table">
+		  <thead class="cabecera">
+	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_colaboracion</th>
@@ -23,8 +25,11 @@
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_oferta</th>
 			<th>id_peticion</th>
+			<th></th>
+			<th></th>
 		</c:if>
 		</tr>
+		</thead>
 		<c:forEach items="${colaboraciones}" var="colaboracion">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -38,12 +43,13 @@
 				<td>${colaboracion.idOferta}</td>
 				<td>${colaboracion.idPeticion}</td>
 			</c:if>
-				<td><a type="button" class="btn btn-default"  href="update/${colaboracion.idColaboracion}.html">Edita</a>
-				<td><a type="button" class="btn btn-default"  href="delete/${colaboracion.idColaboracion}.html">Elimina</a>		
+				<td><a type="button" class="btn btn-success"  href="update/${colaboracion.idColaboracion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+				<td><a type="button" class="btn btn-danger"  href="delete/${colaboracion.idColaboracion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+				</a>		
 			</tr>
 		</c:forEach>
 	</table>
-	<a type="button" class="btn btn-default" href="add.html">Agregar colaboración</a>
+	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar colaboración</a>
 </body>
 </html>
 </jsp:body>

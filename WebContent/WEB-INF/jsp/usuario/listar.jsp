@@ -9,16 +9,10 @@
 
 	<h1>Lista de Usuarios</h1>
 	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-
-<!-- Latest compiled and minified Locales -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+	<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet">
 	
-	
-	<table id="table" class="table table-bordered table-sm m-0">
 	<!-- 	<script>
 	$('#table').bootstrapTable({
 	    columns: [{
@@ -48,20 +42,21 @@
 	
 /* 	$('#table').bootstrapTable('removeByUniqueId',0);
  */	</script> -->
-<%-- 		<table id="table" class="table table-hover  table-sm">
- --%>	
-	  <%-- <thead >
+	<table id="table" class="table table-hover  table-sm">
+	  <thead class="cabecera">
 		<tr >
-				<th>Nombre usuario</th>
-			<th>Contrasenya</th>
+			<th>Nombre usuario</th>
 			<th>Correo</th>
 			<th>Nombre</th>
 			<th>Dni</th>
 			<th>Contador de bloqueo</th>
 			<th>Bloqueado</th>
 			<th>Rol</th>
+			<th></th>
+			<th></th>
+			
 		</tr>
-		</thead> --%>
+		</thead>
 		<tbody >
 		
 		<c:forEach items="${usuarios}" var="usuario">
@@ -74,13 +69,13 @@
 				<td>${usuario.contadorBloqueo}</td>
 				<td>${usuario.bloqueado}</td>
 				<td>${usuario.rol}</td>
-				<td><a type="button" class="btn btn-default" href="update/${usuario.usuario}.html">Edita</a>
-				<td><a style="background=transparent" type="button" class="btn btn-danger" href="delete/${usuario.usuario}.html">Elimina</a>		
+				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
+				<td><a style="background=transparent" type="button" class="btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
-	<a type="button" class="btn btn-default" href="add.html">Agregar usuario</a>
+	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar usuario</a>
 	
 	
 	

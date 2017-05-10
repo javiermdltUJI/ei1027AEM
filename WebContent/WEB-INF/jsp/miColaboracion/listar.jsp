@@ -11,7 +11,11 @@
 </head>
 <body>
 	<h1>Lista de Colaboraciones</h1>
+	
+	<h4>Ofertas</h4>
 	<table class="table">
+		  <thead class="cabecera">
+	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_colaboracion</th>
@@ -23,9 +27,7 @@
 			<th>Descripción</th>
 			<th>Usuario</th>
 		</tr>
-		<tr>
-			<td><h4>Ofertas</h4></td>
-		</tr>
+		</thead>
 		<c:forEach items="${colaboracionesOferta}" var="colaboracionesOferta">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -37,14 +39,31 @@
 				<td>${colaboracionesOferta.valoracion}</td>
 				<td>${colaboracionesOferta.descripcion}</td>
 				<td>${colaboracionesOferta.usuario}</td>
-				<td></td>
-				<td><a type="button" class="btn btn-default"  href="../colaboracion/cancelar/${colaboracionesOferta.usuario}/${colaboracionesOferta.idColaboracion}.html">Cancelar</a>		
+				<td><a type="button" class="btn btn-danger"  href="../colaboracion/cancelar/${colaboracionesOferta.usuario}/${colaboracionesOferta.idColaboracion}.html">Cancelar</a></td>		
 			</tr>
 		</c:forEach>
+		</table>
+		
+		
+		<h4>Peticiones</h4>
+		<table class="table">
+			  <thead class="cabecera">
 		
 		<tr>
-			<td><h4>Peticiones</h4></td>
+	
+		<c:if test='${usuario.rol=="ADMIN"}'>
+			<th>id_colaboracion</th>
+		</c:if>
+			<th>Fecha inicio</th>
+			<th>Fecha fin</th>
+			<th>Horas totales</th>
+			<th>Valoracion</th>
+			<th>Descripción</th>
+			<th>Usuario</th>
+			<th></th>
+			<th></th>
 		</tr>
+		</thead>
 		<c:forEach items="${colaboracionesPeticion}" var="colaboracionesPeticion">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -59,20 +78,19 @@
 				<jsp:useBean id="now" class="java.util.Date"/>
 				<c:choose>
 					<c:when test='${(colaboracionesPeticion.valoracion==0 or colaboracionesPeticion.horasTotales==0) and now.time >= colaboracionesPeticion.fechaFin.time}'>
-						<td><a type="button" class="btn btn-default"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a></td>
+						<td><a type="button" class="btn btn-success"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a></td>
 					</c:when>
 					<c:otherwise>
-						<td></td>
 					</c:otherwise>
 				</c:choose>
 				<c:if test='${now.time < colaboracionesPeticion.fechaFin.time}'>
-					<td><a type="button" class="btn btn-default"  href="../cancelar/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a></td>	
+					<td><a type="button" class="btn btn-danger"  href="../cancelar/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a></td>	
 				</c:if>
 			</tr>
 		</c:forEach>
 		
 	</table>
-	<a type="button" class="btn btn-default" href="add.html">Agregar colaboración</a>
+	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar colaboración</a>
 </body>
 </html>
 </jsp:body>
