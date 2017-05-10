@@ -1,6 +1,8 @@
 <%@ tag description="Estructura d'una pàgina normal" pageEncoding="UTF-8"%>
 <%@ attribute name="title" required="false"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <body>
@@ -69,7 +71,7 @@
 	
 		    <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		    	<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='#' class="generic-anchor footer-list-anchor">Politica de cookies</a>
+		    	<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='./politicas.html' class="generic-anchor footer-list-anchor">Politica de cookies</a>
 		  	
 		 	</span>
 		    
@@ -94,8 +96,7 @@
 		</div>
 		
 		<script>
-	console.log($("#body").height());
-	console.log($("#footer").height());
+
 
 		if($("#body").height()<=500){
 			 	document.getElementById("footer").style.position = "absolute";
@@ -111,6 +112,39 @@
 		}
 	
 	</script>
+	
+	
+	
+	<!--//BLOQUE COOKIES-->
+	<c:if test='${ok!="1"}'>
+		<div id="barraaceptacion" style="display: block;">
+		    <div class="inner">
+		        Solicitamos su permiso para obtener datos estadísticos de su navegación en esta web, en cumplimiento del Real 
+		        Decreto-ley 13/2012. Si continúa navegando consideramos que acepta el uso de cookies.
+		        <a href="javascript:void(0);" class="ok" onclick="PonerCookie();"><b>OK</b></a> | 
+		        <a href="${pageContext.request.contextPath}/principal/politicas.html" target="_blank" class="info">Más información</a>
+		    </div>
+		</div>
+	</c:if>
+	<script>
+	function PonerCookie(){
+	    document.getElementById("barraaceptacion").style.display="none";
+	    $.ajax({type: "POST",
+            url: "${pageContext.request.contextPath}/principal/ok.html",
+            success:function(result){
+            },
+           error:function(result)
+            {
+           }
+       });
+	    
+	}
+	
+	</script>
+	<!--//FIN BLOQUE COOKIES-->
+	
+	
+	
 </div>
 </body>
 </html>

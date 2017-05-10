@@ -12,6 +12,10 @@
 	
 	Somos un grupo de estudiantes de informática que pretende mejorar la comunicación entre estudiantes con el objetivo de que unos aprendan de otros y colaboren activamente.
 	
+	
+	
+		
+	
  </body>
  </html>
 </jsp:body>
