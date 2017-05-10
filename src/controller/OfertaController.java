@@ -177,7 +177,7 @@ public class OfertaController {
 		if (bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "oferta/add";
-		} 
+		}
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());

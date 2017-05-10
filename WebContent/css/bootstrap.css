@@ -2863,6 +2863,9 @@ select[multiple].form-group-lg .form-control {
 .has-warning .form-control-feedback {
   color: #8a6d3b;
 }
+.error{
+	color:red
+}
 .has-error .help-block,
 .has-error .control-label,
 .has-error .radio,

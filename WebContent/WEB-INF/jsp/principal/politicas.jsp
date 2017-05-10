@@ -35,7 +35,7 @@
 </p>
 <h2>Aceptación de la política de cookies</h2>
 
-<p class="text-justify">Pulsando el botón Entendido se asume que usted acepta el uso de cookies.
+<p class="text-justify">Pulsando el botón OK se asume que usted acepta el uso de cookies.
 </p>
 </body>
 </html>
