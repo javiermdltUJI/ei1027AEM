@@ -53,7 +53,11 @@ nav{
  */	margin-bottom:1%;
 }
 
-
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #e64a00;
+    color: #fff;
+}
 
 body {
 /*     font: 11px "Open Sans", sans-serif;
