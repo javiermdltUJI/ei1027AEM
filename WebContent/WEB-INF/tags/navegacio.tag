@@ -11,17 +11,46 @@
 				<li><a style="color: #fff" href="${pageContext.request.contextPath}">Inicio</a></li>
 				<c:choose>
 				<c:when test='${usuario.rol=="ADMIN"}'>
-					<li><a style="color: #fff" href="${pageContext.request.contextPath}/usuario/listar.html">Usuarios</a></li>
-					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listar.html">Habilidades</a></li>
-					<li><a style="color: #fff" href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li>
-					<li><a style="color: #fff" href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li>
-					<li><a style="color: #fff" href="${pageContext.request.contextPath}/colaboracion/listar.html">Colaboraciones</a></li>
+					<li class="dropdown">
+						<a style="color: #fff" id="DropDownUsuarios" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="DropDownUsuarios">
+							<li><a style="color: black" href="${pageContext.request.contextPath}/usuario/add.html">Crear Usuario</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/usuario/listar.html">Ver Usuarios</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a style="color: #fff" id="DropDownHabilidades" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Habilidades <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="DropDownHabilidades">
+							<li><a style="color: black" href="${pageContext.request.contextPath}/habilidad/add.html">Crear Habilidad</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/habilidad/listar.html">Ver Habilidades</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a style="color: #fff" id="DropDownOfertas" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ofertas <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="DropDownOfetas">
+							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Oferta</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/listar.html">Ver Ofertas</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a style="color: #fff" id="DropDownPeticiones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Peticiones <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="DropDownPeticiones">
+							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Petición</a></li>
+							<li><a style="color: black"  href="${pageContext.request.contextPath}/peticion/listar.html">Ver Peticiones</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a style="color: #fff" id="DropDownColaboraciones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Colaboraciones <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="DropDownColaboraciones">
+							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Colaboración</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/listar.html">Ver Colaboracion</a></li>
+						</ul>
+					</li>
 				</c:when>
 				<c:when test='${usuario.rol=="ESTUDIANTE"}'>
 					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li>
 					
 					<li class="dropdown">
-					
           				<a style="color: #fff" id="DropDownOfertas" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ofertas <span class="caret"></span></a>
           				<ul class="dropdown-menu" aria-labelledby="DropDownOfertas">
  			            	<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Oferta</a></li>
