@@ -24,44 +24,37 @@ public class UsuarioValidator implements Validator{
 		
 		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 		Matcher matcher = pattern.matcher(usuario.getCorreo());
-		
-		//Usuario
-		if(usuario.getUsuario().trim().equals(""))
-			errors.rejectValue("usuario", "obligatorio", "Valor requerido");
-		
+				
 		
 		//Contrase√±a
-		if(usuario.getContrasenya().trim().equals(""))
-			errors.rejectValue("contrasenya", "obligatorio", "Valor requerido");
-		
+
 		if(usuario.getContrasenya().length()<7)
-			errors.rejectValue("contrasenya", "obligatorio", "La contraseÒa debe contener como mÌnimo 8 dÌgitos");
+			errors.rejectValue("contrasenya", "obligatorio", "		La contraseÔøΩa debe contener como mÔøΩnimo 8 dÔøΩgitos");
 		
 		if(usuario.getContrasenya().length()>50)
-			errors.rejectValue("contrasenya", "obligatorio", "La contraseÒa±a debe contener como m·ximo 50 dÌgitos");
+			errors.rejectValue("contrasenya", "obligatorio", "		La contraseÔøΩaÔøΩa debe contener como mÔøΩximo 50 dÔøΩgitos");
 		
 		
 		//Correo
-		if(usuario.getCorreo().trim().equals(""))
-			errors.rejectValue("correo", "obligatorio", "Valor requerido");
-		
 		if(!matcher.matches())
-			errors.rejectValue("correo","obligatorio", "Formato incorrecto, ej:algo@algo.algo");
+			errors.rejectValue("correo","obligatorio", "		Formato incorrecto, ej:algo@algo.algo");
 		
 		
 		//Nombre
-		if(usuario.getNombre().trim().equals(""))
-			errors.rejectValue("nombre", "obligatorio", "Valor requerido");
-		
 		if(usuario.getNombre().length() > 50)
-			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 car·cteres");
+			errors.rejectValue("nombre", "obligatorio", "		El nombre no puede superar los 50 car√°cteres");
 		
 		
 		//DNI
-		if(usuario.getDni().trim().equals(""))
-			errors.rejectValue("dni", "obligatorio", "Valor requerido");
-		
 		if(usuario.getDni().length() != 9)
-			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dÌgitos");
+			errors.rejectValue("dni", "obligatorio", "		El DNI contiene 9 d√≠gitos");
+	
+		//contadorBloqueo
+		if(usuario.getContadorBloqueo() < 0 || usuario.getContadorBloqueo() >3)
+			errors.rejectValue("contadorBloqueo", "obligatorio", "		El contador debe ser un n√∫mero entre 0 y 3");
+		
+		//bloqueado
+		if(usuario.getBloqueado() < 0 || usuario.getBloqueado() > 1)
+			errors.rejectValue("bloqueado", "obligatorio", "		El usuario bloqueado solo puede ser 0 √≥ 1");
 	}
 }

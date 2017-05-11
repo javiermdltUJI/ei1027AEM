@@ -21,7 +21,7 @@ public class OfertaValidator implements Validator {
 		 
 		 //fechaIni y fechaFin
 		 if(oferta.getFechaIni().before(new Date()))
-			 errors.rejectValue("fechaIni", "fechaInvalida", "		DÌa inicio Oferta no v·lido");
+			 errors.rejectValue("fechaIni", "fechaInvalida", "		D√≠a inicio Oferta no v√°lido");
 		 
 		 if(oferta.getFechaFin().before(oferta.getFechaIni()))
 			 errors.rejectValue("fechaFin", "fechaInvalida", "		Fecha fin es menor que fecha inicio");

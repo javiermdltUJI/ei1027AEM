@@ -135,12 +135,12 @@ public class PeticionController {
 
 	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
 	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult){
-		//if(bindingResult.hasErrors())
-		//	return "habilidad/add";
 		PeticionValidator peticionValidator = new PeticionValidator();
 		peticionValidator.validate(peticion, bindingResult);
-		if (bindingResult.hasErrors()) 
+		if (bindingResult.hasErrors()) {
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "peticion/addConHabilidad";
+		}
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			peticion.setUsuario(u.getUsuario());
@@ -210,7 +210,15 @@ public class PeticionController {
 	}
 	
 	@RequestMapping(value="/update/{usuario}/{id_peticion}", method = RequestMethod.POST)
-	public String processUpdateSubmit2(HttpSession session, Model model, @PathVariable int id_peticion, @ModelAttribute("peticion") Peticion peticion){
+	public String processUpdateSubmit2(HttpSession session, @PathVariable int id_peticion, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult, Model model){
+		PeticionValidator peticionValidator = new PeticionValidator();
+		peticionValidator.validate(peticion, bindingResult);
+		if (bindingResult.hasErrors()){
+			model.addAttribute("elegida", peticion.getIdHabilidad());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "peticion/update";
+		} 
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			peticion.setUsuario(u.getUsuario());

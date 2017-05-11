@@ -96,8 +96,12 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/update/{nom_usuario}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable String nom_usuario, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
-		if(bindingResult.hasErrors())
+		UsuarioValidator usuarioValidator = new UsuarioValidator();
+		usuarioValidator.validate(usuario, bindingResult);
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "usuario/update";
+		}
 		usuarioDao.updateUsuario(usuario);
 		return "redirect:../listar.html";
 	}

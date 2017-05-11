@@ -55,7 +55,14 @@
 				<form:label path="idHabilidad">Habilidad</form:label>
 				<select name="idHabilidad">
 					<c:forEach items="${habilidades}" var="habilidad">
-						<option value="${habilidad.idHabilidad}"> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>		
+						<c:choose>
+							<c:when test="${elegida==habilidad.idHabilidad}">
+								<option value="${habilidad.idHabilidad}" selected> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${habilidad.idHabilidad}"> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>
+							</c:otherwise>
+						</c:choose>				
 					</c:forEach>
 				</select>
 				

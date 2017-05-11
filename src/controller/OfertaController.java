@@ -213,11 +213,15 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/update/{usuario}/{id_oferta}", method = RequestMethod.POST)
-	public String processUpdateSubmit2(HttpSession session, @PathVariable int id_oferta, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
-	//	if(bindingResult.hasErrors())
-		//	return "habilidad/update";
-		//habilidad.setIdHabilidad(id_habilidad);
-		//System.out.println(oferta.toString());
+	public String processUpdateSubmit2(HttpSession session, @PathVariable int id_oferta, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult, Model model){
+		OfertaValidator ofertaValidator = new OfertaValidator();
+		ofertaValidator.validate(oferta, bindingResult);
+		if (bindingResult.hasErrors()){
+			model.addAttribute("elegida", oferta.getIdHabilidad());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "oferta/update";
+		}		
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());
