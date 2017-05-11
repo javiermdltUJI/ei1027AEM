@@ -13,20 +13,20 @@
 	<form:form method="post" modelAttribute="habilidad">
 			<div class="form-group">
 				<form:label path="nombre">Nombre</form:label>
-				<form:input class="form-control"  path="nombre" id="nombre" placeholder="Nombre"/>
-				<form:errors path="nombre" cssClash="error"/>	
+				<form:input class="form-control"  path="nombre" id="nombre" placeholder="Nombre" required="required"/>
+				<form:errors path="nombre" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 			
 				<form:label path="tipo">Tipo</form:label>
-				<form:input class="form-control"  path="tipo" id="tipo" placeholder="Tipo"/>
-				<form:errors path="tipo" cssClash="error"/>	
+				<form:input class="form-control"  path="tipo" id="tipo" placeholder="Tipo" required="required"/>
+				<form:errors path="tipo" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 			
 				<form:label path="descripcion">Descripción</form:label>
-				<form:input class="form-control"  path="descripcion" id="descripcion" placeholder="Descripción"/>
-				<form:errors path="descripcion" cssClash="error"/>	
+				<form:input class="form-control"  path="descripcion" id="descripcion" placeholder="Descripción" required="required"/>
+				<form:errors path="descripcion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="nivel">Nivel</form:label>

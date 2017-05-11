@@ -26,25 +26,26 @@
         <div class="form-group">
         <form:input type="hidden" name="idColaboracion" path="idColaboracion"/>
                       
-      </div>
-            <div class="form-group">
-        <form:label path="horasTotales">Horas totales</form:label>        
-         <form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales"/>
-      </div>
-      <div class="form-group">
-        <form:label path="valoracion">Valoracion</form:label>
+      	</div>
+      	<div class="form-group">
+    	    <form:label path="horasTotales">Horas totales</form:label>        
+        	<form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
+			<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
+      	</div>
+      	<div class="form-group">
+        	<form:label path="valoracion">Valoracion</form:label>
         <%--  <form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion"/>
         --%>
-        <form:radiobutton path="valoracion" value="1"/>1
-        <form:radiobutton path="valoracion" value="2"/>2
-        <form:radiobutton path="valoracion" value="3"/>3
-        <form:radiobutton path="valoracion" value="4"/>4
-        <form:radiobutton path="valoracion" value="5"/>5
-      </div>
-      <div class="form-group">
-        <input class="btn btn-secundary" type="submit" value="Valorar colaboración" />
-      </div>        
-  </form:form>
+        		<form:radiobutton path="valoracion" value="1"/>1
+        		<form:radiobutton path="valoracion" value="2"/>2
+		        <form:radiobutton path="valoracion" value="3"/>3
+		        <form:radiobutton path="valoracion" value="4"/>4
+		        <form:radiobutton path="valoracion" value="5"/>5
+      	</div>
+      	<div class="form-group">
+        	<input class="btn btn-secundary" type="submit" value="Valorar colaboración" />
+      	</div>        
+  	</form:form>
 </body>
 </html>
 </jsp:body>

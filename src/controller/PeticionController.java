@@ -194,12 +194,13 @@ public class PeticionController {
 	}
 	
 	@RequestMapping(value="/update/{usuario}/{id_peticion}", method = RequestMethod.GET)
-	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, @PathVariable String usuario){
+	public String editPeticion(HttpSession session, Model model, @PathVariable int id_peticion, @PathVariable String usuario, @ModelAttribute("peticion") Peticion peticion){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "peticion/update/"+usuario+"/"+id_peticion+".html");
 		if (u==null)
 			return "redirect:../login.html";
 		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
+			model.addAttribute("elegida", peticion.getIdHabilidad());
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));
 			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
 			return "peticion/update";

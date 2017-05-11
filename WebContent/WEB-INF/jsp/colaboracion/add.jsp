@@ -25,33 +25,33 @@
 	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
 		   <div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
-				<form:input class="form-control" path="fechaIni" id="fechaIni"/>
-				<form:errors path="fechaIni" cssClash="error"/>	
+				<form:input class="form-control" path="fechaIni" id="fechaIni" required="required"/>
+				<form:errors path="fechaIni" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
-				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
-				<form:errors path="fechaFin" cssClash="error"/>	
+				<form:input class="form-control" path="fechaFin" id="fechaFin" required="required"/>
+				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="horasTotales">Horas totales</form:label>
-				<form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales"/>
-				<form:errors path="horasTotales" cssClash="error"/>	
+				<form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
+				<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="valoracion">Valoracion</form:label>
-				<form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion"/>
-				<form:errors path="valoracion" cssClash="error"/>	
+				<form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion" required="required"/>
+				<form:errors path="valoracion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="idOferta">id_oferta</form:label>
-				<form:input  class="form-control" path="idOferta" id="idOferta" placeholder="1"/>
-				<form:errors path="idOferta" cssClash="error"/>	
+				<form:input  class="form-control" path="idOferta" id="idOferta" placeholder="1" required="required"/>
+				<form:errors path="idOferta" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="idPeticion">id_peticion</form:label>
-				<form:input class="form-control" path="idPeticion" id="idPeticion" placeholder="1"/>
-				<form:errors path="idPeticion" cssClash="error"/>	
+				<form:input class="form-control" path="idPeticion" id="idPeticion" placeholder="1" required="required"/>
+				<form:errors path="idPeticion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<input class="btn btn-secundary" type="submit" value="Agregar colaboración" />

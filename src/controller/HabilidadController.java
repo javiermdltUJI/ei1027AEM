@@ -94,9 +94,12 @@ public class HabilidadController {
 	
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable int id_habilidad, @ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){
-	//	if(bindingResult.hasErrors())
-		//	return "habilidad/update";
-		//habilidad.setIdHabilidad(id_habilidad);
+	HabilidadValidator habilidadValidator = new HabilidadValidator();
+	habilidadValidator.validate(habilidad, bindingResult);
+	if(bindingResult.hasErrors()){
+		session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+		return "habilidad/upload";
+	}
 		habilidadDao.updateHabilidad(habilidad);
 		return "redirect:../listar.html";
 	}

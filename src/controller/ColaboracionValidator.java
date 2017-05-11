@@ -18,50 +18,17 @@ public class ColaboracionValidator implements Validator{
 		Colaboracion colaboracion = (Colaboracion)obj;
 		
 		//fechaIni y fechaFin
-		 if(((colaboracion.getFechaIni()) == null) || (colaboracion.getFechaFin() == null)){
-			 errors.rejectValue("fechaIni",  "obligatorio", "Valor requerido");
-			 errors.rejectValue("fechaFin", "obligatorio", "Valor requerido");
-		 }else{
-			 if(colaboracion.getFechaIni().before(new Date()))
-				 errors.rejectValue("fechaIni", "fechaInvalida", "Día inicio petición no válido");
-			 
-			 if(colaboracion.getFechaFin().before(colaboracion.getFechaIni()))
-				 errors.rejectValue("fechaFin", "fechaInvalida", "Fecha fin es menor que fecha inicio");
-			 
-			 if(colaboracion.getFechaFin().equals(colaboracion.getFechaIni()))
-				 errors.rejectValue("fechaIni", "fechaInvalida", "Fecha inicio igual que fecha fin");
-			 
-			 if(colaboracion.getFechaIni().equals(colaboracion.getFechaFin()))
-				 errors.rejectValue("fechaFin", "fechaInvalida", "Fecha fin igual que fecha inicio");
-		 }
+		if(colaboracion.getFechaIni().before(new Date()))
+			 errors.rejectValue("fechaIni", "fechaInvalida", "		Día inicio petición no válido");
 		 
-		 //horastotales
-		 String c = ""+colaboracion.getHorasTotales();
-
-		 if(c.trim().equals(""))
-			 errors.rejectValue("horasTotales", "obligatorio", "Valor requerido");
+		 if(colaboracion.getFechaFin().before(colaboracion.getFechaIni()))
+			 errors.rejectValue("fechaFin", "fechaInvalida", "		Fecha fin es menor que fecha inicio");
 		 
-		 //valoracion
-		 c = ""+colaboracion.getValoracion();
-
-		 if(c.trim().equals(""))
-			 errors.rejectValue("valoracion", "obligatorio", "Valor requerido");
-
-		 //idOferta
-		 c = ""+colaboracion.getIdOferta();
-
-		 if(c.trim().equals(""))
-			 errors.rejectValue("idOferta", "obligatorio", "Valor requerido");
-
-		 //idPeticion
-		 c = ""+colaboracion.getIdPeticion();
-
-		 if(c.trim().equals(""))
-			 errors.rejectValue("idPeticion", "obligatorio", "Valor requerido");
-		
+		 if(colaboracion.getFechaFin().equals(colaboracion.getFechaIni()))
+			 errors.rejectValue("fechaIni", "fechaInvalida", "		Fecha inicio igual que fecha fin");
+		 
+		 if(colaboracion.getFechaIni().equals(colaboracion.getFechaFin()))
+			 errors.rejectValue("fechaFin", "fechaInvalida", "		Fecha fin igual que fecha inicio");
+		 
 	}
-	
-	
-	
-
 }

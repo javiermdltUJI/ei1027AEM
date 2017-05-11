@@ -165,9 +165,12 @@ public class ColaboracionController {
 	
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable int id_colaboracion, @ModelAttribute("colaboracion") Colaboracion colaboracion, BindingResult bindingResult){
-	//	if(bindingResult.hasErrors())
-		//	return "habilidad/update";
-		//habilidad.setIdHabilidad(id_habilidad);
+		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.validate(colaboracion, bindingResult);	
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			return "habilidad/update";
+		}
 		colaboracionDao.updateColaboracion(colaboracion);
 		return "redirect:../listar.html";
 	}
