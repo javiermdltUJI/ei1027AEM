@@ -42,19 +42,19 @@ public class ColaboracionDao {
 	}
 	
 	public List<Colaboracion> getColaboraciones(){
-		return this.jdbcTemplate.query("select * from colaboracion", new ColaboracionMapper());
+		return this.jdbcTemplate.query("select * from colaboracion ORDER BY fecha_ini, fecha_fin asc", new ColaboracionMapper());
 	}
 	
 	public List<Colaboracion> getMisColaboracionesOferta(String usuario){
 		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, P.descripcion, P.usuario"
 				+ " from colaboracion AS C JOIN peticion AS P USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
-				+ " where O.usuario=?", new Object[] {usuario},new ColaboracionMapper());
+				+ " where O.usuario=? ORDER BY C.fecha_ini, C.fecha_fin asc", new Object[] {usuario},new ColaboracionMapper());
 	}
 	
 	public List<Colaboracion> getMisColaboracionesPeticion(String usuario){
 		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, O.descripcion, O.usuario"
 				+ " from colaboracion AS C JOIN oferta AS O USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
-				+ " where P.usuario=? ", new Object[] {usuario},new ColaboracionMapper());
+				+ " where P.usuario=? ORDER BY C.fecha_ini, C.fecha_fin asc", new Object[] {usuario},new ColaboracionMapper());
 	}
 	
 	public Colaboracion getColaboracion(int id_colaboracion) {

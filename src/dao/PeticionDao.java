@@ -48,17 +48,17 @@ public class PeticionDao {
 	}
 	
 	public List<Peticion> getPeticiones(){
-		return this.jdbcTemplate.query("select * from peticion", new PeticionMapper());
+		return this.jdbcTemplate.query("select * from peticion ORDER BY fecha_ini, fecha_fin asc", new PeticionMapper());
 	}
 	
 	//Devuelve las peticiones no hechas por mi
 	public List<Peticion> getPeticiones(String usuario){
-		return this.jdbcTemplate.query("select * from peticion where usuario!=?", new Object[] {usuario}, new PeticionMapper());
+		return this.jdbcTemplate.query("select * from peticion where usuario!=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new PeticionMapper());
 	}
 	
 	//Devuelve mis peticiones
 	public List<Peticion> getMisPeticiones(String usuario){
-		return this.jdbcTemplate.query("select * from peticion where usuario=?", new Object[] {usuario}, new PeticionMapper());
+		return this.jdbcTemplate.query("select * from peticion where usuario=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new PeticionMapper());
 	}
 	
 	
@@ -99,6 +99,6 @@ public class PeticionDao {
 	}
 
 	public List<Peticion> getMisPeticionesHabilidad(String usuario, int idHabilidad) {
-		return this.jdbcTemplate.query("select * from peticion where usuario=? and id_habilidad = ?", new Object[] {usuario, idHabilidad}, new PeticionMapper());
+		return this.jdbcTemplate.query("select * from peticion where usuario=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new PeticionMapper());
 	}
 }

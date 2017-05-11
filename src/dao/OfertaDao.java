@@ -41,17 +41,17 @@ public class OfertaDao {
 	}
 	
 	public List<Oferta> getOfertas(){
-		return this.jdbcTemplate.query("select * from oferta", new OfertaMapper());
+		return this.jdbcTemplate.query("select * from oferta ORDER BY fecha_ini, fecha_fin asc", new OfertaMapper());
 	}
 	
 	//Devuelve ofertas no hechas por mi
 	public Object getOfertas(String usuario) {
-		return this.jdbcTemplate.query("select * from oferta where usuario!=?",  new Object[] {usuario}, new OfertaMapper());
+		return this.jdbcTemplate.query("select * from oferta where usuario!=? ORDER BY fecha_ini, fecha_fin",  new Object[] {usuario}, new OfertaMapper());
 	}
 	
 	//Devuelve ofertas hechas por mi
 	public Object getMisOfertas(String usuario) {
-		return this.jdbcTemplate.query("select * from oferta where usuario=?", new Object[] {usuario}, new OfertaMapper());
+		return this.jdbcTemplate.query("select * from oferta where usuario=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new OfertaMapper());
 	}
 		
 	
@@ -85,7 +85,7 @@ public class OfertaDao {
 	}
 
 	public List<Oferta> getMisOfertasHabilidad(String usuario, int idHabilidad) {
-		return this.jdbcTemplate.query("select * from oferta where usuario=? and id_habilidad = ?", new Object[] {usuario, idHabilidad}, new OfertaMapper());
+		return this.jdbcTemplate.query("select * from oferta where usuario=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new OfertaMapper());
 	}
 
 }

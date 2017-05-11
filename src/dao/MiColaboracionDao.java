@@ -44,19 +44,19 @@ public class MiColaboracionDao {
 	}
 	
 	public List<MiColaboracion> getMiColaboraciones(){
-		return this.jdbcTemplate.query("select * from colaboracion", new MiColaboracionMapper());
+		return this.jdbcTemplate.query("select * from colaboracion ORDER BY fecha_ini, fecha_fin asc", new MiColaboracionMapper());
 	}
 	
 	public List<MiColaboracion> getMisColaboracionesOferta(String usuario){
 		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, P.descripcion, P.usuario, C.id_oferta, C.id_peticion"
 				+ " from colaboracion AS C JOIN peticion AS P USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
-				+ " where O.usuario=?", new Object[] {usuario},new MiColaboracionMapper());
+				+ " where O.usuario=? ORDER BY C.fecha_ini, C.fecha_fin asc", new Object[] {usuario},new MiColaboracionMapper());
 	}
 	
 	public List<MiColaboracion> getMisColaboracionesPeticion(String usuario){
 		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, O.descripcion, O.usuario,  C.id_oferta, C.id_peticion"
 				+ " from colaboracion AS C JOIN peticion AS P USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
-				+ " where P.usuario=? ", new Object[] {usuario},new MiColaboracionMapper());
+				+ " where P.usuario=? ORDER BY C.fecha_ini, C.fecha_fin asc", new Object[] {usuario},new MiColaboracionMapper());
 	}
 	
 	public MiColaboracion getMiColaboracion(int id_colaboracion) {
