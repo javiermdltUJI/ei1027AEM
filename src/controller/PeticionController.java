@@ -74,7 +74,7 @@ public class PeticionController {
 	public String listarPeticiones(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		model.addAttribute("accesible", false);
-
+		session.removeAttribute("mis");
 		session.setAttribute("prevURL", "peticion/listarPeticiones.html");
 		if (u==null)
 			return "redirect:../login.html";
@@ -93,8 +93,8 @@ public class PeticionController {
 		session.setAttribute("prevURL", "peticion/listarPeticiones.html");
 		if (u==null)
 			return "redirect:../login.html";
-		else if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
-			model.addAttribute("accesible", true);
+		else if(u.getUsuario().equals(usuario)){
+			model.addAttribute("accesible", false);
 			model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario));
 			return "peticion/listar";			
 		}else{

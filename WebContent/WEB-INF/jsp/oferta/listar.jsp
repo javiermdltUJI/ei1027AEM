@@ -63,7 +63,7 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Descripción</th>
-		<c:if test='${usuario.usuario==session.getAttribute("mis")}'>
+		<c:if test='${usuario.usuario!=sessionScope.mis}'>
 			<th>Usuario</th>
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
@@ -84,16 +84,16 @@
 					<td>${oferta.fechaIniString}</td>
 					<td>${oferta.fechaFinString}</td>
 					<td>${oferta.descripcion}</td>
-				<c:if test='${usuario.usuario==session.getAttribute("mis")}'>
+				<c:if test='${usuario.usuario != sessionScope.mis}'>
 					<td>${oferta.usuario}</td>
 				</c:if>
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td>${oferta.idHabilidad}</td>
 				</c:if>
-				<!-- 	<c:if test='${accesible == true}'>
-						<td><a type="button" class="btn btn-default" href="../update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
-						<td><a type="button" class="elimina btn btn-default" href="../delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
-					</c:if>  -->
+					<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
+						<td><a type="button" class="btn btn-success" href="../update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a>
+						<td><a type="button" class="elimina btn btn-danger" href="../delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a>		
+					</c:if>  
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-success" href="./update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
 						<td><a type="button" class="elimina btn btn-danger" href="./delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
@@ -106,14 +106,14 @@
 			</c:if>
 		</c:forEach>
 	</table>
-	<c:if test='${accesible == true}'>
+	<c:if test='${usuario.rol=="ADMIN"}'>
 	
 		<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar oferta</a>
 	</c:if>
-	<!-- 
-	<c:if test='${accesible == false}'>
-		<a type="button" class="btn btn-default" href="add.html">Agregar oferta</a>			
-	</c:if> -->
+	 
+	<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
+		<a type="button" class="btn btn-default" href="../add.html">Agregar oferta</a>			
+	</c:if>
 					
 
 </jsp:body>

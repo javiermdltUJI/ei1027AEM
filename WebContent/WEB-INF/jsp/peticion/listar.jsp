@@ -62,7 +62,7 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Descripción</th>
-		<c:if test='${usuario.usuario==session.getAttribute("mis")}'>
+		<c:if test='${usuario.usuario != sessionScope.mis}'>
 			<th>Usuario</th>
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
@@ -84,16 +84,16 @@
 					<td>${peticion.fechaIniString}</td>
 					<td>${peticion.fechaFinString}</td>
 					<td>${peticion.descripcion}</td>
-				<c:if test='${usuario.usuario==session.getAttribute("mis")}'>
-					<td>${oferta.usuario}</td>
+				<c:if test='${usuario.usuario!=sessionScope.mis}'>
+					<td>${peticion.usuario}</td>
 				</c:if>
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td>${peticion.idHabilidad}</td>
 				</c:if>
-				<!-- 	<c:if test='${accesible == true}'>
-						<td><a type="button" class="btn btn-default" href="../update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
-						<td><a type="button" class="elimina btn btn-default" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
-					</c:if> -->
+				<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
+						<td><a type="button" class="btn btn-success" href="../update/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a>
+						<td><a type="button" class="elimina btn btn-danger" href="../delete/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a>		
+					</c:if>
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-success" href="./update/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
 						<td><a type="button" class="elimina btn btn-danger" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
@@ -106,13 +106,13 @@
 			</c:if>
 		</c:forEach>
 	</table>
-	<c:if test='${accesible == true}'>
+	<c:if test='${usuario.rol=="ADMIN"}'>
 		<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar petición</a>
 	</c:if>
-	<!--  
-	<c:if test='${accesible == false}'>
+	  
+	<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
 		<a type="button" class="btn btn-default" href="../add.html">Agregar petición</a>
-	</c:if>  -->
+	</c:if>  
 
 </jsp:body>
 </t:paginabasica>

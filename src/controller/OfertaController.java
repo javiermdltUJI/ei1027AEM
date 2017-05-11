@@ -68,6 +68,7 @@ public class OfertaController {
 		model.addAttribute("accesible", true);
 		model.addAttribute("ofertas", ofertaDao.getOfertas());
 		session.setAttribute("prevURL", "oferta/listar.html" );
+		session.removeAttribute("mis");
 		return "oferta/listar";
 	}
 	
@@ -76,6 +77,7 @@ public class OfertaController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		model.addAttribute("accesible", false);
 		session.setAttribute("prevURL", "oferta/listarOfertas.html" );
+		session.removeAttribute("mis");
 		if (u==null)
 			return "redirect:../login.html";
 		else{
@@ -93,10 +95,10 @@ public class OfertaController {
 		session.setAttribute("prevURL", "oferta/listarMisOfertas/"+usuario+".html" );
 		if (u==null)
 			return "redirect:../login.html";
-		else if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
-			model.addAttribute("accesible", true);
+		else if(u.getUsuario().equals(usuario)){
+			model.addAttribute("accesible", false);
 			model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario));
-			return "oferta/listar";
+			return "oferta/listar";		
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";

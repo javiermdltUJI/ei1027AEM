@@ -39,6 +39,7 @@ public class MiColaboracionController {
 	public String listaColaboracion(HttpSession session, Model model, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "miColaboracion/listar/"+usuario+".html");
+		session.setAttribute("mis", u.getUsuario());
 
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
 			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(usuario));

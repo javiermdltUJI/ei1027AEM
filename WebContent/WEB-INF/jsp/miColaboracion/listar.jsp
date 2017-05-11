@@ -87,10 +87,9 @@
 					<td><a type="button" class="btn btn-danger"  href="../cancelar/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a></td>	
 				</c:if>
 			</tr>
-		</c:forEach>
-		
+		</c:forEach>		
 	</table>
-	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar colaboración</a>
+	<c:remove var="mis" scope="session"/>
 </body>
 </html>
 </jsp:body>
