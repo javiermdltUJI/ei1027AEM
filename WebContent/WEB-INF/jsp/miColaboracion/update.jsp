@@ -43,7 +43,7 @@
 		        <form:radiobutton path="valoracion" value="5"/>5
       	</div>
       	<div class="form-group">
-        	<input class="btn btn-secundary" type="submit" value="Valorar colaboración" />
+        	<input class="btn btn-primary" type="submit" value="Valorar colaboración" />
       	</div>        
   	</form:form>
 </body>
