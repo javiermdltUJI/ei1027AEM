@@ -268,11 +268,14 @@ public class OfertaController {
 			return "redirect:../login.html";
 		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			Oferta oferta2 = ofertaDao.getOferta(id_oferta);
-			final Calendar cal = Calendar.getInstance();
-		    cal.add(Calendar.DATE, -1);
-			oferta2.setFechaFin( cal.getTime());
-			ofertaDao.updateOferta(oferta2);
-			
+			if(colaboracionDao.getNumColaboracionesPorOferta(id_oferta) > 0){
+				Calendar cal = Calendar.getInstance();
+			    cal.add(Calendar.DATE, -1);
+				oferta2.setFechaFin( cal.getTime());
+				ofertaDao.updateOferta(oferta2);
+			}else{
+				ofertaDao.deleteOferta(id_oferta);
+			}
 			if (u.getRol().name().equals("ADMIN")) {
 				session.setAttribute("prevURL", "oferta/listar.html" );
 				return "redirect:../../listar.html";

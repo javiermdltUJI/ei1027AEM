@@ -90,4 +90,17 @@ public class ColaboracionDao {
 		int horasPeticion = this.jdbcTemplate.queryForObject("select COALESCE(SUM(horas_totales), 0) from colaboracion join peticion using (id_peticion) where usuario = ?", new Object[] {usuario}, Integer.class);
 		return horasOferta-horasPeticion;
 	}		
+	
+	//Para obtener el número de peticiones que existen para cualquier colaboracion
+	public int getNumColaboracionesPorPeticion(int id_peticion){
+		int numColaboraciones = this.jdbcTemplate.queryForObject("select count(*) from colaboracion where id_peticion = ?", new Object[]{id_peticion}, Integer.class);
+		return numColaboraciones;
+	}
+	
+	//Para obtener el número de ofertas que existen para cualquier colaboracion
+	public int getNumColaboracionesPorOferta(int id_oferta){
+		int numColaboraciones = this.jdbcTemplate.queryForObject("select count(*) from colaboracion where id_oferta = ?", new Object[]{id_oferta}, Integer.class); 
+		return numColaboraciones;
+	}
+	
 }

@@ -187,7 +187,7 @@ public class PeticionController {
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			peticion.setUsuario(u.getUsuario());
 			peticionDao.addPeticion(peticion);
-			return "redirect:listarMisOfertas/"+u.getUsuario()+".html";
+			return "redirect:listarMisPeticiones/"+u.getUsuario()+".html";
 		}
 		peticionDao.addPeticion(peticion);
 		return "redirect:listar.html";
@@ -265,11 +265,14 @@ public class PeticionController {
 			return "redirect:../login.html";
 		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			Peticion peticion2 = peticionDao.getPeticion(id_peticion);
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, -1);
-			peticion2.setFechaFin(cal.getTime());
-			peticionDao.updatePeticion(peticion2);
-			
+			if(colaboracionDao.getNumColaboracionesPorPeticion(id_peticion) > 0){
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.DATE, -1);
+				peticion2.setFechaFin(cal.getTime());
+				peticionDao.updatePeticion(peticion2);
+			}else{
+				peticionDao.deletePeticion(id_peticion);
+			}
 			if (u.getRol().name().equals("ADMIN")){
 				session.setAttribute("prevURL", "peticion/listar.html");
 				return "redirect:../../listar.html";
