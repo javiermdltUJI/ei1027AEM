@@ -66,6 +66,12 @@
 			<th>Descripción</th>
 		<c:if test='${usuario.usuario!=sessionScope.mis}'>
 			<th>Usuario</th>
+			<th></th>
+		</c:if>
+		<c:if test='${usuario.usuario==sessionScope.mis}'>
+			<th></th>
+			<th></th>
+			<th></th>
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
@@ -113,7 +119,7 @@
 	</c:if>
 	 
 	<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
-		<a type="button" class="btn btn-default" href="../add.html">Agregar oferta</a>			
+		<a type="button" class="btn btn-primary" href="../add.html">Agregar oferta</a>			
 	</c:if>
 					
 

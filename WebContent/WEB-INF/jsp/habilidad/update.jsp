@@ -48,7 +48,7 @@
 							</form:select>
 			</div>
 			<div class="form-group">
-				<input class="btn btn-secundary" type="submit" value="Modificar habilidad" />
+				<input class="btn btn-primary" type="submit" value="Modificar habilidad" />
 			</div>				
 	</form:form>
 </body>

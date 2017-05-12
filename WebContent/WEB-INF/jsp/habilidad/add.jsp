@@ -47,7 +47,7 @@
 			</div>
 			<div class="form-group">
 	
-				<input class="btn btn-primary"  type="submit" value="Agregar habilidad" />
+				<input class="btn btn-primary"  type="submit" value="Añadir habilidad" />
 				
 				
 			</div>				

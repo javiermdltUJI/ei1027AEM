@@ -48,7 +48,7 @@
 				</div>
 			</c:if>
 			<div class="form-group">
-				<input class="btn btn-secundary" type="submit" value="Seleccionar peticion" />
+				<input class="btn btn-primary" type="submit" value="Seleccionar peticion" />
 			</div>				
 	</form:form>
 </body>

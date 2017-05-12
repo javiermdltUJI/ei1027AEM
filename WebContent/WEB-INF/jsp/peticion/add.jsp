@@ -72,7 +72,7 @@
 				 -->
 			</div>
 			<div class="form-group">
-				<input class="btn btn-primary"  type="submit" value="Agregar petición" />
+				<input class="btn btn-primary"  type="submit" value="Añadir petición" />
 				
 			</div>				
 	</form:form>

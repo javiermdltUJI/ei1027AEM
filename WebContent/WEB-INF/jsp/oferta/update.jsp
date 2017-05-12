@@ -71,7 +71,7 @@
 			</div>
 			<div class="form-group">
 
-				<input  class="btn btn-secundary" type="submit" value="Agregar oferta" />
+				<input  class="btn btn-primary" type="submit" value="Modificar oferta" />
 			</div>				
 		
 	</form:form>
