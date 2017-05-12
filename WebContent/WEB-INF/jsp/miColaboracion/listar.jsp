@@ -26,6 +26,7 @@
 			<th>Valoracion</th>
 			<th>Descripción</th>
 			<th>Usuario</th>
+			<th></th>
 		</tr>
 		</thead>
 		<c:forEach items="${colaboracionesOferta}" var="colaboracionesOferta">
@@ -81,6 +82,7 @@
 						<td><a type="button" class="btn btn-success"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a></td>
 					</c:when>
 					<c:otherwise>
+						<td> </td>
 					</c:otherwise>
 				</c:choose>
 				<c:if test='${now.time < colaboracionesPeticion.fechaFin.time}'>

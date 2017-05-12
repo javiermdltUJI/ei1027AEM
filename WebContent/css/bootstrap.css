@@ -1083,17 +1083,17 @@ th {
           box-sizing: border-box;
 }
 html {
-  font-size: 10px;
+  font-size: 14px;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-body {
+/* body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
   background-color: #fff;
-}
+} */
 input,
 button,
 select,
@@ -1579,14 +1579,14 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 8%;
+  padding-left: 8%;
   margin-right: auto;
   margin-left: auto;
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width: 75%;
   }
 }
 @media (min-width: 992px) {
@@ -3233,6 +3233,17 @@ fieldset[disabled] .btn-info.active {
   background-color: #f0ad4e;
   border-color: #eea236;
 }
+
+.btn-loginSkill {
+  color: #fff;
+  background-color: transparent;
+     
+    border-color: #f5e6c5;
+    border-width: 1.5px;
+    margin-right: 2%;
+  
+}
+
 .btn-warning:hover,
 .btn-warning:focus,
 .btn-warning.focus,
@@ -3986,8 +3997,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .nav-tabs.nav-justified > li > a {
-    border-bottom: 1px solid #ddd;
-    border-radius: 4px 4px 0 0;
+/*     border-bottom: 1px solid #ddd;
+ */    border-radius: 4px 4px 0 0;
   }
   .nav-tabs.nav-justified > .active > a,
   .nav-tabs.nav-justified > .active > a:hover,

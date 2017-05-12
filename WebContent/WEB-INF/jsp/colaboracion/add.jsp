@@ -54,7 +54,7 @@
 				<form:errors path="idPeticion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
-				<input class="btn btn-secundary" type="submit" value="Agregar colaboración" />
+				<input class="btn btn-primary" type="submit" value="Agregar colaboración" />
 			</div>				
 	</form:form>
 </body>

@@ -35,14 +35,14 @@
 					<li class="dropdown">
 						<a style="color: #fff" id="DropDownPeticiones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Peticiones <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="DropDownPeticiones">
-							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Petición</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/peticion/add.html">Crear Petición</a></li>
 							<li><a style="color: black"  href="${pageContext.request.contextPath}/peticion/listar.html">Ver Peticiones</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a style="color: #fff" id="DropDownColaboraciones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Colaboraciones <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="DropDownColaboraciones">
-							<li><a style="color: black" href="${pageContext.request.contextPath}/oferta/add.html">Crear Colaboración</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/add.html">Crear Colaboración</a></li>
 							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/listar.html">Ver Colaboracion</a></li>
 						</ul>
 					</li>

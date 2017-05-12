@@ -26,9 +26,9 @@
 	$('.dropdown-toggle').dropdown();
 	</script>
 	
-		<header style="border:none; ">
-			<a href="${pageContext.request.contextPath}" >
-			<img alt="Skills sharing" src="${pageContext.request.contextPath}/img/titulo.png" style="width:30%">
+		<header style="border:none;">
+			<a href="${pageContext.request.contextPath}" style="margin-left:33%" >
+			<img alt="Skills sharing" src="${pageContext.request.contextPath}/img/titulo3.png" style="width:28%">
 		
 			</a>
 			<t:login />
