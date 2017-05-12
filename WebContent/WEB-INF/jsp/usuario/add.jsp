@@ -10,7 +10,7 @@
 <title>Crear un nuevo usuario</title>
 </head>
 <body>
-	<h2>Nuevo usuario</h2>
+	<h2 class="titulo">Nuevo usuario</h2>
 	<form:form method="post" modelAttribute="usuario">
 			<div class="form-group">
 				<form:label path="usuario">Usuario</form:label>

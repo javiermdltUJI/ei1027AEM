@@ -23,7 +23,7 @@
   });
 
 </script>
-	<h2>Petición</h2>
+	<h2 class="titulo">Petición</h2>
 		<form:form method="post" modelAttribute="peticion" >
 			<div class="form-group">
 				<form:input type="hidden" name="idPeticion" path="idPeticion"/>

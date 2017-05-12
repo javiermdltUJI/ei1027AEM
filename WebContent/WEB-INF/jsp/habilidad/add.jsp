@@ -9,7 +9,7 @@
 <title>Crear una nueva habilidad</title>
 </head>
 <body>
-	<h2>Nueva habilidad</h2>
+	<h2 class="titulo">Nueva habilidad</h2>
 	<form:form method="post" modelAttribute="habilidad">
 			<div class="form-group">
 				<form:label path="nombre">Nombre</form:label>

@@ -23,7 +23,7 @@
 </head>
 <body>
 
-	<h2>Nueva petición</h2>
+	<h2 class="titulo">Nueva petición</h2>
 	<form:form method="post" modelAttribute="peticion"  onsubmit="validate()">
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>

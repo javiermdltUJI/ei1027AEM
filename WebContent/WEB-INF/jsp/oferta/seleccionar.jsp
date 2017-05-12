@@ -12,7 +12,7 @@
 <title>Gestionar Ofertas</title>
 </head>
 <body>
-	<h1>Lista de Ofertas</h1>
+	<h1 class="titulo">Lista de Ofertas</h1>
 	<table class="table">
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>

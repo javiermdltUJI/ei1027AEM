@@ -66,6 +66,12 @@ h1 {
   margin: .67em 0;
   font-size: 2em;
 }
+.titulo{
+	color: #564c45;
+}
+.subtitulo{
+	margin-top:2%;
+}
 mark {
   color: #000;
   background: #ff0;
@@ -1195,6 +1201,8 @@ h6,
   line-height: 1.1;
   color: inherit;
 }
+
+
 h1 small,
 h2 small,
 h3 small,

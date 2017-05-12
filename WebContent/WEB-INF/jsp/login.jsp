@@ -10,7 +10,7 @@
 <title>Login</title>
 </head>
 <body>
-	<h2>Login usuario</h2>
+	<h2 class="titulo">Login usuario</h2>
 	<form:form method="post" modelAttribute="usuarioLogin" action="${pageContext.request.contextPath}/login.html">
 			<div class="form-group">
 				<form:label path="usuario">Usuario</form:label>

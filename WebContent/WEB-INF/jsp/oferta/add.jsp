@@ -23,7 +23,7 @@
 
 </head>
 <body>
-	<h2>Nueva oferta</h2>
+	<h2 class="titulo">Nueva oferta</h2>
 	
 	<form:form method="post" modelAttribute="oferta" onsubmit="validate()">
 	

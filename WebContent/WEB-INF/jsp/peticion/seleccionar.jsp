@@ -12,7 +12,7 @@
 <title>Gestionar Peticiones</title>
 </head>
 <body>
-	<h1>Lista de Peticiones</h1>
+	<h1 class="titulo">Lista de Peticiones</h1>
 	<table class="table">
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>

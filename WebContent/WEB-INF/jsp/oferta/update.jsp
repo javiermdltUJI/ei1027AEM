@@ -22,7 +22,7 @@
 </script>
 </head>
 <body>
-	<h2>Oferta</h2>
+	<h2 class="titulo">Oferta</h2>
 	<form:form method="post" modelAttribute="oferta">
 			<div class="form-group">
 				<form:input type="hidden" name="idOferta" path="idOferta"/>

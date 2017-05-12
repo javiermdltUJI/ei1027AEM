@@ -22,7 +22,7 @@
 </script>
 </head>
 <body>
-	<h2>Nueva colaboración</h2>
+	<h2 class="titulo">Nueva colaboración</h2>
 	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
 		   <div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>

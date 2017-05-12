@@ -53,7 +53,7 @@
 	}	
 	
 	</script>
-	<h1>Lista de Peticiones</h1>
+	<h1 class="titulo">Lista de Peticiones</h1>
 	<table class="table">
 		<thead class="cabecera">
 		<tr>

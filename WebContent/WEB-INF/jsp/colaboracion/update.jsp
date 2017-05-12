@@ -21,7 +21,7 @@
 </script>
 </head>
 <body>
-	<h2>Colaboración</h2>
+	<h2 class="titulo">Colaboración</h2>
 	<form:form method="post" modelAttribute="colaboracion">
 		    <div class="form-group">
 				<form:input type="hidden" name="idColaboracion" path="idColaboracion"/>

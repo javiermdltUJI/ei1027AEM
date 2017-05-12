@@ -9,7 +9,7 @@
 <title>Modificar datos de una habilidad</title>
 </head>
 <body>
-	<h2>Habilidad</h2>
+	<h2 class="titulo">Habilidad</h2>
 	<form:form method="post" modelAttribute="habilidad">
 		   <div class="form-group">
 				<form:input type="hidden" name="idHabilidad" path="idHabilidad"/>

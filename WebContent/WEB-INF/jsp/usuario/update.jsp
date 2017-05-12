@@ -10,7 +10,7 @@
 <title>Modificar datos de un usuarios</title>
 </head>
 <body>
-	<h2>Usuario</h2>
+	<h2 class="titulo">Usuario</h2>
 	<form:form method="post" modelAttribute="usuario">
 			<div class="form-group">
 				<form:label path="usuario">Usuario</form:label>

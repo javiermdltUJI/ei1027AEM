@@ -52,7 +52,7 @@
 		
 	
 	</script>
-	<h1>Lista de Ofertas</h1>
+	<h1 class="titulo">Lista de Ofertas</h1>
 	<table class="table">
 	<thead class="cabecera">
 
