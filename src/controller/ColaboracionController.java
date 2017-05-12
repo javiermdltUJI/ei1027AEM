@@ -110,7 +110,7 @@ public class ColaboracionController {
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
-			return "habilidad/add";
+			return "colaboracion/addOferta";
 		}
 		colaboracion.setIdOferta(id_oferta);
 		session.setAttribute("colaboracion", colaboracion);
@@ -139,7 +139,7 @@ public class ColaboracionController {
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");	
-			return "habilidad/add";
+			return "colaboracion/addPeticion";
 		}
 		colaboracion.setIdPeticion(id_peticion);
 		session.setAttribute("colaboracion", colaboracion);

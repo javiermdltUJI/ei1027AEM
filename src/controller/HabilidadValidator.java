@@ -30,15 +30,15 @@ public class HabilidadValidator implements Validator{
 		
 		//nombre
 		if(habilidad.getNombre().length() > 50)
-			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 carácteres");
+			errors.rejectValue("nombre", "obligatorio", "		El nombre no puede superar los 50 carácteres");
 		
 		
 		//tipo
 		if(habilidad.getTipo().length() > 50)
-			errors.rejectValue("tipo", "obligatorio", "El tipo no puede superar los 50 carácteres");
+			errors.rejectValue("tipo", "obligatorio", "		El tipo no puede superar los 50 carácteres");
 
 		//descripcion		
 		if(habilidad.getDescripcion().length() > 300)
-			errors.rejectValue("descripcion", "obligatorio", "La descripción no puede superar los 300 carácteres");		
+			errors.rejectValue("descripcion", "obligatorio", "		La descripción no puede superar los 300 carácteres");		
 	}	
 }

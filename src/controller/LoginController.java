@@ -79,7 +79,7 @@ public class LoginController {
         usuario = userDao.loadUserByUsername(usuario.getUsuario(),usuario.getContrasenya()); 
 
         if (usuario == null) {
-            bindingResult.rejectValue("contrasenya", "badpw", "Contraseña incorrecta"); 
+            bindingResult.rejectValue("contrasenya", "badpw", "ContraseÃ±a incorrecta"); 
             return "login";
         }
         /**

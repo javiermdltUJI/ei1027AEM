@@ -25,43 +25,27 @@ public class UsuarioValidator implements Validator{
 		Pattern pattern = Pattern.compile(PATTERN_EMAIL);
 		Matcher matcher = pattern.matcher(usuario.getCorreo());
 		
-		//Usuario
-		if(usuario.getUsuario().trim().equals(""))
-			errors.rejectValue("usuario", "obligatorio", "Valor requerido");
-		
 		
 		//ContraseÃ±a
-		if(usuario.getContrasenya().trim().equals(""))
-			errors.rejectValue("contrasenya", "obligatorio", "Valor requerido");
-		
 		if(usuario.getContrasenya().length()<7)
-			errors.rejectValue("contrasenya", "obligatorio", "La contraseña debe contener como mínimo 8 dígitos");
+			errors.rejectValue("contrasenya", "obligatorio", "		La contraseÃ±a debe contener como mÃ­nimo 8 dÃ­gitos");
 		
 		if(usuario.getContrasenya().length()>50)
-			errors.rejectValue("contrasenya", "obligatorio", "La contraseña±a debe contener como máximo 50 dígitos");
+			errors.rejectValue("contrasenya", "obligatorio", "		La contraseÃ±a debe contener como mÃ¡ximo 50 dÃ­gitos");
 		
 		
 		//Correo
-		if(usuario.getCorreo().trim().equals(""))
-			errors.rejectValue("correo", "obligatorio", "Valor requerido");
-		
 		if(!matcher.matches())
 			errors.rejectValue("correo","obligatorio", "Formato incorrecto, ej:algo@algo.algo");
 		
 		
 		//Nombre
-		if(usuario.getNombre().trim().equals(""))
-			errors.rejectValue("nombre", "obligatorio", "Valor requerido");
-		
 		if(usuario.getNombre().length() > 50)
-			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 carácteres");
+			errors.rejectValue("nombre", "obligatorio", "El nombre no puede superar los 50 caracteres");
 		
 		
 		//DNI
-		if(usuario.getDni().trim().equals(""))
-			errors.rejectValue("dni", "obligatorio", "Valor requerido");
-		
 		if(usuario.getDni().length() != 9)
-			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dígitos");
+			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dÃ­gitos");
 	}
 }
