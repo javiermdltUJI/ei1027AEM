@@ -9,6 +9,12 @@
 
 	<h1>Lista de Usuarios</h1>
 	
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
+	
 	<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet">
@@ -42,6 +48,44 @@
 	
 /* 	$('#table').bootstrapTable('removeByUniqueId',0);
  */	</script> -->
+ 
+ 	<script type="text/javascript">
+	
+	
+	url="";
+	$(document).ready(function(){
+
+		$('.elimina').click(function(e){
+			url = this.href;
+			e.preventDefault();
+			notif_confirm({
+			'message': '¿Borrar este usuario?',
+			'textaccept': 'Yes!',
+			'textcancel': 'No',
+			'fullscreen': true,
+			'callback': myCallback
+			})
+		});
+	});
+	
+	var myCallback = function(choice){
+		if(choice){
+			window.location.href = url;
+			notif({
+				'type': 'success',
+				'msg': 'Usuario borrado!',
+				'position': 'center'
+			})
+		}else{
+			notif({
+				'type': 'error',
+				'msg': 'Usuario no borrado!',
+				'position': 'center'
+			})
+		}
+	}	
+	
+	</script> 
 	<table id="table" class="table table-hover  table-sm">
 	  <thead class="cabecera">
 	  
@@ -71,7 +115,7 @@
 				<td>${usuario.bloqueado}</td>
 				<td>${usuario.rol}</td>
 				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
-				<td><a style="background=transparent" type="button" class="btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
+				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
 			</tr>
 		</c:forEach>
 		</tbody>

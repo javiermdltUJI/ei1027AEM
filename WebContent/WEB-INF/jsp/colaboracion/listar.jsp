@@ -11,6 +11,50 @@
 </head>
 <body>
 	<h1>Lista de Colaboraciones</h1>
+	
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	<script type="text/javascript">
+	
+	
+	url="";
+	$(document).ready(function(){
+
+		$('.elimina').click(function(e){
+			url = this.href;
+			e.preventDefault();
+			notif_confirm({
+			'message': '¿Borrar esta colaboración?',
+			'textaccept': 'Yes!',
+			'textcancel': 'No',
+			'fullscreen': true,
+			'callback': myCallback
+			})
+		});
+	});
+	
+	var myCallback = function(choice){
+		if(choice){
+			window.location.href = url;
+			notif({
+				'type': 'success',
+				'msg': 'Colaboración borrada!',
+				'position': 'center'
+			})
+		}else{
+			notif({
+				'type': 'error',
+				'msg': 'Colaboración no borrada!',
+				'position': 'center'
+			})
+		}
+	}	
+	
+	</script>
+	
+	
 	<table class="table">
 		  <thead class="cabecera">
 	
@@ -45,7 +89,7 @@
 				<td>${colaboracion.idPeticion}</td>
 			</c:if>
 				<td><a type="button" class="btn btn-success"  href="update/${colaboracion.idColaboracion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
-				<td><a type="button" class="btn btn-danger"  href="delete/${colaboracion.idColaboracion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar
+				<td><a type="button" class="elimina btn btn-danger"  href="delete/${colaboracion.idColaboracion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar
 				</a>		
 			</tr>
 		</c:forEach>
