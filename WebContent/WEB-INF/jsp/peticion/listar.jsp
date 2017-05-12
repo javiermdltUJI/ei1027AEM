@@ -51,6 +51,7 @@
 			})
 		}
 	}	
+	
 	</script>
 	<h1>Lista de Peticiones</h1>
 	<table class="table">

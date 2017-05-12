@@ -40,6 +40,7 @@
 	<div id="body">
 		<div class="container" style="left:2%">
 		
+		
 			<jsp:doBody />
 		</div>
 		

@@ -59,6 +59,8 @@
 			</c:if>
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Agregar usuario" />
+				
+				
 			</div>
 	</form:form>
 </body>

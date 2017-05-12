@@ -48,6 +48,8 @@
 			<div class="form-group">
 	
 				<input class="btn btn-primary"  type="submit" value="Agregar habilidad" />
+				
+				
 			</div>				
 	</form:form>
 </body>

@@ -44,6 +44,7 @@
  */	</script> -->
 	<table id="table" class="table table-hover  table-sm">
 	  <thead class="cabecera">
+	  
 		<tr >
 			<th>Nombre usuario</th>
 			<th>Correo</th>
