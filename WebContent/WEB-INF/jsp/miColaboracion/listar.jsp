@@ -10,9 +10,9 @@
 <title>Gestionar Colaboraciones</title>
 </head>
 <body>
-	<h1>Lista de Colaboraciones</h1>
+	<h1 class="titulo">Lista de Colaboraciones</h1>	
 	
-	<h4>Ofertas</h4>
+	<h4 class="subtitulo">Colaboraciones creadas a partir de mis ofertas: </h4>
 	<table class="table">
 		  <thead class="cabecera">
 	
@@ -47,7 +47,7 @@
 		
 		
 		
-		<h4>Peticiones</h4>
+		<h4 class="subtitulo">Colaboraciones creadas a partir de mis peticiones: </h4>
 		<table class="table">
 			  <thead class="cabecera">
 		
@@ -82,13 +82,14 @@
 					<c:when test='${(colaboracionesPeticion.valoracion==0 or colaboracionesPeticion.horasTotales==0) and now.time >= colaboracionesPeticion.fechaFin.time}'>
 						<td><a type="button" class="btn btn-success"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a></td>
 					</c:when>
-					<c:otherwise>
-						<td> </td>
+					<c:when test='${now.time < colaboracionesPeticion.fechaFin.time}'>
+						<td><a type="button" class="btn btn-danger"  href="../cancelar/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a></td>	
+					</c:when>
+					<c:otherwise>					
+						<td><button type="button" class="btn btn-default disabled" disabled="disabled">Terminada</button></td>	
 					</c:otherwise>
 				</c:choose>
-				<c:if test='${now.time < colaboracionesPeticion.fechaFin.time}'>
-					<td><a type="button" class="btn btn-danger"  href="../cancelar/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Cancelar</a></td>	
-				</c:if>
+				
 			</tr>
 		</c:forEach>		
 	</table>
