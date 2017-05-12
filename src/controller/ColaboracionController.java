@@ -93,8 +93,9 @@ public class ColaboracionController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "colaboracion/addOferta/"+id_oferta+".html" );
 		if(u != null){
-			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
-				return "error/excesoHorasOferta";
+			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
+				session.setAttribute("horas", Math.abs(20+colaboracionDao.getHorasColaboraciones(u.getUsuario())));
+				return "error/excesoHorasPeticion";
 			}else{
 				model.addAttribute("colaboracion", new Colaboracion());
 				return "colaboracion/addOferta";
@@ -122,8 +123,9 @@ public class ColaboracionController {
 		session.setAttribute("prevURL", "colaboracion/addPeticion/"+id_peticion+".html" );
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null){
-			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) < -20){
-				return "error/excesoHorasPeticion";
+			if(colaboracionDao.getHorasColaboraciones(u.getUsuario()) > 20){
+				session.setAttribute("horas", Math.abs(20-colaboracionDao.getHorasColaboraciones(u.getUsuario())));
+				return "error/excesoHorasOferta";
 			}else{
 				model.addAttribute("colaboracion", new Colaboracion());
 				return "colaboracion/addPeticion";
