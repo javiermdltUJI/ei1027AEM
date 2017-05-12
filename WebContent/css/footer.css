@@ -89,7 +89,7 @@ html, body {
 
 
 nav{
-	  background: #e8691c;
+	  background: #837165;
 	
 /* 	background: #ff5800;
  */	margin-bottom:1%;
@@ -97,14 +97,14 @@ nav{
 
 .nav>li>a:focus, .nav>li>a:hover {
     text-decoration: none;
-    background-color: #e64a00;
+    background-color:#5b5048;
     color: #fff;
 }
 
 
 body {
-/*     font: 11px "Open Sans", sans-serif;
- */ 
+     font: "Open Sans", sans-serif;
+
  
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -201,7 +201,7 @@ footer {
 
 
 .cabecera{
-	background: #fc843d;
+	background: #ec975b;
 -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 6px;
