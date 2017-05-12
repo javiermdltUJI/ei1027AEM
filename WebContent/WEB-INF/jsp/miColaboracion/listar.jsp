@@ -10,7 +10,7 @@
 <title>Gestionar Colaboraciones</title>
 </head>
 <body>
-	<h1 class="titulo">Lista de Colaboraciones</h1>	
+	<h2 class="titulo">Lista de Colaboraciones</h2>	
 	
 	<h4 class="subtitulo">Colaboraciones creadas a partir de mis ofertas: </h4>
 	<table class="table">

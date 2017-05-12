@@ -11,7 +11,7 @@
 <title>Gestionar Habilidades</title>
 </head>
 <body>
-	<h1 class="titulo">Lista de Habilidades</h1>
+	<h2 class="titulo">Lista de Habilidades</h2>
 	<table class="table">
 		  <thead class="cabecera">
 	

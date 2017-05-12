@@ -10,7 +10,7 @@
 <title>Gestionar Colaboraciones</title>
 </head>
 <body>
-	<h1 class="titulo">Lista de Colaboraciones</h1>
+	<h2 class="titulo">Lista de Colaboraciones</h2>
 	
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
