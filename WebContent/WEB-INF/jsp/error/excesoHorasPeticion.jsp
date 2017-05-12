@@ -10,7 +10,11 @@
 <title>Error</title>
 </head>
 <body>
-	<h1>Error. Has excedido las horas de petición. </h1>
+	<img class="center-block" alt="" src="${pageContext.request.contextPath}/img/error.png" style="width:15%;">
+
+	<h1><p class="text-center">Error. Has excedido las horas de petición. </p></h1>
+
+	<div style="text-align:center;"><a type="button" class="btn btn-default" href="${pageContext.request.contextPath}/${sessionScope.prevURL}">Volver</a></div>
 </body>
 </html>
 </jsp:body>
