@@ -110,6 +110,9 @@
 
 
 
+		}else{
+		 	document.getElementById("footer").style.position = "relative";
+
 		}
 	
 	</script>
