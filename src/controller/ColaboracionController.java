@@ -169,7 +169,7 @@ public class ColaboracionController {
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
-			return "habilidad/update";
+			return "colaboracion/update";
 		}
 		colaboracionDao.updateColaboracion(colaboracion);
 		return "redirect:../listar.html";
