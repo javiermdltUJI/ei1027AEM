@@ -3022,6 +3022,8 @@ select[multiple].form-group-lg .form-control {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
+  min-width: 50px;  
+   max-width: 300px;
 }
 .btn:focus,
 .btn:active:focus,
@@ -3245,12 +3247,23 @@ fieldset[disabled] .btn-info.active {
 .btn-loginSkill {
   	color: #fff;
   	background-color: transparent;
-    with:auto;
+    width:auto;
     border-color: #f5e6c5;
     border-width: 1.5px;
     margin-right: 2%;
   
 }
+
+.btn-loginSkill2 {
+  	color: #ff8000;
+  	background-color: transparent;
+    width:auto;
+    border-color: #f5e6c5;
+    border-width: 1.5px;
+    margin-right: 2%;
+  
+}
+
 
 .btn-warning:hover,
 .btn-warning:focus,

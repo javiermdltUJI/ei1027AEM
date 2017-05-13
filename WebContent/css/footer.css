@@ -1,3 +1,18 @@
+
+.login .buttonslogin {
+  display: none;
+}
+
+
+@media (max-width: 960px) {
+  .login .normal    { display: none; }
+  .login .buttonslogin { display: inline-block; }
+}
+/* @media (min-width: 960px) {
+  .login .normal    { display: inline-block; }
+  .login .buttonslogin { display: none; }
+} */
+
 #barraaceptacion {
     display:none;
     position:fixed;
@@ -38,6 +53,7 @@
 #left_widget_column {
 	border: 0px;
 	background: white;
+	height:400px;
 
 	padding: 20px;
 	width: 40%;
@@ -48,7 +64,7 @@
 #middle_widget_column {
 	border: 0px;
 	background: white;
-
+	height: 100px;
 	padding: 20px;
 	width: 32%;
 	display: inline-block;
@@ -58,7 +74,7 @@
 #right_widget_column {
 	border: 0px;
 		background: white;
-	
+	height:400px;
 	padding: 20px;
 	width: 55%;
 	display: inline-block;
