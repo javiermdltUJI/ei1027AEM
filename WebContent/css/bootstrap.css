@@ -3243,9 +3243,9 @@ fieldset[disabled] .btn-info.active {
 }
 
 .btn-loginSkill {
-  color: #fff;
-  background-color: transparent;
-     
+  	color: #fff;
+  	background-color: transparent;
+    with:auto;
     border-color: #f5e6c5;
     border-width: 1.5px;
     margin-right: 2%;

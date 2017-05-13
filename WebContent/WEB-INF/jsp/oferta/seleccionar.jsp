@@ -14,6 +14,8 @@
 <body>
 	<h2 class="titulo">Lista de Ofertas</h2>
 	<table class="table">
+		<thead class="cabecera">
+	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_peticion</th>
@@ -25,7 +27,11 @@
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
 		</c:if>
+		<c:if test='${usuario.rol!="ADMIN"}'>
+			<th></th>
+		</c:if>
 		</tr>
+		</thead>
 		<c:forEach items="${ofertas}" var="oferta">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -48,7 +54,8 @@
 					<td><a type="button" class="btn btn-default" href="../colaboracion/creadaOferta/${oferta.idOferta}.html">Seleccionar</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>
-					<td><a type="button" class="btn btn-default" href="../colaboracion/creadaOferta/${oferta.idOferta}.html">Seleccionar</a></td>
+					<td><a type="button" class="btn btn-primary" href="../colaboracion/creadaOferta/${oferta.idOferta}.html"><i class="fa fa-check" aria-hidden="true"></i>
+					 Seleccionar</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>

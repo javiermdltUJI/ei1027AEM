@@ -101,6 +101,8 @@
 
 		if($("#body").height()<=500){
 			 	document.getElementById("footer").style.position = "absolute";
+			 	
+			 	
 			     document.getElementById("footer").style.marginBottom = "0px";
 			     
 

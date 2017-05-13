@@ -14,6 +14,8 @@
 <body>
 	<h2 class="titulo">Lista de Peticiones</h2>
 	<table class="table">
+			<thead class="cabecera">
+	
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_peticion</th>
@@ -25,7 +27,12 @@
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>
 		</c:if>
+		<c:if test='${usuario.rol!="ADMIN"}'>
+			<th></th>
+		</c:if>
 		</tr>
+		</thead>
+		
 		<c:forEach items="${peticiones}" var="peticion">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -48,7 +55,8 @@
 					<td><a type="button" class="btn btn-default" href="../colaboracion/creada/${peticion.idPeticion}.html">Seleccionar</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>
-					<td><a type="button" class="btn btn-default" href="../colaboracion/creada/${peticion.idPeticion}.html">Seleccionar</a></td>
+					<td><a type="button" class="btn btn-primary" href="../colaboracion/creada/${peticion.idPeticion}.html"><i class="fa fa-check" aria-hidden="true"></i>
+					 Seleccionar</a></td>
 				</c:if>
 			</tr>
 		</c:forEach>
