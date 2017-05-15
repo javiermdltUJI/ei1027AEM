@@ -82,14 +82,11 @@ public class LoginController {
             bindingResult.rejectValue("contrasenya", "badpw", "Contraseña incorrecta"); 
             return "login";
         }
-        /**
-        if(usuario.getActivo() == false){
-        	bindingResult.rejectValue("contrasenya", "badpw", "Usuario desactivado pongase en contacto con el administrador"); 
-        	session.setAttribute("perfilBloqueado", "Su perfil está desactivado. Póngase en contacto con el administrador para más información.");
-            return "login";
-        }
-        **/
-                
+        
+    	if(usuario.getBloqueado() == 1)
+    		return "error/bloqueado";
+    
+        
         // Autenticats correctament. 
         // Guardem les dades de l'usuari autenticat a la sessio
         session.setAttribute("usuario", usuario); 

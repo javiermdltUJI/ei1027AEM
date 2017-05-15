@@ -24,7 +24,7 @@
 		</p>
 		<img alt="" src="${pageContext.request.contextPath}/img/Customer-Feedback.jpg" style="width:34%;     margin-right: 32%;   margin-left: 32%;">
 					
-		<p>Registrate ahora para empezar a utilizarlo!!</p>
+		<p>¡¡Regístrate ahora para empezar a utilizarlo!!</p>
 					
 					<a class="btn btn-warning" style="color:#fff; margin-left:40%" href="${pageContext.request.contextPath}/usuario/add.html">Registrarme!</a>
 		
