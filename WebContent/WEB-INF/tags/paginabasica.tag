@@ -72,7 +72,7 @@
 	
 		    <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		    	<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='./politicas.html' class="generic-anchor footer-list-anchor">Politica de cookies</a>
+		    	<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/politicas.html' class="generic-anchor footer-list-anchor">Politica de cookies</a>
 		  	
 		 	</span>
 		    
