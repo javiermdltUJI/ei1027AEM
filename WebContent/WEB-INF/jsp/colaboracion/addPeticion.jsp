@@ -24,6 +24,8 @@
 </head>
 <body>
 	<h2 class="titulo">Nueva colaboración</h2>
+	
+	<p>Las fechas de la colaboración deben ajustarse a la peticion, por lo que debe estar entre <strong>${peticion.fechaIniString}</strong> y <strong>${peticion.fechaFinString}</strong> y la fecha de inicio debe ser mayor que el día actual.</p>
 	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
 		   <div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
@@ -46,6 +48,9 @@
 					<form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion" required="required"/>
 					<form:errors path="valoracion" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
+			</c:if>
+			<c:if test='${feedbackFechas=="error"}'>
+				<p style="color:red">Las fechas no se ajustan a los parametros explicados anteriormente.</p>
 			</c:if>
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Seleccionar Oferta" />

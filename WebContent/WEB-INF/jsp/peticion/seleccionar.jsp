@@ -13,6 +13,10 @@
 </head>
 <body>
 	<h2 class="titulo">Lista de Peticiones</h2>
+	<p> Seleccionar una colaboración con fechas entre: 
+	<strong>${colaboracion.fechaIniString}</strong> y 
+	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
+	</p>
 	<table class="table">
 			<thead class="cabecera">
 	

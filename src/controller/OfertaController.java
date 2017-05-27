@@ -1,10 +1,15 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +28,7 @@ import dao.ColaboracionDao;
 import dao.HabilidadDao;
 import dao.OfertaDao;
 import dao.PeticionDao;
+import dao.UsuarioDao;
 import modelo.Colaboracion;
 import modelo.Oferta;
 import modelo.Peticion;
@@ -41,7 +47,12 @@ public class OfertaController {
 	private ColaboracionDao colaboracionDao;
 	
 	private HabilidadDao habilidadDao;
+	private UsuarioDao usuarioDao;
 
+	@Autowired
+	public void setUsuarioDao(UsuarioDao usuarioDao){
+		this.usuarioDao = usuarioDao;
+	}
 	
 	@Autowired
 	public void setOfertaDao(OfertaDao ofertaDao){
@@ -116,7 +127,21 @@ public class OfertaController {
 			model.addAttribute("accesible", false);
 			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
 			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
-			model.addAttribute("ofertas", ofertaDao.getMisOfertasHabilidad(u.getUsuario(), p.getIdHabilidad()));
+			Colaboracion colaboracion = (Colaboracion) session.getAttribute("colaboracion");
+			Date FechaIniColabo = colaboracion.getFechaIni();
+			Date FechaFinColabo = colaboracion.getFechaFin();
+			
+			List<Oferta> ofertas = ofertaDao.getMisOfertasHabilidad(u.getUsuario(), p.getIdHabilidad());
+			
+			List<Oferta> ofertasValidas =  new ArrayList<Oferta>();
+
+			for( Oferta oferta:ofertas){
+				if(oferta.getFechaIni().compareTo(FechaIniColabo)<=0 && oferta.getFechaFin().compareTo(FechaFinColabo)>=0){
+					ofertasValidas.add(oferta);
+				}
+			}
+			
+			model.addAttribute("ofertas", ofertasValidas);
 			return "oferta/seleccionar";			
 		}
 	}
@@ -129,6 +154,7 @@ public class OfertaController {
 			return "redirect:../login.html";
 		else if (session.getAttribute("colaboracion")!=null){
 			model.addAttribute("oferta", new Oferta());
+			session.setAttribute("feedbackFechas", "Noerror");
 			return "oferta/addConHabilidad";			
 		} else {
 			session.setAttribute("prevURL", "principal/principal.html");
@@ -137,13 +163,21 @@ public class OfertaController {
 	}
 
 	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
-	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult){
+	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult) throws AddressException, MessagingException, EmailException{
 		OfertaValidator ofertaValidator = new OfertaValidator();
 		ofertaValidator.validate(oferta, bindingResult);
 		if (bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "oferta/addConHabilidad";
 		}
+		Colaboracion colaboracion = (Colaboracion) session.getAttribute("colaboracion");
+		Date FechaIniColabo = colaboracion.getFechaIni();
+		Date FechaFinColabo = colaboracion.getFechaFin();
+		if(oferta.getFechaIni().compareTo(colaboracion.getFechaIni())>0 || oferta.getFechaFin().compareTo(colaboracion.getFechaFin())<0){
+			session.setAttribute("feedbackFechas", "error");
+			return "peticion/addConHabilidad";
+		}
+		
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());
@@ -154,6 +188,10 @@ public class OfertaController {
 			c.setIdOferta(id_oferta);
 			colaboracionDao.addColaboracion(c);
 			session.removeAttribute("colaboracion");
+			
+			String correo = usuarioDao.getUsuario(p.getUsuario()).getCorreo();
+			mandaCorreo.enviarMensaje(correo, "peticion");
+			
 			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
 		}
 		return "redirect:listar.html";

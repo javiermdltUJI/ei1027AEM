@@ -128,7 +128,11 @@ public class ColaboracionController {
 				session.setAttribute("horas", Math.abs(20+colaboracionDao.getHorasColaboraciones(u.getUsuario())));
 				return "error/excesoHorasPeticion";
 			}else{
+				Oferta ofertaSeleccionada = ofertaDao.getOferta(id_oferta);
+				
+				session.setAttribute("oferta", ofertaSeleccionada);
 				model.addAttribute("colaboracion", new Colaboracion());
+				session.setAttribute("feedbackFechas", "bien");
 				return "colaboracion/addOferta";
 			}
 		}else{
@@ -139,11 +143,17 @@ public class ColaboracionController {
 	@RequestMapping(value="/addOferta/{id_oferta}", method=RequestMethod.POST)
 	public String processAddOfertaSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_oferta){
 		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
-		colaboracionValidator.validate(colaboracion, bindingResult);	
+		colaboracionValidator.validate(colaboracion, bindingResult);
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "colaboracion/addOferta";
 		}
+		Oferta ofertaSeleccionada = ofertaDao.getOferta(id_oferta);
+		if(ofertaSeleccionada.getFechaIni().compareTo(colaboracion.getFechaIni())>0 || ofertaSeleccionada.getFechaFin().compareTo(colaboracion.getFechaFin())<0){
+			session.setAttribute("feedbackFechas", "error");
+			return "colaboracion/addOferta";
+		}
+		session.setAttribute("feedbackFechas", "bien");
 		colaboracion.setIdOferta(id_oferta);
 		session.setAttribute("colaboracion", colaboracion);
 		return "redirect:../../peticion/seleccionar.html";
@@ -158,6 +168,10 @@ public class ColaboracionController {
 				session.setAttribute("horas", Math.abs(20-colaboracionDao.getHorasColaboraciones(u.getUsuario())));
 				return "error/excesoHorasOferta";
 			}else{
+				Peticion peticionSeleccionada = peticionDao.getPeticion(id_peticion);
+				
+				session.setAttribute("peticion", peticionSeleccionada);
+				session.setAttribute("feedbackFechas", "bien");
 				model.addAttribute("colaboracion", new Colaboracion());
 				return "colaboracion/addPeticion";
 			}
@@ -174,6 +188,12 @@ public class ColaboracionController {
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");	
 			return "colaboracion/addPeticion";
 		}
+		Peticion peticionSeleccionada = peticionDao.getPeticion(id_peticion);
+		if(peticionSeleccionada.getFechaIni().compareTo(colaboracion.getFechaIni())>0 || peticionSeleccionada.getFechaFin().compareTo(colaboracion.getFechaFin())<0){
+			session.setAttribute("feedbackFechas", "error");
+			return "colaboracion/addPeticion";
+		}
+		session.setAttribute("feedbackFechas", "bien");
 		colaboracion.setIdPeticion(id_peticion);
 		session.setAttribute("colaboracion", colaboracion);
 		return "redirect:../../oferta/seleccionar.html";
