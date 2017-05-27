@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,16 @@ import dao.ColaboracionDao;
 import dao.MiColaboracionDao;
 import dao.OfertaDao;
 import dao.PeticionDao;
+import dao.UsuarioDao;
 import modelo.Colaboracion;
+import modelo.Oferta;
+import modelo.Peticion;
 import modelo.Usuario;
+
+
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 
 //El formato de las fechas es dd-mm-yyyy. En caso contrario APOCALIPSIS!!!!
@@ -33,7 +43,28 @@ public class ColaboracionController {
 	
 	private ColaboracionDao colaboracionDao;
 	private MiColaboracionDao miColaboracionDao;
+	private PeticionDao peticionDao;
+	private OfertaDao ofertaDao;
+	private UsuarioDao usuarioDao;
 
+	
+	
+	@Autowired
+	public void setUsuarioDao(UsuarioDao UsuarioDao){
+		this.usuarioDao = UsuarioDao;
+	}
+	
+	
+	@Autowired
+	public void setOfertaDao(OfertaDao OfertaDao){
+		this.ofertaDao = OfertaDao;
+	}
+	
+	
+	@Autowired
+	public void setPeticionDao(PeticionDao PeticionDao){
+		this.peticionDao = PeticionDao;
+	}
 	
 	@Autowired
 	public void setColaboracionDao(ColaboracionDao colaboracionDao){
@@ -222,8 +253,12 @@ public class ColaboracionController {
 		}
 	}
 	
+	
+		
+	
+	// AQUI HABRA QUE COGER LA OFERTA Y DE LA OFERTA SU USUARIO PARA PODER MANDARLE UN CORREO
 	@RequestMapping("/creada/{id_peticion}")
-	public String creadaColaboracion(HttpSession session, Model model, @PathVariable int id_peticion){
+	public String creadaColaboracion(HttpSession session, Model model, @PathVariable int id_peticion) throws AddressException, MessagingException, EmailException{
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "colaboracion/creada/"+id_peticion+".html");
 		if (u==null)
@@ -234,12 +269,25 @@ public class ColaboracionController {
 			colaboracionDao.addColaboracion(c);
 			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(u.getUsuario()));
 			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(u.getUsuario()));
+
+			Oferta oferta = ofertaDao.getOferta(c.getIdOferta());
+			
+			String correo = usuarioDao.getUsuario(oferta.getUsuario()).getCorreo();
+
+			mandaCorreo.enviarMensaje(correo, "oferta");
+			
+//			return "/sendEmail";
 			return "miColaboracion/listar";
+
 		}
 	}
 	
+	
+	
+	
+	// AQUI HABRA QUE COGER LA PETICION Y DE LA PETICION SU USUARIO PARA PODER MANDARLE UN CORREO
 	@RequestMapping("/creadaOferta/{id_oferta}")
-	public String creadaColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
+	public String creadaColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta) throws AddressException, MessagingException, EmailException{
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "colaboracion/creadaOferta/"+id_oferta+".html");
 		if (u==null)
@@ -250,8 +298,17 @@ public class ColaboracionController {
 			colaboracionDao.addColaboracion(c);
 			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(u.getUsuario()));
 			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(u.getUsuario()));
+			
+			Peticion peticion = peticionDao.getPeticion(c.getIdPeticion());
+			
+			String correo = usuarioDao.getUsuario(peticion.getUsuario()).getCorreo();
+
+			
+			mandaCorreo.enviarMensaje(correo, "oferta");
+			
+//			return "/sendEmail";
 			return "miColaboracion/listar";
-		}
+			}
 	}
 	
 	

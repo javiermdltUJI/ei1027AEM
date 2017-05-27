@@ -26,7 +26,7 @@
 					
 		<p>¡¡Regístrate ahora para empezar a utilizarlo!!</p>
 					
-					<a class="btn btn-warning" style="color:#fff; margin-left:40%" href="${pageContext.request.contextPath}/usuario/add.html">Registrarme!</a>
+			<a class="btn btn-warning" style="color:#fff; margin-left:40%" href="${pageContext.request.contextPath}/usuario/add.html">Registrarme!</a>
 		
 	</div>  
   	

@@ -1,5 +1,15 @@
 package controller;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +36,7 @@ public class UsuarioController {
 		this.usuarioDao = usuarioDao;
 	}
 	
+		
 	@RequestMapping("/listar")
 	public String listaUsuarios(HttpSession session, Model model){
 		Usuario u = (Usuario) session.getAttribute("usuario");
