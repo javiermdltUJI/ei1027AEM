@@ -29,7 +29,7 @@
       	</div>
       	<div class="form-group">
     	    <form:label path="horasTotales">Horas totales</form:label>        
-        	<form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
+        	<form:input type="number" min="0" class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
 			<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
       	</div>
       	<div class="form-group">
