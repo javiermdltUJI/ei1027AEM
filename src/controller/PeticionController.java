@@ -146,7 +146,7 @@ public class PeticionController {
 	}
 	
 	@RequestMapping(value="/addConHabilidad")
-	public String addPeticionConHabilidad(HttpSession session, Model model){
+	public String addPeticionConHabilidad(HttpSession session, Model model) throws AddressException, MessagingException, EmailException{
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "peticion/addConHabilidad.html");
 		if (u==null)
@@ -154,14 +154,38 @@ public class PeticionController {
 		else if (session.getAttribute("colaboracion")!=null){
 			model.addAttribute("peticion", new Peticion());
 			session.setAttribute("feedbackFechas", "Noerror");
-			return "peticion/addConHabilidad";			
+			//return "peticion/addConHabilidad";
+			Peticion peticion = new Peticion();
+			peticion.setUsuario(u.getUsuario());			
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Oferta o = ofertaDao.getOferta(c.getIdOferta());
+			peticion.setIdHabilidad(o.getIdHabilidad());
+			peticion.setFechaFin(c.getFechaFin());
+			peticion.setFechaIni(c.getFechaIni());
+			peticion.setDescripcion(o.getDescripcion());
+					
+			int id_peticion = peticionDao.addPeticionInt(peticion);
+			c.setIdPeticion(id_peticion);
+			colaboracionDao.addColaboracion(c);
+			session.removeAttribute("colaboracion");
+			
+			String correo = usuarioDao.getUsuario(o.getUsuario()).getCorreo();
+			mandaCorreo.enviarMensaje(correo, "oferta");
+
+			
+			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
+			
+			
+			
+			
+			
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
 
-	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
+	/*@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
 	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult) throws AddressException, MessagingException, EmailException{
 		PeticionValidator peticionValidator = new PeticionValidator();
 		peticionValidator.validate(peticion, bindingResult);
@@ -197,7 +221,7 @@ public class PeticionController {
 		}
 		return "redirect:listar.html";
 	}
-
+*/
 	
 	
 

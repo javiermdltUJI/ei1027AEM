@@ -2,6 +2,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
 
 
@@ -13,6 +15,16 @@
 </head>
 <body>
 	<h2 class="titulo">Lista de Ofertas</h2>
+	<p> Seleccionar una colaboración con fechas entre: 
+	<strong>${colaboracion.fechaIniString}</strong> y 
+	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
+	</p>
+	
+	<c:if test='${fn:length(collection)==0}'>
+		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automaticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
+	</c:if>
+	<c:if test='${fn:length(collection)!=0}'>
+		
 	<table class="table">
 		<thead class="cabecera">
 	
@@ -60,11 +72,13 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</c:if>
+	
 	<c:if test='${accesible == true}'>
-		<a type="button" class="btn btn-primary" href="../addConHabilidad.html">Agregar petición</a>
+		<a type="button" class="btn btn-primary" href="../addConHabilidad.html">Agregar oferta</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
-		<a type="button" class="btn btn-primary" href="addConHabilidad.html">Agregar petición</a>
+		<a type="button" class="btn btn-primary" href="addConHabilidad.html">Agregar oferta</a>
 	</c:if>
 </body>
 </html>

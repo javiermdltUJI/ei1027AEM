@@ -147,42 +147,58 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/addConHabilidad")
-	public String addOfertaConHabilidad(HttpSession session, Model model){
+	public String addOfertaConHabilidad(HttpSession session, Model model) throws AddressException, MessagingException, EmailException{
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "oferta/addConHabilidad.html" );
 		if (u==null)
 			return "redirect:../login.html";
 		else if (session.getAttribute("colaboracion")!=null){
-			model.addAttribute("oferta", new Oferta());
-			session.setAttribute("feedbackFechas", "Noerror");
-			return "oferta/addConHabilidad";			
+			//model.addAttribute("oferta", new Oferta());
+			//session.setAttribute("feedbackFechas", "Noerror");
+			//return "oferta/addConHabilidad";			
+			
+			Oferta oferta = new Oferta();
+			oferta.setUsuario(u.getUsuario());
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
+			oferta.setIdHabilidad(p.getIdHabilidad());
+			oferta.setFechaFin(c.getFechaFin());
+			oferta.setFechaIni(c.getFechaIni());
+			oferta.setDescripcion(p.getDescripcion());
+			int id_oferta = ofertaDao.addOfertaInt(oferta);
+			c.setIdOferta(id_oferta);
+			colaboracionDao.addColaboracion(c);
+			session.removeAttribute("colaboracion");
+			
+			String correo = usuarioDao.getUsuario(p.getUsuario()).getCorreo();
+			mandaCorreo.enviarMensaje(correo, "peticion");
+			
+			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
+						
+			
 		} else {
 			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
 
-	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
+/*	@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
 	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult) throws AddressException, MessagingException, EmailException{
-		OfertaValidator ofertaValidator = new OfertaValidator();
-		ofertaValidator.validate(oferta, bindingResult);
-		if (bindingResult.hasErrors()){
-			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
-			return "oferta/addConHabilidad";
-		}
-		Colaboracion colaboracion = (Colaboracion) session.getAttribute("colaboracion");
-		Date FechaIniColabo = colaboracion.getFechaIni();
-		Date FechaFinColabo = colaboracion.getFechaFin();
-		if(oferta.getFechaIni().compareTo(colaboracion.getFechaIni())>0 || oferta.getFechaFin().compareTo(colaboracion.getFechaFin())<0){
-			session.setAttribute("feedbackFechas", "error");
-			return "peticion/addConHabilidad";
-		}
+		
+		Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+		Peticion p = peticionDao.getPeticion(c.getIdPeticion());
+		oferta.setIdHabilidad(p.getIdHabilidad());
+		oferta.setFechaFin(c.getFechaFin());
+		oferta.setFechaIni(c.getFechaIni());
+		oferta.setDescripcion(p.getDescripcion());
+		colaboracionDao.addColaboracion(c);
+		session.removeAttribute("colaboracion");
+		
+		
 		
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if(u != null &&  !u.getRol().name().equals("ADMIN")){
 			oferta.setUsuario(u.getUsuario());
-			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
-			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
 			oferta.setIdHabilidad(p.getIdHabilidad());
 			int id_oferta = ofertaDao.addOfertaInt(oferta);
 			c.setIdOferta(id_oferta);
@@ -195,7 +211,7 @@ public class OfertaController {
 			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
 		}
 		return "redirect:listar.html";
-	}
+	}*/
 
 	
 	@RequestMapping(value="/add")
