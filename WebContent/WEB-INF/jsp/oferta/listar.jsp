@@ -68,8 +68,12 @@
 			<th>Usuario</th>
 			<th></th>
 		</c:if>
-		<c:if test='${usuario.usuario==sessionScope.mis}'>
+		<c:if test='${usuario.usuario!=sessionScope.mis}'>
 			<th></th>
+			<th></th>
+			<th></th>
+		</c:if>
+		<c:if test='${usuario.usuario==sessionScope.mis}'>
 			<th></th>
 			<th></th>
 		</c:if>

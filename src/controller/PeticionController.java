@@ -108,7 +108,7 @@ public class PeticionController {
 		if (u==null)
 			return "redirect:../login.html";
 		else if(u.getUsuario().equals(usuario)){
-			model.addAttribute("accesible", false);
+			model.addAttribute("accesible", true);
 			model.addAttribute("peticiones", peticionDao.getMisPeticiones(usuario));
 			return "peticion/listar";			
 		}else{
