@@ -83,7 +83,7 @@ public class UsuarioController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		if (u==null || !u.getRol().name().equals("ADMIN")){
 				usuario.setBloqueado(0);
-				usuario.setContadorBloqueo(0);
+				usuario.setEliminado(0);
 				usuario.setRol(Rol.ESTUDIANTE);
 		}
 		usuarioDao.addUsuario(usuario);
@@ -125,6 +125,34 @@ public class UsuarioController {
 		return "redirect:../login.html";
 		else if(u.getRol().name().equals("ADMIN")){
 			usuarioDao.deleteUsuario(usuario);
+			return "redirect:../listar.html";
+		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
+			return "error/error";
+		}
+	}
+	@RequestMapping(value="/lock/{usuario}")
+	public String processLock(HttpSession session, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "usuario/listar.html");
+		if (u==null)
+		return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
+			//usuarioDao.lockUsuario(usuario,fecha_fin);
+			return "redirect:../listar.html";
+		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
+			return "error/error";
+		}
+	}
+	@RequestMapping(value="/unlock/{usuario}")
+	public String processUnlock(HttpSession session, @PathVariable String usuario){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "usuario/listar.html");
+		if (u==null)
+		return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
+			usuarioDao.unlockUsuario(usuario);
 			return "redirect:../listar.html";
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");

@@ -1,15 +1,19 @@
-<%@ tag description="Estructura d'una pÃ gina normal" pageEncoding="UTF-8"%>
+<%@ tag description="Estructura d'una pàgina normal" pageEncoding="ISO-8859-1"%>
 <%@ attribute name="title" required="false"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
+<head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/logo.ico?" type="image/x-icon" />
+</head>
+
 <body>
 <div id="container">
 
 	<div id="head">
-	<meta charset="utf-8">
+	<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>${title}</title>
 	
@@ -81,7 +85,7 @@
 		  <div class="footer-list-top"> 
 		      <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		   		<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='#' class="generic-anchor footer-list-anchor" >Algo mÃ¡s</a>
+		   		<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='#' class="generic-anchor footer-list-anchor" >Algo más</a>
 		  	
 		 	</span>
 		   
@@ -90,7 +94,7 @@
 			<div style="margin-left:40%; color:#fff" class="footer-bottom-wrapper">   
 				<i style="color:#fff " class="fa fa-copyright" role="copyright">
 		 
-				</i> 2017 Skills Sharing <address class="footer-address" role="company address">EAM, CastellÃ³n de la plana</address><span class="footer-bottom-rights"> - All Rights Reserved - </span>
+				</i> 2017 Skills Sharing <address class="footer-address" role="company address">EAM, Castellón de la plana</address><span class="footer-bottom-rights"> - All Rights Reserved - </span>
 		    </div>
 		   
 		  </section>
@@ -125,10 +129,10 @@
 	<c:if test='${ok!="1"}'>
 		<div id="barraaceptacion" style="display: block;">
 		    <div class="inner">
-		        Solicitamos su permiso para obtener datos estadÃ­sticos de su navegaciÃ³n en esta web, en cumplimiento del Real 
-		        Decreto-ley 13/2012. Si continÃºa navegando consideramos que acepta el uso de cookies.
+		        Solicitamos su permiso para obtener datos estadísticos de su navegación en esta web, en cumplimiento del Real 
+		        Decreto-ley 13/2012. Si continúa navegando consideramos que acepta el uso de cookies.
 		        <a href="javascript:void(0);" class="ok" onclick="PonerCookie();"><b>OK</b></a> | 
-		        <a href="${pageContext.request.contextPath}/principal/politicas.html" target="_blank" class="info">MÃ¡s informaciÃ³n</a>
+		        <a href="${pageContext.request.contextPath}/principal/politicas.html" target="_blank" class="info">Más información</a>
 		    </div>
 		</div>
 	</c:if>

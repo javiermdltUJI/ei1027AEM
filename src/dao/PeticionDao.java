@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.ResultSet;
 import java.util.Date;
@@ -19,9 +18,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import modelo.Peticion;
-
-//He creado un id estatatico que se va incrementando cada vez que se hace una llamada al add
-//Ahora mismo el id es 6 porque tengo 5 componentes en la bbdd, pero hay que cambiarlo a 0 cuando la bbdd se cree nueva
 
 
 @Repository

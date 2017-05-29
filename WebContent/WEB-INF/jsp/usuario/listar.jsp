@@ -94,9 +94,11 @@
 			<th>Correo</th>
 			<th>Nombre</th>
 			<th>Dni</th>
-			<th>Contador de bloqueo</th>
+			<th>Eliminado</th>
 			<th>Bloqueado</th>
+			<th>Fecha fin bloqueo</th>
 			<th>Rol</th>
+			<th></th>
 			<th></th>
 			<th></th>
 			
@@ -111,11 +113,19 @@
  --%>				<td>${usuario.correo}</td>
 				<td>${usuario.nombre}</td>
 				<td>${usuario.dni}</td>
-				<td>${usuario.contadorBloqueo}</td>
+				<td>${usuario.eliminado}</td>
 				<td>${usuario.bloqueado}</td>
+				<td>${usuario.fechaFinString}</td>
 				<td>${usuario.rol}</td>
 				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
-				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
+				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+				
+				<c:if test='${usuario.bloqueado==0}'>
+					<td><a style="background=transparent" type="button" class="elimina btn btn-warning" href="lock/${usuario.usuario}.html"><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
+				</c:if>
+				<c:if test='${usuario.bloqueado==1}'>
+					<td><a style="background=transparent" type="button" class="elimina btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
+				</c:if>	
 			</tr>
 		</c:forEach>
 		</tbody>
