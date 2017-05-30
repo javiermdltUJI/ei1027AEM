@@ -1,5 +1,8 @@
 package modelo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Usuario {
 	
 	private String usuario;
@@ -7,8 +10,10 @@ public class Usuario {
 	private String correo;
 	private String nombre;
 	private String dni;
-	private int contadorBloqueo = 0;
+	private int eliminado = 0;
 	private int bloqueado = 0;
+	private Date fechaFin;
+	private String fechaFinString;
 	private Rol rol;
 	
 	public String getUsuario(){ return usuario; }
@@ -21,19 +26,23 @@ public class Usuario {
 	public void setNombre(String nombre){ this.nombre = nombre; }
 	public String getDni(){ return dni; }
 	public void setDni(String dni){ this.dni = dni; }
-	public int getContadorBloqueo(){ return contadorBloqueo; }
-	public void setContadorBloqueo(int cont){
-		if(contadorBloqueo < 3){
-			this.contadorBloqueo = cont;
-		}else{
-			this.bloqueado = 1;
-		}
-	}
+	public int getEliminado() { return eliminado; }
+	public void setEliminado(int eliminado) { this.eliminado = eliminado; }
 	public int getBloqueado(){ return bloqueado; }
 	public void setBloqueado(int bloq){
 		if(bloq <= 1){
 			this.bloqueado = bloq;
 		}
+	}
+	public Date getFechaFin() { return fechaFin; }
+	public void setFechaFin(Date fFin){ 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.fechaFinString = dateFormat.format(fFin); 
+		this.fechaFin = fFin; 
+	}
+	public String getFechaFinString() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		return dateFormat.format(fechaFin); 
 	}
 	public Rol getRol() {
 		return rol;
@@ -44,9 +53,9 @@ public class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Estudiante [usuario=" + usuario + ", contrasenya=" + contrasenya + ", correo="
-				+ correo + ", nombre=" + nombre + ", dni=" + dni + ", contadorBloqueo"
-				+ contadorBloqueo + ", bloqueado=" + bloqueado + ", rol=" + rol +"]";
+		return "Usuario [usuario=" + usuario + ", contrasenya=" + contrasenya + ", correo=" + correo + ", nombre="
+				+ nombre + ", dni=" + dni + ", eliminado=" + eliminado + ", bloqueado=" + bloqueado + ", fechaFin="
+				+ fechaFin + ", fechaFinString=" + fechaFinString + ", rol=" + rol + "]";
 	}
 	
 }

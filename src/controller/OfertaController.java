@@ -107,7 +107,7 @@ public class OfertaController {
 		if (u==null)
 			return "redirect:../login.html";
 		else if(u.getUsuario().equals(usuario)){
-			model.addAttribute("accesible", false);
+			model.addAttribute("accesible", true);
 			model.addAttribute("ofertas", ofertaDao.getMisOfertas(usuario));
 			return "oferta/listar";		
 		}else{

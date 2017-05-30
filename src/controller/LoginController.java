@@ -83,7 +83,7 @@ public class LoginController {
             return "login";
         }
         
-    	if(usuario.getBloqueado() == 1)
+    	if(usuarioDao.estaBloqueado(usuario.getNombre()))
     		return "error/bloqueado";
     
         

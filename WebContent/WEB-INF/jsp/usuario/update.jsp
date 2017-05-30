@@ -8,6 +8,15 @@
 <head>
 <meta charset=UTF-8>
 <title>Modificar datos de un usuarios</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script>
+  $(function() {
+    $( "#fechaFin" ).datepicker({ dateFormat: 'dd-mm-yy' });
+  });
+
+</script>
 </head>
 <body>
 	<h2 class="titulo">Usuario</h2>
@@ -39,14 +48,19 @@
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
-					<form:label path="contadorBloqueo">Contador de bloqueo</form:label>
-					<form:input class="form-control" type="number" path="contadorBloqueo" id="contadorBloqueo" placeholder="0" required="required"/>
-					<form:errors path="contadorBloqueo" cssClass="error fa fa-exclamation-circle"/>
+					<form:label path="eliminado">Eliminado</form:label>
+					<form:input class="form-control" type="number" path="eliminado" id="contadorBloqueo" placeholder="0" required="required"/>
+					<form:errors path="eliminado" cssClass="error fa fa-exclamation-circle"/>
 				</div>
 				<div class="form-group">
 					<form:label path="bloqueado">Bloqueado</form:label>
 					<form:input class="form-control" type="number" path="bloqueado" id="bloqueado" placeholder="0" required="required"/>
 					<form:errors path="bloqueado" cssClass="error fa fa-exclamation-circle"/>
+				</div>
+				<div class="form-group">
+					<form:label path="fechaFin">Fecha de fin de bloqueo</form:label>
+					<form:input class="form-control" path="fechaFin" id="fechaFin"/>
+					<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 				<div class="form-group">
 					<form:label path="rol">Rol</form:label>

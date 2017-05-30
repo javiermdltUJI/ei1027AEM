@@ -3,8 +3,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
-
-
 <t:paginabasica title="EI1027">
 <jsp:body>
 
@@ -63,21 +61,20 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Descripción</th>
-		<c:if test='${usuario.usuario != sessionScope.mis}'>
+		<c:if test='${usuario.usuario != sessionScope.mis && usuario.rol!="ADMIN"}'>
 			<th>Usuario</th>
 			<th></th>
 		</c:if>
-		<c:if test='${usuario.usuario == sessionScope.mis}'>
-			<th></th>
+		<c:if test='${usuario.usuario==sessionScope.mis}'>
 			<th></th>
 			<th></th>
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
+			<th>Usuario</th>
 			<th>id_habilidad</th>
 			<th></th>
 			<th></th>
 			<th></th>
-			
 		</c:if>
 		</tr>
 		</thead>

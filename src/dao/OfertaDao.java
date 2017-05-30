@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import modelo.Oferta;
-import modelo.Peticion;
 
 
 @Repository

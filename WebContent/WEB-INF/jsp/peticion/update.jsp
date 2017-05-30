@@ -37,7 +37,7 @@
 			<div class="form-group">				
 				<form:label path="fechaFin">Fecha Fin</form:label>
 				<form:input class="form-control" path="fechaFin" id="fechaFin" required="required"/>
-				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle" "/>	
+				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="descripcion">Descripción</form:label>
