@@ -36,7 +36,7 @@
 			</div>
 			<div class="form-group">
 				<form:label path="correo">Correo</form:label>
-				<form:input class="form-control" path="correo" id="correo" placeholder="Correo" required="required"/>
+				<form:input type="email" class="form-control" path="correo" id="correo" placeholder="Correo" required="required"/>
 				<form:errors path="correo" cssClass="error fa fa-exclamation-circle"/>
 			</div>
 			<div class="form-group">
