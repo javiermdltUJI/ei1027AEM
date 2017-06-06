@@ -20,6 +20,19 @@
 
 </script>
 
+<script language='javascript' type='text/javascript'>
+			    function check(input) {
+			        if (input.value != document.getElementById('correo').value) {
+			            input.setCustomValidity('El email no coincide');
+			        } else {
+			            // input is valid -- reset the error message
+			            input.setCustomValidity('');
+			        }
+			    }
+</script>
+			
+
+
 </head>
 <body>
 	<h2 class="titulo">Nuevo usuario</h2>
@@ -38,6 +51,10 @@
 				<form:label path="correo">Correo</form:label>
 				<form:input type="email" class="form-control" path="correo" id="correo" placeholder="Correo" required="required"/>
 				<form:errors path="correo" cssClass="error fa fa-exclamation-circle"/>
+			</div>
+			<div class="form-group">
+				<label path="correo">Repite el correo</label>
+				<input type="email" class="form-control" id="correoValidar" placeholder="Correo" oninput="check(this)" required="required"/>
 			</div>
 			<div class="form-group">
 				<form:label path="nombre">Nombre</form:label>
