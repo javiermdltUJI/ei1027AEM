@@ -72,7 +72,7 @@ public class UsuarioDao implements UserDao {
 	}
 	
 	public void lockUsuario(String usuario, Date fecha_fin){
-		this.jdbcTemplate.update("update usuario set bloqueado = 1, fecha fin = ? where nom_usuario = ?", fecha_fin, usuario);
+		this.jdbcTemplate.update("update usuario set bloqueado = 1, fecha_fin = ? where nom_usuario = ?", fecha_fin, usuario);
 	}
 	public void unlockUsuario(String usuario){
 		this.jdbcTemplate.update("update usuario set bloqueado = 0, fecha_fin = '0001-01-01' where nom_usuario = ?", usuario);

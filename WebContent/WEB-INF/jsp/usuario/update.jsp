@@ -58,9 +58,9 @@
 					<form:errors path="bloqueado" cssClass="error fa fa-exclamation-circle"/>
 				</div>
 				<div class="form-group">
-					<form:label path="fechaFin">Fecha de fin de bloqueo</form:label>
-					<form:input class="form-control" path="fechaFin" id="fechaFin"/>
-					<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
+					<form:label path="fechaFinString">Fecha de fin de bloqueo</form:label>
+					<form:input class="form-control" path="fechaFinString" id="fechaFin"/>
+					<form:errors path="fechaFinString" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 				<div class="form-group">
 					<form:label path="rol">Rol</form:label>
