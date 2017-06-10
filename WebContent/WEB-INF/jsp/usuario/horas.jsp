@@ -6,20 +6,20 @@
 <jsp:body>
 
 
-<h1>Relación de colaboraciones de peticiones y ofertas</h1>
+<h1>Relación de horas entre colaboraciones de peticiones y ofertas</h1>
 
-
+<div style="margin-left:15%">
 <c:if test='${sessionScope.horas==0}'>
-<p>Has realizado el mismo numero de horas para peticiones que para colaboraciones</p>
+<h3>Has realizado el mismo numero de horas para peticiones que para ofertas</h3>
 </c:if>
 <c:if test='${sessionScope.horas<0}'>
-<p>Has realizado el más horas para peticiones que para colaboraciones</p>
+<h3>Has realizado más horas para peticiones que para ofertas</h3>
 </c:if>
 <c:if test='${sessionScope.horas>0}'>
-<p>Has realizado el más horas para colaboraciones que para peticiones</p>
+<h3>Has realizado más horas para ofertas que para peticiones</h3>
 </c:if>
-<p class="text-justify"> Total: ${sessionScope.horas}</p>
+<h3 class="text-justify"> Total: ${sessionScope.horas}</h3>
 
-
+</div>
 </jsp:body>
 </t:paginabasica>

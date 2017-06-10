@@ -34,7 +34,7 @@
 		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
-			<th>Descripción</th>
+			<th>Más info.</th>
 			<th>Usuario</th>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_habilidad</th>

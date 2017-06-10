@@ -40,7 +40,7 @@
 				<td>${colaboracionesOferta.valoracion}</td>
 				<td>${colaboracionesOferta.descripcion}</td>
 				<td>${colaboracionesOferta.usuario}</td>
-				<td><a type="button" class="btn btn-danger"  href="../colaboracion/cancelar/${colaboracionesOferta.usuario}/${colaboracionesOferta.idColaboracion}.html">Cancelar</a></td>		
+				<td><a type="button" class="btn btn-default"  disabled> No puedes cancelar la colaboración.</a></td>		
 			</tr>
 		</c:forEach>
 		</table>

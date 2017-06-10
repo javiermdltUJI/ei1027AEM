@@ -36,7 +36,7 @@
 				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
 			</div>
 			<div class="form-group">
-				<form:label path="descripcion">Descripción</form:label>
+				<form:label path="descripcion">Más info.</form:label>
 				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>

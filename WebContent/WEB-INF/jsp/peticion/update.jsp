@@ -40,7 +40,7 @@
 				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
-				<form:label path="descripcion">Descripción</form:label>
+				<form:label path="descripcion">Más info.</form:label>
 				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción" required="required"/>
 				<form:errors path="descripcion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>

@@ -61,7 +61,7 @@
 		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
-			<th>Descripción</th>
+			<th>Más info.</th>
 		<c:if test='${usuario.usuario != sessionScope.mis && usuario.rol!="ADMIN"}'>
 			<th>Usuario</th>
 			<th></th>
