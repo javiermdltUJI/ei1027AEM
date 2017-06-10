@@ -11,10 +11,13 @@ import javax.sql.DataSource;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import modelo.Rol;
 import modelo.Usuario;
@@ -135,4 +138,13 @@ public class UsuarioDao implements UserDao {
 		private static Date toDate(Timestamp t){
 			return new Date(t.getTime());
 		}	
+
+		@InitBinder
+		private void initBinder(WebDataBinder webDataBinder) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			dateFormat.setLenient(false);
+			webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+		}
+
 }
+

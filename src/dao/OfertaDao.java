@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
@@ -9,9 +10,12 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import modelo.Oferta;
 
@@ -85,6 +89,13 @@ public class OfertaDao {
 
 	public List<Oferta> getMisOfertasHabilidad(String usuario, int idHabilidad) {
 		return this.jdbcTemplate.query("select * from oferta where usuario=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new OfertaMapper());
+	}
+	
+	@InitBinder
+	private void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		dateFormat.setLenient(false);
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 
 }

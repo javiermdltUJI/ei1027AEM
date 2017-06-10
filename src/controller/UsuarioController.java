@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.UsuarioDao;
+import modelo.Peticion;
 import modelo.Rol;
 import modelo.Usuario;
 
@@ -91,7 +92,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
-	public String editUsuario(HttpSession session, Model model, @PathVariable String usuario){
+	public String editUsuario(HttpSession session, Model model, @PathVariable String usuario, @ModelAttribute("usuario") Usuario usu){
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "usuario/update/"+usuario+".html");
 		if (u==null)
@@ -113,6 +114,7 @@ public class UsuarioController {
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "usuario/update";
 		}
+		System.out.println(usuario);
 		usuarioDao.updateUsuario(usuario);
 		return "redirect:../listar.html";
 	}
