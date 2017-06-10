@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.HabilidadDao;
+import modelo.Estado;
 import modelo.Habilidad;
 import modelo.Usuario;
 
@@ -91,6 +92,30 @@ public class HabilidadController {
 			return "error/error";
 		}
 	}
+	
+	
+	@RequestMapping(value="/activar/{id_habilidad}")
+	public String activar(HttpSession session, @PathVariable int id_habilidad){
+		
+		Habilidad habilidad = habilidadDao.getHabilidad(id_habilidad);
+		Estado estado = Estado.ACTIVO;
+		habilidad.setEstado(estado);
+		habilidadDao.updateHabilidad(habilidad);
+
+		return "redirect:../listar.html";
+	}
+	
+	@RequestMapping(value="/cancelar/{id_habilidad}")
+	public String cancelar(HttpSession session, @PathVariable int id_habilidad){
+		
+		Habilidad habilidad = habilidadDao.getHabilidad(id_habilidad);
+		Estado estado = Estado.CANCELADO;
+		habilidad.setEstado(estado);
+		habilidadDao.updateHabilidad(habilidad);
+
+		return "redirect:../listar.html";
+	}
+	
 	
 	@RequestMapping(value="/update/{id_habilidad}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable int id_habilidad, @ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult){

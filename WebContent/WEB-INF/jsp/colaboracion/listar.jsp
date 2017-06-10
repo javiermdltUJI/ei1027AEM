@@ -38,12 +38,13 @@
 	
 	var myCallback = function(choice){
 		if(choice){
-			window.location.href = url;
 			notif({
 				'type': 'success',
 				'msg': 'Colaboración borrada!',
 				'position': 'center'
 			})
+			setInterval(function(){ window.location.href = url; },2000);
+
 		}else{
 			notif({
 				'type': 'error',

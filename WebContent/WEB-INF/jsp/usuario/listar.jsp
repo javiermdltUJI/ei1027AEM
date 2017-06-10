@@ -60,7 +60,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Borrar este usuario?',
-			'textaccept': 'Yes!',
+			'textaccept': 'Si!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback
@@ -70,12 +70,13 @@
 	
 	var myCallback = function(choice){
 		if(choice){
-			window.location.href = url;
 			notif({
 				'type': 'success',
 				'msg': 'Usuario borrado!',
 				'position': 'center'
 			})
+			setInterval(function(){ window.location.href = url; },2000);
+
 		}else{
 			notif({
 				'type': 'error',
@@ -84,6 +85,54 @@
 			})
 		}
 	}	
+	
+	$(document).ready(function(){
+
+		$('.bloquea').click(function(e){
+			url = this.href;
+			e.preventDefault();
+			notif_confirm({
+			'message': '¿Bloquear este usuario?',
+			'textaccept': 'Yes!',
+			'textcancel': 'No',
+			'fullscreen': true,
+			'callback': myCallback2
+			})
+		});
+	});
+	
+	$(document).ready(function(){
+
+		$('.desbloquea').click(function(e){
+			url = this.href;
+			e.preventDefault();
+			notif_confirm({
+			'message': '¿Desbloquear este usuario?',
+			'textaccept': 'Si!',
+			'textcancel': 'No',
+			'fullscreen': true,
+			'callback': myCallback2
+			})
+		});
+	});
+	
+	var myCallback2 = function(choice){
+		if(choice){
+			notif({
+				'type': 'success',
+				'msg': 'Usuario bloqueado!',
+				'position': 'center'
+			})
+			setInterval(function(){ window.location.href = url; },2000);
+		}else{
+			notif({
+				'type': 'error',
+				'msg': 'Usuario no bloqueado!',
+				'position': 'center'
+			})
+		}
+	}	
+	
 	
 	</script> 
 	<table id="table" class="table table-hover  table-sm">
@@ -121,10 +170,10 @@
 				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
 				
 				<c:if test='${usuario.bloqueado==0}'>
-					<td><a style="background=transparent" type="button" class="elimina btn btn-warning" href="lock/${usuario.usuario}.html"><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
+					<td><a style="background=transparent" type="button" class="bloquea btn btn-warning" href="lock/${usuario.usuario}.html"><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
 				</c:if>
 				<c:if test='${usuario.bloqueado==1}'>
-					<td><a style="background=transparent" type="button" class="elimina btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
+					<td><a style="background=transparent" type="button" class="desbloquea btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
 				</c:if>	
 			</tr>
 		</c:forEach>
