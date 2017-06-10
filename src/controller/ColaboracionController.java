@@ -119,6 +119,18 @@ public class ColaboracionController {
 		return "redirect:listar.html";
 	}
 	
+	
+	@RequestMapping(value="/consultaHoras")
+	public String consultarHoras(HttpSession session, Model model){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("horas", colaboracionDao.getHorasColaboraciones(u.getUsuario()));
+		
+		return "usuario/horas";
+		
+	}
+	
+	
+	
 	@RequestMapping(value="/addOferta/{id_oferta}")
 	public String addColaboracionOferta(HttpSession session, Model model, @PathVariable int id_oferta){
 		Usuario u = (Usuario) session.getAttribute("usuario");

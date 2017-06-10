@@ -37,6 +37,12 @@ public class UsuarioController {
 		this.usuarioDao = usuarioDao;
 	}
 	
+	
+	@RequestMapping("/horas")
+	public String horas(HttpSession session, Model model){
+		return "usuario/horas";
+
+	}
 		
 	@RequestMapping("/listar")
 	public String listaUsuarios(HttpSession session, Model model){

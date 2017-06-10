@@ -15,8 +15,15 @@
 		<c:if test='${usuario != null}'>
 			<div class="normal">
 				<ul class="nav navbar-nav" style="float:right; top:0%">
-					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;">Bienvenido/a ${usuario.usuario}</a></li>
-					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;" href="${pageContext.request.contextPath}/logout.html">Cerrar sesión</a></li>
+					<li class="dropdown">
+						<a class="btn btn-loginSkill btn-responsive" style="color: #fff" id="DropDownUsuarios" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido/a ${usuario.usuario} <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="DropDownUsuarios">
+							<li><a style="color: black" href="${pageContext.request.contextPath}/usuario/update/${usuario.usuario}.html">Editar tus datos</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/consultaHoras.html">Consultar mis horas</a></li>
+						</ul>
+					</li>
+<%-- 					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;">Bienvenido/a ${usuario.usuario}</a></li>
+ --%>					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;" href="${pageContext.request.contextPath}/logout.html">Cerrar sesión</a></li>
 				</ul>
 			</div>
 		</c:if>
