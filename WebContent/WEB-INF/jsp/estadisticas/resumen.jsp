@@ -16,9 +16,8 @@
 </head>
 <body>
 	<h2 class="titulo">Resumen de las estadísticas del sistema</h2>
-	
-	
 	<h3 class="titulo"> Informe de usuarios</h3>
+		${usuariosTotales}
 	
 	<h3 class="titulo"> Informe de Habilidades</h3>
 	

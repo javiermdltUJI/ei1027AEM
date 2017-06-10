@@ -63,6 +63,16 @@ public class EstadisticasController {
 		if (u==null)
 			return "redirect:../login.html";
 		else if(u.getRol().name().equals("ADMIN")){
+			
+			
+			model.addAttribute("usuariosTotales", usuarioDao.getUsuariosTotales());
+			model.addAttribute("usuariosBloqueados", usuarioDao.getUsuariosBloqueados());
+			model.addAttribute("usuariosEliminados", usuarioDao.getUsuariosEliminados());
+
+			
+			
+			
+			
 			return "estadisticas/resumen";
 		}else{
 			session.setAttribute("prevURL", "estadisticas/resumen.html");
