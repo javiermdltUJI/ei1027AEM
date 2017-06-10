@@ -98,4 +98,12 @@ public class OfertaDao {
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 
+	//ESTADISTICAS
+	
+	//Num. total ofertas en el sistema
+	
+	public int getOfertasTotales() {
+		return this.jdbcTemplate.queryForObject("select count(*) from oferta", Integer.class);
+	}
+	
 }

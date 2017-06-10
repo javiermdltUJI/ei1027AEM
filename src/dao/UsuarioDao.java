@@ -114,7 +114,7 @@ public class UsuarioDao implements UserDao {
 	     }
 	 }
 	
-	//Para comprobar si un usuario está bloqueado
+	//Para comprobar si un usuario estï¿½ bloqueado
 	public boolean estaBloqueado(String nombreUsuario){
 		Usuario usuario;
 		if (existeUsuario(nombreUsuario)) {
@@ -136,16 +136,36 @@ public class UsuarioDao implements UserDao {
 	}
 	
 	//Para extraer correctamente las fechas
-		private static Date toDate(Timestamp t){
-			return new Date(t.getTime());
-		}	
+	private static Date toDate(Timestamp t){
+		return new Date(t.getTime());
+	}	
 
-		@InitBinder
-		private void initBinder(WebDataBinder webDataBinder) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-			dateFormat.setLenient(false);
-			webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-		}
+	@InitBinder
+	private void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		dateFormat.setLenient(false);
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+		
+	
+	//ESTADISTICAS
+		
+	//Usuarios totales
+	public int getUsuariosTotales() {
+		return this.jdbcTemplate.queryForObject("select count(*) from usuario", Integer.class);
+	}
+	
+	//Usuarios eliminados
+	public int getUsuariosEliminados() {
+		return this.jdbcTemplate.queryForObject("select count(*) from usuario where eliminado=1", Integer.class);
+	}
+	
+	//Usuarios bloqueados
+	public int getUsuariosBloqueados() {
+		return this.jdbcTemplate.queryForObject("select count(*) from usuario where bloqueado=1", Integer.class);
+	}
+		
+	
 
 }
 

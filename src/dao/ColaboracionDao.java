@@ -103,4 +103,18 @@ public class ColaboracionDao {
 		return numColaboraciones;
 	}
 	
+	
+	//ESTADISTICAS
+	
+	//Num. colaboraciones valoradas
+	public int getColaboracionesValoradas() {
+		return this.jdbcTemplate.queryForObject("select count(*) from colaboracion where valoracion > 0", Integer.class);
+	}
+	
+	//Num. colaboraciones totales
+	public int getColaboracionesTotales() {
+		return this.jdbcTemplate.queryForObject("select count(*) from colaboracion", Integer.class);
+	}
+	
+	
 }

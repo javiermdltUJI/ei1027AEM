@@ -65,5 +65,26 @@ public class HabilidadDao {
 	public void deleteHabilidad(int habilidad){
 		this.jdbcTemplate.update("delete from habilidad where id_habilidad = ?", habilidad);
 	}
-
+	
+	//ESTADISTICAS
+	
+	//Num. total habilidades
+	public int getHabilidadesTotales() {
+		return this.jdbcTemplate.queryForObject("select count(*) from habilidad", Integer.class);
+	}
+	
+	//Num. total habilidades canceladas
+	public int getHabilidadesCanceladas() {
+		return this.jdbcTemplate.queryForObject("select count(*) from habilidad where estado='CANCELADO'", Integer.class);
+	}
+	
+	//habilidad más ofertada
+	public String getHabilidadMasOfertada(){
+		return this.jdbcTemplate.queryForObject("select nombre from (select id_habilidad, count(id_habilidad) as cuenta from peticion group by id_habilidad order by cuenta desc limit 1) as t join habilidad  using (id_habilidad)", String.class);
+	}
+	
+	//habilidad más demandada
+	public String getHabilidadMasDemandada(){
+		return this.jdbcTemplate.queryForObject("select nombre from (select id_habilidad, count(id_habilidad) as cuenta from peticion group by id_habilidad order by cuenta desc limit 1) as t join habilidad  using (id_habilidad)", String.class);
+	}
 }

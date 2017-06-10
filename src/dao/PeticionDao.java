@@ -97,4 +97,11 @@ public class PeticionDao {
 	public List<Peticion> getMisPeticionesHabilidad(String usuario, int idHabilidad) {
 		return this.jdbcTemplate.query("select * from peticion where usuario=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new PeticionMapper());
 	}
+	
+	//ESTADISTICAS
+	
+	//Num. totales peticiones en el sistema
+	public int getPeticionesTotales() {
+		return this.jdbcTemplate.queryForObject("select count(*) from peticion", Integer.class);
+	}
 }
