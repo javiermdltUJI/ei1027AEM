@@ -69,12 +69,18 @@
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
 					<form:label path="eliminado">Eliminado</form:label>
-					<form:input class="form-control" type="number" path="eliminado" id="contadorBloqueo" placeholder="0" required="required"/>
+						<form:select path="eliminado" class="form-control" id="contadorBloqueo">
+							<form:option value="0"> No </form:option>
+							<form:option value="1"> Si </form:option>
+						</form:select>
 					<form:errors path="eliminado" cssClass="error fa fa-exclamation-circle"/>
 				</div>
 				<div class="form-group">
 					<form:label path="bloqueado">Bloqueado</form:label>
-					<form:input class="form-control" type="number" path="bloqueado" id="bloqueado" placeholder="0" required="required"/>
+						<form:select path="bloqueado" class="form-control" id="bloqueado">
+							<form:option value="0"> No </form:option>
+							<form:option value="1"> Si </form:option>
+						</form:select>
 					<form:errors path="bloqueado" cssClass="error fa fa-exclamation-circle"/>
 				</div>
 				<div class="form-group">
