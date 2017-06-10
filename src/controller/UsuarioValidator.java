@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,5 +48,10 @@ public class UsuarioValidator implements Validator{
 		//DNI
 		if(usuario.getDni().length() != 9)
 			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dígitos");
+		
+		//FechaFin
+		 if(usuario.getFechaFin().before(new Date()))
+			 errors.rejectValue("fechaFin", "fechaInvalida", "		Día fin de bloqueo no válido");
+
 	}
 }
