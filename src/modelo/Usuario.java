@@ -1,7 +1,11 @@
 package modelo;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Usuario {
 	
@@ -12,6 +16,8 @@ public class Usuario {
 	private String dni;
 	private int eliminado = 0;
 	private int bloqueado = 0;
+	
+	 @DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaFin;
 	private String fechaFinString;
 	private Rol rol;
@@ -35,6 +41,12 @@ public class Usuario {
 		}
 	}
 	public Date getFechaFin() { return fechaFin; }
+	
+	public void setFechaFin(String fFin) throws ParseException{
+		this.fechaFinString = fFin;
+		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		this.fechaFin=format.parse(fFin);
+	}
 	public void setFechaFin(Date fFin){ 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.fechaFinString = dateFormat.format(fFin); 

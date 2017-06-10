@@ -57,11 +57,12 @@ public class UsuarioDao implements UserDao {
 	}
 	
 	public void addUsuario(Usuario usuario){
+		java.sql.Date fecha = new java.sql.Date(usuario.getFechaFin().getTime());
 		BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 		String cifrada = passwordEncryptor.encryptPassword(usuario.getContrasenya());
 		this.jdbcTemplate.update("insert into Usuario(nom_usuario, contrasenya, correo, nombre, dni, eliminado, bloqueado, fecha_fin, rol) values(?, ?, ?, ?, ?, ?, ?, ?, CAST(? AS rol))", 
 				usuario.getUsuario(), cifrada, usuario.getCorreo(), usuario.getNombre(), usuario.getDni(), usuario.getEliminado(),
-				usuario.getBloqueado(), usuario.getFechaFin(), usuario.getRol().name());
+				usuario.getBloqueado(), fecha, usuario.getRol().name());
 	}
 	
 	public void updateUsuario(Usuario usuario){
@@ -125,7 +126,7 @@ public class UsuarioDao implements UserDao {
 				return false;
 			if (usuario.getFechaFin().before(new Date())){
 				usuario.setBloqueado(0);
-				usuario.setFechaFin(null);
+				//usuario.setFechaFin(null);
 				updateUsuario(usuario);
 				return false;
 			}

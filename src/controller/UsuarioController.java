@@ -70,7 +70,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult, HttpSession session){
+	public String processAddSubmit(@ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult, HttpSession session, Model model){
 		UsuarioValidator usuarioValidator = new UsuarioValidator();
 		usuarioValidator.validate(usuario, bindingResult);
 		if(bindingResult.hasErrors()){
