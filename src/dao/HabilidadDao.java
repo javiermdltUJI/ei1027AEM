@@ -80,7 +80,7 @@ public class HabilidadDao {
 	
 	//habilidad más ofertada
 	public String getHabilidadMasOfertada(){
-		return this.jdbcTemplate.queryForObject("select nombre from (select id_habilidad, count(id_habilidad) as cuenta from peticion group by id_habilidad order by cuenta desc limit 1) as t join habilidad  using (id_habilidad)", String.class);
+		return this.jdbcTemplate.queryForObject("select nombre from (select id_habilidad, count(id_habilidad) as cuenta from oferta group by id_habilidad order by cuenta desc limit 1) as t join habilidad  using (id_habilidad)", String.class);
 	}
 	
 	//habilidad más demandada

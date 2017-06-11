@@ -16,13 +16,71 @@
 </head>
 <body>
 	<h2 class="titulo">Resumen de las estadísticas del sistema</h2>
-	<h3 class="titulo"> Informe de usuarios</h3>
-		${usuariosTotales}
 	
-	<h3 class="titulo"> Informe de Habilidades</h3>
+	<table class="table">
+		<tr>
+			<th><h3>Informe de usuarios</h3></th>
+			<th></th>
+		</tr>
+		<tr>
+			<td> Usuarios totales: </td>
+			<td>${usuariosTotales}</td>
+		</tr>
+		<tr>
+			<td> Usuarios bloqueados: </td>
+			<td> ${usuariosBloqueados} </td>
+		</tr>
+		<tr>
+			<td> Usuarios eliminados: </td>
+			<td> ${usuariosEliminados} </td>
+		</tr>		
+	</table>
 	
-	<h3 class="titulo"> Informe de Colaboraciones</h3>
+	<table class="table">
+		<tr>
+			<th><h3>Informe de habilidades</h3></th>
+			<th></th>
+		</tr>
+		<tr>
+			<td> Habilidades totales: </td>
+			<td> ${habilidadesTotales} </td>
+		</tr>
+		<tr>
+			<td> Habilidades canceladas: </td>
+			<td> ${habilidadesCanceladas} </td>
+		</tr>
+		<tr>
+			<td> Habilidad más ofertada: </td>
+			<td> ${habilidadMasOfertada} </td>
+		</tr>
+		<tr>
+			<td> Habilidad más demandada: </td>
+			<td> ${habilidadMasDemandada} </td>
+		</tr>
+	</table>
 	
+	<table class="table">
+		<tr>
+			<th><h3>Informe de colaboraciones </h3></th>
+			<th></th>
+		</tr>
+		<tr>
+			<td> Colaboraciones totales: </td>
+			<td> ${colaboracionesTotales} </td>
+		</tr>
+		<tr>
+			<td> Colaboraciones valoradas: </td>
+			<td> ${colaboracionesValoradas} </td>
+		</tr>
+		<tr>
+			<td> Peticiones totales: </td>
+			<td> ${peticionesTotales} </td>
+		</tr>
+		<tr>
+			<td> Ofertas totales: </td>
+			<td> ${ofertasTotales} </td>
+		</tr>
+	</table>	
 </body>
 </html>
 </jsp:body>
