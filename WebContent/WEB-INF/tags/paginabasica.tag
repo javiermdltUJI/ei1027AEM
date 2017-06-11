@@ -67,7 +67,7 @@
 		  <div class="footer-list-top">
 		      <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		  	    <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='+#' class="generic-anchor footer-list-anchor" >Sobre Nosotros</a>
+		  	    <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/sobreNosotros.html' class="generic-anchor footer-list-anchor" >Sobre Nosotros</a>
 		  	
 		 	  </span>
 		    
@@ -85,7 +85,7 @@
 		  <div class="footer-list-top"> 
 		      <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		   		<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='#' class="generic-anchor footer-list-anchor" >Algo más</a>
+		   		<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/dondeEncontrarnos.html' class="generic-anchor footer-list-anchor" >Donde encontrarnos</a>
 		  	
 		 	</span>
 		   
