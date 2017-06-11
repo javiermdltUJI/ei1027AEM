@@ -24,12 +24,12 @@
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
 			<th>Valoracion</th>
-			<th>Descripción</th>
+			<th>Habilidad</th>
 			<th>Usuario</th>
 			<th></th>
 		</tr>
 		</thead>
-		<c:forEach items="${colaboracionesOferta}" var="colaboracionesOferta">
+		<c:forEach items="${colaboracionesOferta}" varStatus="i" var="colaboracionesOferta">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${colaboracionesOferta.idColaboracion}</td>
@@ -38,14 +38,15 @@
 				<td>${colaboracionesOferta.fechaFinString}</td>
 				<td>${colaboracionesOferta.horasTotales}</td>
 				<td>${colaboracionesOferta.valoracion}</td>
-				<td>${colaboracionesOferta.descripcion}</td>
-				<td>${colaboracionesOferta.usuario}</td>
-				<td><a type="button" class="btn btn-default"  disabled> No puedes cancelar la colaboración.</a></td>		
+				<td>${habilidadesOferta[i.index].nombre}</td>
+<%-- 				<td>${colaboracionesOferta.descripcion}</td>
+ --%>			<td>${colaboracionesOferta.usuario}</td>
+				<td><a type="button" class="btn btn-default"  disabled>* No puedes cancelar la colaboración.</a></td>		
 			</tr>
 		</c:forEach>
 		</table>
 		
-		
+		<p style="color:gray">* Una colaboración solo puede ser cancelada por aquel que ha hecho la petición.</p>
 		
 		<h4 class="subtitulo">Colaboraciones creadas a partir de mis peticiones: </h4>
 		<table class="table">
@@ -60,13 +61,13 @@
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
 			<th>Valoracion</th>
-			<th>Descripción</th>
+			<th>Habilidad</th>
 			<th>Usuario</th>
 			<th></th>
 			<th></th>
 		</tr>
 		</thead>
-		<c:forEach items="${colaboracionesPeticion}" var="colaboracionesPeticion">
+		<c:forEach items="${colaboracionesPeticion}" varStatus="j" var="colaboracionesPeticion">
 			<tr>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${colaboracionesPeticion.idColaboracion}</td>
@@ -75,8 +76,10 @@
 				<td>${colaboracionesPeticion.fechaFinString}</td>	
 				<td>${colaboracionesPeticion.horasTotales}</td>
 				<td>${colaboracionesPeticion.valoracion}</td>
-				<td>${colaboracionesPeticion.descripcion}</td>
-				<td>${colaboracionesPeticion.usuario}</td>
+				<td>${habilidadesPeticion[j.index].nombre}</td>
+				
+<%-- 				<td>${colaboracionesPeticion.descripcion}</td>
+ --%>				<td>${colaboracionesPeticion.usuario}</td>
 				<jsp:useBean id="now" class="java.util.Date"/>
 				<c:choose>
 					<c:when test='${(colaboracionesPeticion.valoracion==0 or colaboracionesPeticion.horasTotales==0) and now.time >= colaboracionesPeticion.fechaFin.time}'>

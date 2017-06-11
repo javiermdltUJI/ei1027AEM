@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import antlr.collections.List;
+import dao.HabilidadDao;
 import dao.MiColaboracionDao;
+import dao.OfertaDao;
+import modelo.Colaboracion;
+import modelo.Habilidad;
 import modelo.MiColaboracion;
 import modelo.Usuario;
 
@@ -27,6 +33,22 @@ import modelo.Usuario;
 @Controller
 @RequestMapping("/miColaboracion")
 public class MiColaboracionController {
+	
+	private HabilidadDao habilidadDao;
+	
+	@Autowired
+	public void setHabilidadDao(HabilidadDao habilidadDao){
+		this.habilidadDao = habilidadDao;
+	}
+	
+	
+	private OfertaDao ofertaDao;
+	
+	@Autowired
+	public void setOfertaDao(OfertaDao ofertaDao){
+		this.ofertaDao = ofertaDao;
+	}
+	
 	
 	private MiColaboracionDao miColaboracionDao;
 	
@@ -42,8 +64,26 @@ public class MiColaboracionController {
 		session.setAttribute("mis", u.getUsuario());
 
 		if(u != null && (u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN"))){
-			model.addAttribute("colaboracionesOferta", miColaboracionDao.getMisColaboracionesOferta(usuario));
-			model.addAttribute("colaboracionesPeticion", miColaboracionDao.getMisColaboracionesPeticion(usuario));
+			java.util.List<MiColaboracion> colaboracionesOfertas = miColaboracionDao.getMisColaboracionesOferta(usuario);
+			java.util.List<Habilidad> habilidades1 = new ArrayList();
+			for(int i=0 ; i < colaboracionesOfertas.size(); i++){
+				Habilidad habilidad = habilidadDao.getHabilidad(ofertaDao.getOferta((colaboracionesOfertas.get(i).getIdOferta())).getIdHabilidad());
+				habilidades1.add(habilidad);
+			}
+						
+			java.util.List<MiColaboracion> colaboracionesPeticiones = miColaboracionDao.getMisColaboracionesPeticion(usuario);
+			java.util.List<Habilidad> habilidades2 = new ArrayList();
+
+			for(int i=0 ; i < colaboracionesPeticiones.size(); i++){
+				Habilidad habilidad = habilidadDao.getHabilidad(ofertaDao.getOferta((colaboracionesPeticiones.get(i).getIdOferta())).getIdHabilidad());
+				habilidades2.add(habilidad);
+			}
+
+			model.addAttribute("colaboracionesOferta", colaboracionesOfertas);
+			model.addAttribute("colaboracionesPeticion", colaboracionesPeticiones);
+			model.addAttribute("habilidadesOferta", habilidades1);
+			model.addAttribute("habilidadesPeticion", habilidades2);
+
 			return "miColaboracion/listar";
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");
