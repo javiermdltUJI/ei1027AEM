@@ -104,6 +104,28 @@
 	}); */
 	
 	$(document).ready(function(){
+		
+		$('#okBloquear').click(function(e){
+			
+			user = document.getElementById('userBlock').value;
+			alert(user);
+			
+			blockday = document.getElementById('blockDay').value;
+			alert(blockday);
+
+			e.preventDefault();
+			notif({
+				'type': 'success',
+				'msg': 'Usuario bloqueado!',
+				'position': 'center'
+			})
+			setInterval(function(){ window.location.href = url; },2000);
+			document.getElementById('userBlock').value = user;
+			document.getElementById('blockDay').value = blockday; 
+
+	         $('#seleccionarFecha').submit();
+
+		});
 
 		$('.desbloquea').click(function(e){
 			url = this.href;
@@ -150,10 +172,10 @@
       </div>
       <div class="modal-body">
       
-      <form:form method="POST" action="blockUser.html">
+      <form:form id="seleccionarFecha" method="POST" action="blockUser.html">
       
        	<label>Fecha de fin de bloqueo</label>
-  		<input  class="form-control"  type="date" name="blockDay">
+  		<input  id="blockDay" class="form-control"  type="date" name="blockDay" required>
   		<input id="userBlock" name="userBlock" type="text" style="display:none">
   		<br>
         <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>
