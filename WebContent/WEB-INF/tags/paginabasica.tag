@@ -57,7 +57,7 @@
 		  	<div style="margin-left:10% ;font-size:1.4em">
 <!-- 		  	  <span style="vertical-align:middle; color:#fff">CONNECT <span class="footer-social-small">with</span> US    </span>
  -->		  	
-		 	  <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://plus.google.com/" title="Google Plus" >  <i class="fa fa-google-plus"></i></a>
+		 	  <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://plus.google.com/116616887437267516099" title="Google Plus" >  <i class="fa fa-google-plus"></i></a>
 			  <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://github.com/javiermdltUJI/ei1027AEM" title="GitHUb" ><i class="fa fa-github" aria-hidden="true"></i></a>
 		
 		 	</div>
@@ -91,10 +91,10 @@
 		   
 		  </div>
 		  <section class="footer-bottom-section flex-rw">
-			<div style="margin-left:40%; color:#fff" class="footer-bottom-wrapper">   
+			<div style="margin-left:30%; color:#fff" class="footer-bottom-wrapper">   
 				<i style="color:#fff " class="fa fa-copyright" role="copyright">
 		 
-				</i> 2017 Skills Sharing <address class="footer-address" role="company address">EAM, Castellón de la plana</address><span class="footer-bottom-rights"> - All Rights Reserved - </span>
+				</i> 2017 Skills Sharing <address class="footer-address" role="company address">EAM, Castellón de la plana</address><span class="footer-bottom-rights"> - All Rights Reserved - <a style="color:white" href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> </span>
 		    </div>
 		   
 		  </section>

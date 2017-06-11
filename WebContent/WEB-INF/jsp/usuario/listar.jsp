@@ -13,6 +13,7 @@
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
 	
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+		<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/style.css'>
 	
 	
 	<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
@@ -51,6 +52,7 @@
  
  	<script type="text/javascript">
 	
+	usuario="";
 	
 	url="";
 	$(document).ready(function(){
@@ -86,7 +88,7 @@
 		}
 	}	
 	
-	$(document).ready(function(){
+	/* $(document).ready(function(){
 
 		$('.bloquea').click(function(e){
 			url = this.href;
@@ -99,7 +101,7 @@
 			'callback': myCallback2
 			})
 		});
-	});
+	}); */
 	
 	$(document).ready(function(){
 
@@ -134,7 +136,40 @@
 	}	
 	
 	
-	</script> 
+	</script>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Hasta que fecha debe estar bloqueado el usuario?</h4>
+      </div>
+      <div class="modal-body">
+      
+      <form:form method="POST" action="blockUser.html">
+      
+       	<label>Fecha de fin de bloqueo</label>
+  		<input  class="form-control"  type="date" name="blockDay">
+  		<input id="userBlock" name="userBlock" type="text" style="display:none">
+  		<br>
+        <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>
+     
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+       </form:form>
+      
+  		
+      </div>
+      <!-- <div class="modal-footer">
+      </div> -->
+    </div>
+
+  </div>
+</div>
+	
 	<table id="table" class="table table-hover  table-sm">
 	  <thead class="cabecera">
 	  
@@ -170,10 +205,32 @@
 				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
 				
 				<c:if test='${usuario.bloqueado==0}'>
-					<td><a style="background=transparent" type="button" class="bloquea btn btn-warning" href="lock/${usuario.usuario}.html"><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
+				
+					<%--
+					 este a tiene que tener 
+					 
+					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+					
+					href="lock/${usuario.usuario}.html"
+					
+					poner un onclick en los botones que guarden en una varible el usuario que es o generar un evento.
+					
+					document.getElementById('okBloquear').data-href='update/${usuario.usuario}.html';
+					
+					
+					https://stackoverflow.com/questions/33281031/get-date-from-jsp-to-controller-in-spring-mvc
+					
+					https://stackoverflow.com/questions/5590036/passing-parameters-from-jsp-to-controller-in-spring-mvc
+					
+					document.getElementById('okBloquear').href='lock/${usuario.usuario}.html';
+					 --%>
+					 
+ 					 <td><a onclick="document.getElementById('userBlock').value='${usuario.usuario}'" type="button" class="bloquea btn btn-warning"  data-toggle="modal" data-target="#myModal" ><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
+					 
+					 
 				</c:if>
 				<c:if test='${usuario.bloqueado==1}'>
-					<td><a style="background=transparent" type="button" class="desbloquea btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
+					<td><a type="button" class="desbloquea btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
 				</c:if>	
 			</tr>
 		</c:forEach>

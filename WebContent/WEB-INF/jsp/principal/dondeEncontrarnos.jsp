@@ -8,7 +8,8 @@
   <body>
   <h2 class="titulo">Donde encontrarnos</h2>
 
-	<p>Nos encontraras en la universidad Jaume I.</p>
+	<p>Nos encontraras en la universidad Jaume I o en el siguiente correo: <a href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> 
+	</p>
 	<br>
 	
 	<img alt="" src="${pageContext.request.contextPath}/img/cover.jpg" style="width:90%; height:10%;     margin-right: 5%;   margin-left: 5%;"/>

@@ -1,7 +1,9 @@
 package controller;
 
+import java.text.ParseException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.ibm.icu.text.SimpleDateFormat;
 
 import dao.UsuarioDao;
 import modelo.Rol;
@@ -141,6 +145,26 @@ public class UsuarioController {
 			return "error/error";
 		}
 	}
+	
+	
+	@RequestMapping(value = "/blockUser", method = RequestMethod.POST)
+	public String blockUser(HttpServletRequest request) throws ParseException{
+		
+		String date= request.getParameter("blockDay");
+		String[] parts = date.split("-");
+		date= parts[2]+"/"+parts[1]+"/"+parts[0];
+		String usuario= request.getParameter("userBlock");
+		
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date fecha_fin = format.parse(date);
+
+		usuarioDao.lockUsuario(usuario,fecha_fin);
+		
+		return "redirect:./listar.html";
+
+	}
+	
+	
 	@RequestMapping(value="/lock/{usuario}")
 	public String processLock(HttpSession session, @PathVariable String usuario){
 		Usuario u = (Usuario) session.getAttribute("usuario");
