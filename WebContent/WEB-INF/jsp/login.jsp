@@ -27,8 +27,8 @@
 			</div>
 			
 			 <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Acceder</button>
-	          <div>
-	            <a href="${pageContext.request.contextPath}/usuario/add.html">Create account</a> or <a href="#">reset password</a>
+	          <div style="    margin-top: 2%;">
+	            Si no tienes cuenta puedes registrarte desde aquí: <a href="${pageContext.request.contextPath}/usuario/add.html">Crear cuenta</a>
 	          </div>
 	         
 	</form:form>
