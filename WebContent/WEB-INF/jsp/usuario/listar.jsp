@@ -127,6 +127,14 @@
 
 		});
 
+		$('#cancelar').click(function(e){
+			notif({
+				'type': 'error',
+				'msg': 'Usuario no bloqueado!',
+				'position': 'center'
+			})
+		});
+		
 		$('.desbloquea').click(function(e){
 			url = this.href;
 			e.preventDefault();
@@ -165,8 +173,8 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
+    <div style="margin-top:40%" class="modal-content">
+      <div style="background-color: rgba(232, 105, 28, 0.85); color: white;" class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">¿Hasta que fecha debe estar bloqueado el usuario?</h4>
       </div>
@@ -180,7 +188,7 @@
   		<br>
         <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>
      
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button id="cancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
        </form:form>
       
   		
