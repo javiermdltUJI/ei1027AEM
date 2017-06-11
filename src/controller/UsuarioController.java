@@ -1,15 +1,7 @@
 package controller;
 
-import java.util.Properties;
+import java.util.Date;
 
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.UsuarioDao;
-import modelo.Peticion;
 import modelo.Rol;
 import modelo.Usuario;
 
@@ -91,6 +82,7 @@ public class UsuarioController {
 		if (u==null || !u.getRol().name().equals("ADMIN")){
 				usuario.setBloqueado(0);
 				usuario.setEliminado(0);
+				usuario.setFechaFin(new Date());
 				usuario.setRol(Rol.ESTUDIANTE);
 		}
 		usuarioDao.addUsuario(usuario);
@@ -102,7 +94,7 @@ public class UsuarioController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "usuario/update/"+usuario+".html");
 		if (u==null)
-			return "redirect:../login.html";
+			return "redirect:../../login.html";
 		else if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			model.addAttribute("usuario", usuarioDao.getUsuario(usuario));
 			return "usuario/update";				
@@ -114,14 +106,24 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/update/{nom_usuario}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable String nom_usuario, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
+		Usuario u = (Usuario) session.getAttribute("usuario");
 		UsuarioValidator usuarioValidator = new UsuarioValidator();
 		usuarioValidator.validate(usuario, bindingResult);
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "usuario/update";
 		}
-		System.out.println(usuario);
+		if(u.getRol().name().equals("ESTUDIANTE") && u.getUsuario().equals(usuario.getUsuario())) {
+			usuario.setBloqueado(0);
+			usuario.setEliminado(0);
+			usuario.setFechaFin(new Date());
+			usuario.setRol(Rol.ESTUDIANTE);
+			System.out.println("entro");
+		}
 		usuarioDao.updateUsuario(usuario);
+		if (u.getRol().name().equals("ESTUDIANTE"))
+			//TODO mirar de poner un mensaje de que se ha hecho de forma correcta
+				return "redirect:../../principal/principal.html";
 		return "redirect:../listar.html";
 	}
 	

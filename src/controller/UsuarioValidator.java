@@ -50,8 +50,9 @@ public class UsuarioValidator implements Validator{
 			errors.rejectValue("dni", "obligatorio", "El DNI contiene 9 dígitos");
 		
 		//FechaFin
-		 if(usuario.getFechaFin().before(new Date()))
-			 errors.rejectValue("fechaFin", "fechaInvalida", "		Día fin de bloqueo no válido");
+		if (usuario.getFechaFin()!=null)
+			if(usuario.getFechaFin().before(new Date()))
+				errors.rejectValue("fechaFin", "fechaInvalida", "		Día fin de bloqueo no válido");
 
 	}
 }

@@ -3,19 +3,10 @@ package controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import modelo.Estado;
 import modelo.Habilidad;
-import modelo.Nivel;
 
 public class HabilidadValidator implements Validator{
 
-	
-	private int id_habilidad;
-	private String nombre;
-	private String tipo;
-	private String descripcion;
-	private Nivel nivel;
-	private Estado estado;
 	
 	@Override
 	public boolean supports(Class<?> cls) {

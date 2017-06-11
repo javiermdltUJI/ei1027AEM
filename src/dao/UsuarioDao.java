@@ -66,9 +66,22 @@ public class UsuarioDao implements UserDao {
 	}
 	
 	public void updateUsuario(Usuario usuario){
-		this.jdbcTemplate.update("update Usuario set contrasenya = ?, correo = ?,  nombre = ?, dni = ?, eliminado = ?, bloqueado = ?, fecha_fin = ?, rol = CAST(? AS rol) where nom_usuario = ?", 
+		System.out.println("usuario "+ usuario);
+		Usuario guardado = this.jdbcTemplate.queryForObject("select * from usuario where nom_usuario=?",  new Object[] {usuario.getUsuario()}, new UsuarioMapper());
+		//no se ha modificado la contrasenya
+		System.out.println(guardado.getContrasenya());
+		if (usuario.getContrasenya().equals(guardado.getContrasenya()))
+			this.jdbcTemplate.update("update Usuario set contrasenya = ?, correo = ?,  nombre = ?, dni = ?, eliminado = ?, bloqueado = ?, fecha_fin = ?, rol = CAST(? AS rol) where nom_usuario = ?", 
 				usuario.getContrasenya(), usuario.getCorreo(), usuario.getNombre(), usuario.getDni(), usuario.getEliminado(), usuario.getBloqueado(), usuario.getFechaFin(),
 				usuario.getRol().name(), usuario.getUsuario());
+		else{//no se ha modificado la contrasenya
+			BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+			String cifrada = passwordEncryptor.encryptPassword(usuario.getContrasenya());
+			this.jdbcTemplate.update("update Usuario set contrasenya = ?, correo = ?,  nombre = ?, dni = ?, eliminado = ?, bloqueado = ?, fecha_fin = ?, rol = CAST(? AS rol) where nom_usuario = ?", 
+					cifrada, usuario.getCorreo(), usuario.getNombre(), usuario.getDni(), usuario.getEliminado(), usuario.getBloqueado(), usuario.getFechaFin(),
+					usuario.getRol().name(), usuario.getUsuario());
+		}
+			
 	}
 	
 	public void deleteUsuario(String usuario){
