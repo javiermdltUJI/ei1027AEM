@@ -35,6 +35,22 @@ public class PrincipalController {
 		return "principal/politicas";
 	}
 	
+	
+	@RequestMapping(value="/sobreNosotros", method = RequestMethod.GET)
+	public String sobreNosotros(Model model, HttpSession session) {
+		//model.addAttribute("usuarioLogin", new Usuario());
+		session.setAttribute("prevURL", "principal/sobreNosotros.html" );		
+		return "principal/sobreNosotros";
+	}
+	
+	@RequestMapping(value="/dondeEncontrarnos", method = RequestMethod.GET)
+	public String dondeEncontrarnos(Model model, HttpSession session) {
+		//model.addAttribute("usuarioLogin", new Usuario());
+		session.setAttribute("prevURL", "principal/dondeEncontrarnos.html" );		
+		return "principal/dondeEncontrarnos";
+	}
+	
+	
 	@RequestMapping(value="/ok", method = RequestMethod.POST, produces="application/json")
 	public @ResponseBody String cookieOK(Model model, HttpSession session) {
 		session.setAttribute("ok", 1);
