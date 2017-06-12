@@ -35,7 +35,7 @@
 				'type': 'success',
 				'msg': '¡Colaboracion creada!',
 				'position': 'center'
-			})
+			});
 			
 		});
 		
@@ -45,7 +45,7 @@
 				'type': 'success',
 				'msg': '¡Colaboracion creada!',
 				'position': 'center'
-			})
+			});
 		});
 		
 	
