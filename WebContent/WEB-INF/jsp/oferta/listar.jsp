@@ -64,6 +64,12 @@
 		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
+			
+			<c:if test='${usuario.rol=="ESTUDIANTE"}'>
+				<th>Habilidad</th>
+				<th>Nivel</th>
+			</c:if>
+		
 			<th>Más info.</th>
 		<c:if test='${usuario.usuario!=sessionScope.mis && usuario.rol!="ADMIN"}'>
 			<th>Usuario</th>
@@ -91,6 +97,10 @@
 				</c:if>
 					<td>${oferta.fechaIniString}</td>
 					<td>${oferta.fechaFinString}</td>
+					<c:if test='${usuario.rol=="ESTUDIANTE"}'>
+						<td>${oferta.descripcionHabilidad}</td>
+						<td>${oferta.nivelHabilidad}</td>
+					</c:if>
 					<td>${oferta.descripcion}</td>
 				<c:if test='${usuario.usuario != sessionScope.mis}'>
 					<td>${oferta.usuario}</td>
@@ -98,6 +108,7 @@
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td>${oferta.idHabilidad}</td>
 				</c:if>
+				
 					<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
 						<td><a type="button" class="btn btn-success" href="../update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a></td>
 						<td><a type="button" class="elimina btn btn-danger" href="../delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a></td>		

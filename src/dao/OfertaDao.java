@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import modelo.Nivel;
 import modelo.Oferta;
 
 
@@ -43,18 +44,33 @@ public class OfertaDao {
 		}
 	}
 	
+	private static final class OfertaConHabilidadMapper implements RowMapper<Oferta>{
+		public Oferta mapRow(ResultSet rs, int rowNum) throws SQLException{
+			Oferta oferta = new Oferta();
+			oferta.setIdOferta(rs.getInt("id_oferta"));
+			oferta.setFechaIni(toDate(rs.getTimestamp("fecha_ini")));
+			oferta.setFechaFin(toDate(rs.getTimestamp("fecha_fin")));
+			oferta.setDescripcion(rs.getString("descripcion"));
+			oferta.setUsuario(rs.getString("usuario"));
+			oferta.setIdHabilidad(rs.getInt("id_habilidad"));
+			oferta.setDescripcionHabilidad(rs.getString("nombre"));
+			oferta.setNivelHabilidad(Nivel.valueOf(rs.getString("nivel")));
+			return oferta;
+		}
+	}
+	
 	public List<Oferta> getOfertas(){
 		return this.jdbcTemplate.query("select * from oferta ORDER BY fecha_ini, fecha_fin asc", new OfertaMapper());
 	}
 	
 	//Devuelve ofertas no hechas por mi
 	public Object getOfertas(String usuario) {
-		return this.jdbcTemplate.query("select * from oferta where usuario!=? ORDER BY fecha_ini, fecha_fin",  new Object[] {usuario}, new OfertaMapper());
+		return this.jdbcTemplate.query("select oferta.id_habilidad, id_oferta, fecha_ini, fecha_fin, oferta.descripcion , usuario, habilidad.descripcion AS nombre, nivel from oferta JOIN habilidad USING (id_habilidad) where usuario!=? ORDER BY fecha_ini, fecha_fin",  new Object[] {usuario}, new OfertaConHabilidadMapper());
 	}
 	
 	//Devuelve ofertas hechas por mi
 	public Object getMisOfertas(String usuario) {
-		return this.jdbcTemplate.query("select * from oferta where usuario=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new OfertaMapper());
+		return this.jdbcTemplate.query("select oferta.id_habilidad, id_oferta, fecha_ini, fecha_fin, oferta.descripcion , usuario, habilidad.descripcion AS nombre, nivel from oferta JOIN habilidad USING (id_habilidad)  where usuario=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new OfertaConHabilidadMapper());
 	}
 		
 	

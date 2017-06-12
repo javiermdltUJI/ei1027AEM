@@ -14,6 +14,10 @@ public class Oferta {
 	private String usuario;
 	private int id_habilidad;
 	
+	//Para mostrar los datos de la habilidad
+	private String descripcionHabilidad;
+	private Nivel nivelHabilidad;
+	
 	public int getIdOferta(){ return id_oferta; }
 	public void setIdOferta(int idOferta){ this.id_oferta = idOferta;}
 	public Date getFechaIni(){ return fechaIni; }
@@ -49,5 +53,18 @@ public class Oferta {
 		return "Oferta [id_oferta=" + id_oferta + ", fechaIni=" + fechaIni + ", fechaFin="
 				+ fechaFin + ", descripcion=" + descripcion + ", usuario=" + usuario + ", id_habilidad"
 				+ id_habilidad + "]";
+	}
+
+	public Nivel getNivelHabilidad() {
+		return nivelHabilidad;
+	}
+	public void setNivelHabilidad(Nivel nivelHabilidad) {
+		this.nivelHabilidad = nivelHabilidad;
+	}
+	public String getDescripcionHabilidad() {
+		return descripcionHabilidad;
+	}
+	public void setDescripcionHabilidad(String descripcionHabilidad) {
+		this.descripcionHabilidad = descripcionHabilidad;
 	}
 }
