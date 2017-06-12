@@ -103,11 +103,7 @@
 		});
 	}); */
 	
-	$(function() {
-	    $( "#blockDay" ).datepicker({ dateFormat: 'dd-mm-yy' });
 
-	  });
-	
 	$(document).ready(function(){
 		
 		$('#okBloquear').click(function(e){
