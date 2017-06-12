@@ -103,6 +103,11 @@
 		});
 	}); */
 	
+	$(function() {
+	    $( "#blockDay" ).datepicker({ dateFormat: 'dd-mm-yy' });
+
+	  });
+	
 	$(document).ready(function(){
 		
 		$('#okBloquear').click(function(e){
@@ -189,7 +194,7 @@
       <form:form id="seleccionarFecha" method="POST" action="blockUser.html">
       
        	<label>Fecha de fin de bloqueo</label>
-  		<input  id="blockDay" class="form-control" name="blockDay" required>
+  		<input  id="blockDay" class="form-control" type="date" name="blockDay" required>
   		<input id="userBlock" name="userBlock" type="text" style="display:none">
   		<br>
         <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>
