@@ -87,8 +87,9 @@ public class EstadisticasController {
 			model.addAttribute("colaboracionesValoradas", colaboracionDao.getColaboracionesValoradas());
 			model.addAttribute("peticionesTotales", peticionDao.getPeticionesTotales());
 			model.addAttribute("ofertasTotales", ofertaDao.getOfertasTotales());
-			
-			
+			model.addAttribute("colaboracionesHorasTotales", colaboracionDao.getColaboracionesHorasTotales());
+			model.addAttribute("mediaHorasColaboracion", colaboracionDao.getMediaHorasColaboraciones());
+			model.addAttribute("mediaValoracionColaboraciones", colaboracionDao.getMediaValoracionColaboraciones());
 			
 			
 			return "estadisticas/resumen";

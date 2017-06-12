@@ -250,7 +250,12 @@
 				<c:if test='${usuario.bloqueado==1}'>
 					<td>Sí</td>
 				</c:if>
-				<td>${usuario.fechaFinString}</td>
+				<c:if test='${usuario.bloqueado==1}'>
+					<td>${usuario.fechaFinString}</td>
+				</c:if>
+				<c:if test='${usuario.bloqueado==0}'>
+					<td></td>
+				</c:if>
 				<td>${usuario.rol}</td>
 				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
 				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>

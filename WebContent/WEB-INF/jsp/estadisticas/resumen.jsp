@@ -80,6 +80,20 @@
 			<td> Ofertas totales: </td>
 			<td> ${ofertasTotales} </td>
 		</tr>
+		<tr>
+			<td> Horas totales de colaboraciones: </td>
+			<td>${colaboracionesHorasTotales}</td>
+		</tr>
+		<tr>
+			<td> Media de horas por colaboración: </td>
+			<td>${mediaHorasColaboracion}</td>
+		</tr>
+		<tr>
+			<td> Valoración media de colaboraciones: </td>
+			<td>${mediaValoracionColaboraciones}</td>
+		</tr>
+		
+		
 	</table>	
 </body>
 </html>

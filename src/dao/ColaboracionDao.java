@@ -116,5 +116,23 @@ public class ColaboracionDao {
 		return this.jdbcTemplate.queryForObject("select count(*) from colaboracion", Integer.class);
 	}
 	
+	//Horas totales colaboraciones
+	public int getColaboracionesHorasTotales() {
+		return this.jdbcTemplate.queryForObject("select sum(horas_totales) from colaboracion", Integer.class);
+	}
+	
+	//Media horas colaboraciones
+	public double getMediaHorasColaboraciones(){
+		double num = this.jdbcTemplate.queryForObject("select avg(horas_totales) from colaboracion where horas_totales!=0", Double.class).doubleValue();
+		return num;
+//		return Math.round(num*100)/100;
+	}
+	
+	//Media valoraciones colaboraciones
+	public double getMediaValoracionColaboraciones(){
+		double num = this.jdbcTemplate.queryForObject("select avg(valoracion) from colaboracion where valoracion!=0", Double.class).doubleValue();
+		return num;
+	}
+	
 	
 }
