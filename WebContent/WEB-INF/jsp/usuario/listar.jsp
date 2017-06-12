@@ -217,7 +217,6 @@
 			<th>Eliminado</th>
 			<th>Bloqueado</th>
 			<th>Fecha fin bloqueo</th>
-			<th>Rol</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -227,6 +226,7 @@
 		<tbody >
 		
 		<c:forEach items="${usuarios}" var="usuario">
+		<c:if test='${usuario.rol!="ADMIN"}'>
 			<tr>
 				<td >${usuario.usuario}</td>
 <%-- 				<td>${usuario.contrasenya}</td>
@@ -251,7 +251,6 @@
 				<c:if test='${usuario.bloqueado==0}'>
 					<td></td>
 				</c:if>
-				<td>${usuario.rol}</td>
 				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
 				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
 				
@@ -284,6 +283,7 @@
 					<td><a type="button" class="desbloquea btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
 				</c:if>	
 			</tr>
+			</c:if>
 		</c:forEach>
 		</tbody>
 	</table>
