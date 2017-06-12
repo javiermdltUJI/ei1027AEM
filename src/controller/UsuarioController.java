@@ -83,14 +83,18 @@ public class UsuarioController {
 			return "usuario/add";
 		}
 		Usuario u = (Usuario) session.getAttribute("usuario");
-		if (u==null || !u.getRol().name().equals("ADMIN")){
+		if (u==null){
 				usuario.setBloqueado(0);
 				usuario.setEliminado(0);
 				usuario.setFechaFin(new Date());
 				usuario.setRol(Rol.ESTUDIANTE);
+				usuarioDao.addUsuario(usuario);
+				return "redirect:../login.html";
+		} else{
+			usuarioDao.addUsuario(usuario);
+			return "redirect:listar.html";
 		}
-		usuarioDao.addUsuario(usuario);
-		return "redirect:listar.html";
+
 	}
 	
 	@RequestMapping(value="/update/{usuario}", method = RequestMethod.GET)
