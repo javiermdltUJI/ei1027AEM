@@ -121,12 +121,11 @@
 				'msg': '¡Usuario bloqueado!',
 				'position': 'center'
 			})
-			setInterval(function(){ window.location.href = url; },2000);
+			setInterval(function(){  $('#seleccionarFecha').submit(); },2000);
 			document.getElementById('userBlock').value = user;
 			document.getElementById('blockDay').value = blockday; 
 
-	         $('#seleccionarFecha').submit();
-
+	        
 		});
 
 		$('#cancelar').click(function(e){
