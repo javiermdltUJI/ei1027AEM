@@ -24,7 +24,7 @@
 <body>
 
 	<h2 class="titulo">Nueva oferta</h2>
-	<p>Las fechas de la oferta deben ajustarse a la colaboracion, por lo que la fecha de inicio debe ser menor o igual que <strong>${colaboracion.fechaIniString}</strong> y  la fecha de fin mayor o igual que <strong>${colaboracion.fechaFinString}</strong>.</p>
+	<p>Las fechas de la oferta deben ajustarse a la colaboración, por lo que la fecha de inicio debe ser menor o igual que <strong>${colaboracion.fechaIniString}</strong> y  la fecha de fin mayor o igual que <strong>${colaboracion.fechaFinString}</strong>.</p>
 	
 	<form:form method="post" modelAttribute="oferta"  onsubmit="validate()">
 			<div class="form-group">
@@ -46,7 +46,7 @@
 				</div>
 			</c:if>
 			<c:if test='${feedbackFechas=="error"}'>
-				<p style="color:red">Las fechas no se ajustan a los parametros explicados anteriormente.</p>
+				<p style="color:red">Las fechas no se ajustan a los parámetros explicados anteriormente.</p>
 			</c:if>
 			<div class="form-group">
 				<input class="btn btn-primary"  type="submit" value="Añadir petición" />

@@ -41,7 +41,7 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Habilidad activada!',
+				'msg': '¡Habilidad activada!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -49,7 +49,7 @@
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Habilidad no activada',
+				'msg': '¡Habilidad no activada',
 				'position': 'center'
 			})
 		}
@@ -76,7 +76,7 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Habilidad cancelada!',
+				'msg': '¡Habilidad cancelada!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -84,7 +84,7 @@
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Habilidad no cancelada!',
+				'msg': '¡Habilidad no cancelada!',
 				'position': 'center'
 			})
 		}

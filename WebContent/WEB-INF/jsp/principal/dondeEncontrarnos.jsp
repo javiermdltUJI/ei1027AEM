@@ -6,9 +6,9 @@
 <title>Donde encontrarnos</title>
   </head>
   <body>
-  <h2 class="titulo">Donde encontrarnos</h2>
+  <h2 class="titulo">Dónde encontrarnos</h2>
 
-	<p>Nos encontraras en la universidad Jaume I o en el siguiente correo: <a href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> 
+	<p>Nos encontrarás en la Universidad Jaume I o en el siguiente correo: <a href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> 
 	</p>
 	<br>
 	

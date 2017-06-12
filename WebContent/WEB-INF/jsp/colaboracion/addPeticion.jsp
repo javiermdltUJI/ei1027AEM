@@ -25,7 +25,7 @@
 <body>
 	<h2 class="titulo">Nueva colaboración</h2>
 	
-	<p>Las fechas de la colaboración deben ajustarse a la peticion, por lo que debe estar entre <strong>${peticion.fechaIniString}</strong> y <strong>${peticion.fechaFinString}</strong> y la fecha de inicio debe ser mayor que el día actual.</p>
+	<p>Las fechas de la colaboración deben ajustarse a la petición, por lo que debe estar entre <strong>${peticion.fechaIniString}</strong> y <strong>${peticion.fechaFinString}</strong> y la fecha de inicio debe ser mayor que el día actual.</p>
 	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
 		   <div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
@@ -40,17 +40,17 @@
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">
 					<form:label path="horasTotales">Horas totales</form:label>
-					<form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
+					<form:input class="form-control" path="horasTotales" id="horasTotales" type="number" placeholder="Horas Totales" required="required"/>
 					<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 				<div class="form-group">
-					<form:label path="valoracion">Valoracion</form:label>
-					<form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion" required="required"/>
+					<form:label path="valoracion">Valoración</form:label>
+					<form:input  class="form-control" path="valoracion" id="valoracion" type="number" placeholder="Valoracion" required="required"/>
 					<form:errors path="valoracion" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 			</c:if>
 			<c:if test='${feedbackFechas=="error"}'>
-				<p style="color:red">Las fechas no se ajustan a los parametros explicados anteriormente.</p>
+				<p style="color:red">Las fechas no se ajustan a los parámetros explicados anteriormente.</p>
 			</c:if>
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Seleccionar Oferta" />

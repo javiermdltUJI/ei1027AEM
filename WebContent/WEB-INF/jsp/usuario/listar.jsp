@@ -238,8 +238,18 @@
  --%>				<td>${usuario.correo}</td>
 				<td>${usuario.nombre}</td>
 				<td>${usuario.dni}</td>
-				<td>${usuario.eliminado}</td>
-				<td>${usuario.bloqueado}</td>
+				<c:if test='${usuario.eliminado==0}'>
+					<td>No</td>
+				</c:if>
+				<c:if test='${usuario.eliminado==1}'>
+					<td>Sí</td>
+				</c:if>
+				<c:if test='${usuario.bloqueado==0}'>
+					<td>No</td>
+				</c:if>
+				<c:if test='${usuario.bloqueado==1}'>
+					<td>Sí</td>
+				</c:if>
 				<td>${usuario.fechaFinString}</td>
 				<td>${usuario.rol}</td>
 				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>

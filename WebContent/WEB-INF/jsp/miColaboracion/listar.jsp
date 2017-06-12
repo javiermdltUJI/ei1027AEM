@@ -23,7 +23,7 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
-			<th>Valoracion</th>
+			<th>Valoración</th>
 			<th>Habilidad</th>
 			<th>Usuario</th>
 			<th></th>
@@ -60,7 +60,7 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
-			<th>Valoracion</th>
+			<th>Valoración</th>
 			<th>Habilidad</th>
 			<th>Usuario</th>
 			<th></th>

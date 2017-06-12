@@ -29,7 +29,7 @@
 
 <p class="text-justify">En este portal se utilizan cookies de sesión. Las cookies de sesión son cookies temporales que permanecen en el archivo de cookies de su navegador hasta que abandone la página web, por lo que ninguna queda registrada en el disco duro del usuario. La información obtenida por medio de estas cookies, sirve para analizar pautas de tráfico en la web.
 </p>
-<p class="text-justify">Por otra parte, las cookies utilizadas son propieas. Las cookies propias se envían al equipo terminal del usuario desde un equipo o dominio gestionado por el propio editor y desde el que se presta el servicio solicitado por el usuario.
+<p class="text-justify">Por otra parte, las cookies utilizadas son propias. Las cookies propias se envían al equipo terminal del usuario desde un equipo o dominio gestionado por el propio editor y desde el que se presta el servicio solicitado por el usuario.
 </p>
 <p class="text-justify">Por lo tanto, es uso que hacemos de la información del usuario nos permite proporcionar una mejor experiencia mejorando el contenido y facilitando su uso.
 </p>

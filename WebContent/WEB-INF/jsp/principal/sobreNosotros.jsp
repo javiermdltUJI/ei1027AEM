@@ -10,14 +10,14 @@
 
 
 	<h4> Skill sharing se trata de un proyecto con el objetivo de unir personas para que intercambien conocimiento.
-	Forma parte de la asignatura EI1027 del grado en informática de la universidad Jaume I. 
+	Forma parte de la asignatura EI1027 del grado en informática de la Universidad Jaume I. 
 	</h4>
 	<br>
 	<h4>
 	Esta plataforma ha sido desarrollada como un proyecto dentro de la asignatura por los alumnos:
 	</h4>
 	<h4>
-	Mar Escobar Benet, Miguel Amela Llobet y Javier Martínez de la Torre.
+	Miguel Amela Llobet, Mar Escobar Benet y Javier Martínez de la Torre.
 	</h4>
 	<br>
 	<h4>

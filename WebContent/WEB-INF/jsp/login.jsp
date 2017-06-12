@@ -20,7 +20,7 @@
 			</div>
 			
 			<div class="form-group">
-				<form:label path="contrasenya">Contrasenya</form:label>
+				<form:label path="contrasenya">Contraseña</form:label>
 				<form:password class="form-control" path="contrasenya" id="contrasenya" placeholder="Contrasenya"/>
 			    <form:errors path="contrasenya" cssClass="error" />
 			

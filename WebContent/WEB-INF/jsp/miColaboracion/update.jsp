@@ -29,11 +29,11 @@
       	</div>
       	<div class="form-group">
     	    <form:label path="horasTotales">Horas totales</form:label>        
-        	<form:input type="number" min="0" class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
+        	<form:input type="number" min="0" class="form-control" path="horasTotales" id="horasTotales" type="number" placeholder="Horas Totales" required="required"/>
 			<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
       	</div>
       	<div class="form-group">
-        	<form:label path="valoracion">Valoracion</form:label>
+        	<form:label path="valoracion">Valoración</form:label>
         <%--  <form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion"/>
         --%>
         		<form:radiobutton path="valoracion" value="1"/>1

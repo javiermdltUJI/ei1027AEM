@@ -34,7 +34,7 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Oferta borrada!',
+				'msg': '¡Oferta borrada!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -42,7 +42,7 @@
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Oferta no borrada!',
+				'msg': '¡Oferta no borrada!',
 				'position': 'center'
 			})
 		}
@@ -108,10 +108,10 @@
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-success" href="./update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a></td>
 						<td><a type="button" class="elimina btn btn-danger" href="./delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a></td>
-						<td><a type="button" class="btn btn-primary" href="../colaboracion/add.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboracion</a></td>
+						<td><a type="button" class="btn btn-primary" href="../colaboracion/add.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboración</a></td>
 					</c:if>
 					<c:if test='${accesible == false}'>
-						<td><a type="button" class="btn btn-primary" href="../colaboracion/addOferta/${oferta.idOferta}.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboracion</a></td>
+						<td><a type="button" class="btn btn-primary" href="../colaboracion/addOferta/${oferta.idOferta}.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboración</a></td>
 					</c:if>
 				</tr>
 			</c:if>

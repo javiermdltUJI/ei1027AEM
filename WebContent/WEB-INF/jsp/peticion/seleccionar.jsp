@@ -20,7 +20,7 @@
 	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
 	</p>
 	<c:if test='${fn:length(collection)==0}'>
-		<p><strong><i>No existen peticiones que se ajusten a la colaboración que se quiere crear. Para generar automaticamente una petición conforme a la colaboración selecciona 'Agregar petición'</i></strong> </p>
+		<p><strong><i>No existen peticiones que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una petición conforme a la colaboración selecciona 'Agregar petición'</i></strong> </p>
 	</c:if>
 	<c:if test='${fn:length(collection)!=0}'>
 		<table class="table">

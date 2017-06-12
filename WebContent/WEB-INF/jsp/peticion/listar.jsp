@@ -37,7 +37,7 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Petición borrado!',
+				'msg': '¡Petición borrado!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -45,7 +45,7 @@
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Petición no borrado!',
+				'msg': '¡Petición no borrado!',
 				'position': 'center'
 			})
 		}
@@ -104,10 +104,10 @@
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-success" href="./update/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
 						<td><a type="button" class="elimina btn btn-danger" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>		
-						<td><a type="button" class="btn btn-primary" href="../colaboracion/add.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboracion</a></td>
+						<td><a type="button" class="btn btn-primary" href="../colaboracion/add.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboración</a></td>
 					</c:if>
 					<c:if test='${accesible == false}'>
-						<td><a type="button" class="btn btn-primary" href="../colaboracion/addPeticion/${peticion.idPeticion}.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboracion</a></td>
+						<td><a type="button" class="btn btn-primary" href="../colaboracion/addPeticion/${peticion.idPeticion}.html"><i class="fa fa-plus" aria-hidden="true"></i> Crear colaboración</a></td>
 					</c:if>
 				</tr>
 			</c:if>

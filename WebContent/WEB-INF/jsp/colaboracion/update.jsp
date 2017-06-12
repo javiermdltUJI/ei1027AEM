@@ -39,22 +39,22 @@
 			</div>
 			<div class="form-group">
 				<form:label path="horasTotales">Horas totales</form:label>
-				<form:input class="form-control" path="horasTotales" id="horasTotales" placeholder="Horas Totales" required="required"/>
+				<form:input class="form-control" path="horasTotales" id="horasTotales" type="number" placeholder="Horas Totales" required="required"/>
 				<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
-				<form:label path="valoracion">Valoracion</form:label>
-				<form:input  class="form-control" path="valoracion" id="valoracion" placeholder="Valoracion" required="required"/>
+				<form:label path="valoracion">Valoración</form:label>
+				<form:input  class="form-control" path="valoracion" id="valoracion" type="number" placeholder="Valoracion" required="required"/>
 				<form:errors path="valoracion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="idOferta">id_oferta</form:label>
-				<form:input  class="form-control" path="idOferta" id="idOferta" placeholder="1" required="required"/>
+				<form:input  class="form-control" path="idOferta" id="idOferta" type="number" placeholder="1" required="required"/>
 				<form:errors path="idOferta" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="idPeticion">id_peticion</form:label>
-				<form:input class="form-control" path="idPeticion" id="idPeticion" placeholder="1" required="required"/>
+				<form:input class="form-control" path="idPeticion" id="idPeticion" type="number" placeholder="1" required="required"/>
 				<form:errors path="idPeticion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">

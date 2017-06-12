@@ -40,7 +40,7 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Colaboración borrada!',
+				'msg': '¡Colaboración borrada!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -48,7 +48,7 @@
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Colaboración no borrada!',
+				'msg': '¡Colaboración no borrada!',
 				'position': 'center'
 			})
 		}
@@ -67,7 +67,7 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
-			<th>Valoracion</th>
+			<th>Valoración</th>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>id_oferta</th>
 			<th>id_peticion</th>

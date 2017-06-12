@@ -21,7 +21,7 @@
 	</p>
 	
 	<c:if test='${fn:length(collection)==0}'>
-		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automaticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
+		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
 	</c:if>
 	<c:if test='${fn:length(collection)!=0}'>
 		
