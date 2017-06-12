@@ -51,7 +51,7 @@ public class PrincipalController {
 	}
 	
 	
-	@RequestMapping(value="/ok", method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/ok", method = RequestMethod.POST, produces="application/json", headers = "Accept=*/*")
 	public @ResponseBody String cookieOK(Model model, HttpSession session) {
 		session.setAttribute("ok", 1);
 		return "OK";
