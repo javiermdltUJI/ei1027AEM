@@ -74,7 +74,7 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Usuario borrado!',
+				'msg': '¡Usuario borrado!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -82,7 +82,7 @@
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Usuario no borrado!',
+				'msg': '¡Usuario no borrado!',
 				'position': 'center'
 			})
 		}
@@ -116,7 +116,7 @@
 			e.preventDefault();
 			notif({
 				'type': 'success',
-				'msg': 'Usuario bloqueado!',
+				'msg': '¡Usuario bloqueado!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
@@ -130,7 +130,7 @@
 		$('#cancelar').click(function(e){
 			notif({
 				'type': 'error',
-				'msg': 'Usuario no bloqueado!',
+				'msg': '¡Usuario no bloqueado!',
 				'position': 'center'
 			})
 		});
@@ -152,21 +152,27 @@
 		if(choice){
 			notif({
 				'type': 'success',
-				'msg': 'Usuario bloqueado!',
+				'msg': '¡Usuario desbloqueado!',
 				'position': 'center'
 			})
 			setInterval(function(){ window.location.href = url; },2000);
 		}else{
 			notif({
 				'type': 'error',
-				'msg': 'Usuario no bloqueado!',
+				'msg': '¡Usuario no bloqueado!',
 				'position': 'center'
 			})
 		}
 	}	
 	
+	$(function() {
+    	$( "#blockDay" ).datepicker({ dateFormat: 'dd-mm-yy' });
+
+	});
+
 	
 	</script>
+		
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -176,14 +182,14 @@
     <div style="margin-top:40%" class="modal-content">
       <div style="background-color: rgba(232, 105, 28, 0.85); color: white;" class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">¿Hasta que fecha debe estar bloqueado el usuario?</h4>
+        <h4 class="modal-title">¿Hasta qué fecha debe estar bloqueado el usuario?</h4>
       </div>
       <div class="modal-body">
       
       <form:form id="seleccionarFecha" method="POST" action="blockUser.html">
       
        	<label>Fecha de fin de bloqueo</label>
-  		<input  id="blockDay" class="form-control"  type="date" name="blockDay" required>
+  		<input  id="blockDay" class="form-control" name="blockDay" required>
   		<input id="userBlock" name="userBlock" type="text" style="display:none">
   		<br>
         <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>
