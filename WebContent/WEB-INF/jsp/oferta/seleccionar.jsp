@@ -24,6 +24,37 @@
 		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
 	</c:if>
 	<c:if test='${fn:length(collection)!=0}'>
+	
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
+	<script>
+	
+	$(document).ready(function(){
+
+		$('.selecciona').click(function(e){
+			notif({
+				'type': 'success',
+				'msg': '¡Colaboracion creada!',
+				'position': 'center'
+			})
+			
+		});
+		
+		$('.addOferta').click(function(e){
+
+			notif({
+				'type': 'success',
+				'msg': '¡Colaboracion creada!',
+				'position': 'center'
+			})
+		});
+		
+	
+	});
+	</script>
 		
 	<table class="table">
 		<thead class="cabecera">
@@ -63,10 +94,10 @@
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td><a type="button" class="btn btn-default" href="./update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
 					<td><a type="button" class="btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
-					<td><a type="button" class="btn btn-default" href="../colaboracion/creadaOferta/${oferta.idOferta}.html">Seleccionar</a></td>
+					<td><a type="button" class="selecciona btn btn-default" href="../colaboracion/creadaOferta/${oferta.idOferta}.html">Seleccionar</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>
-					<td><a type="button" class="btn btn-primary" href="../colaboracion/creadaOferta/${oferta.idOferta}.html"><i class="fa fa-check" aria-hidden="true"></i>
+					<td><a type="button" class="selecciona btn btn-primary" href="../colaboracion/creadaOferta/${oferta.idOferta}.html"><i class="fa fa-check" aria-hidden="true"></i>
 					 Seleccionar</a></td>
 				</c:if>
 			</tr>
@@ -75,10 +106,10 @@
 	</c:if>
 	
 	<c:if test='${accesible == true}'>
-		<a type="button" class="btn btn-primary" href="../addConHabilidad.html">Agregar oferta</a>
+		<a type="button" class="addOferta btn btn-primary" href="../addConHabilidad.html">Agregar oferta</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
-		<a type="button" class="btn btn-primary" href="addConHabilidad.html">Agregar oferta</a>
+		<a type="button" class="addOferta btn btn-primary" href="addConHabilidad.html">Agregar oferta</a>
 	</c:if>
 </body>
 </html>

@@ -19,6 +19,40 @@
 	<strong>${colaboracion.fechaIniString}</strong> y 
 	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
 	</p>
+	
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
+	
+	<script>
+	
+	$(document).ready(function(){
+
+		$('.selecciona').click(function(e){
+			notif({
+				'type': 'success',
+				'msg': '¡Colaboracion creada!',
+				'position': 'center'
+			})
+			
+		});
+		
+		$('.addOferta').click(function(e){
+
+			notif({
+				'type': 'success',
+				'msg': '¡Colaboracion creada!',
+				'position': 'center'
+			})
+		});
+		
+	
+	});
+	</script>
+	
+	
 	<c:if test='${fn:length(collection)==0}'>
 		<p><strong><i>No existen peticiones que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una petición conforme a la colaboración selecciona 'Agregar petición'</i></strong> </p>
 	</c:if>
@@ -62,10 +96,10 @@
 					<c:if test='${usuario.rol=="ADMIN"}'>
 						<td><a type="button" class="btn btn-default" href="./update/${peticion.usuario}/${peticion.idPeticion}.html">Edita</a>
 						<td><a type="button" class="btn btn-default" href="./delete/${peticion.usuario}/${peticion.idPeticion}.html">Elimina</a>		
-						<td><a type="button" class="btn btn-default" href="../colaboracion/creada/${peticion.idPeticion}.html">Seleccionar</a></td>
+						<td><a type="button" class="selecciona btn btn-default" href="../colaboracion/creada/${peticion.idPeticion}.html">Seleccionar</a></td>
 					</c:if>
 					<c:if test='${accesible == false}'>
-						<td><a type="button" class="btn btn-primary" href="../colaboracion/creada/${peticion.idPeticion}.html"><i class="fa fa-check" aria-hidden="true"></i>
+						<td><a type="button" class="selecciona btn btn-primary" href="../colaboracion/creada/${peticion.idPeticion}.html"><i class="fa fa-check" aria-hidden="true"></i>
 						 Seleccionar</a></td>
 					</c:if>
 				</tr>
@@ -73,10 +107,10 @@
 		</table>
 	</c:if>
 	<c:if test='${accesible == true}'>
-		<a type="button" class="btn btn-primary" href="../addConHabilidad.html">Agregar petición</a>
+		<a type="button" class="addOferta btn btn-primary" href="../addConHabilidad.html">Agregar petición</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
-		<a type="button" class="btn btn-primary" href="addConHabilidad.html">Agregar petición</a>
+		<a type="button" class="addOferta btn btn-primary" href="addConHabilidad.html">Agregar petición</a>
 	</c:if>
 </body>
 </html>
