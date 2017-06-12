@@ -19,6 +19,9 @@
 	<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
 		<link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	
 	<!-- 	<script>
 	$('#table').bootstrapTable({
@@ -109,10 +112,8 @@
 		$('#okBloquear').click(function(e){
 			
 			user = document.getElementById('userBlock').value;
-			alert(user);
-			
+		
 			blockday = document.getElementById('blockDay').value;
-			alert(blockday);
 
 			e.preventDefault();
 			notif({
@@ -167,7 +168,7 @@
 	}	
 	
 	$(function() {
-    	$( "#blockDay" ).datepicker({ dateFormat: 'dd-mm-yy' });
+    	$( "#blockDay" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
 	});
 
@@ -178,7 +179,6 @@
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div style="margin-top:40%" class="modal-content">
       <div style="background-color: rgba(232, 105, 28, 0.85); color: white;" class="modal-header">
@@ -190,7 +190,7 @@
       <form:form id="seleccionarFecha" method="POST" action="blockUser.html">
       
        	<label>Fecha de fin de bloqueo</label>
-  		<input  id="blockDay" class="form-control" type="date" name="blockDay" required>
+  		<input  id="blockDay" class="form-control" placeholder="dd/mm/yyyy" name="blockDay" required>
   		<input id="userBlock" name="userBlock" type="text" style="display:none">
   		<br>
         <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>

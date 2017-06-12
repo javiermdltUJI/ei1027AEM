@@ -155,8 +155,7 @@ public class UsuarioController {
 	public String blockUser(HttpServletRequest request) throws ParseException{
 		
 		String date= request.getParameter("blockDay");
-		String[] parts = date.split("-");
-		date= parts[2]+"/"+parts[1]+"/"+parts[0];
+		
 		String usuario= request.getParameter("userBlock");
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
