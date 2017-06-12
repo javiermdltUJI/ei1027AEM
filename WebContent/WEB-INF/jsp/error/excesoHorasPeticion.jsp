@@ -13,7 +13,7 @@
 	<img class="center-block" alt="" src="${pageContext.request.contextPath}/img/error.png" style="width:15%;">
 
 	<h1 class="text-center">Error. Has excedido las horas de petición.</h1>
-	<p class="text-center">Para poder coninuar, has de crear una colaboración a partir de ofertas de otros usuarios de al menos ${sessionScope.horas}</p>
+	<p class="text-center">Para poder continuar, has de crear una colaboración a partir de ofertas de otros usuarios de al menos ${sessionScope.horas}</p>
 
 	<div style="text-align:center;"><a type="button" class="btn btn-default" href="${pageContext.request.contextPath}/${sessionScope.prevURL}">Volver</a></div>
 </body>
