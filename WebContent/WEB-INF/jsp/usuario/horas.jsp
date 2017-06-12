@@ -20,6 +20,9 @@
 </c:if>
 <h3 class="text-justify"> Total: ${sessionScope.horas}</h3>
 
+	<img alt="" src="${pageContext.request.contextPath}/img/time.png" style="width:15%;     margin-right: 42%;   margin-left: 42%;"/>
+
+
 </div>
 </jsp:body>
 </t:paginabasica>

@@ -23,7 +23,7 @@
 	<h4>
 	Cualquier duda se puede contactar mediante el correo: <a href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> 
 	</h4>
-	<img alt="" src="${pageContext.request.contextPath}/img/monigote.png" style="width:15%;     margin-right: 42%;   margin-left: 42%;"/>
+	<img alt="" src="${pageContext.request.contextPath}/img/monigote.png" style="width:20%;     margin-right: 40%;   margin-left: 40%;"/>
 	
 </body>
 </html>

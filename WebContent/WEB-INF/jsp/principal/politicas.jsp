@@ -1,5 +1,5 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %> 
-<t:paginabasica title="asd">
+<t:paginabasica title="Política de cookies">
 <jsp:body>
 <html> 
   <head>
