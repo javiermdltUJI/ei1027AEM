@@ -19,17 +19,6 @@
 	<strong>${colaboracion.fechaIniString}</strong> y 
 	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
 	</p>
-	
-	<c:if test='${fn:length(collection)==0}'>
-		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
-	</c:if>
-	<c:if test='${fn:length(collection)!=0}'>
-	
-	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
-	
-	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
-	
 	<script>
 	
 	$(document).ready(function(){
@@ -55,6 +44,17 @@
 	
 	});
 	</script>
+	<c:if test='${fn:length(collection)==0}'>
+		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
+	</c:if>
+	<c:if test='${fn:length(collection)!=0}'>
+	
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	
+	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
+	
 		
 	<table class="table">
 		<thead class="cabecera">
