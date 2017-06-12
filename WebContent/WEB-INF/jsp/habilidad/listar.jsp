@@ -29,7 +29,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Activar esta habilidad?',
-			'textaccept': 'Si!',
+			'textaccept': '¡Sí!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback
@@ -62,7 +62,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Cancelar esta habilidad?',
-			'textaccept': 'Si!',
+			'textaccept': '¡Sí!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback2

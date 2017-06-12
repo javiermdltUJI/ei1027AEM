@@ -22,7 +22,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Borrar esta oferta?',
-			'textaccept': 'Yes!',
+			'textaccept': '¡Sí!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback

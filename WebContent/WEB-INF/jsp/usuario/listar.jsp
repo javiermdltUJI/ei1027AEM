@@ -62,7 +62,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Borrar este usuario?',
-			'textaccept': 'Si!',
+			'textaccept': '¡Sí!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback
@@ -141,7 +141,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Desbloquear este usuario?',
-			'textaccept': 'Si!',
+			'textaccept': '¡Sí!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback2

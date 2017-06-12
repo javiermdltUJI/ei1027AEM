@@ -28,7 +28,7 @@
 			e.preventDefault();
 			notif_confirm({
 			'message': '¿Borrar esta colaboración?',
-			'textaccept': 'Si!',
+			'textaccept': '¡Sí!',
 			'textcancel': 'No',
 			'fullscreen': true,
 			'callback': myCallback
