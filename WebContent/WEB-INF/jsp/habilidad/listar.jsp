@@ -98,9 +98,6 @@
 		  <thead class="cabecera">
 	
 		<tr>
-		<c:if test='${usuario.rol=="ADMIN"}'>
-			<th>id_habilidad</th>
-		</c:if>
 			<th>Nombre</th>
 			<th>Tipo</th>
 			<th>Descripción</th>
@@ -117,9 +114,6 @@
 		</thead>
 		<c:forEach items="${habilidades}" var="habilidad">
 			<tr>
-			<c:if test='${usuario.rol=="ADMIN"}'>
-				<td>${habilidad.idHabilidad}</td>
-			</c:if>
 				<td>${habilidad.nombre}</td>
 				<td>${habilidad.tipo}</td>
 				<td>${habilidad.descripcion}</td>

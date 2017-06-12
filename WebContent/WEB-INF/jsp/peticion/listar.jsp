@@ -61,6 +61,9 @@
 		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
+			<th>Habilidad</th>
+			<th>Nivel</th>
+			
 			<th>Más info.</th>
 		<c:if test='${usuario.usuario != sessionScope.mis && usuario.rol!="ADMIN"}'>
 			<th>Usuario</th>
@@ -72,7 +75,6 @@
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>Usuario</th>
-			<th>id_habilidad</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -88,12 +90,12 @@
 				</c:if>
 					<td>${peticion.fechaIniString}</td>
 					<td>${peticion.fechaFinString}</td>
+					<td>${peticion.descripcionHabilidad}</td>
+					<td>${peticion.nivelHabilidad}</td>
+					
 					<td>${peticion.descripcion}</td>
 				<c:if test='${usuario.usuario!=sessionScope.mis}'>
 					<td>${peticion.usuario}</td>
-				</c:if>
-				<c:if test='${usuario.rol=="ADMIN"}'>
-					<td>${peticion.idHabilidad}</td>
 				</c:if>
 				<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>
 						<td><a type="button" class="btn btn-success" href="../update/${peticion.usuario}/${peticion.idPeticion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a>

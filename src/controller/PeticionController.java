@@ -264,7 +264,7 @@ public class PeticionController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "peticion/update/"+usuario+"/"+id_peticion+".html");
 		if (u==null)
-			return "redirect:../login.html";
+			return "redirect:../../login.html";
 		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){
 			model.addAttribute("elegida", peticion.getIdHabilidad());
 			model.addAttribute("peticion", peticionDao.getPeticion(id_peticion));

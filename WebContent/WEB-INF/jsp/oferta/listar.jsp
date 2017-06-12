@@ -64,11 +64,8 @@
 		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
-			
-			<c:if test='${usuario.rol=="ESTUDIANTE"}'>
-				<th>Habilidad</th>
-				<th>Nivel</th>
-			</c:if>
+			<th>Habilidad</th>
+			<th>Nivel</th>
 		
 			<th>Más info.</th>
 		<c:if test='${usuario.usuario!=sessionScope.mis && usuario.rol!="ADMIN"}'>
@@ -81,7 +78,6 @@
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
 			<th>Usuario</th>
-			<th>id_habilidad</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -97,16 +93,12 @@
 				</c:if>
 					<td>${oferta.fechaIniString}</td>
 					<td>${oferta.fechaFinString}</td>
-					<c:if test='${usuario.rol=="ESTUDIANTE"}'>
-						<td>${oferta.descripcionHabilidad}</td>
-						<td>${oferta.nivelHabilidad}</td>
-					</c:if>
+					<td>${oferta.descripcionHabilidad}</td>
+					<td>${oferta.nivelHabilidad}</td>
+					
 					<td>${oferta.descripcion}</td>
 				<c:if test='${usuario.usuario != sessionScope.mis}'>
 					<td>${oferta.usuario}</td>
-				</c:if>
-				<c:if test='${usuario.rol=="ADMIN"}'>
-					<td>${oferta.idHabilidad}</td>
 				</c:if>
 				
 					<c:if test='${usuario.usuario == sessionScope.mis && usuario.usuario != null}'>

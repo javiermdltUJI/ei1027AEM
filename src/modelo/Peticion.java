@@ -14,6 +14,10 @@ public class Peticion {
 	private String usuario;
 	private int id_habilidad;
 	
+	//Para mostrar los datos de la habilidad
+	private String descripcionHabilidad;
+	private Nivel nivelHabilidad;
+	
 	public int getIdPeticion(){ return id_peticion; }
 	public void setIdPeticion(int idPeticion){ this.id_peticion = idPeticion;}
 	public Date getFechaIni(){ return fechaIni; }
@@ -48,5 +52,17 @@ public class Peticion {
 	public String getFechaFinString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		return dateFormat.format(fechaFin); 
+	}
+	public String getDescripcionHabilidad() {
+		return descripcionHabilidad;
+	}
+	public void setDescripcionHabilidad(String descripcionHabilidad) {
+		this.descripcionHabilidad = descripcionHabilidad;
+	}
+	public Nivel getNivelHabilidad() {
+		return nivelHabilidad;
+	}
+	public void setNivelHabilidad(Nivel nivelHabilidad) {
+		this.nivelHabilidad = nivelHabilidad;
 	}
 }

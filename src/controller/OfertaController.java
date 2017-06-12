@@ -255,7 +255,7 @@ public class OfertaController {
 		Usuario u = (Usuario) session.getAttribute("usuario");
 		session.setAttribute("prevURL", "oferta/update/"+usuario+"/"+id_oferta+".html" );
 		if (u==null)
-			return "redirect:../login.html";
+			return "redirect:../../login.html";
 		if(u.getUsuario().equals(usuario) || u.getRol().name().equals("ADMIN")){	
 			model.addAttribute("oferta", ofertaDao.getOferta(id_oferta));
 			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());

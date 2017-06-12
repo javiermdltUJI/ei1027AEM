@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import modelo.Nivel;
 import modelo.Peticion;
 
 
@@ -43,18 +44,34 @@ public class PeticionDao {
 		}
 	}
 	
+	private static final class PeticionConHabilidadMapper implements RowMapper<Peticion>{
+		public Peticion mapRow(ResultSet rs, int rowNum) throws SQLException{
+			Peticion peticion = new Peticion();
+			peticion.setIdPeticion(rs.getInt("id_peticion"));
+			peticion.setFechaIni(toDate(rs.getTimestamp("fecha_ini")));
+			peticion.setFechaFin(toDate(rs.getTimestamp("fecha_fin")));
+			peticion.setDescripcion(rs.getString("descripcion"));
+			peticion.setUsuario(rs.getString("usuario"));
+			peticion.setIdHabilidad(rs.getInt("id_habilidad"));
+			peticion.setDescripcionHabilidad(rs.getString("nombre"));
+			peticion.setNivelHabilidad(Nivel.valueOf(rs.getString("nivel")));
+			return peticion;
+		}
+	}
+	
+	
 	public List<Peticion> getPeticiones(){
-		return this.jdbcTemplate.query("select * from peticion ORDER BY fecha_ini, fecha_fin asc", new PeticionMapper());
+		return this.jdbcTemplate.query("select peticion.id_habilidad, id_peticion, fecha_ini, fecha_fin, peticion.descripcion, usuario, habilidad.descripcion AS nombre, nivel from peticion JOIN habilidad USING (id_habilidad) ORDER BY fecha_ini, fecha_fin asc", new PeticionConHabilidadMapper());
 	}
 	
 	//Devuelve las peticiones no hechas por mi
 	public List<Peticion> getPeticiones(String usuario){
-		return this.jdbcTemplate.query("select * from peticion where usuario!=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new PeticionMapper());
+		return this.jdbcTemplate.query("select peticion.id_habilidad, id_peticion, fecha_ini, fecha_fin, peticion.descripcion, usuario, habilidad.descripcion AS nombre, nivel from peticion JOIN habilidad USING (id_habilidad) where usuario!=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new PeticionConHabilidadMapper());
 	}
 	
 	//Devuelve mis peticiones
 	public List<Peticion> getMisPeticiones(String usuario){
-		return this.jdbcTemplate.query("select * from peticion where usuario=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new PeticionMapper());
+		return this.jdbcTemplate.query("select peticion.id_habilidad, id_peticion, fecha_ini, fecha_fin, peticion.descripcion, usuario, habilidad.descripcion AS nombre, nivel from peticion JOIN habilidad USING (id_habilidad)  where usuario=? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario}, new PeticionConHabilidadMapper());
 	}
 	
 	
