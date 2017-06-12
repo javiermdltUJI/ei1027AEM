@@ -71,7 +71,7 @@ public class LoginController {
            // Comprova que el login siga correcte 
         // intentant carregar les dades de l'usuari 
         
-        if(! usuarioDao.existeUsuario(usuario.getUsuario())){
+        if(!usuarioDao.existeUsuario(usuario.getUsuario())){
         	bindingResult.rejectValue("usuario", "badpw", "Nombre usuario invalido");
         	return "login";
         }
@@ -82,10 +82,8 @@ public class LoginController {
             bindingResult.rejectValue("contrasenya", "badpw", "Contraseña incorrecta"); 
             return "login";
         }
-        
-    	if(usuarioDao.estaBloqueado(usuario.getNombre()))
+    	if(usuarioDao.estaBloqueado(usuario.getUsuario()))
     		return "error/bloqueado";
-    
         
         // Autenticats correctament. 
         // Guardem les dades de l'usuari autenticat a la sessio

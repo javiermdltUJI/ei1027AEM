@@ -95,17 +95,7 @@ public class UsuarioDao implements UserDao {
 		this.jdbcTemplate.update("update usuario set bloqueado = 0, fecha_fin = '0001-01-01' where nom_usuario = ?", usuario);
 	}
 	
-	//Para comprobar si un usuario existe en la base de datos
-	public boolean existeUsuario(String nombreUsuario){
-		try{
-		this.jdbcTemplate.queryForObject("select * from Usuario where nom_usuario = ?",  
-				new Object[] {nombreUsuario}, 
-				new UsuarioMapper());
-		}catch(EmptyResultDataAccessException e){
-			return false;
-		}
-		return true;
-	}
+	
 	
 		
 	
@@ -127,7 +117,21 @@ public class UsuarioDao implements UserDao {
 	     }
 	 }
 	
-	//Para comprobar si un usuario est� bloqueado
+	
+	//Para comprobar si un usuario existe en la base de datos
+		public boolean existeUsuario(String nombreUsuario){
+			try{
+			Usuario u = this.jdbcTemplate.queryForObject("select * from Usuario where nom_usuario = ?",  
+					new Object[] {nombreUsuario}, 
+					new UsuarioMapper());
+			return true;
+			}catch(EmptyResultDataAccessException e){
+				return false;
+			}
+		}
+		
+		
+	//Para comprobar si un usuario está bloqueado
 	public boolean estaBloqueado(String nombreUsuario){
 		Usuario usuario;
 		if (existeUsuario(nombreUsuario)) {
@@ -139,7 +143,7 @@ public class UsuarioDao implements UserDao {
 				return false;
 			if (usuario.getFechaFin().before(new Date())){
 				usuario.setBloqueado(0);
-				//usuario.setFechaFin(null);
+				usuario.setFechaFin(new Date());
 				updateUsuario(usuario);
 				return false;
 			}
