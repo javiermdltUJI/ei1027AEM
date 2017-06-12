@@ -39,8 +39,8 @@ public class mandaCorreo {
 	        Transport transport = mailSession.getTransport();
 
 	        MimeMessage message = new MimeMessage(mailSession);
-	        message.setSubject("Nueva colaboración en Skill Sharing");
-	        message.setContent("<h2><strong>Hola!</strong></h2><p>Se ha generado una nueva colaboración en la que participas a partir de una "+tipo+" tuya, entra en skill sharing para tener más información.</p><p>Esperamos verte pronto por la plataforma.</p><br><p>El equipo de skill sharing</p>", "text/html; charset=utf-8");
+	        message.setSubject("Nueva colaboraciÃ³n en Skill Sharing");
+	        message.setContent("<h2><strong>Hola!</strong></h2><p>Se ha generado una nueva colaboraciÃ³n en la que participas a partir de una "+tipo+" tuya, entra en skill sharing para tener mÃ¡s informaciÃ³n.</p><p>Esperamos verte pronto por la plataforma.</p><br><p>El equipo de skill sharing</p>", "text/html; charset=utf-8");
 
 	        message.addRecipient(Message.RecipientType.TO,
 	             new InternetAddress(correo));
