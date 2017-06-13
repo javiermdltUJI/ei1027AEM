@@ -42,7 +42,7 @@
 			<div class="form-group">						
 				<form:label path="valoracion">Valoración</form:label>
 				<form:select path="valoracion" class="form-control" id="tipoValoracion">
-					<form:option value="0"> - </form:option>
+					<form:option value="0"> --- </form:option>
 					<form:option value="1"> 1 </form:option>
 					<form:option value="2"> 2 </form:option>
 					<form:option value="3"> 3 </form:option>

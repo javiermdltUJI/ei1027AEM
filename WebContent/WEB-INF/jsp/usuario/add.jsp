@@ -85,7 +85,7 @@
 				</div>
 				<div class="form-group">
 					<form:label path="fechaFin">Fecha de fin de bloqueo</form:label>
-					<form:input class="form-control" path="fechaFin" id="fechaFin"/>
+					<form:input class="form-control" path="fechaFin" placeholder="dd-mm-aaaa" id="fechaFin"/>
 					<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
 				<div class="form-group">
