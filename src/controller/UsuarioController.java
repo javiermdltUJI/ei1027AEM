@@ -158,7 +158,7 @@ public class UsuarioController {
 		
 		String usuario= request.getParameter("userBlock");
 		
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha_fin = format.parse(date);
 
 		usuarioDao.lockUsuario(usuario,fecha_fin);

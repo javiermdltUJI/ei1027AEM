@@ -11,6 +11,8 @@
 	
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/moment.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/moment-with-locales.js'></script>
 	
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
 		<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/style.css'>
@@ -109,7 +111,7 @@
 
 	$(document).ready(function(){
 		
-		$('#okBloquear').click(function(e){
+		/* $('#okBloquear').click(function(e){
 			
 			user = document.getElementById('userBlock').value;
 		
@@ -126,7 +128,7 @@
 			document.getElementById('blockDay').value = blockday; 
 
 	        
-		});
+		}); */
 
 		$('#cancelar').click(function(e){
 			notif({
@@ -167,13 +169,38 @@
 	}	
 	
 	$(function() {
-    	$( "#blockDay" ).datepicker({ dateFormat: 'dd/mm/yy' });
+    	$( "#blockDay" ).datepicker({ dateFormat: 'dd-mm-yy' });
 
 	});
 
 	
 	</script>
+	<script>
+	function submitform() {
 		
+		  if(moment(document.getElementById('blockDay').value, 'DD-MM-YYYY',true).isValid() ) {
+		    user = document.getElementById('userBlock').value;
+			
+			blockday = document.getElementById('blockDay').value;
+
+			notif({
+				'type': 'success',
+				'msg': '¡Usuario bloqueado!',
+				'position': 'center'
+			});
+			
+			setInterval(function(){  $('#seleccionarFecha').submit(); },2000);
+			document.getElementById('userBlock').value = user;
+			document.getElementById('blockDay').value = blockday;
+		  } else {
+			  $('#blockDay').get(0).setCustomValidity('Introduce una fecha');
+
+/* 		    	document.getElementById('blockDay').setCustomValidity('');
+*/		  }
+		}
+	
+	
+	</script>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -189,10 +216,10 @@
       <form:form id="seleccionarFecha" method="POST" action="blockUser.html">
       
        	<label>Fecha de fin de bloqueo</label>
-  		<input  id="blockDay" class="form-control" placeholder="dd/mm/yyyy" name="blockDay" required>
+  		<input  id="blockDay" class="form-control" placeholder="dd-mm-yyyy" name="blockDay" required>
   		<input id="userBlock" name="userBlock" type="text" style="display:none">
   		<br>
-        <button type="submit" id="okBloquear" class="btn btn-success" >Bloquear usuario con esta fecha</button>
+        <button onclick="submitform()" class="btn btn-success" >Bloquear usuario con esta fecha</button>
      
         <button id="cancelar" type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
        </form:form>
