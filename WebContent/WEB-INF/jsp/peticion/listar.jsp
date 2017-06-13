@@ -57,16 +57,16 @@
 		<thead class="cabecera">
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
-			<th>id_peticion</th>
+			<th style="vertical-align: middle">id_peticion</th>
 		</c:if>
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
-			<th>Habilidad</th>
-			<th>Nivel</th>
+			<th style="vertical-align: middle">Habilidad</th>
+			<th style="vertical-align: middle">Nivel</th>
 			
-			<th>Más info.</th>
+			<th style="vertical-align: middle">Más info.</th>
 		<c:if test='${usuario.usuario != sessionScope.mis && usuario.rol!="ADMIN"}'>
-			<th>Usuario</th>
+			<th style="vertical-align: middle">Usuario</th>
 			<th></th>
 		</c:if>
 		<c:if test='${usuario.usuario==sessionScope.mis}'>
@@ -74,7 +74,7 @@
 			<th></th>
 		</c:if>
 		<c:if test='${usuario.rol=="ADMIN"}'>
-			<th>Usuario</th>
+			<th style="vertical-align: middle">Usuario</th>
 			<th></th>
 			<th></th>
 			<th></th>

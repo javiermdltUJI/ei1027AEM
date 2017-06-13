@@ -237,12 +237,12 @@
 	  <thead class="cabecera">
 	  
 		<tr >
-			<th>Nombre usuario</th>
-			<th>Correo</th>
-			<th>Nombre</th>
-			<th>Dni</th>
-			<th>Eliminado</th>
-			<th>Bloqueado</th>
+			<th style="vertical-align: middle">Nombre usuario</th>
+			<th style="vertical-align: middle">Correo</th>
+			<th style="vertical-align: middle">Nombre</th>
+			<th style="vertical-align: middle">Dni</th>
+			<th style="vertical-align: middle">Eliminado</th>
+			<th style="vertical-align: middle">Bloqueado</th>
 			<th>Fecha fin bloqueo</th>
 			<th></th>
 			<th></th>
