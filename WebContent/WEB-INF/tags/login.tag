@@ -38,7 +38,8 @@
 				<ul class="nav navbar-nav" style="float:right; top:0%">
 					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;"><i class="fa fa-user-circle" aria-hidden="true"></i>
 					 Bienvenido/a ${usuario.usuario}</a></li>
-					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;" href="${pageContext.request.contextPath}/estadisticas/resumen.html">Estadísticas</a></li>
+					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;" href="${pageContext.request.contextPath}/estadisticas/resumen.html"><i class="fa fa-bar-chart" aria-hidden="true"></i>
+					Estadísticas</a></li>
 					<li><a class="btn btn-loginSkill btn-responsive" style="color:#fff;" href="${pageContext.request.contextPath}/logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i>
 					 Cerrar sesión</a></li>
 				</ul>
