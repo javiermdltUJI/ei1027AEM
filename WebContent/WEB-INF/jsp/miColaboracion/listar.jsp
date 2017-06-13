@@ -82,7 +82,7 @@
  --%>				<td>${colaboracionesPeticion.usuario}</td>
 				<jsp:useBean id="now" class="java.util.Date"/>
 				<c:choose>
-					<c:when test='${(colaboracionesPeticion.valoracion==0 or colaboracionesPeticion.horasTotales==0) and now.time >= colaboracionesPeticion.fechaFin.time}'>
+					<c:when test='${(colaboracionesPeticion.valoracion==0 and colaboracionesPeticion.horasTotales==0) and now.time >= colaboracionesPeticion.fechaFin.time}'>
 						<td><a type="button" class="btn btn-success"  href="../update/${usuario.usuario}/${colaboracionesPeticion.idColaboracion}.html">Valorar</a></td>
 					</c:when>
 					<c:when test='${now.time < colaboracionesPeticion.fechaFin.time}'>
