@@ -334,6 +334,7 @@ public class PeticionController {
 			if(colaboracionDao.getNumColaboracionesPorPeticion(id_peticion) > 0){
 				Calendar cal = Calendar.getInstance();
 				cal.add(Calendar.DATE, -1);
+				peticion2.setFechaIni(cal.getTime());
 				peticion2.setFechaFin(cal.getTime());
 				peticionDao.updatePeticion(peticion2);
 			}else{

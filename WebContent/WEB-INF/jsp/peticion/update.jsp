@@ -56,7 +56,7 @@
 				<select name="idHabilidad">
 					<c:forEach items="${habilidades}" var="habilidad">
 						<c:choose>
-							<c:when test="${elegida==habilidad.idHabilidad}">
+							<c:when test="${peticion.idHabilidad==habilidad.idHabilidad}">
 								<option value="${habilidad.idHabilidad}" selected> ${habilidad.descripcion}  Nivel: ${habilidad.nivel}</option>
 							</c:when>
 							<c:otherwise>
