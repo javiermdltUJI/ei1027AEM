@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/moment.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/moment-with-locales.js'></script>
 
 <script>
   $(function() {
@@ -24,9 +26,36 @@
 </head>
 <body>
 	<h2 class="titulo">Nueva colaboración</h2>
+		
+	<script>
+	function submitform() {
+		
+		  if(moment(document.getElementById('fechaIni').value, 'DD-MM-YYYY',true).isValid() && moment(document.getElementById('fechaFin').value, 'DD-MM-YYYY',true).isValid() ) {
+		    ini = document.getElementById('fechaIni').value;
+			
+			fin = document.getElementById('fechaFin').value;
+
+			setInterval(function(){  $('#addOfertaForm').submit(); },2000);
+			document.getElementById('fechaFin').value = fin;
+			document.getElementById('fechaIni').value = ini;
+		  } else {
+			  if(!moment(document.getElementById('fechaIni').value, 'DD-MM-YYYY',true).isValid()){
+			  	$('#fechaIni').get(0).setCustomValidity('Introduce la fecha en formato dd-mm-yyyy');
+			  }
+			  if(!moment(document.getElementById('fechaFin').value, 'DD-MM-YYYY',true).isValid()){
+				  	$('#fechaFin').get(0).setCustomValidity('Introduce la fecha en formato dd-mm-yyyy');
+				  
+			  }
+/* 		    	document.getElementById('blockDay').setCustomValidity('');
+*/		  }
+		}
+	
+	
+	</script>
+	
 	
 	<p>Las fechas de la colaboración deben ajustarse a la petición, por lo que debe estar entre <strong>${peticion.fechaIniString}</strong> y <strong>${peticion.fechaFinString}</strong> y la fecha de inicio debe ser mayor que el día actual.</p>
-	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
+	<form:form id="addOfertaForm" method="post" modelAttribute="colaboracion">
 		   <div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
 				<form:input class="form-control" path="fechaIni" id="fechaIni" placeholder="dd-mm-aaaa" required="required"/>
@@ -59,7 +88,8 @@
 				<p style="color:red">Las fechas no se ajustan a los parámetros explicados anteriormente.</p>
 			</c:if>
 			<div class="form-group">
-				<input class="btn btn-primary" type="submit" value="Seleccionar Oferta" />
+				<button class="btn btn-primary"  onclick="submitform()" value="Seleccionar peticion" >Seleccionar oferta</button>
+				
 			</div>				
 	</form:form>
 </body>
