@@ -325,6 +325,7 @@ public class OfertaController {
 			if(colaboracionDao.getNumColaboracionesPorOferta(id_oferta) > 0){
 				Calendar cal = Calendar.getInstance();
 			    cal.add(Calendar.DATE, -1);
+				oferta2.setFechaIni( cal.getTime());
 				oferta2.setFechaFin( cal.getTime());
 				ofertaDao.updateOferta(oferta2);
 			}else{
