@@ -76,7 +76,7 @@
 	
 		    <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		    	<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/politicas.html' class="generic-anchor footer-list-anchor">Politica de cookies</a>
+		    	<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/politicas.html' class="generic-anchor footer-list-anchor">Política de cookies</a>
 		  	
 		 	</span>
 		    
@@ -85,7 +85,7 @@
 		  <div class="footer-list-top"> 
 		      <span class="footer-social-overlap footer-social-icons-wrapper">
 		  		
-		   		<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/dondeEncontrarnos.html' class="generic-anchor footer-list-anchor" >Donde encontrarnos</a>
+		   		<a style="vertical-align:middle; color:#fff; font-size: 1.2em " href='${pageContext.request.contextPath}/principal/dondeEncontrarnos.html' class="generic-anchor footer-list-anchor" >Dónde encontrarnos</a>
 		  	
 		 	</span>
 		   
@@ -94,7 +94,7 @@
 			<div style="margin-left:30%; color:#fff" class="footer-bottom-wrapper">   
 				<i style="color:#fff " class="fa fa-copyright" role="copyright">
 		 
-				</i> 2017 Skills Sharing <address class="footer-address" role="company address">EAM, Castellón de la plana</address><span class="footer-bottom-rights"> - All Rights Reserved - <a style="color:white" href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> </span>
+				</i> 2017 Skills Sharing <address class="footer-address" role="company address">EAM, Castellón de la Plana</address><span class="footer-bottom-rights"> - All Rights Reserved - <a style="color:white" href="mailto:skillsharingeam@gmail.com">skillsharingeam@gmail.com</a> </span>
 		    </div>
 		   
 		  </section>
