@@ -52,7 +52,7 @@ public class Colaboracion {
 	
 	public String toString() {
 		return "Colaboracion [id_colaboracion=" + id_colaboracion + ", fechaIni=" + fechaIni + ", fechaFin="
-				+ fechaFin + ", horasTotales=" + horasTotales + ", valoracion=" + valoracion + ", id_oferta"
-				+ id_oferta + ", id_peticion" + id_peticion + "]";
+				+ fechaFin + ", horasTotales=" + horasTotales + ", valoracion=" + valoracion + ", id_oferta="
+				+ id_oferta + ", id_peticion = " + id_peticion + "]";
 	}
 }

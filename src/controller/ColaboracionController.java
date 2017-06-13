@@ -1,5 +1,6 @@
 package controller;
 
+import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -110,12 +111,21 @@ public class ColaboracionController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String processAddSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult){
 		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.setColaboracionValidator(colaboracionDao);
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "colaboracion/add";
 		}
-		colaboracionDao.addColaboracion(colaboracion);
+		try {
+			try{
+				colaboracionDao.addColaboracion(colaboracion);
+			}catch (IllegalArgumentException e ){
+				return "redirect:../error/noOfertaPeticion";
+			}
+		}catch (InvalidParameterException err){
+			return "redirect:../error/noHabilidad";
+		}
 		return "redirect:listar.html";
 	}
 	
@@ -155,6 +165,7 @@ public class ColaboracionController {
 	@RequestMapping(value="/addOferta/{id_oferta}", method=RequestMethod.POST)
 	public String processAddOfertaSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_oferta){
 		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.setColaboracionValidator(colaboracionDao);
 		colaboracionValidator.validate(colaboracion, bindingResult);
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
@@ -195,6 +206,7 @@ public class ColaboracionController {
 	@RequestMapping(value="/addPeticion/{id_peticion}", method=RequestMethod.POST)
 	public String processAddPeticionSubmit(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult, @PathVariable int id_peticion){
 		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.setColaboracionValidator(colaboracionDao);
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");	
@@ -231,6 +243,7 @@ public class ColaboracionController {
 	@RequestMapping(value="/update/{id_colaboracion}", method = RequestMethod.POST)
 	public String processUpdateSubmit(HttpSession session, @PathVariable int id_colaboracion, @ModelAttribute("colaboracion") Colaboracion colaboracion, BindingResult bindingResult){
 		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.setColaboracionValidator(colaboracionDao);
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");

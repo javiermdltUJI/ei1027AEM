@@ -2,12 +2,22 @@ package controller;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import dao.ColaboracionDao;
 import modelo.Colaboracion;
 
+@Component 
 public class ColaboracionValidator implements Validator{
+	
+	private ColaboracionDao colaboracionDao;
+	public void setColaboracionValidator(ColaboracionDao colaboracionDao){
+		this.colaboracionDao=colaboracionDao;
+	}
+	
 	
 	@Override
 	public boolean supports(Class<?> cls) {
@@ -16,6 +26,13 @@ public class ColaboracionValidator implements Validator{
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Colaboracion colaboracion = (Colaboracion)obj;
+		//no existe oferta o peticion
+		if(!colaboracionDao.existeOferta(colaboracion.getIdOferta()))
+			 errors.rejectValue("idOferta", "idOfertaInvalido", "		No existe una oferta con ese id");
+		else if(!colaboracionDao.existePeticion(colaboracion.getIdPeticion()))
+			 errors.rejectValue("idPeticion", "idPeticionInvalido", "		No existe una petición con ese id");
+		else if(!colaboracionDao.coincideHabilidad(colaboracion.getIdOferta(),colaboracion.getIdPeticion()))
+			 errors.rejectValue("idOferta", "habilidadInvalida", "		No coinciden las habilidades de la oferta y la petición");
 		
 		//fechaIni y fechaFin
 		if(colaboracion.getFechaIni().before(new Date()))

@@ -2,8 +2,10 @@ package dao;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.security.InvalidParameterException;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.EmptyStackException;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -63,9 +65,30 @@ public class ColaboracionDao {
 		
 	public void addColaboracion(Colaboracion colaboracion){
 		this.jdbcTemplate.update("insert into Colaboracion( fecha_ini, fecha_fin, horas_totales, valoracion, id_oferta, id_peticion) values(?, ?, ?, ?, ?, ?)", 
-				colaboracion.getFechaIni(), colaboracion.getFechaFin(), colaboracion.getHorasTotales(), colaboracion.getValoracion(), colaboracion.getIdOferta(), colaboracion.getIdPeticion());
+			colaboracion.getFechaIni(), colaboracion.getFechaFin(), colaboracion.getHorasTotales(), colaboracion.getValoracion(), colaboracion.getIdOferta(), colaboracion.getIdPeticion());
+
 	}
 	
+	public boolean existeOferta(int idOferta){
+		System.out.println("qweqwe");
+		System.out.println(this.jdbcTemplate.queryForObject("select count(*) from oferta where id_oferta = ?", new Object[] {idOferta}, Integer.class));
+		if (this.jdbcTemplate.queryForObject("select count(*) from oferta where id_oferta = ?", new Object[] {idOferta}, Integer.class)==0)
+			return false;
+		return true;
+	}
+	public boolean existePeticion(int idPeticion){
+		if (this.jdbcTemplate.queryForObject("select count(*) from peticion where id_peticion = ?", new Object[] {idPeticion}, Integer.class)==0)
+			return false;
+		return true;
+	}
+	public boolean coincideHabilidad(int idOferta, int idPeticion){
+		int idHabilidadOferta = this.jdbcTemplate.queryForObject("select id_habilidad from oferta where id_oferta = ?", new Object[] {idOferta}, Integer.class);
+		int idHabilidadPeticion = this.jdbcTemplate.queryForObject("select id_habilidad from peticion where id_peticion = ?", new Object[] {idPeticion}, Integer.class);
+			
+		if(idHabilidadOferta==idHabilidadPeticion)
+			return true;
+		return false;
+	}
 	public void updateColaboracion(Colaboracion colaboracion){
 		this.jdbcTemplate.update("update Colaboracion set fecha_ini = ?, fecha_fin = ?,  horas_totales = ?, valoracion = ?, id_oferta = ?, id_peticion = ? where id_colaboracion = ?", 
 				colaboracion.getFechaIni(), colaboracion.getFechaFin(), colaboracion.getHorasTotales(), colaboracion.getValoracion(), colaboracion.getIdOferta(), colaboracion.getIdPeticion(), colaboracion.getIdColaboracion());
