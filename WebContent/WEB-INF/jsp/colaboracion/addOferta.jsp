@@ -30,12 +30,12 @@
 	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
 		   <div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
-				<form:input class="form-control" path="fechaIni" id="fechaIni" required="required"/>
+				<form:input class="form-control" path="fechaIni" id="fechaIni" placeholder="dd-mm-aaaa" required="required"/>
 				<form:errors path="fechaIni" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
-				<form:input class="form-control" path="fechaFin" id="fechaFin" required="required"/>
+				<form:input class="form-control" path="fechaFin" id="fechaFin" placeholder="dd-mm-aaaa" required="required"/>
 				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
@@ -44,10 +44,16 @@
 					<form:input class="form-control" path="horasTotales" id="horasTotales" type="number" placeholder="Horas Totales" required="required"/>
 					<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
 				</div>
-				<div class="form-group">
+				<div class="form-group">						
 					<form:label path="valoracion">Valoración</form:label>
-					<form:input  class="form-control" path="valoracion" id="valoracion" type="number" placeholder="Valoracion" required="required"/>
-					<form:errors path="valoracion" cssClass="error fa fa-exclamation-circle"/>	
+					<form:select path="valoracion" class="form-control" id="tipoValoracion">
+						<form:option value="0"> --- </form:option>
+						<form:option value="1"> 1 </form:option>
+						<form:option value="2"> 2 </form:option>
+						<form:option value="3"> 3 </form:option>
+						<form:option value="4"> 4 </form:option>
+						<form:option value="5"> 5 </form:option>
+					</form:select>	
 				</div>
 			</c:if>
 			<c:if test='${feedbackFechas=="error"}'>

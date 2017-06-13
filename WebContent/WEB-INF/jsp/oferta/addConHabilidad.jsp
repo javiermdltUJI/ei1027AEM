@@ -29,15 +29,15 @@
 	<form:form method="post" modelAttribute="oferta"  onsubmit="validate()">
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
-				<form:input class="form-control" path="fechaIni" id="fechaIni"/>
+				<form:input class="form-control" path="fechaIni" placeholder="dd-mm-aaaa" id="fechaIni"/>
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
-				<form:input class="form-control" path="fechaFin" id="fechaFin"/>
+				<form:input class="form-control" path="fechaFin" placeholder="dd-mm-aaaa" id="fechaFin"/>
 			</div>
 			<div class="form-group">
 				<form:label path="descripcion">Más info.</form:label>
-				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción"/>
+				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="p.ej. Lunes y Martes por la tarde"/>
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<div class="form-group">

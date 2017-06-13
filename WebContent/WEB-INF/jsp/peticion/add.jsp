@@ -27,17 +27,17 @@
 	<form:form method="post" modelAttribute="peticion"  onsubmit="validate()">
 			<div class="form-group">
 				<form:label path="fechaIni">Fecha Inicio</form:label>
-				<form:input class="form-control" path="fechaIni" id="fechaIni" required="required"/>
+				<form:input class="form-control" path="fechaIni" id="fechaIni" placeholder="dd-mm-aaaa" required="required"/>
 				<form:errors path="fechaIni" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="fechaFin">Fecha Fin</form:label>
-				<form:input class="form-control" path="fechaFin" id="fechaFin" required="required"/>
+				<form:input class="form-control" path="fechaFin" id="fechaFin" placeholder="dd-mm-aaaa" required="required"/>
 				<form:errors path="fechaFin" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="descripcion">Más info.</form:label>
-				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="Descripción" required="required"/>
+				<form:input class="form-control" path="descripcion" id="descripcion" placeholder="p.ej. Lunes y Martes por la tarde" required="required"/>
 				<form:errors path="descripcion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<c:if test='${usuario.rol=="ADMIN"}'>
