@@ -52,18 +52,23 @@
 			</div>
 			<div class="form-group">
 				<form:label path="idOferta">id_oferta</form:label>
-				<form:input  class="form-control" path="idOferta" id="idOferta" type="number" placeholder="1" required="required"/>
+				<form:input  class="form-control" path="idOferta" id="idOferta" type="number" min="1" placeholder="1" required="required"/>
 				<form:errors path="idOferta" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<form:label path="idPeticion">id_peticion</form:label>
-				<form:input class="form-control" path="idPeticion" id="idPeticion" type="number" placeholder="1" required="required"/>
+				<form:input class="form-control" path="idPeticion" id="idPeticion" type="number" min="1" placeholder="1" required="required"/>
 				<form:errors path="idPeticion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Añadir colaboración" />
 			</div>				
 	</form:form>
+	<script>
+		document.getElementById("idOferta").value="";
+		document.getElementById("idPeticion").value="";
+	</script>
+	
 </body>
 </html>
 </jsp:body>

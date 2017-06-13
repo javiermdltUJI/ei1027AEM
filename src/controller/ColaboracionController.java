@@ -153,7 +153,9 @@ public class ColaboracionController {
 				Oferta ofertaSeleccionada = ofertaDao.getOferta(id_oferta);
 				
 				session.setAttribute("oferta", ofertaSeleccionada);
-				model.addAttribute("colaboracion", new Colaboracion());
+				Colaboracion colaboracion = new Colaboracion();
+				colaboracion.setIdOferta(id_oferta);
+				model.addAttribute("colaboracion", colaboracion);
 				session.setAttribute("feedbackFechas", "bien");
 				return "colaboracion/addOferta";
 			}
@@ -195,7 +197,9 @@ public class ColaboracionController {
 				
 				session.setAttribute("peticion", peticionSeleccionada);
 				session.setAttribute("feedbackFechas", "bien");
-				model.addAttribute("colaboracion", new Colaboracion());
+				Colaboracion colaboracion = new Colaboracion();
+				colaboracion.setIdPeticion(id_peticion);
+				model.addAttribute("colaboracion", colaboracion);
 				return "colaboracion/addPeticion";
 			}
 		}else{
