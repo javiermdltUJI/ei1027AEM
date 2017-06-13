@@ -57,8 +57,8 @@
 		  	<div style="margin-left:10% ;font-size:1.4em">
 <!-- 		  	  <span style="vertical-align:middle; color:#fff">CONNECT <span class="footer-social-small">with</span> US    </span>
  -->		  	
-		 	  <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://plus.google.com/116616887437267516099" title="Google Plus" >  <i class="fa fa-google-plus"></i></a>
-			  <a style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://github.com/javiermdltUJI/ei1027AEM" title="GitHUb" ><i class="fa fa-github" aria-hidden="true"></i></a>
+		 	  <a target="_blank" style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://plus.google.com/116616887437267516099" title="Google Plus" >  <i class="fa fa-google-plus"></i></a>
+			  <a target="_blank" style="vertical-align:middle; color:#fff; font-size: 1.2em " href="https://github.com/javiermdltUJI/ei1027AEM" title="GitHUb" ><i class="fa fa-github" aria-hidden="true"></i></a>
 		
 		 	</div>
 		    </div>
