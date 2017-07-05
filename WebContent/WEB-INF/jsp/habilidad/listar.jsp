@@ -14,8 +14,20 @@
 	<h2 class="titulo">Lista de Habilidades</h2>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/jquery-3.2.1.js'></script>
+<%-- 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/jquery.tablesorter.pager.js'></script> --%>
+<%-- 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/jquery-migrate-1.4.1.js'></script> --%>
 	
-	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+<%-- 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/jquery.tablesorter.js'></script> --%>
+<%-- 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/jquery.tablesorter.min.js'></script> --%>
+	
+ 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
+	
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 	
 	
  	<script type="text/javascript">
@@ -93,8 +105,17 @@
 	
 	</script> 
 	
+	<c:choose>	
+		<c:when test='${usuario.rol=="ADMIN"}'>
+			<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar habilidad</a>
+		</c:when>
+	</c:choose>
 	
-	<table class="table">
+	<table id="table" class="table table-hover  table-sm" data-toggle="table" data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-page-list="[10, 14, 50]"
+       data-page-size ="10">
 		  <thead class="cabecera">
 	
 		<tr>
@@ -136,11 +157,19 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<c:choose>	
-		<c:when test='${usuario.rol=="ADMIN"}'>
-			<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar habilidad</a>
-		</c:when>
-	</c:choose>
+
+
+	<script>
+		
+		$(function () {
+		    $('#table').bootstrapTable({
+		    });
+		});	
+	
+	
+	</script>
+
+
 </body>
 </html>
 </jsp:body>

@@ -13,6 +13,7 @@
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/moment.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/moment-with-locales.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/bootstrap-table-es-SP.js'></script>
 	
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
 		<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/style.css'>
@@ -24,36 +25,13 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 	
-	<!-- 	<script>
-	$('#table').bootstrapTable({
-	    columns: [{
-	        field: 'username',
-	        title: 'nombre usuario'
-	    }, {
-	        field: 'Correo',
-	        title: 'correo'
-	    }, {
-	        field: 'nombre',
-	        title: 'nombre'
-	    }, {
-	        field: 'dni',
-	        title: 'dni'
-	    }, {
-	        field: 'contador de bloqueo',
-	        title: 'contador de bloqueo'
-	    }, {
-	        field: 'bloqueo',
-	        title: 'bloqueo'
-	    }, {
-	        field: 'rol',
-	        title: 'rol'
-	    }],data: [{}]
-	    
-	});
-	
-/* 	$('#table').bootstrapTable('removeByUniqueId',0);
- */	</script> -->
+
  
  	<script type="text/javascript">
 	
@@ -93,43 +71,10 @@
 		}
 	}	
 	
-	/* $(document).ready(function(){
-
-		$('.bloquea').click(function(e){
-			url = this.href;
-			e.preventDefault();
-			notif_confirm({
-			'message': '¿Bloquear este usuario?',
-			'textaccept': 'Yes!',
-			'textcancel': 'No',
-			'fullscreen': true,
-			'callback': myCallback2
-			})
-		});
-	}); */
-	
 
 	$(document).ready(function(){
 		
-		/* $('#okBloquear').click(function(e){
-			
-			user = document.getElementById('userBlock').value;
 		
-			blockday = document.getElementById('blockDay').value;
-
-			e.preventDefault();
-			notif({
-				'type': 'success',
-				'msg': '¡Usuario bloqueado!',
-				'position': 'center'
-			})
-			setInterval(function(){  $('#seleccionarFecha').submit(); },2000);
-			document.getElementById('userBlock').value = user;
-			document.getElementById('blockDay').value = blockday; 
-
-	        
-		}); */
-
 		$('#cancelar').click(function(e){
 			notif({
 				'type': 'error',
@@ -232,18 +177,24 @@
 
   </div>
 </div>
+		<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar usuario</a>
 	
-	<table id="table" class="table table-hover  table-sm">
+	<table id="table" class="table table-hover  table-sm" data-toggle="table" data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-page-list="[7, 14, 50]"
+       data-page-size ="7"
+              >
 	  <thead class="cabecera">
 	  
 		<tr >
-			<th style="vertical-align: middle">Nombre usuario</th>
-			<th style="vertical-align: middle">Correo</th>
-			<th style="vertical-align: middle">Nombre</th>
-			<th style="vertical-align: middle">Dni</th>
-			<th style="vertical-align: middle">Eliminado</th>
-			<th style="vertical-align: middle">Bloqueado</th>
-			<th>Fecha fin bloqueo</th>
+			<th data-field="username" style="vertical-align: middle">Nombre usuario</th>
+			<th data-field="correo" style="vertical-align: middle">Correo</th>
+			<th data-field="name" style="vertical-align: middle">Nombre</th>
+			<th data-field="dni" style="vertical-align: middle">Dni</th>
+			<th data-field="deleted" style="vertical-align: middle">Eliminado</th>
+			<th data-field="block" style="vertical-align: middle">Bloqueado</th>
+			<th data-field="dataend">Fecha fin bloqueo</th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -257,7 +208,8 @@
 			<tr>
 				<td >${usuario.usuario}</td>
 <%-- 				<td>${usuario.contrasenya}</td>
- --%>				<td>${usuario.correo}</td>
+ --%>			
+ 				<td>${usuario.correo}</td>
 				<td>${usuario.nombre}</td>
 				<td>${usuario.dni}</td>
 				<c:if test='${usuario.eliminado==0}'>
@@ -314,10 +266,17 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar usuario</a>
 	
 	
+	<script>
+		
+		$(function () {
+		    $('#table').bootstrapTable({
+		    });
+		});	
 	
+	
+	</script>
 
 
 </jsp:body>

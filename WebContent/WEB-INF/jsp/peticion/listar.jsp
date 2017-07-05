@@ -14,6 +14,12 @@
 	
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
 	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+	
+	
 	<script type="text/javascript">
 	
 	
@@ -53,7 +59,11 @@
 	
 	</script>
 	<h2 class="titulo">Lista de Peticiones</h2>
-	<table class="table">
+	<table class="table" id="table" data-toggle="table" data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-page-list="[6, 14, 50]"
+       data-page-size ="6">
 		<thead class="cabecera">
 		<tr>
 		<c:if test='${usuario.rol=="ADMIN"}'>
@@ -113,6 +123,15 @@
 			</c:if>
 		</c:forEach>
 	</table>
+	<script>
+		
+		$(function () {
+		    $('#table').bootstrapTable({
+		    });
+		});	
+	
+	
+	</script>
 	<c:if test='${usuario.rol=="ADMIN"}'>
 		<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar petición</a>
 	</c:if>

@@ -10,10 +10,21 @@
 <title>Gestionar Colaboraciones</title>
 </head>
 <body>
+
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+	
+
 	<h2 class="titulo">Lista de Colaboraciones</h2>	
 	
 	<h4 class="subtitulo">Colaboraciones creadas a partir de mis ofertas: </h4>
-	<table class="table">
+	<table class="table" id="table" data-toggle="table" data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-page-list="[6, 14, 50]"
+       data-page-size ="6">
 		  <thead class="cabecera">
 	
 		<tr>
@@ -45,11 +56,23 @@
 			</tr>
 		</c:forEach>
 		</table>
+		<script>
 		
+		$(function () {
+		    $('#table').bootstrapTable({
+		    });
+		});	
+	
+	
+	</script>
 		<p style="color:gray">* Una colaboración solo puede ser cancelada por aquel que ha hecho la petición.</p>
 		
 		<h4 class="subtitulo">Colaboraciones creadas a partir de mis peticiones: </h4>
-		<table class="table">
+		<table class="table" id="table2" data-toggle="table" data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-page-list="[8, 14, 50]"
+       data-page-size ="8">
 			  <thead class="cabecera">
 		
 		<tr>
@@ -96,6 +119,15 @@
 			</tr>
 		</c:forEach>		
 	</table>
+	<script>
+		
+		$(function () {
+		    $('#table2').bootstrapTable({
+		    });
+		});	
+	
+	
+	</script>
 	<c:remove var="mis" scope="session"/>
 </body>
 </html>

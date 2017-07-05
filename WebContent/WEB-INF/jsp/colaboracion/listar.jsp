@@ -17,6 +17,14 @@
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
 	
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+	
+	
+	
 	<script type="text/javascript">
 	
 	
@@ -57,7 +65,11 @@
 	</script>
 	
 	
-	<table class="table">
+	<table class="table" id="table" data-toggle="table" data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-page-list="[6, 14, 50]"
+       data-page-size ="6">
 		  <thead class="cabecera">
 	
 		<tr>
@@ -96,6 +108,15 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<script>
+		
+		$(function () {
+		    $('#table').bootstrapTable({
+		    });
+		});	
+	
+	
+	</script>
 	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar colaboración</a>
 </body>
 </html>

@@ -194,7 +194,7 @@ table {
 }
 td,
 th {
-  padding: 0;
+  padding: 1;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
@@ -1604,7 +1604,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 95%;
+    width: 98%;
   }
 }
 .container-fluid {
