@@ -63,9 +63,11 @@
 	}	
 	
 	</script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/js/bootstrap-table-es-SP.js'></script>
 	
 	
 	<table class="table" id="table" data-toggle="table" data-query-params="queryParams"
+	   data-locale="es-SP"
        data-pagination="true"
        data-search="true"
        data-page-list="[6, 14, 50]"

@@ -178,8 +178,10 @@
   </div>
 </div>
 		<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar usuario</a>
+			<script type='text/javascript' src='${pageContext.request.contextPath}/js/bootstrap-table-es-SP.js'></script>
 	
 	<table id="table" class="table table-hover  table-sm" data-toggle="table" data-query-params="queryParams"
+	   data-locale="es-SP"
        data-pagination="true"
        data-search="true"
        data-page-list="[7, 14, 50]"
