@@ -6,7 +6,9 @@ import java.security.InvalidParameterException;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.EmptyStackException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -156,6 +158,13 @@ public class ColaboracionDao {
 		double num = this.jdbcTemplate.queryForObject("select avg(valoracion) from colaboracion where valoracion!=0", Double.class).doubleValue();
 		return num;
 	}
+	
+	//Colaboraciones totales por mes
+		public List<Map<String, Object>> getCountColaboracionesPorMes(){
+			return this.jdbcTemplate.queryForList("select EXTRACT(MONTH from fecha_ini), count(*) from colaboracion group by EXTRACT (MONTH from fecha_ini) ORDER BY date_part");
+		}
+	
+	
 	
 	
 }

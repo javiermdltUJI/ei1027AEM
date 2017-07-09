@@ -1,5 +1,9 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +95,24 @@ public class EstadisticasController {
 			model.addAttribute("mediaHorasColaboracion", colaboracionDao.getMediaHorasColaboraciones());
 			model.addAttribute("mediaValoracionColaboraciones", colaboracionDao.getMediaValoracionColaboraciones());
 			
+			//Colaboraciones por meses
+			List<Map<String, Object>> res = colaboracionDao.getCountColaboracionesPorMes();
+			List<Long> meses = new ArrayList<Long>();
+			for (int i = 0; i<12; i++){
+				boolean esta = false;
+				for (Map<String, Object> elem : res){
+					double j = i+0.0;
+					if ((double)elem.get("date_part")==(j)){
+						esta=true;
+						meses.add( (long) elem.get("count"));
+						break;
+					}	
+				}
+				if(!esta)
+					meses.add((long) 0);
+					
+			}
+			model.addAttribute("countColaboracionesPorMes", meses);
 			
 			return "estadisticas/resumen";
 		}else{

@@ -7,13 +7,7 @@
 <html>
 <head>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/logo.ico?" type="image/x-icon" />
-</head>
-
-<body>
-<div id="container">
-
-	<div id="head">
-	<meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>${title}</title>
 	
@@ -21,10 +15,18 @@
 	<link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/footer.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<div id="container">
+
+	<div id="head">
+	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 	
 	<script>
 	$('.dropdown-toggle').dropdown();
