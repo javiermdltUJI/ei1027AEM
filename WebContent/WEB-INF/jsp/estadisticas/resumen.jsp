@@ -1,7 +1,8 @@
 <%@page contentType="text/html; charset=iso-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <t:paginabasica title="EI1027">
 <jsp:body>
 <html>
@@ -54,8 +55,8 @@ window.onload = function () {
 		},
 		colorSet: "greenShades",
 		axisX:{
-			minimum: 0,
-			maximum: 13
+			minimum: 1,
+			maximum: 12
 		},
 		data: [
 		{
@@ -203,22 +204,84 @@ window.onload = function () {
 			<th></th>
 		</tr>
 		<tr>
-			<td colspan="2"> <div id="colaboraciones" style="height: 300px; width: 80%; margin: auto; "></div></td>
+			<td colspan="22"> <div id="colaboraciones" style="height: 300px; width: 80%; margin: auto; "></div></td>
+			
 		</tr>
 		<tr>
-			<td colspan="2"> <div id="chartContainer" style="height: 300px; width: 80%; margin: auto; "></div></td>
+			<td colspan="22"> <div id="chartContainer" style="height: 300px; width: 80%; margin: auto; "></div></td>
 		</tr>
 		<tr>
 			<td> Horas totales de colaboraciones: </td>
 			<td>${colaboracionesHorasTotales}</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td> Media de horas por colaboración: </td>
-			<td>${mediaHorasColaboracion}</td>
+			<td><fmt:formatNumber value="${mediaHorasColaboracion}" maxFractionDigits="2"/></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td> Valoración media de colaboraciones: </td>
-			<td>${mediaValoracionColaboraciones}</td>
+			<td><fmt:formatNumber value="${mediaValoracionColaboraciones}" maxFractionDigits="2"/></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			
 		</tr>		
 	</table>
 	
