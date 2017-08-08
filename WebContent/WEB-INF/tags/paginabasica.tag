@@ -37,10 +37,42 @@
 			<img alt="Skills sharing" src="${pageContext.request.contextPath}/img/titulo3.png" style="width:28%">
 		
 			</a>
-			<t:login />
+<%-- 			<t:login /> --%>
 		
 		</header>
-		<t:navegacio />
+<%-- 		<t:navegacio /> --%>
+
+
+<nav class="navbar" role="navigation" style="border-radius: 0px">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+         <span class="sr-only"></span>
+         <span class="icon-bar"><i class="fa fa-bars" aria-hidden="true" style="color:#fff"></i></span>
+<!--          <span class="icon-bar"></span> -->
+<!--          <span class="icon-bar"></span> -->
+       </button>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+      <ul class="nav navbar-nav navbar-center" >
+          	<t:navegacio />
+     
+     		<div id="loginBar">
+     		           		<t:loginNav />
+     		
+     		</div>     
+	  </ul>
+     
+      <ul class="nav navbar-nav navbar-right" style="margin-top: -4.5%">
+      		<t:login />
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
 		
 	</div>
 	<div id="body">

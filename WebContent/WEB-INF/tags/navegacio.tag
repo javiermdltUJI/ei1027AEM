@@ -4,10 +4,10 @@
 <c:set var="usuario" scope="request" value='${session.getAttribute("usuarioLogin")}'/>
 
 
-<nav >
-	<div class="container">
-		<div class="navbar-collapse">
-			<ul class="nav nav-tabs nav-justified">
+<!-- <nav > -->
+<!-- 	<div class="container"> -->
+<!-- 		<div class="navbar-collapse"> -->
+<!-- 			<ul class="nav nav-tabs nav-justified"> -->
 				<li><a style="color: #fff" href="${pageContext.request.contextPath}">Inicio</a></li>
 				<c:choose>
 				<c:when test='${usuario.rol=="ADMIN"}'>
@@ -69,11 +69,18 @@
 					<li><a style="color: #fff" href="${pageContext.request.contextPath}/miColaboracion/listar/${usuario.usuario}.html">Mis Colaboraciones</a></li>
 				</c:when>
 					
+<%-- 				<c:when test='${usuario.rol==null}'> --%>
+<%-- 					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li> --%>
+<%-- 					<li><a style="color: #fff"href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li> --%>
+<%-- 					<li><a style="color: #fff"href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li> --%>
+<%-- 				</c:when> --%>
+				
 				<c:when test='${usuario.rol==null}'>
 					<li><a style="color: #fff" href="${pageContext.request.contextPath}/habilidad/listarActivas.html">Habilidades</a></li>
 					<li><a style="color: #fff"href="${pageContext.request.contextPath}/oferta/listar.html">Ofertas</a></li>
 					<li><a style="color: #fff"href="${pageContext.request.contextPath}/peticion/listar.html">Peticiones</a></li>
 				</c:when>
+				
 				</c:choose>
 
 			</ul>
@@ -91,6 +98,6 @@
 
 			
 			
-		</div>
-	</div>
-</nav>
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </nav> -->

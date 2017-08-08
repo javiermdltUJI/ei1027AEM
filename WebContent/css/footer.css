@@ -4,10 +4,44 @@
 }
 
 
-@media (max-width: 960px) {
+.login2{
+	display:none;
+}
+
+@media (max-width: 1200px) {
   .login .normal    { display: none; }
   .login .buttonslogin { display: inline-block; }
+  
+  #loginBar{ display: block;
+  }
+  .login2{ 
+  		display: block;
+  		float:right;
+  }
 }
+
+@media (min-width: 1250px) {
+  .navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+  .login2{ 
+  	display: left;
+  
+  }
+}
+
+
+@media (max-width: 800px) {
+ 
+  #loginBar{ 
+  	float: left;
+  
+  }
+}
+
+
 /* @media (min-width: 960px) {
   .login .normal    { display: inline-block; }
   .login .buttonslogin { display: none; }
@@ -53,7 +87,7 @@
 #left_widget_column {
 	border: 0px;
 	background: white;
-	height:400px;
+	height:450px;
 
 	padding: 20px;
 	width: 40%;
@@ -74,7 +108,7 @@
 #right_widget_column {
 	border: 0px;
 		background: white;
-	height:400px;
+	height:450px;
 	padding: 20px;
 	width: 55%;
 	display: inline-block;
