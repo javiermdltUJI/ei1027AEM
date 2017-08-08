@@ -1,3 +1,9 @@
+.footer,
+.push {
+  height: 50px;
+}
+
+
 
 .login .buttonslogin {
   display: none;
