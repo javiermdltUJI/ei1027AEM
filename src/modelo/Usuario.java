@@ -47,10 +47,12 @@ public class Usuario {
 		DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		this.fechaFin=format.parse(fFin);
 	}
-	public void setFechaFin(Date fFin){ 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		this.fechaFinString = dateFormat.format(fFin); 
-		this.fechaFin = fFin; 
+	public void setFechaFin(Date fFin){
+		if(fFin!=null){
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			this.fechaFinString = dateFormat.format(fFin); 
+			this.fechaFin = fFin;
+		}
 	}
 	public String getFechaFinString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

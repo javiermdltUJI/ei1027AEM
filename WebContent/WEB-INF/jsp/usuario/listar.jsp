@@ -234,38 +234,45 @@
 					<td></td>
 				</c:if>
 				<td><a type="button" class="btn btn-success" href="update/${usuario.usuario}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
-				<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
-				
-				<c:if test='${usuario.bloqueado==0}'>
-				
-					<%--
-					 este a tiene que tener 
-					 
-					<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-					
-					href="lock/${usuario.usuario}.html"
-					
-					poner un onclick en los botones que guarden en una varible el usuario que es o generar un evento.
-					
-					document.getElementById('okBloquear').data-href='update/${usuario.usuario}.html';
-					
-					
-					https://stackoverflow.com/questions/33281031/get-date-from-jsp-to-controller-in-spring-mvc
-					
-					https://stackoverflow.com/questions/5590036/passing-parameters-from-jsp-to-controller-in-spring-mvc
-					
-					document.getElementById('okBloquear').href='lock/${usuario.usuario}.html';
-					 --%>
-					 
- 					 <td><a onclick="document.getElementById('userBlock').value='${usuario.usuario}'" type="button" class="bloquea btn btn-warning"  data-toggle="modal" data-target="#myModal" ><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
-					 
-					 
+				<c:if test='${usuario.eliminado==0}'>
+					<td><a style="background=transparent" type="button" class="elimina btn btn-danger" href="delete/${usuario.usuario}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+				</td>
 				</c:if>
-				<c:if test='${usuario.bloqueado==1}'>
-					<td><a type="button" class="desbloquea btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
-				</c:if>	
-			</tr>
-			</c:if>
+				<c:if test='${usuario.eliminado==1}'>
+					<td><a style="background=transparent" type="button" class="btn btn-default disabled" disabled="disabled"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a>
+					</td>
+				</c:if>
+				<c:if test='${usuario.eliminado==0}'>
+					<c:if test='${usuario.bloqueado==0}'>
+						<%--
+						 este a tiene que tener 
+						 
+						<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+						
+						href="lock/${usuario.usuario}.html"
+						
+						poner un onclick en los botones que guarden en una varible el usuario que es o generar un evento.
+						
+						document.getElementById('okBloquear').data-href='update/${usuario.usuario}.html';
+						
+						
+						https://stackoverflow.com/questions/33281031/get-date-from-jsp-to-controller-in-spring-mvc
+						
+						https://stackoverflow.com/questions/5590036/passing-parameters-from-jsp-to-controller-in-spring-mvc
+						
+						document.getElementById('okBloquear').href='lock/${usuario.usuario}.html';
+						 --%>
+						 
+	 					 <td><a onclick="document.getElementById('userBlock').value='${usuario.usuario}'" type="button" class="bloquea btn btn-warning"  data-toggle="modal" data-target="#myModal" ><i class="fa fa-lock" aria-hidden="true"></i> Bloquear</a></td>	
+						 
+						 
+					</c:if>
+					<c:if test='${usuario.bloqueado==1}'>
+						<td><a type="button" class="desbloquea btn btn-info" href="unlock/${usuario.usuario}.html"><i class="fa fa-unlock" aria-hidden="true"></i> Desbloquear</a></td>	
+					</c:if>
+				</c:if>
+				</tr>
+				</c:if>
 		</c:forEach>
 		</tbody>
 	</table>

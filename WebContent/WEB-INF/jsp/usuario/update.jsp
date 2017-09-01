@@ -17,6 +17,16 @@
   });
 
 </script>
+<script language='javascript' type='text/javascript'>
+			    function check2(input) {
+			        if (input.value != document.getElementById('contrasenya').value) {
+			            input.setCustomValidity('La contrasenya no coincide');
+			        } else {
+			            // input is valid -- reset the error message
+			            input.setCustomValidity('');
+			        }
+			    }
+</script>
 </head>
 <body>
 	<h2 class="titulo">Usuario</h2>
@@ -30,6 +40,10 @@
 				<form:label path="contrasenya">Contrasenya</form:label>
 				<form:input class="form-control" type = "password" path="contrasenya" id="contrasenya" placeholder="Contrasenya" required="required"/>
 				<form:errors path="contrasenya" cssClass="error fa fa-exclamation-circle"></form:errors>		
+			</div>
+			<div class="form-group">
+				<label path="contrasenya">Repite la contrasenya</label>
+				<input type="password" class="form-control" id="contrasenyaValidar" placeholder="Contrasenya" oninput="check2(this)" required="required"/>
 			</div>
 			<div class="form-group">
 				<form:label path="correo">Correo</form:label>
