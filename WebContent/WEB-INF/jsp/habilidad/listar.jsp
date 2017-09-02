@@ -105,11 +105,7 @@
 	
 	</script> 
 	
-	<c:choose>	
-		<c:when test='${usuario.rol=="ADMIN"}'>
-			<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar habilidad</a>
-		</c:when>
-	</c:choose>
+	
 		<script type='text/javascript' src='${pageContext.request.contextPath}/js/bootstrap-table-es-SP.js'></script>
 	
 	<table id="table" class="table table-hover  table-sm" data-toggle="table" data-query-params="queryParams"
@@ -128,11 +124,12 @@
 			<c:choose>	
 				<c:when test='${usuario.rol=="ADMIN"}'>
 					<th>Estado</th>
+					<th></th>
+					<th></th>
 				</c:when>
 				
 		</c:choose>
-		<th></th>
-			<th></th>
+			
 		</tr>
 		</thead>
 		<c:forEach items="${habilidades}" var="habilidad">
@@ -170,7 +167,13 @@
 	
 	
 	</script>
-
+	<c:choose>	
+		<c:when test='${usuario.rol=="ADMIN"}'>
+			<div>
+				<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar habilidad</a>
+			</div>
+		</c:when>
+	</c:choose>
 
 </body>
 </html>

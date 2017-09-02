@@ -41,11 +41,11 @@ public class HabilidadDao {
 	}
 	
 	public List<Habilidad> getHabilidades(){
-		return this.jdbcTemplate.query("select * from habilidad", new HabilidadMapper());
+		return this.jdbcTemplate.query("select * from habilidad order by tipo", new HabilidadMapper());
 	}
 	
 	public List<Habilidad> getHabilidadesActivas(){
-		return this.jdbcTemplate.query("select * from habilidad where estado='ACTIVO'", new HabilidadMapper());
+		return this.jdbcTemplate.query("select * from habilidad where estado='ACTIVO' order by tipo", new HabilidadMapper());
 	}
 	
 	public Habilidad getHabilidad(int id_habilidad) {

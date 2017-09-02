@@ -124,19 +124,28 @@ public class PeticionController {
 		if (u==null)
 			return "redirect:../login.html";
 		else {
-			model.addAttribute("accesible", false);
+			if(!u.getRol().name().equals("ADMIN"))
+				model.addAttribute("accesible", true);
+			else
+				model.addAttribute("accesible", false);
+			
 			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
 			Oferta o = ofertaDao.getOferta(c.getIdOferta());
 			Colaboracion colaboracion = (Colaboracion) session.getAttribute("colaboracion");
 			Date FechaIniColabo = colaboracion.getFechaIni();
 			Date FechaFinColabo = colaboracion.getFechaFin();
 			
-			List<Peticion> peticiones = peticionDao.getMisPeticionesHabilidad(u.getUsuario(), o.getIdHabilidad());
+			List<Peticion> peticiones;
+			if(!u.getRol().name().equals("ADMIN"))
+				peticiones = peticionDao.getMisPeticionesHabilidad(u.getUsuario(), o.getIdHabilidad());
+			else
+				peticiones = peticionDao.getNoMisPeticionesHabilidad(u.getUsuario(), o.getIdHabilidad());
 			
 			List<Peticion> peticionesValidas =  new ArrayList<Peticion>();
 
-			for( Peticion peticion:peticiones){
-				if(peticion.getFechaIni().compareTo(FechaIniColabo)<=0 && peticion.getFechaFin().compareTo(FechaFinColabo)>=0){
+			for(Peticion peticion:peticiones){
+				if((peticion.getFechaIni().compareTo(FechaIniColabo)<=0 && peticion.getFechaFin().compareTo(FechaFinColabo)>=0) ||
+						(FechaIniColabo.compareTo(peticion.getFechaIni())<=0 && FechaFinColabo.compareTo(peticion.getFechaFin())>=0)){
 					peticionesValidas.add(peticion);
 				}
 			}
@@ -152,39 +161,95 @@ public class PeticionController {
 		if (u==null)
 			return "redirect:../login.html";
 		else if (session.getAttribute("colaboracion")!=null){
-			model.addAttribute("peticion", new Peticion());
-			session.setAttribute("feedbackFechas", "Noerror");
-			//return "peticion/addConHabilidad";
-			Peticion peticion = new Peticion();
-			peticion.setUsuario(u.getUsuario());			
-			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
-			Oferta o = ofertaDao.getOferta(c.getIdOferta());
-			peticion.setIdHabilidad(o.getIdHabilidad());
-			peticion.setFechaFin(c.getFechaFin());
-			peticion.setFechaIni(c.getFechaIni());
-			peticion.setDescripcion(o.getDescripcion());
-					
-			int id_peticion = peticionDao.addPeticionInt(peticion);
-			c.setIdPeticion(id_peticion);
-			colaboracionDao.addColaboracion(c);
-			session.removeAttribute("colaboracion");
-			
-			String correo = usuarioDao.getUsuario(o.getUsuario()).getCorreo();
-			mandaCorreo.enviarMensaje(correo, "oferta");
+			if (!u.getRol().name().equals("ADMIN")){
+				model.addAttribute("peticion", new Peticion());
+				session.setAttribute("feedbackFechas", "Noerror");
+				//return "peticion/addConHabilidad";
+				Peticion peticion = new Peticion();
+				peticion.setUsuario(u.getUsuario());			
+				Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+				Oferta o = ofertaDao.getOferta(c.getIdOferta());
+				peticion.setIdHabilidad(o.getIdHabilidad());
+				peticion.setFechaFin(c.getFechaFin());
+				peticion.setFechaIni(c.getFechaIni());
+				peticion.setDescripcion(o.getDescripcion());
+						
+				int id_peticion = peticionDao.addPeticionInt(peticion);
+				c.setIdPeticion(id_peticion);
+				colaboracionDao.addColaboracion(c);
+				session.removeAttribute("colaboracion");
+				
+				String correo = usuarioDao.getUsuario(o.getUsuario()).getCorreo();
+				mandaCorreo.enviarMensaje(correo, "oferta");
 
 			
-			return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
+				return "redirect:../miColaboracion/listar/"+u.getUsuario()+".html";
+			} else 
+				return "redirect:../addConHabilidadUsuario.html";
 			
+		}else {
+			session.setAttribute("prevURL", "principal/principal.html");
+		return "error/error";
+	}		
+}
+	@RequestMapping(value="/addConHabilidadUsuario")
+	public String addPeticionConHabilidadUsuario(HttpSession session, Model model){
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "peticion/addConHabilidad.html");
+		if (u==null)
+			return "redirect:../login.html";
+		else if (session.getAttribute("colaboracion")!=null){
+			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+			Oferta oferta = ofertaDao.getOferta(c.getIdOferta());
+			model.addAttribute(new Usuario());
+			model.addAttribute("usuarios", usuarioDao.getUsuariosActivosNoUsuarioNoAdmin(oferta.getUsuario()));
+			return "peticion/addConHabilidadUsuario";
+		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
+			return "error/error";
+		}
+		
+	}
+	
+	@RequestMapping(value="/addConHabilidadUsuario", method=RequestMethod.POST)
+	public String addPeticionConHabilidadUsuario(HttpSession session, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult,  Model model) throws AddressException, MessagingException, EmailException{
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("prevURL", "peticion/addConHabilidad.html");
+		if (u==null)
+			return "redirect:../login.html";
+		else if (session.getAttribute("colaboracion")!=null){
+			if (u.getRol().name().equals("ADMIN")){
+				model.addAttribute("peticion", new Peticion());
+				session.setAttribute("feedbackFechas", "Noerror");
+
+				Peticion peticion = new Peticion();
+				peticion.setUsuario(usuario.getUsuario());			
+				Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
+				Oferta o = ofertaDao.getOferta(c.getIdOferta());
+				peticion.setIdHabilidad(o.getIdHabilidad());
+				peticion.setFechaFin(c.getFechaFin());
+				peticion.setFechaIni(c.getFechaIni());
+				peticion.setDescripcion(o.getDescripcion());
+						
+				int id_peticion = peticionDao.addPeticionInt(peticion);
+				c.setIdPeticion(id_peticion);
+				colaboracionDao.addColaboracion(c);
+				session.removeAttribute("colaboracion");
+				
+				String correo = usuarioDao.getUsuario(o.getUsuario()).getCorreo();
+				mandaCorreo.enviarMensaje(correo, "oferta");
+				
+				return "redirect:listar.html";
 			
-			
-			
+			} else 
+				return "redirect:../addConHabilidadUsuario.html";
 			
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");
 			return "error/error";
 		}
 	}
-
+	
 	/*@RequestMapping(value="/addConHabilidad", method=RequestMethod.POST)
 	public String processAddConHabilidadSubmit(HttpSession session, @ModelAttribute("peticion") Peticion peticion, BindingResult bindingResult) throws AddressException, MessagingException, EmailException{
 		PeticionValidator peticionValidator = new PeticionValidator();

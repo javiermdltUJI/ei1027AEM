@@ -107,6 +107,10 @@ public class OfertaDao {
 		return this.jdbcTemplate.query("select * from oferta where usuario=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new OfertaMapper());
 	}
 	
+	public List<Oferta> getNoMisOfertasHabilidad(String usuario, int idHabilidad) {
+		return this.jdbcTemplate.query("select * from oferta where usuario!=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new OfertaMapper());
+	}
+	
 	@InitBinder
 	private void initBinder(WebDataBinder webDataBinder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -114,12 +118,21 @@ public class OfertaDao {
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 
+	public List<Oferta> getMisPeticionesHabilidad(String usuario, int idHabilidad) {
+		return this.jdbcTemplate.query("select * from oferta where usuario=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new OfertaMapper());
+	}
+
+	public List<Oferta> getNoMisPeticionesHabilidad(String usuario, int idHabilidad) {
+		return this.jdbcTemplate.query("select * from oferta where usuario!=? and id_habilidad = ? ORDER BY fecha_ini, fecha_fin asc", new Object[] {usuario, idHabilidad}, new OfertaMapper());
+	}
+	
+	
 	//ESTADISTICAS
 	
 	//Num. total ofertas en el sistema
-	
 	public int getOfertasTotales() {
 		return this.jdbcTemplate.queryForObject("select count(*) from oferta", Integer.class);
 	}
-	
+
+
 }

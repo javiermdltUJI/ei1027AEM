@@ -128,6 +128,26 @@ public class ColaboracionController {
 		}
 		return "redirect:listar.html";
 	}
+	/*//para admin
+	@RequestMapping(value="/ofertaAdd/{id_oferta}")
+	public String addColaboracionOfertaAdd(HttpSession session, Model model, @PathVariable int id_oferta){
+		session.setAttribute("prevURL", "colaboracion/ofertaAdd/"+id_oferta+".html");
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
+			model.addAttribute("colaboracion", new Colaboracion());
+			int id_habilidad = ofertaDao.getOferta(id_oferta).getIdHabilidad();
+			model.addAttribute("peticiones", peticionDao.getNoMisPeticionesHabilidad(ofertaDao.getOferta(id_oferta).getUsuario(), id_habilidad));
+			return "colaboracion/ofertaAdd";
+		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
+			return "error/error";
+		}
+	}
+	*/
+	
+	
 	
 	
 	@RequestMapping(value="/consultaHoras")
@@ -237,6 +257,8 @@ public class ColaboracionController {
 		session.setAttribute("prevURL", "colaboracion/update/"+id_colaboracion+".html" );
 		if(u != null && u.getRol().name().equals("ADMIN")){
 			model.addAttribute("colaboracion", colaboracionDao.getColaboracion(id_colaboracion));
+			session.setAttribute("id_oferta", colaboracionDao.getColaboracion(id_colaboracion).getIdOferta());
+			session.setAttribute("id_peticion", colaboracionDao.getColaboracion(id_colaboracion).getIdPeticion());
 			return "colaboracion/update";
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");
@@ -253,7 +275,11 @@ public class ColaboracionController {
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			return "colaboracion/update";
 		}
+		colaboracion.setIdOferta((int) session.getAttribute("id_oferta"));
+		colaboracion.setIdPeticion((int) session.getAttribute("id_peticion"));
 		colaboracionDao.updateColaboracion(colaboracion);
+		session.removeAttribute("id_oferta");
+		session.removeAttribute("id_peticion");
 		return "redirect:../listar.html";
 	}
 	

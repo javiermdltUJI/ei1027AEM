@@ -43,11 +43,14 @@
 				<form:errors path="horasTotales" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
 			<div class="form-group">
-				<form:label path="valoracion">Valoración</form:label>
-				<form:input  class="form-control" path="valoracion" id="valoracion" type="number" placeholder="Valoracion" required="required"/>
-				<form:errors path="valoracion" cssClass="error fa fa-exclamation-circle"/>	
-			</div>
-			<div class="form-group">
+        	<form:label path="valoracion">Valoración</form:label>
+        		<form:radiobutton path="valoracion" value="1"/>1
+        		<form:radiobutton path="valoracion" value="2"/>2
+		        <form:radiobutton path="valoracion" value="3"/>3
+		        <form:radiobutton path="valoracion" value="4"/>4
+		        <form:radiobutton path="valoracion" value="5"/>5
+      	</div>
+			<!--  <div class="form-group">
 				<form:label path="idOferta">id_oferta</form:label>
 				<form:input  class="form-control" path="idOferta" id="idOferta" type="number" placeholder="1" required="required"/>
 				<form:errors path="idOferta" cssClass="error fa fa-exclamation-circle"/>	
@@ -57,6 +60,7 @@
 				<form:input class="form-control" path="idPeticion" id="idPeticion" type="number" placeholder="1" required="required"/>
 				<form:errors path="idPeticion" cssClass="error fa fa-exclamation-circle"/>	
 			</div>
+			 -->
 			<div class="form-group">
 				<input class="btn btn-primary" type="submit" value="Añadir colaboración" />
 			</div>				

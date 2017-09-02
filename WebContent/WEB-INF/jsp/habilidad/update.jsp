@@ -32,10 +32,10 @@
 			<div class="form-group">
 				<form:label path="nivel">Nivel</form:label>
 				<form:select path="nivel" class="form-control" id="tipoNivel">
-								<form:option value="EXPERTO"> ---- </form:option>
+								<form:option value="NOVATO"> ---- </form:option>
 								<form:option value="EXPERTO"> Experto </form:option>
 								<form:option value="MEDIO">Medio</form:option>
-								<form:option value="BAJO">Bajo</form:option>
+								<form:option value="NOVATO">Novato</form:option>
 				</form:select>
 				
 			</div>

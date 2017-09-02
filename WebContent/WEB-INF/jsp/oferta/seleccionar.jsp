@@ -51,18 +51,19 @@
 	
 	});
 	</script>
+	
+	
 	<c:if test='${fn:length(collection)==0}'>
-		<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
+		<c:choose>
+			<c:when test='${usuario.rol=="ESTUDIANTE"}'>
+				<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Agregar oferta'</i></strong> </p>
+			</c:when>
+			<c:otherwise>
+				<p><strong><i>No existen ofertas que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una oferta conforme a la colaboración selecciona 'Seleccionar usuario' para poder crear una oferta para ese usuario.</i></strong> </p>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 	<c:if test='${fn:length(collection)!=0}'>
-	
-	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
-	
-	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
-	
-	
-		
 	<table class="table">
 		<thead class="cabecera">
 	
@@ -101,7 +102,7 @@
 				<c:if test='${usuario.rol=="ADMIN"}'>
 					<td><a type="button" class="btn btn-default" href="./update/${oferta.usuario}/${oferta.idOferta}.html">Edita</a>
 					<td><a type="button" class="btn btn-default" href="./delete/${oferta.usuario}/${oferta.idOferta}.html">Elimina</a>		
-					<td><a type="button" class="selecciona btn btn-default" href="../colaboracion/creadaOferta/${oferta.idOferta}.html">Seleccionar</a></td>
+					<td><a type="button" class="selecciona btn btn-default" href="../colaboracion/creada/${oferta.idOferta}.html">Seleccionar</a></td>
 				</c:if>
 				<c:if test='${accesible == false}'>
 					<td><a type="button" class="selecciona btn btn-primary" href="../colaboracion/creadaOferta/${oferta.idOferta}.html"><i class="fa fa-check" aria-hidden="true"></i>
@@ -116,7 +117,7 @@
 		<a type="button" class="addOferta btn btn-primary" href="../addConHabilidad.html">Agregar oferta</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
-		<a type="button" class="addOferta btn btn-primary" href="addConHabilidad.html">Agregar oferta</a>
+		<a type="button" class="addOferta2 btn btn-primary" href="addConHabilidadUsuario.html">Agregar oferta</a>
 	</c:if>
 </body>
 </html>

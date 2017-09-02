@@ -19,11 +19,11 @@
 	<strong>${colaboracion.fechaIniString}</strong> y 
 	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
 	</p>
-	
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/js/notifIt.min.js'></script>
 	
 	<link rel='stylesheet' type='text/css' href='${pageContext.request.contextPath}/css/notifIt.css'>
+	
 	
 	
 	<script>
@@ -54,7 +54,14 @@
 	
 	
 	<c:if test='${fn:length(collection)==0}'>
-		<p><strong><i>No existen peticiones que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una petición conforme a la colaboración selecciona 'Agregar petición'</i></strong> </p>
+		<c:choose>
+			<c:when test='${usuario.rol=="ESTUDIANTE"}'>
+				<p><strong><i>No existen peticiones que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una petición conforme a la colaboración selecciona 'Agregar petición'</i></strong> </p>
+			</c:when>
+			<c:otherwise>
+				<p><strong><i>No existen peticiones que se ajusten a la colaboración que se quiere crear. Para generar automáticamente una petición conforme a la colaboración selecciona 'Seleccionar usuario' para poder crear una petición para ese usuario.</i></strong> </p>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 	<c:if test='${fn:length(collection)!=0}'>
 		<table class="table">
@@ -110,7 +117,7 @@
 		<a type="button" class="addOferta btn btn-primary" href="../addConHabilidad.html">Agregar petición</a>
 	</c:if>
 	<c:if test='${accesible == false}'>
-		<a type="button" class="addOferta btn btn-primary" href="addConHabilidad.html">Agregar petición</a>
+		<a type="button" class="addOferta2 btn btn-primary" href="addConHabilidadUsuario.html">Seleccionar usuario</a>
 	</c:if>
 </body>
 </html>

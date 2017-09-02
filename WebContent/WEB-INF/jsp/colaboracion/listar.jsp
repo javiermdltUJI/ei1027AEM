@@ -99,7 +99,16 @@
 				<td>${colaboracion.fechaIniString}</td>
 				<td>${colaboracion.fechaFinString}</td>
 				<td>${colaboracion.horasTotales}</td>
-				<td>${colaboracion.valoracion}</td>
+				<td><c:forEach begin="1" end="5" var="loop">
+						<c:choose>
+						    <c:when test='${loop<=colaboracion.valoracion}'>
+						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
+						    </c:when>    
+						    <c:otherwise>
+						        <i class="fa fa-star-o" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
+						    </c:otherwise>
+						</c:choose>
+					</c:forEach></td>
 			<c:if test='${usuario.rol=="ADMIN"}'>
 				<td>${colaboracion.idOferta}</td>
 				<td>${colaboracion.idPeticion}</td>

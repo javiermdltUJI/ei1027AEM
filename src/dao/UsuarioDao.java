@@ -52,6 +52,11 @@ public class UsuarioDao implements UserDao {
 		return this.jdbcTemplate.query("select * from usuario", new UsuarioMapper());
 	}
 	
+	public List<Usuario>  getUsuariosActivosNoUsuarioNoAdmin(String nom) {
+		return this.jdbcTemplate.query("select * from usuario where eliminado=0 and nom_usuario!=? and  rol=CAST('ESTUDIANTE' AS rol)",
+				new Object[] {nom}, new UsuarioMapper());
+	}
+	
 	public Usuario getUsuario(String usuario) {
 		return this.jdbcTemplate.queryForObject("select * from usuario where nom_usuario=?",  new Object[] {usuario}, new UsuarioMapper());
 	}
@@ -184,6 +189,8 @@ public class UsuarioDao implements UserDao {
 	public int getUsuariosBloqueados() {
 		return this.jdbcTemplate.queryForObject("select count(*) from usuario where bloqueado=1", Integer.class);
 	}
+
+	
 		
 	
 
