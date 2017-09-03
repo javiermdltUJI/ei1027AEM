@@ -51,7 +51,19 @@
 				<td>${colaboracionesOferta.fechaIniString}</td>
 				<td>${colaboracionesOferta.fechaFinString}</td>
 				<td>${colaboracionesOferta.horasTotales}</td>
-				<td>${colaboracionesOferta.valoracion}</td>
+				<%-- <td>${colaboracionesOferta.valoracion}</td>
+				--%>
+				<td class="espacio"><c:forEach begin="1" end="5" var="loop">
+						<c:choose>
+						    <c:when test='${loop<=colaboracion.valoracion}'>
+						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
+						    </c:when>    
+						    <c:otherwise>
+						        <i class="fa fa-star-o" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
+						    </c:otherwise>
+						</c:choose>
+					</c:forEach></td>
+				
 				<td>${habilidadesOferta[i.index].nombre}</td>
 <%-- 				<td>${colaboracionesOferta.descripcion}</td>
  --%>			<td>${colaboracionesOferta.usuario}</td>
@@ -101,7 +113,19 @@
 				<td>${colaboracionesPeticion.fechaIniString}</td>
 				<td>${colaboracionesPeticion.fechaFinString}</td>	
 				<td>${colaboracionesPeticion.horasTotales}</td>
-				<td>${colaboracionesPeticion.valoracion}</td>
+				<%-- <td>${colaboracionesPeticion.valoracion}</td> --%>
+				
+				<td class="espacio"><c:forEach begin="1" end="5" var="loop">
+						<c:choose>
+						    <c:when test='${loop<=colaboracion.valoracion}'>
+						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
+						    </c:when>    
+						    <c:otherwise>
+						        <i class="fa fa-star-o" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
+						    </c:otherwise>
+						</c:choose>
+					</c:forEach></td>
+				
 				<td>${habilidadesPeticion[j.index].nombre}</td>
 				
 <%-- 				<td>${colaboracionesPeticion.descripcion}</td>
