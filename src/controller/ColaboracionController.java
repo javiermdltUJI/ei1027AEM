@@ -196,6 +196,9 @@ public class ColaboracionController {
 				String correo = usuarioDao.getUsuario(oferta.getUsuario()).getCorreo();
 				mandaCorreo.enviarMensaje(correo, "oferta");
 				
+				correo = usuarioDao.getUsuario(peticion.getUsuario()).getCorreo();
+				mandaCorreo.enviarMensaje(correo,"peticion");
+				
 				
 			}catch (IllegalArgumentException e ){
 				return "redirect:../error/noOfertaPeticion";
