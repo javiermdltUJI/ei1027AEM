@@ -51,11 +51,11 @@
 				<td>${colaboracionesOferta.fechaIniString}</td>
 				<td>${colaboracionesOferta.fechaFinString}</td>
 				<td>${colaboracionesOferta.horasTotales}</td>
-				<%-- <td>${colaboracionesOferta.valoracion}</td>
-				--%>
-				<td class="espacio"><c:forEach begin="1" end="5" var="loop">
+				
+				<td class="espacio">
+					<c:forEach begin="1" end="5" var="loop">
 						<c:choose>
-						    <c:when test='${loop<=colaboracion.valoracion}'>
+						    <c:when test='${loop<=colaboracionesOferta.valoracion}'>
 						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
 						    </c:when>    
 						    <c:otherwise>
@@ -102,7 +102,6 @@
 			<th>Habilidad</th>
 			<th>Usuario</th>
 			<th></th>
-			<th></th>
 		</tr>
 		</thead>
 		<c:forEach items="${colaboracionesPeticion}" varStatus="j" var="colaboracionesPeticion">
@@ -113,11 +112,11 @@
 				<td>${colaboracionesPeticion.fechaIniString}</td>
 				<td>${colaboracionesPeticion.fechaFinString}</td>	
 				<td>${colaboracionesPeticion.horasTotales}</td>
-				<%-- <td>${colaboracionesPeticion.valoracion}</td> --%>
 				
-				<td class="espacio"><c:forEach begin="1" end="5" var="loop">
+				<td class="espacio">
+					<c:forEach begin="1" end="5" var="loop">
 						<c:choose>
-						    <c:when test='${loop<=colaboracion.valoracion}'>
+						    <c:when test='${loop<=colaboracionesPeticion.valoracion}'>
 						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
 						    </c:when>    
 						    <c:otherwise>

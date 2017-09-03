@@ -101,7 +101,8 @@
 				<td>${colaboracion.fechaIniString}</td>
 				<td>${colaboracion.fechaFinString}</td>
 				<td>${colaboracion.horasTotales}</td>
-				<td class="espacio"><c:forEach begin="1" end="5" var="loop">
+				<td class="espacio">
+					<c:forEach begin="1" end="5" var="loop">
 						<c:choose>
 						    <c:when test='${loop<=colaboracion.valoracion}'>
 						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
