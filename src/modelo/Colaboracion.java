@@ -14,6 +14,11 @@ public class Colaboracion {
 	private int valoracion;
 	private int id_oferta;
 	private int id_peticion;
+	private String ofertante;
+	private String demandante;
+	private Nivel nivel;
+	private String descripcion;
+	private int idHabilidad;
 	
 	public int getIdColaboracion(){ return id_colaboracion; }
 	public void setIdColaboracion(int id_colaboracion){ this.id_colaboracion = id_colaboracion;}
@@ -55,4 +60,18 @@ public class Colaboracion {
 				+ fechaFin + ", horasTotales=" + horasTotales + ", valoracion=" + valoracion + ", id_oferta="
 				+ id_oferta + ", id_peticion = " + id_peticion + "]";
 	}
+	public String getOfertante() { return ofertante; }
+	public void setOfertante(String ofertante) { this.ofertante = ofertante; }
+
+	public String getDemandante() { return demandante; }
+	public void setDemandante(String demandante) { this.demandante = demandante; }
+	
+	public String getDescripcion() { return descripcion; }
+	public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+		
+	public Nivel getNivel() { return nivel; }
+	public void setNivel(Nivel nivel) { this.nivel = nivel; }
+	public int getIdHabilidad() { return idHabilidad; }
+	public void setIdHabilidad(int idHabilidad) { this.idHabilidad = idHabilidad; }
+
 }

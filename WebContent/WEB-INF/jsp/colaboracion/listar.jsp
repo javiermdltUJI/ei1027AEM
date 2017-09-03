@@ -81,10 +81,12 @@
 			<th>Fecha inicio</th>
 			<th>Fecha fin</th>
 			<th>Horas totales</th>
-			<th>Valoración</th>
+			<th> Valoración </th>
 		<c:if test='${usuario.rol=="ADMIN"}'>
-			<th>id_oferta</th>
-			<th>id_peticion</th>
+			<th>Ofertante</th>
+			<th>Demandante</th>
+			<th>Descripción</th>
+			<th>Nivel</th>
 			<th></th>
 			<th></th>
 			
@@ -99,7 +101,7 @@
 				<td>${colaboracion.fechaIniString}</td>
 				<td>${colaboracion.fechaFinString}</td>
 				<td>${colaboracion.horasTotales}</td>
-				<td><c:forEach begin="1" end="5" var="loop">
+				<td class="espacio"><c:forEach begin="1" end="5" var="loop">
 						<c:choose>
 						    <c:when test='${loop<=colaboracion.valoracion}'>
 						       <i class="fa fa-star" aria-hidden="true" style="color:rgba(232, 105, 28, 0.63)"></i>
@@ -110,8 +112,10 @@
 						</c:choose>
 					</c:forEach></td>
 			<c:if test='${usuario.rol=="ADMIN"}'>
-				<td>${colaboracion.idOferta}</td>
-				<td>${colaboracion.idPeticion}</td>
+				<td>${colaboracion.ofertante}</td>
+				<td>${colaboracion.demandante}</td>
+				<td>${colaboracion.descripcion}</td>
+				<td>${colaboracion.nivel}</td>
 			</c:if>
 				<td><a type="button" class="btn btn-success"  href="update/${colaboracion.idColaboracion}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</a>
 				<td><a type="button" class="elimina btn btn-danger"  href="delete/${colaboracion.idColaboracion}.html"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar
@@ -128,7 +132,7 @@
 	
 	
 	</script>
-	<a type="button" class="btn btn-primary" href="add.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar colaboración</a>
+	<a type="button" class="btn btn-primary" href="addColaboracion.html"><i class="fa fa-plus" aria-hidden="true"></i> Agregar colaboración</a>
 </body>
 </html>
 </jsp:body>

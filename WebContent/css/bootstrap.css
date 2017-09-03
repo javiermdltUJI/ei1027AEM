@@ -272,6 +272,10 @@ th {
     border: 1px solid #ddd !important;
   }
 }
+.espacio{
+	white-space: nowrap;
+
+}
 @font-face {
   font-family: 'Glyphicons Halflings';
 

@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import modelo.Colaboracion;
+import modelo.Nivel;
 
 
 
@@ -45,6 +46,22 @@ public class ColaboracionDao {
 		}
 	}
 	
+	private static final class AColaboracionMapper implements RowMapper<Colaboracion>{
+		public Colaboracion mapRow(ResultSet rs, int rowNum) throws SQLException{
+			Colaboracion colaboracion = new Colaboracion();
+			colaboracion.setIdColaboracion(rs.getInt("id_colaboracion"));
+			colaboracion.setFechaIni(toDate(rs.getTimestamp("fecha_ini")));
+			colaboracion.setFechaFin(toDate(rs.getTimestamp("fecha_fin")));
+			colaboracion.setHorasTotales(rs.getInt("horas_totales"));
+			colaboracion.setValoracion(rs.getInt("valoracion"));
+			colaboracion.setOfertante(rs.getString("ofertante"));
+			colaboracion.setDemandante(rs.getString("demandante"));	
+			colaboracion.setNivel(Nivel.valueOf(rs.getString("nivel")));
+			colaboracion.setDescripcion(rs.getString("descripcion"));
+			return colaboracion;
+		}
+	}
+	
 	public List<Colaboracion> getColaboraciones(){
 		return this.jdbcTemplate.query("select * from colaboracion ORDER BY fecha_ini, fecha_fin asc", new ColaboracionMapper());
 	}
@@ -57,9 +74,17 @@ public class ColaboracionDao {
 	
 	public List<Colaboracion> getMisColaboracionesPeticion(String usuario){
 		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, C.horas_totales, C.valoracion, O.descripcion, O.usuario"
-				+ " from colaboracion AS C JOIN oferta AS O USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
+				+ " from colaboracion AS C JOIN peticion AS P USING(id_peticion) JOIN oferta AS O USING(id_oferta)"
 				+ " where P.usuario=? ORDER BY C.fecha_ini, C.fecha_fin asc", new Object[] {usuario},new ColaboracionMapper());
 	}
+	
+	public List<Colaboracion> getAColaboraciones(){
+		return this.jdbcTemplate.query("select C.id_colaboracion, C.fecha_ini, C.fecha_fin, O.usuario AS ofertante, P.usuario AS demandante,"
+				+ " C.horas_totales, C.valoracion, H.descripcion, H.nivel"
+				+ " from colaboracion AS C JOIN oferta AS O USING(id_oferta) JOIN peticion AS P USING(id_peticion)  JOIN habilidad AS H ON(O.id_habilidad=H.id_habilidad)"
+				+ " ORDER BY C.fecha_ini, C.fecha_fin asc", new AColaboracionMapper());
+	}
+		
 	
 	public Colaboracion getColaboracion(int id_colaboracion) {
 		return this.jdbcTemplate.queryForObject("select * from colaboracion where id_colaboracion=?",  new Object[] {id_colaboracion}, new ColaboracionMapper());

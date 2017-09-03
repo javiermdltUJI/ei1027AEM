@@ -51,7 +51,7 @@
 			</c:if>
 			<div class="form-group">
 				<form:label path="idHabilidad">Habilidad</form:label>
-					<select name="idHabilidad">
+					<select name="idHabilidad" class="form-control">
 					<c:forEach items="${habilidades}" var="habilidad">
 						<c:choose>
 						

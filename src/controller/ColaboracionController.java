@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.ColaboracionDao;
+import dao.HabilidadDao;
 import dao.MiColaboracionDao;
 import dao.OfertaDao;
 import dao.PeticionDao;
@@ -47,6 +48,7 @@ public class ColaboracionController {
 	private PeticionDao peticionDao;
 	private OfertaDao ofertaDao;
 	private UsuarioDao usuarioDao;
+	private HabilidadDao habilidadDao;
 
 	
 	
@@ -73,6 +75,11 @@ public class ColaboracionController {
 	}
 	
 	@Autowired
+	public void setHabilidadDao(HabilidadDao habilidadDao){
+		this.habilidadDao = habilidadDao;
+	}
+	
+	@Autowired
 	public void setMiColaboracionDao(MiColaboracionDao miColaboracionDao){
 		this.miColaboracionDao = miColaboracionDao;
 	}
@@ -85,7 +92,7 @@ public class ColaboracionController {
 		if (u==null)
 			return "redirect:../login.html";
 		else if(u.getRol().name().equals("ADMIN")){
-			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+			model.addAttribute("colaboraciones", colaboracionDao.getAColaboraciones());
 			return "colaboracion/listar";
 		}else{
 			session.setAttribute("prevURL", "principal/principal.html");
@@ -120,6 +127,76 @@ public class ColaboracionController {
 		try {
 			try{
 				colaboracionDao.addColaboracion(colaboracion);
+			}catch (IllegalArgumentException e ){
+				return "redirect:../error/noOfertaPeticion";
+			}
+		}catch (InvalidParameterException err){
+			return "redirect:../error/noHabilidad";
+		}
+		return "redirect:listar.html";
+	}
+	
+	
+	@RequestMapping(value="/addColaboracion")
+	public String addColaboracion2(HttpSession session, Model model){
+		session.setAttribute("prevURL", "colaboracion/addColaboracion.html" );
+		Usuario u = (Usuario) session.getAttribute("usuario");
+		if (u==null)
+			return "redirect:../login.html";
+		else if(u.getRol().name().equals("ADMIN")){
+			model.addAttribute("colaboracion", new Colaboracion());
+			model.addAttribute("usuarios", usuarioDao.getUsuariosNoEliminadosNoAdmin());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
+			return "colaboracion/addColaboracion";
+		}else{
+			session.setAttribute("prevURL", "principal/principal.html");
+			return "error/error";
+		}
+	}
+
+	@RequestMapping(value="/addColaboracion", method=RequestMethod.POST)
+	public String processAddSubmit2(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion,  BindingResult bindingResult,  Model model) throws AddressException, MessagingException, EmailException{
+		ColaboracionValidator colaboracionValidator = new ColaboracionValidator();
+		colaboracionValidator.setColaboracionValidator(colaboracionDao);
+		colaboracionValidator.validate(colaboracion, bindingResult);	
+		if(bindingResult.hasErrors()){
+			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
+			model.addAttribute("elegida", colaboracion.getIdHabilidad());
+			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
+			model.addAttribute("usuarios", usuarioDao.getUsuariosNoEliminadosNoAdmin());
+			model.addAttribute("ofertanteElegido",colaboracion.getOfertante());
+			model.addAttribute("demandanteElegido",colaboracion.getDemandante());
+			return "colaboracion/addColaboracion";
+		}
+		try {
+			try{
+				String descripcion = habilidadDao.getHabilidad(colaboracion.getIdHabilidad()).getDescripcion();
+
+				Oferta oferta = new Oferta();
+				oferta.setDescripcion(descripcion);
+				oferta.setFechaIni(colaboracion.getFechaIni());
+				oferta.setFechaFin(colaboracion.getFechaFin());
+				oferta.setIdHabilidad(colaboracion.getIdHabilidad());
+				oferta.setUsuario(colaboracion.getOfertante());
+				int idOferta = ofertaDao.addOfertaInt(oferta);
+				
+				Peticion peticion = new Peticion();
+				peticion.setDescripcion(descripcion);
+				peticion.setFechaIni(colaboracion.getFechaIni());
+				peticion.setFechaFin(colaboracion.getFechaFin());
+				peticion.setIdHabilidad(colaboracion.getIdHabilidad());
+				peticion.setUsuario(colaboracion.getDemandante());
+				int idPeticion = peticionDao.addPeticionInt(peticion);
+				
+				colaboracion.setIdOferta(idOferta);
+				colaboracion.setIdPeticion(idPeticion);
+				
+				colaboracionDao.addColaboracion(colaboracion);
+				
+				String correo = usuarioDao.getUsuario(oferta.getUsuario()).getCorreo();
+				mandaCorreo.enviarMensaje(correo, "oferta");
+				
+				
 			}catch (IllegalArgumentException e ){
 				return "redirect:../error/noOfertaPeticion";
 			}

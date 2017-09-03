@@ -42,8 +42,8 @@
 					<li class="dropdown">
 						<a style="color: #fff" id="DropDownColaboraciones" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Colaboraciones <span class="caret"></span></a>
 						<ul class="dropdown-menu" aria-labelledby="DropDownColaboraciones">
-							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/add.html">Crear Colaboración</a></li>
-							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/listar.html">Ver Colaboracion</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/addColaboracion.html">Crear Colaboración</a></li>
+							<li><a style="color: black" href="${pageContext.request.contextPath}/colaboracion/listar.html">Ver Colaboraciones</a></li>
 						</ul>
 					</li>
 				</c:when>
