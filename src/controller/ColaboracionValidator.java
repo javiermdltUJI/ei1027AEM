@@ -35,9 +35,9 @@ public class ColaboracionValidator implements Validator{
 		else if(!colaboracionDao.coincideHabilidad(colaboracion.getIdOferta(),colaboracion.getIdPeticion()))
 			 errors.rejectValue("idOferta", "habilidadInvalida", "		No coinciden las habilidades de la oferta y la petición");
 		}*/
-		
-		if(colaboracion.getOfertante().equals(colaboracion.getDemandante()))
-			errors.rejectValue("ofertante", "ofertanteInvalido", "     Usuario ofertante y demandante no pueden coincidir");
+		if (colaboracion.getOfertante()!=null && colaboracion.getDemandante()!=null)
+			if(colaboracion.getOfertante().equals(colaboracion.getDemandante()))
+				errors.rejectValue("ofertante", "ofertanteInvalido", "     Usuario ofertante y demandante no pueden coincidir");
 		//fechaIni y fechaFin
 		if(colaboracion.getFechaIni().before(new Date()))
 			 errors.rejectValue("fechaIni", "fechaInvalida", "		Día inicio petición no válido");

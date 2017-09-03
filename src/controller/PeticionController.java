@@ -129,9 +129,9 @@ public class PeticionController {
 			else
 				model.addAttribute("accesible", false);
 			
-			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
-			Oferta o = ofertaDao.getOferta(c.getIdOferta());
 			Colaboracion colaboracion = (Colaboracion) session.getAttribute("colaboracion");
+			
+			Oferta o = ofertaDao.getOferta(colaboracion.getIdOferta());
 			Date FechaIniColabo = colaboracion.getFechaIni();
 			Date FechaFinColabo = colaboracion.getFechaFin();
 			
@@ -144,8 +144,7 @@ public class PeticionController {
 			List<Peticion> peticionesValidas =  new ArrayList<Peticion>();
 
 			for(Peticion peticion:peticiones){
-				if((peticion.getFechaIni().compareTo(FechaIniColabo)<=0 && peticion.getFechaFin().compareTo(FechaFinColabo)>=0) ||
-						(FechaIniColabo.compareTo(peticion.getFechaIni())<=0 && FechaFinColabo.compareTo(peticion.getFechaFin())>=0)){
+				if((peticion.getFechaIni().compareTo(FechaIniColabo)>=0 && peticion.getFechaFin().compareTo(FechaFinColabo)<=0)){
 					peticionesValidas.add(peticion);
 				}
 			}

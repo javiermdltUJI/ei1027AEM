@@ -129,9 +129,9 @@ public class OfertaController {
 			else
 				model.addAttribute("accesible", false);
 			
-			Colaboracion c = (Colaboracion) session.getAttribute("colaboracion");
-			Peticion p = peticionDao.getPeticion(c.getIdPeticion());
 			Colaboracion colaboracion = (Colaboracion) session.getAttribute("colaboracion");
+
+			Peticion p = peticionDao.getPeticion(colaboracion.getIdPeticion());
 			Date FechaIniColabo = colaboracion.getFechaIni();
 			Date FechaFinColabo = colaboracion.getFechaFin();
 			
@@ -144,7 +144,7 @@ public class OfertaController {
 			List<Oferta> ofertasValidas =  new ArrayList<Oferta>();
 
 			for( Oferta oferta:ofertas){
-				if(oferta.getFechaIni().compareTo(FechaIniColabo)<=0 && oferta.getFechaFin().compareTo(FechaFinColabo)>=0){
+				if(oferta.getFechaIni().compareTo(FechaIniColabo)>=0 && oferta.getFechaFin().compareTo(FechaFinColabo)<=0){
 					ofertasValidas.add(oferta);
 				}
 			}
