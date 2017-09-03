@@ -29,11 +29,13 @@
 	<script>
 		$(document).ready(function(){
 			$('#colaboracion').submit(function(e){
-				notif({
-					'type': 'success',
-					'msg': '¡Colaboracion creada!',
-					'position': 'center',
-				});
+					 if(${error}){
+						notif({
+							'type': 'success',
+							'msg': '¡Colaboracion creada!',
+							'position': 'center',
+						});
+			}
 				
 			});		
 	
@@ -42,7 +44,7 @@
 </head>
 <body>
 	<h2 class="titulo">Nueva colaboración</h2>
-	<form:form method="post" modelAttribute="colaboracion"  onsubmit="validate()">
+	<form:form method="post" modelAttribute="colaboracion" >
 				<div class="form-group">
 				<form:label path="idHabilidad">Habilidad</form:label>
 					<select name="idHabilidad" class="form-control">
@@ -122,10 +124,7 @@
 				<input class="btn btn-primary" type="submit" value="Añadir colaboración" />
 			</div>				
 	</form:form>
-	<script>
-		document.getElementById("idOferta").value="";
-		document.getElementById("idPeticion").value="";
-	</script>
+
 	
 </body>
 </html>

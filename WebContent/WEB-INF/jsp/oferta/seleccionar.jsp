@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h2 class="titulo">Lista de Ofertas</h2>
-	<p> Seleccionar una colaboración con fechas entre: 
+	<p> Seleccionar una petición con fechas entre: 
 	<strong>${colaboracion.fechaIniString}</strong> y 
 	<strong>${colaboracion.fechaFinString}</strong>, si no existe niguna petición puedes crearla.
 	</p>
@@ -129,8 +129,8 @@
 			<th>Más info.</th>
 			<th>Usuario</th>
 			<th></th>
-			<th></th>
-			<th></th>
+			<!--<th></th>
+			<th></th>-->
 		</tr>
 		</thead>
 		<c:forEach items="${ofertas}" var="oferta">
@@ -144,13 +144,13 @@
 				<td>${oferta.usuario}</td>
 				<c:if test='${accesible == true}'>
 					<td><a type="button" class="btn btn-success" href="../update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a>
-					<td><a type="button"  class="elimina btn btn-danger" href="../delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a>	
+					<!--<td><a type="button"  class="elimina btn btn-danger" href="../delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a>-->	
 					<td><a type="button" class="selecciona btn btn-primary" href="../colaboracion/creadaOferta/${oferta.idOferta}.html"><i class="fa fa-check" aria-hidden="true"></i>	
 					 Seleccionar</a></td>
 				</c:if>
 				<c:if test='${usuario.rol=="ADMIN"}'>
-					<td><a type="button" class="btn btn-success" href="./update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a>
-					<td><a type="button"  class="elimina btn btn-danger" href="./delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a>		
+					<!--<td><a type="button" class="btn btn-success" href="./update/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-pencil" aria-hidden="true"></i> Edita</a>
+					<td><a type="button"  class="elimina btn btn-danger" href="./delete/${oferta.usuario}/${oferta.idOferta}.html"><i class="fa fa-trash" aria-hidden="true"></i> Elimina</a>-->		
 				</c:if>
 				<c:if test='${accesible == false}'>
 					<td><a type="button" class="selecciona btn btn-primary" href="../colaboracion/creadaOferta/${oferta.idOferta}.html"><i class="fa fa-check" aria-hidden="true"></i>

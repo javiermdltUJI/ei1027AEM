@@ -141,6 +141,8 @@ public class ColaboracionController {
 	public String addColaboracion2(HttpSession session, Model model){
 		session.setAttribute("prevURL", "colaboracion/addColaboracion.html" );
 		Usuario u = (Usuario) session.getAttribute("usuario");
+		session.setAttribute("error",false);
+
 		if (u==null)
 			return "redirect:../login.html";
 		else if(u.getRol().name().equals("ADMIN")){
@@ -160,6 +162,8 @@ public class ColaboracionController {
 		colaboracionValidator.setColaboracionValidator(colaboracionDao);
 		colaboracionValidator.validate(colaboracion, bindingResult);	
 		if(bindingResult.hasErrors()){
+			session.setAttribute("error",true);
+
 			session.setAttribute("feedback", "Hay campos incorrectos o falta rellenar");
 			model.addAttribute("elegida", colaboracion.getIdHabilidad());
 			model.addAttribute("habilidades", habilidadDao.getHabilidadesActivas());
@@ -170,6 +174,8 @@ public class ColaboracionController {
 		}
 		try {
 			try{
+				session.setAttribute("error",false);
+
 				String descripcion = habilidadDao.getHabilidad(colaboracion.getIdHabilidad()).getDescripcion();
 
 				Oferta oferta = new Oferta();
